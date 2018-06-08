@@ -10,7 +10,7 @@
 
 
 ```sh
-yarn add @roseys/styler
+yarn add @roseys/futils
 ```
 
 My Personal utility functions. Mostly re-writing whats already out there but doing it to learn.
