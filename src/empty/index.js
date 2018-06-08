@@ -29,6 +29,10 @@ export default x =>
           ? ""
           : is("Object")(x)
             ? {}
+            : is("Map")(x)
+            ? new Map()
+            : is("Set")(x)
+            ? new Set()
             : _isArguments(x)
               ? (function() {
                   return arguments;
