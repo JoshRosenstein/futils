@@ -1,2 +1,13 @@
-Tests
-src
+.travis.yml
+src/
+rollup.config.js
+rollup.split.js
+coverage/
+webpack.config.js
+.eslintrc.js
+.eslintignore
+.gitignore
+scripts
+.nyc_output
+eslintrc.json
+tests/

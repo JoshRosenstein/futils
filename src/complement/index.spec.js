@@ -1,9 +1,9 @@
-import PLACEHOLDER from "./index";
+import complement from "./index";
 
 describe.skip("PLACEHOLDER", () => {
   it("Subtract One from Number", () => {
-    const a = PLACEHOLDER(1);
-    const eA = 0;
+    const a = complement(Array.isArray, [])
+    const eA = false;
 
     expect(a).toEqual(eA);
   });
