@@ -39,9 +39,7 @@ const paths = globby.sync(['src/*.js', '!src/index.js', '!src/_internals','!src/
          exports: 'named'
       }
     }
-if(moduleName==='where'){
-    results.push(config)}
-
+  results.push(config)
     return true
   })
 

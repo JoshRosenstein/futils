@@ -12,7 +12,7 @@ const listFns = () => {
       fullPath: `${file}/index.js`
     }))
 
-console.log(ret)
+//console.log(ret)
   return ret
 }
 

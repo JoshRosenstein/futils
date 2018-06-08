@@ -914,18 +914,8 @@
     return dropFirst_(1, x);
   });
 
-  var reduceValues$1 = (function (fn) {
-    return reduceWithValueKey(function (acc) {
-      return function (value) {
-        return function () {
-          return fn(acc)(value);
-        };
-      };
-    });
-  });
-
   var index$y = (function (functor) {
-    return reduceValues$1(flip(append))([])(functor);
+    return reduceValues(flip(append))([])(functor);
   });
 
   var when_ = function when_(condition, whenTrueFn) {
