@@ -1,6 +1,6 @@
 {
-  "name": "futils",
-  "version": "1.0.0",
+  "name": "@roseys/futils",
+  "version": "0.0.1",
   "description": "",
   "keywords": [
     "ramda",
