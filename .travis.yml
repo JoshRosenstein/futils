@@ -1,9 +1,7 @@
 language: node_js
 node_js:
   - "8"
-script:
-  - npm run test:coverage
+script: "npm run test:coverage"
 cache:
-  directories:
-  - "node_modules"
+  directories: "node_modules"
 after_success: - cat ./coverage/lcov.info | ./node_modules/codecov/bin/codecov
