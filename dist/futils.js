@@ -26,11 +26,6 @@
       return f[name](arg);
     };
   };
-  var takesTwo = function takesTwo(name) {
-    return function (arg1, arg2, f) {
-      return f[name](arg1, arg2);
-    };
-  };
   var takesN = function takesN(name) {
     return function (f) {
       for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
@@ -40,98 +35,13 @@
     };
   };
   var split = takesOne("split");
-  var instanceOf = function instanceOf(instanceConstructor, instance) {
-    return instance instanceof instanceConstructor;
-  };
-  var hasOwnProperty = takesOne("hasOwnProperty");
   var length = function length(x) {
     return x.length;
   };
-  var keys = function keys(obj) {
-    return Object.keys(obj);
-  };
-  var assign = function () {
-    return Object.assign ? function (obj0) {
-      for (var _len2 = arguments.length, objs = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
-        objs[_key2 - 1] = arguments[_key2];
-      }
-      return Object.assign.apply(Object, [obj0].concat(objs));
-    } : function (obj0) {
-      for (var _len3 = arguments.length, objs = Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
-        objs[_key3 - 1] = arguments[_key3];
-      }
-      return objs.reduce(function (topAgg, obj) {
-        return keys(obj).reduce(function (agg, key) {
-          agg[key] = obj[key];
-          return agg;
-        }, topAgg);
-      }, obj0);
-    };
-  }();
   var concat = takesN("concat");
-  var slice = takesTwo("slice");
-  var includes = function () {
-    return "includes" in Array.prototype ? takesOne("includes") : function (value, xs) {
-      return xs.indexOf(value) > -1;
-    };
-  }();
-  var indexOf = takesOne("indexOf");
-  var lastIndexOf = takesOne("lastIndexOf");
-  var map = takesOne("map");
-  var filter = takesOne("filter");
-  var reduce = takesTwo("reduce");
-  var reduceRight = takesTwo("reduceRight");
-  var forEach = takesOne("forEach");
-  var some = takesOne("some");
-  var every = takesOne("every");
-  var join = takesOne("join");
-  var push = takesN("push");
-  var defineReverse = function defineReverse() {
-    return Array.prototype.reverse ? function (x) {
-      return x.reverse();
-    } : function (x) {
-      return x.reduceRight(function (agg, item) {
-        agg.push(item);
-        return agg;
-      }, []);
-    };
-  };
-  var reverse = defineReverse();
   var apply = function apply(fn, args) {
     return fn.apply(null, args);
   };
-  var call = function call(fn) {
-    for (var _len4 = arguments.length, args = Array(_len4 > 1 ? _len4 - 1 : 0), _key4 = 1; _key4 < _len4; _key4++) {
-      args[_key4 - 1] = arguments[_key4];
-    }
-    return apply(fn, args);
-  };
-
-  var index = /*#__PURE__*/Object.freeze({
-    split: split,
-    instanceOf: instanceOf,
-    hasOwnProperty: hasOwnProperty,
-    length: length,
-    keys: keys,
-    assign: assign,
-    concat: concat,
-    slice: slice,
-    includes: includes,
-    indexOf: indexOf,
-    lastIndexOf: lastIndexOf,
-    map: map,
-    filter: filter,
-    reduce: reduce,
-    reduceRight: reduceRight,
-    forEach: forEach,
-    some: some,
-    every: every,
-    join: join,
-    push: push,
-    reverse: reverse,
-    apply: apply,
-    call: call
-  });
 
   var notFnErrPrefix = "`fn` in `curry(fn, ...args)`";
   var curryN$1 = function curryN(executeArity, fn) {
@@ -163,7 +73,83 @@
     return curryN$1(4, fn);
   };
 
-  function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+  var defineProperty = function (obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+
+    return obj;
+  };
+
+  var _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  var slicedToArray = function () {
+    function sliceIterator(arr, i) {
+      var _arr = [];
+      var _n = true;
+      var _d = false;
+      var _e = undefined;
+
+      try {
+        for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+          _arr.push(_s.value);
+
+          if (i && _arr.length === i) break;
+        }
+      } catch (err) {
+        _d = true;
+        _e = err;
+      } finally {
+        try {
+          if (!_n && _i["return"]) _i["return"]();
+        } finally {
+          if (_d) throw _e;
+        }
+      }
+
+      return _arr;
+    }
+
+    return function (arr, i) {
+      if (Array.isArray(arr)) {
+        return arr;
+      } else if (Symbol.iterator in Object(arr)) {
+        return sliceIterator(arr, i);
+      } else {
+        throw new TypeError("Invalid attempt to destructure non-iterable instance");
+      }
+    };
+  }();
+
+  var toConsumableArray = function (arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
+
+      return arr2;
+    } else {
+      return Array.from(arr);
+    }
+  };
+
   var append_ = function append_(value, orderedList) {
     switch (type(orderedList)) {
       case "String":
@@ -172,7 +158,7 @@
         }
       case "Array":
         {
-          return [].concat(_toConsumableArray(orderedList), [value]);
+          return [].concat(toConsumableArray(orderedList), [value]);
         }
       default:
         {
@@ -185,20 +171,17 @@
   var applyTo_ = function applyTo_(value, fn) {
     return fn(value);
   };
-  var index$1 = curry2(applyTo_);
+  var index = curry2(applyTo_);
 
-  var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-  function _toConsumableArray$1(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-  function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
   var attach_ = function attach_(key, value, functor) {
     switch (type(functor)) {
       case "Object":
         {
-          return _extends({}, functor, _defineProperty({}, key, value));
+          return _extends({}, functor, defineProperty({}, key, value));
         }
       case "Array":
         {
-          return [].concat(_toConsumableArray$1(functor.slice(0, key)), [value], _toConsumableArray$1(functor.slice(key)));
+          return [].concat(toConsumableArray(functor.slice(0, key)), [value], toConsumableArray(functor.slice(key)));
         }
       case "String":
         {
@@ -206,11 +189,11 @@
         }
       case "Map":
         {
-          return new Map([].concat(_toConsumableArray$1(functor), [[key, value]]));
+          return new Map([].concat(toConsumableArray(functor), [[key, value]]));
         }
       case "Set":
         {
-          return new Set([].concat(_toConsumableArray$1(functor), [value]));
+          return new Set([].concat(toConsumableArray(functor), [value]));
         }
       default:
         {
@@ -223,9 +206,9 @@
   var complement_ = function complement_(predicate, anything) {
     return !predicate(anything);
   };
-  var index$2 = curry2(complement_);
+  var index$1 = curry2(complement_);
 
-  var index$3 = (function () {
+  var index$2 = (function () {
     for (var _len = arguments.length, fns = Array(_len), _key = 0; _key < _len; _key++) {
       fns[_key] = arguments[_key];
     }
@@ -237,7 +220,7 @@
   });
 
   var notFnErrPrefix$1 = "`fn` in `curry(fn, ...args)`";
-  var index$4 = (function (executeArity, fn) {
+  var index$3 = (function (executeArity, fn) {
     for (var _len = arguments.length, curriedArgs = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
       curriedArgs[_key - 2] = arguments[_key];
     }
@@ -290,7 +273,7 @@
     return !isNil(value) && typeof value.toString === "function" ? value.toString() : Object.prototype.toString.apply(value);
   });
 
-  var index$5 = (function (x) {
+  var index$4 = (function (x) {
     if (isNil(x)) {
       return x;
     }
@@ -305,14 +288,13 @@
   var divide = function divide(a, b) {
     return a / b;
   };
-  var index$6 = curry2(divide);
+  var index$5 = curry2(divide);
 
   var gt_ = function gt_(a, b) {
     return a > b;
   };
   var greaterThan = curry2(gt_);
 
-  function _toConsumableArray$2(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
   var fromIteratorToArrayIterator = function fromIteratorToArrayIterator(list) {
     return function (iterator) {
       var _iterator$next = iterator.next(),
@@ -321,18 +303,17 @@
       if (done) {
         return list;
       }
-      return fromIteratorToArrayIterator([].concat(_toConsumableArray$2(list), [value]))(iterator);
+      return fromIteratorToArrayIterator([].concat(toConsumableArray(list), [value]))(iterator);
     };
   };
   var fromIteratorToArray = (function (iterator) {
     return fromIteratorToArrayIterator([])(iterator);
   });
 
-  function _toConsumableArray$3(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
   var fromMapping = {
     Array: function Array(array) {
       return array.reduce(function (pairs, value, index) {
-        return [].concat(_toConsumableArray$3(pairs), [[index, value]]);
+        return [].concat(toConsumableArray(pairs), [[index, value]]);
       }, []);
     },
     Object: function (_Object) {
@@ -346,8 +327,8 @@
     }(function (object) {
       return Object.entries(object);
     }),
-    Set: function Set(set) {
-      return fromIteratorToArray(set.values()).map(function (value) {
+    Set: function Set(set$$1) {
+      return fromIteratorToArray(set$$1.values()).map(function (value) {
         return [undefined, value];
       });
     },
@@ -362,7 +343,6 @@
     throw new Error("fromFunctorToPairs doesn't know how to handle " + type(pairableValue));
   });
 
-  var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
   var reduceWithValueKey_ = function reduceWithValueKey_(reducer, initial, functor) {
     switch (type(functor)) {
       case "Array":
@@ -374,7 +354,7 @@
       case "Object":
         {
           return toPairs(functor).reduce(function (acc, _ref) {
-            var _ref2 = _slicedToArray(_ref, 2),
+            var _ref2 = slicedToArray(_ref, 2),
                 key = _ref2[0],
                 value = _ref2[1];
             return reducer(acc)(value)(key);
@@ -383,7 +363,7 @@
       case "Set":
         {
           return toPairs(functor).reduce(function (acc, _ref3) {
-            var _ref4 = _slicedToArray(_ref3, 2),
+            var _ref4 = slicedToArray(_ref3, 2),
                 value = _ref4[1];
             return reducer(acc)(value)();
           }, initial);
@@ -391,7 +371,7 @@
       case "Map":
         {
           return toPairs(functor).reduce(function (acc, _ref5) {
-            var _ref6 = _slicedToArray(_ref5, 2),
+            var _ref6 = slicedToArray(_ref5, 2),
                 key = _ref6[0],
                 value = _ref6[1];
             return reducer(acc)(value)(key);
@@ -400,7 +380,7 @@
       case "String":
         {
           return toPairs(functor.split("")).reduce(function (acc, _ref7) {
-            var _ref8 = _slicedToArray(_ref7, 2),
+            var _ref8 = slicedToArray(_ref7, 2),
                 key = _ref8[0],
                 value = _ref8[1];
             return reducer(acc)(value)(key);
@@ -444,7 +424,7 @@
       };
     })(fresh(orderedList))(orderedList);
   };
-  var dropFirst = curry2(dropFirst_);
+  var index$6 = curry2(dropFirst_);
 
   var filter_ = function filter_(predicate, enumerable) {
     if (enumerable.filter) {
@@ -485,7 +465,6 @@
     return pipe.apply(undefined, argsToGive)(value);
   });
 
-  var _slicedToArray$1 = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
   var forEach_ = function forEach_(fn, functor) {
     if (typeof functor.forEach === "function") {
       functor.forEach(function (value, key) {
@@ -494,7 +473,7 @@
       return functor;
     }
     return toPairs(functor).forEach(function (_ref) {
-      var _ref2 = _slicedToArray$1(_ref, 2),
+      var _ref2 = slicedToArray(_ref, 2),
           key = _ref2[0],
           value = _ref2[1];
       fn(value)(key);
@@ -559,8 +538,6 @@
     return reduceKeys(flip(append))([])(keyedEnumerable);
   });
 
-  var _extends$1 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-  function _toConsumableArray$4(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
   var mergeRight_ = function mergeRight_(left, right) {
     if (type(left) !== type(right)) {
       throw new Error("mergeRight received a " + type(left) + " and " + type(right) + " which aren't the same");
@@ -568,19 +545,19 @@
     switch (type(left)) {
       case "Array":
         {
-          return [].concat(_toConsumableArray$4(left), _toConsumableArray$4(right));
+          return [].concat(toConsumableArray(left), toConsumableArray(right));
         }
       case "Object":
         {
-          return _extends$1({}, left, right);
+          return _extends({}, left, right);
         }
       case "Map":
         {
-          return new Map([].concat(_toConsumableArray$4(left), _toConsumableArray$4(right)));
+          return new Map([].concat(toConsumableArray(left), toConsumableArray(right)));
         }
       case "Set":
         {
-          return new Set([].concat(_toConsumableArray$4(left), _toConsumableArray$4(right)));
+          return new Set([].concat(toConsumableArray(left), toConsumableArray(right)));
         }
       case "String":
         {
@@ -594,7 +571,6 @@
   };
   var mergeRight = curry2(mergeRight_);
 
-  function _defineProperty$1(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
   var of = curry(function (key, value, functor) {
     switch (type(functor)) {
       case "Array":
@@ -603,7 +579,7 @@
         }
       case "Object":
         {
-          return _defineProperty$1({}, key, value);
+          return defineProperty({}, key, value);
         }
       case "Set":
         {
@@ -680,8 +656,6 @@
     });
   });
 
-  var _extends$2 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-  function _toConsumableArray$5(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
   var mergeLeft_ = function mergeLeft_(left, right) {
     if (type(left) !== type(right)) {
       throw new Error("mergeLeft received a " + type(left) + " and " + type(right) + " which aren't the same");
@@ -689,19 +663,19 @@
     switch (type(left)) {
       case "Array":
         {
-          return [].concat(_toConsumableArray$5(right), _toConsumableArray$5(left));
+          return [].concat(toConsumableArray(right), toConsumableArray(left));
         }
       case "Object":
         {
-          return _extends$2({}, right, left);
+          return _extends({}, right, left);
         }
       case "Map":
         {
-          return new Map([].concat(_toConsumableArray$5(right), _toConsumableArray$5(left)));
+          return new Map([].concat(toConsumableArray(right), toConsumableArray(left)));
         }
       case "Set":
         {
-          return new Set([].concat(_toConsumableArray$5(right), _toConsumableArray$5(left)));
+          return new Set([].concat(toConsumableArray(right), toConsumableArray(left)));
         }
       case "String":
         {
@@ -778,14 +752,12 @@
     return functors;
   });
 
-  var _extends$3 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-  function _defineProperty$2(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
   var index$i = (function (fn) {
     return reduceWithValueKey(function (accumulated) {
       return function (value) {
         return function (key) {
           if (accumulated[key]) {
-            return _extends$3({}, accumulated, _defineProperty$2({}, key, fn(accumulated[key])(value)(key)));
+            return _extends({}, accumulated, defineProperty({}, key, fn(accumulated[key])(value)(key)));
           }
           return attach(key)(value)(accumulated);
         };
@@ -808,7 +780,6 @@
     return !x;
   });
 
-  function _toConsumableArray$6(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
   var prepend = curry(function (value, orderedList) {
     switch (type(orderedList)) {
       case "String":
@@ -817,7 +788,7 @@
         }
       case "Array":
         {
-          return [value].concat(_toConsumableArray$6(orderedList));
+          return [value].concat(toConsumableArray(orderedList));
         }
       default:
         {
@@ -861,16 +832,16 @@
     }
     return keyedFunctor[name];
   };
-  var get = curry2(prop_);
+  var get$1 = curry2(prop_);
 
   var path = curry(function (keychain, tree) {
-    return reduceValues(flip(get))(tree)(keychain);
+    return reduceValues(flip(get$1))(tree)(keychain);
   });
 
   var pick = function pick(keys, keyedEnumerable) {
     return reduceValues(function (accumulated) {
       return function (key) {
-        var v = get(key)(keyedEnumerable);
+        var v = get$1(key)(keyedEnumerable);
         return v ? mergeRight(accumulated)(objectFrom([key])(v)) : accumulated;
       };
     })(fresh(keyedEnumerable))(keys);
@@ -880,13 +851,13 @@
   var pickAll_ = function pickAll_(keys, keyedEnumerable) {
     return reduceValues(function (accumulated) {
       return function (key) {
-        return mergeRight(accumulated)(objectFrom([key])(get(key)(keyedEnumerable)));
+        return mergeRight(accumulated)(objectFrom([key])(get$1(key)(keyedEnumerable)));
       };
     })(fresh(keyedEnumerable))(keys);
   };
   var index$q = curry2(pickAll_);
 
-  var toArray = (function (value) {
+  var toArray$1 = (function (value) {
     if (is("Array")(value)) {
       return value;
     }
@@ -894,7 +865,11 @@
   });
 
   var index$r = curry2(function (keychain, functor) {
-    return mapValues(path(toArray(keychain)))(functor);
+    return mapValues(path(toArray$1(keychain)))(functor);
+  });
+
+  var index$s = (function (a) {
+    return a;
   });
 
   var reject_ = function reject_(fn, list) {
@@ -902,14 +877,14 @@
       return !fn(v);
     }, list);
   };
-  var index$s = curry2(reject_);
+  var index$t = curry2(reject_);
 
   var round_ = function round_(precision, num) {
     return Number(Math.round(num + 'e' + precision) + 'e-' + precision);
   };
-  var index$t = curry2(round_);
+  var index$u = curry2(round_);
 
-  var index$u = curry(split);
+  var index$v = curry(split);
 
   var isRegex = function isRegex(x) {
     return Object.prototype.toString.call(x) === "[object RegExp]";
@@ -933,9 +908,11 @@
   var startsWith_ = function startsWith_(subset, set) {
     return test(new RegExp("^" + escapeString(subset)))(set);
   };
-  var index$v = curry2(startsWith_);
+  var index$w = curry2(startsWith_);
 
-  var index$w = dropFirst(1);
+  var index$x = (function (x) {
+    return dropFirst_(1, x);
+  });
 
   var reduceValues$1 = (function (fn) {
     return reduceWithValueKey(function (acc) {
@@ -947,7 +924,7 @@
     });
   });
 
-  var index$x = (function (functor) {
+  var index$y = (function (functor) {
     return reduceValues$1(flip(append))([])(functor);
   });
 
@@ -965,30 +942,29 @@
       return input;
     };
   };
-  var index$y = curry2(when_);
+  var index$z = curry2(when_);
 
   var where_ = function where_(matcher, keyedEnumerable) {
     return reduceWithValueKey(function (latest) {
       return function (value) {
         return function (key) {
-          return latest && value(path(toArray(key))(keyedEnumerable));
+          return latest && value(path(toArray$1(key))(keyedEnumerable));
         };
       };
     })(true)(matcher);
   };
-  var index$z = curry2(where_);
+  var index$A = curry2(where_);
 
-  exports.JS = index;
   exports.append = append;
-  exports.applyTo = index$1;
+  exports.applyTo = index;
   exports.attach = attach;
-  exports.complement = index$2;
-  exports.compose = index$3;
+  exports.complement = index$1;
+  exports.compose = index$2;
   exports.curry = curry;
-  exports.curryN = index$4;
-  exports.dec = index$5;
-  exports.divide = index$6;
-  exports.dropFirst = dropFirst;
+  exports.curryN = index$3;
+  exports.dec = index$4;
+  exports.divide = index$5;
+  exports.dropFirst = index$6;
   exports.empty = fresh;
   exports.filter = filter$1;
   exports.flip = flip;
@@ -1036,26 +1012,27 @@
   exports.pickAll = index$q;
   exports.pipe = pipe;
   exports.pluck = index$r;
+  exports.plucks = index$s;
   exports.prepend = prepend;
-  exports.prop = get;
+  exports.prop = get$1;
   exports.reduceKeys = reduceKeys;
   exports.reduceValues = reduceValues;
   exports.reduceWithValueKey = reduceWithValueKey;
-  exports.reject = index$s;
+  exports.reject = index$t;
   exports.replace = replace;
   exports.reverse = reverse$1;
-  exports.round = index$t;
-  exports.split = index$u;
-  exports.startsWith = index$v;
-  exports.tail = index$w;
+  exports.round = index$u;
+  exports.split = index$v;
+  exports.startsWith = index$w;
+  exports.tail = index$x;
   exports.test = test;
-  exports.toArray = toArray;
+  exports.toArray = toArray$1;
   exports.toPairs = toPairs;
   exports.toString = toString$1;
   exports.type = type;
-  exports.values = index$x;
-  exports.when = index$y;
-  exports.where = index$z;
+  exports.values = index$y;
+  exports.when = index$z;
+  exports.where = index$A;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 

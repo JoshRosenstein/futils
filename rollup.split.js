@@ -1,12 +1,13 @@
 import babel from 'rollup-plugin-babel'
 import filesize from 'rollup-plugin-filesize'
+import resolve from 'rollup-plugin-node-resolve'
 import globby from 'globby'
 import path from 'path'
 import { uglify } from 'rollup-plugin-uglify'
 
 const buildEntry = () => {
   const results = []
-  const paths = globby.sync(['src/*.js', '!src/index.js', '!src/_internals'])
+const paths = globby.sync(['src/*.js', '!src/index.js', '!src/_internals','!src/JS','src/*/index.js'])
 
   paths.forEach(p => {
     const { name, dir } = path.parse(p)
@@ -19,7 +20,14 @@ const buildEntry = () => {
     const config = {
       input: path.resolve(__dirname, p),
       plugins: [
-        babel(),
+        resolve({
+          jsnext: true,
+          main: true,
+          browser: true
+        }),
+        babel({
+      exclude: 'node_modules/**'
+    }),
         uglify(),
         filesize()
       ],
@@ -27,11 +35,12 @@ const buildEntry = () => {
         dir,
         file: `${moduleName}.js`,
         format: 'umd',
-        name: moduleName
+        name: moduleName,
+         exports: 'named'
       }
     }
-
-    results.push(config)
+if(moduleName==='where'){
+    results.push(config)}
 
     return true
   })

@@ -1,3 +1,3 @@
-import dropFirst from "../dropFirst";
+import {dropFirst_} from "../dropFirst";
 
-export default dropFirst(1);
+export default x=>dropFirst_(1,x);

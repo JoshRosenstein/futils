@@ -7,31 +7,38 @@
     "functional",
     "js"
   ],
-  "main": "dist/futils.min.js",
+  "main": "dist/futils.common.js",
+  "module": "dist/futils.es.js",
+  "jsnext:main": "dist/futils.es.js",
+  "browser": "dist/futils.min.js",
+  "moduleName": "futils",
   "unpkg": "dist/futils.min.js",
   "author": "Josh Rosenstein",
   "license": "MIT",
   "scripts": {
+    "prepack": "rollup -c rollup.split.js && node scripts/create-export.js && rollup -c",
+    "postpack": "npm run clean",
     "build": "rollup -c",
     "split": "rollup -c rollup.split.js",
     "scripts": "node scripts/create-export.js",
     "stats": "rollup -c rollup.split.js && node scripts/clean.js",
     "clean": "node scripts/clean.js",
-    "clean:modules": "rimraf node_modules",
     "test": "jest --coverage --no-cache --ci --runInBand",
+    "test:wcache": "jest --coverage --ci --runInBand",
     "test:watch": "jest --watchAll",
     "test:coverage": "jest --coverage",
     "reinstall": "yarn run clean:modules && yarn",
     "lint": "standard src/*.js"
   },
-  "dependencies": {
-    "babel-preset-react": "^6.24.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-jest": "^22.4.3",
+    "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-transform-modules": "^0.1.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "bundlesize": "^0.17.0",
     "codecov": "^3.0.0",
@@ -39,14 +46,33 @@
     "cross-env": "^5.1.6",
     "globby": "8.0.1",
     "jest": "23.0.0",
+    "regenerator-runtime": "^0.11.1",
     "rollup": "0.59.2",
     "rollup-plugin-babel": "3.0.4",
     "rollup-plugin-cleanup": "3.0.0-beta.1",
+    "rollup-plugin-commonjs": "^9.1.3",
     "rollup-plugin-filesize": "1.5.0",
     "rollup-plugin-node-resolve": "^3.3.0",
+    "rollup-plugin-replace": "^2.0.0",
     "rollup-plugin-uglify": "4.0.0",
     "standard": "11.0.1"
   },
+  "jest": {
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/*.css.js",
+      "!**/node_modules/**",
+      "!**/vendor/**",
+      "!**/build/**",
+        "!**/dist/**",
+      "!**/coverage/**",
+          "!**/scripts/**"
+    ],
+    "coveragePathIgnorePatterns":[
+        "./rollup.split.js"
+
+    ]
+},
   "standard": {
     "ignore": [
       "dist/*",
@@ -59,21 +85,37 @@
     }
   ],
   "babel": {
-    "presets": [[
-      "env",
-      {
-       "targets": {
-         "browsers": [
-           "last 2 versions",
-           "ie >= 9"
-         ]
-       },
-       "modules": false
-     }
-    ], "react","stage-0"],
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "browsers": [
+              "last 2 versions",
+              "ie >= 9"
+            ]
+          },
+          "modules": false
+        }
+      ],
+      "react",
+      "stage-0"
+    ],
+    "plugins": [
+      "external-helpers"
+    ],
     "env": {
       "test": {
-
+        "presets": [
+          [
+            "env"
+          ],
+          "react",
+          "stage-0"
+        ],
+        "plugins": [
+          "transform-runtime"
+        ]
       }
     }
   }
