@@ -7,10 +7,7 @@
     "functional",
     "js"
   ],
-  "main": "dist/futils.common.js",
-  "module": "dist/futils.es.js",
-  "jsnext:main": "dist/futils.es.js",
-  "browser": "dist/futils.min.js",
+  "main": "dist/futils.min.js",
   "moduleName": "futils",
   "unpkg": "dist/futils.min.js",
   "author": "Josh Rosenstein",
