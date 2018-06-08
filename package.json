@@ -7,9 +7,8 @@
     "functional",
     "js"
   ],
-  "main": "dist/bundle.common.js",
-  "module": "dist/bundle.esm.js",
-  "unpkg": "dist/bundle.min.js",
+  "main": "dist/futils.min.js",
+  "unpkg": "dist/futils.min.js",
   "author": "Josh Rosenstein",
   "license": "MIT",
   "scripts": {
