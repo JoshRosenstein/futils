@@ -1,6 +1,6 @@
 {
   "name": "@roseys/futils",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "keywords": [
     "ramda",
@@ -64,15 +64,14 @@
       "!**/node_modules/**",
       "!**/vendor/**",
       "!**/build/**",
-        "!**/dist/**",
+      "!**/dist/**",
       "!**/coverage/**",
-          "!**/scripts/**"
+      "!**/scripts/**"
     ],
-    "coveragePathIgnorePatterns":[
-        "./rollup.split.js"
-
+    "coveragePathIgnorePatterns": [
+      "./rollup.split.js"
     ]
-},
+  },
   "standard": {
     "ignore": [
       "dist/*",
