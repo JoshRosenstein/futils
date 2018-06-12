@@ -1,15 +1,20 @@
-import reduceWithValueKey from "../reduceWithValueKey";
-import attach from "../attach";
+import { reduceWithValueKey_ } from "../reduceWithValueKey"
+import { attach_ } from "../attach"
+import { curry3 } from "../curry"
+export const mergeWithKey_ = (fn, initial, functor) =>
+  reduceWithValueKey_(
+    (accumulated, value, key) => {
+      if (accumulated[key]) {
+        return {
+          ...accumulated,
+          [key]: fn(accumulated[key], value, key)
+        }
+      }
 
-export default fn => {
-  return reduceWithValueKey(accumulated => value => key => {
-    if (accumulated[key]) {
-      return {
-        ...accumulated,
-        [key]: fn(accumulated[key])(value)(key)
-      };
-    }
+      return attach_(key, value, accumulated)
+    },
+    initial,
+    functor
+  )
 
-    return attach(key)(value)(accumulated);
-  });
-};
+export default curry3(mergeWithKey_)

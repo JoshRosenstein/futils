@@ -1,10 +1,13 @@
-import reduceValues from "../reduceValues";
-import attach from "../attach";
-import reverse from "../reverse";
-import curry from "../curry";
+import { reduceValues_ } from "../reduceValues"
+import { attach_ } from "../attach"
+import reverse from "../reverse"
+import { curry2 } from "../curry"
 
-export default curry((keychain, value) =>
-  reduceValues(accumulated => key => attach(key)(accumulated)({}))(value)(
+export const objectFrom_ = (keychain, value) =>
+  reduceValues_(
+    (accumulated, key) => attach_(key, accumulated, {}),
+    value,
     reverse(keychain)
   )
-);
+
+export default curry2(objectFrom_)

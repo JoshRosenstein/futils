@@ -1,5 +1,5 @@
-import flip from "../flip";
-import append from "../append";
-import reduceKeys from "../reduceKeys";
+import { append_ } from "../append"
+import { reduceKeys_ } from "../reduceKeys"
 
-export default keyedEnumerable => reduceKeys(flip(append))([])(keyedEnumerable);
+export default keyedObj =>
+  reduceKeys_((acc, key) => append_(key, acc), [], keyedObj)

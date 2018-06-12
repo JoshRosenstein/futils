@@ -1,3 +1,3 @@
-import is from "../is";
+import { is_ } from "../is"
 
-export default value => is("undefined")(value) || is("null")(value);
+export default value => is_("undefined", value) || is_("null", value)

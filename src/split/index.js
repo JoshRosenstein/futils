@@ -1,4 +1,4 @@
-import {split} from '../JS'
-import curry2 from '../curry'
+import { curry2 } from "../curry"
 
+export const split = (separator, str) => str.split(separator)
 export default curry2(split)

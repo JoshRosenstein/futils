@@ -1,3 +1,3 @@
-import nth from "../nth";
+import { nth_ } from "../nth"
 
-export default nth(0);
+export default list => nth_(0, list)

@@ -1,18 +1,20 @@
-import type from "../type";
-import curry from "../curry";
+import type from "../type"
+import { curry2 } from "../curry"
 
-export default curry((value, orderedList) => {
+export const prepend_ = (value, orderedList) => {
   switch (type(orderedList)) {
     case "String": {
-      return `${value}${orderedList}`;
+      return `${value}${orderedList}`
     }
     case "Array": {
-      return [value, ...orderedList];
+      return [value, ...orderedList]
     }
     default: {
       throw new Error(
         `prepend doesn't know how to deal with ${type(orderedList)}`
-      );
+      )
     }
   }
-});
+}
+
+export default curry2(prepend_)

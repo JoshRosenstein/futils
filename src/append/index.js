@@ -1,7 +1,7 @@
 import type from "../type"
 import { curry2 } from "../curry"
 
-const append_ = (value, orderedList) => {
+export const append_ = (value, orderedList) => {
   switch (type(orderedList)) {
     case "String": {
       return `${orderedList}${value}`

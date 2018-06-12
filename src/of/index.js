@@ -1,26 +1,28 @@
-import type from "../type";
-import curry from "../curry";
+import type from "../type"
+import { curry3 } from "../curry"
 
-export default curry((key, value, functor) => {
+export const of_ = (key, value, functor) => {
   switch (type(functor)) {
     case "Array": {
-      return [value];
+      return [value]
     }
     case "Object": {
-      return { [key]: value };
+      return { [key]: value }
     }
     case "Set": {
-      return new Set([value]);
+      return new Set([value])
     }
     case "Map": {
-      return new Map([[key, value]]);
+      return new Map([[key, value]])
     }
     case "String": {
-      return `${value}`;
+      return `${value}`
     }
 
     default: {
-      throw new Error(`of doesn't know how to type ${type(functor)}`);
+      throw new Error(`of doesn't know how to type ${type(functor)}`)
     }
   }
-});
+}
+
+export default curry3(of_)

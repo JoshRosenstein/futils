@@ -1,8 +1,6 @@
-import nth from "../nth";
-import mapValues from "../mapValues";
-
-var last = nth(-1);
+import { mapValues_ } from "../mapValues"
+import last from "../last"
 
 export default pairs => {
-  return mapValues(last)(pairs);
-};
+  return mapValues_(last, pairs)
+}

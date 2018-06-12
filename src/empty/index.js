@@ -1,20 +1,20 @@
-import is from "../is";
+import { is_ } from "../is"
 
-var toString = Object.prototype.toString;
+var toString = Object.prototype.toString
 
 function _has(prop, obj) {
-  return Object.prototype.hasOwnProperty.call(obj, prop);
+  return Object.prototype.hasOwnProperty.call(obj, prop)
 }
 
 var _isArguments = (function() {
   return toString.call(arguments) === "[object Arguments]"
     ? function _isArguments(x) {
-        return toString.call(x) === "[object Arguments]";
+        return toString.call(x) === "[object Arguments]"
       }
     : function _isArguments(x) {
-        return _has("callee", x);
-      };
-})();
+        return _has("callee", x)
+      }
+})()
 
 export default x =>
   x != null && typeof x.empty === "function"
@@ -23,19 +23,19 @@ export default x =>
       x.constructor != null &&
       typeof x.constructor.empty === "function"
       ? x.constructor.empty()
-      : is("Array")(x)
+      : is_("Array", x)
         ? []
-        : is("String")(x)
+        : is_("String", x)
           ? ""
-          : is("Object")(x)
+          : is_("Object", x)
             ? {}
-            : is("Map")(x)
-            ? new Map()
-            : is("Set")(x)
-            ? new Set()
-            : _isArguments(x)
-              ? (function() {
-                  return arguments;
-                })()
-              : // else
-                void 0;
+            : is_("Map", x)
+              ? new Map()
+              : is_("Set", x)
+                ? new Set()
+                : _isArguments(x)
+                  ? (function() {
+                      return arguments
+                    })()
+                  : // else
+                    void 0

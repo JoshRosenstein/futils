@@ -1,7 +1,7 @@
 import reduceKeys from "./index"
 
 describe("reduceKeys", () => {
-  const reducer = acc => current => `${acc}/${current}`,
+  const reducer = (acc, current) => `${acc}/${current}`,
     initial = "."
 
   test("Array", () => {

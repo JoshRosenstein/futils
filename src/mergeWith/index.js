@@ -1,13 +1,18 @@
-import fetchKey from "../key";
-import attach from "../attach";
-import reduceWithValueKey from "../reduceWithValueKey";
+import  { prop_ } from "../prop"
+import  { attach_ } from "../attach"
+import  { reduceWithValueKey_ } from "../reduceWithValueKey"
+import { curry3 } from "../curry"
+export const mergeWith_ = (fn, initial, functor) =>
+  reduceWithValueKey_(
+    (acc, value, key) => {
+      if (prop_(key, acc)) {
+        return attach_(key, fn(prop_(key, acc), value), acc)
+      }
 
-export default fn => {
-  return reduceWithValueKey(accumulated => value => key => {
-    if (fetchKey(key)(accumulated)) {
-      return attach(key)(fn(fetchKey(key)(accumulated))(value))(accumulated);
-    }
+      return attach_(key, value, acc)
+    },
+    initial,
+    functor
+  )
 
-    return attach(key)(value)(accumulated);
-  });
-};
+export default curry3(mergeWith_)

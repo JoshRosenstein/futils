@@ -1,9 +1,9 @@
-import is from "../is";
+import { is_ } from "../is"
 
 export default value => {
-  if (is("Array")(value)) {
-    return value;
+  if (is_("Array", value)) {
+    return value
   }
 
-  return [value];
-};
+  return [value]
+}

@@ -1,8 +1,9 @@
-import prop from "../prop";
-import reduceValues from "../reduceValues";
-import flip from "../flip";
-import curry from "../curry";
+import { prop_ } from "../prop"
+import { reduceValues_ } from "../reduceValues"
+import { curry2 } from "../curry"
 
-export default curry((keychain, tree) => {
-  return reduceValues(flip(prop))(tree)(keychain);
-});
+export const path_ = (keychain, tree) => {
+  return reduceValues_((acc, val) => prop_(val, acc), tree, keychain)
+}
+
+export default curry2(path_)

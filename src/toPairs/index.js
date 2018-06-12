@@ -1,21 +1,31 @@
-import type from "../type";
-import fromIteratorToArray from "../fromIteratorToArray";
+import type from "../type"
+import fromIteratorToArray from "../fromIteratorToArray"
 
-const fromMapping = {
-  Array: array =>
-    array.reduce((pairs, value, index) => [...pairs, [index, value]], []),
-  Object: object => Object.entries(object),
-  Set: set =>
-    fromIteratorToArray(set.values()).map(value => [undefined, value]),
-  Map: map => fromIteratorToArray(map.entries())
-};
+export default pairableObj => {
+  switch (type(pairableObj)) {
+    case "Array": {
+      return pairableObj.reduce(
+        (pairs, value, index) => [...pairs, [index, value]],
+        []
+      )
+    }
+    case "Object": {
+      return Object.entries(pairableObj)
+    }
+    case "Set": {
+      return fromIteratorToArray(pairableObj.values()).map(value => [
+        undefined,
+        value
+      ])
+    }
+    case "Map": {
+      return fromIteratorToArray(pairableObj.entries())
+    }
 
-export default pairableValue => {
-  if (fromMapping[type(pairableValue)]) {
-    return fromMapping[type(pairableValue)](pairableValue);
+    default: {
+      throw new Error(
+        `fromFunctorToPairs doesn't know how to handle ${type(pairableObj)}`
+      )
+    }
   }
-
-  throw new Error(
-    `fromFunctorToPairs doesn't know how to handle ${type(pairableValue)}`
-  );
-};
+}

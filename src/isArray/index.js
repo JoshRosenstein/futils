@@ -1,3 +1,3 @@
-import is from "../is";
+import { is_ } from "../is"
 
-export default value => is("Array")(value);
+export default value => is_("Array", value)

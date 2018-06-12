@@ -1,7 +1,6 @@
-import reduceValues from "../reduceValues";
-import flip from "../flip";
-import fresh from "../empty";
-import prepend from "../prepend";
+import { reduceValues_ } from "../reduceValues"
+import empty from "../empty"
+import { prepend_ } from "../prepend"
 
 export default orderedList =>
-  reduceValues(flip(prepend))(fresh(orderedList))(orderedList);
+  reduceValues_((acc, v) => prepend_(v, acc), empty(orderedList), orderedList)

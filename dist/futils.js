@@ -406,7 +406,7 @@
     };
   }();
   var fresh = (function (x) {
-    return x != null && typeof x.empty === "function" ? x.empty() : x != null && x.constructor != null && typeof x.constructor.empty === "function" ? x.constructor.empty() : is("Array")(x) ? [] : is("String")(x) ? "" : is("Object")(x) ? {} : _isArguments(x) ? function () {
+    return x != null && typeof x.empty === "function" ? x.empty() : x != null && x.constructor != null && typeof x.constructor.empty === "function" ? x.constructor.empty() : is("Array")(x) ? [] : is("String")(x) ? "" : is("Object")(x) ? {} : is("Map")(x) ? new Map() : is("Set")(x) ? new Set() : _isArguments(x) ? function () {
       return arguments;
     }() :
     void 0;
