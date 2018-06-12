@@ -1037,9 +1037,48 @@
     return reduce_(reducer, initial, functor, true);
   });
 
-  var reduceWhile_ = function reduceWhile_(pred, fn, init, list) {
-    var res = init;
-    var copy = [].concat(list);
+  var reduceWhile_ = function reduceWhile_(pred, reducer, initial, functor) {
+    var fn = void 0;
+    switch (type(functor)) {
+      case "Array":
+        fn = function fn(acc, value, key) {
+          return reducer(acc, value, key);
+        };
+        break;
+      case "Object":
+      case "Map":
+        fn = function fn(acc, _ref) {
+          var _ref2 = slicedToArray(_ref, 2),
+              key = _ref2[0],
+              value = _ref2[1];
+          return reducer(acc, value, key);
+        };
+        functor = toPairs(functor);
+        break;
+      case "Set":
+        fn = function fn(acc, _ref3) {
+          var _ref4 = slicedToArray(_ref3, 2),
+              value = _ref4[1];
+          return reducer(acc, value);
+        };
+        functor = toPairs(functor);
+        break;
+      case "String":
+        fn = function fn(acc, _ref5) {
+          var _ref6 = slicedToArray(_ref5, 2),
+              key = _ref6[0],
+              value = _ref6[1];
+          return reducer(acc, value, key);
+        };
+        functor = toPairs(functor.split(""));
+        break;
+      default:
+        {
+          throw new Error("reduce couldn't figure out how to reduce " + type(functor));
+        }
+    }
+    var res = initial;
+    var copy = [].concat(functor);
     while (copy.length && pred(res, copy[0])) {
       res = fn(res, copy.shift());
     }return res;
@@ -1173,7 +1212,7 @@
   exports.mergeAllDeepLeft = index$A;
   exports.mergeAllDeepRight = index$B;
   exports.mergeAllLeft = index$C;
-  exports.mergeAllRight = index$D;
+  exports.mergeAll = index$D;
   exports.mergeDeepLeft = mergeDeepLeft;
   exports.mergeDeepRight = mergeDeepRight;
   exports.mergeLeft = mergeLeft;
