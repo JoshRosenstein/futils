@@ -2,5 +2,5 @@
 
 import {curry2} from "../curry";
 
-const defaultTo_ = (def, val) => (val == null || isNaN(val) ? def : val)
+export const defaultTo_ = (d, v) => v == null || v !== v ? d : v
 export default curry2(defaultTo_)

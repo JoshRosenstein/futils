@@ -22,6 +22,7 @@
     "clean": "node scripts/clean.js",
     "test": "jest --coverage --no-cache --ci --runInBand",
     "test:wcache": "jest --coverage --ci --runInBand",
+    "test:quick": "jest --onlyChanged --runInBand",
     "test:watch": "jest --watchAll",
     "test:coverage": "jest --coverage",
     "reinstall": "yarn run clean:modules && yarn",
