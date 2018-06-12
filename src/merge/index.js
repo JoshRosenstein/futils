@@ -2,12 +2,12 @@ import type from "../type";
 import { curry2 } from "../curry";
 import isNil from '../isNil'
 
-export const mergeRight_ = (left, right) => {
+export const merge_ = (left, right) => {
   if(isNil(left)) return right
     if(isNil(right)) return left
   if (type(left) !== type(right)) {
     throw new Error(
-      `mergeRight received a ${type(left)} and ${type(
+      `merge received a ${type(left)} and ${type(
         right
       )} which aren't the same`
     );
@@ -37,9 +37,9 @@ export const mergeRight_ = (left, right) => {
     }
 
     default: {
-      throw new Error(`mergeRight doesn't know how to deal with ${type(left)}`);
+      throw new Error(`merge doesn't know how to deal with ${type(left)}`);
     }
   }
 };
 
-export default curry2(mergeRight_);
+export default curry2(merge_);

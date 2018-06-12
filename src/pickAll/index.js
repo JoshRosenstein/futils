@@ -1,4 +1,4 @@
-import { mergeRight_ } from "../mergeRight"
+import { merge_ } from "../merge"
 import { reduceValues_ } from "../reduceValues"
 import { objOf_ } from "../objOf"
 import { prop_ } from "../prop"
@@ -8,7 +8,7 @@ import { curry2 } from "../curry"
 export const pickAll_ = (keys, keyedEnumerable) => {
   return reduceValues_(
     (accumulated, key) =>
-      mergeRight_(accumulated, objOf_(key, prop_(key, keyedEnumerable))),
+      merge_(accumulated, objOf_(key, prop_(key, keyedEnumerable))),
     empty(keyedEnumerable),
     keys
   )

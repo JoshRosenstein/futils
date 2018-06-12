@@ -450,11 +450,11 @@
   };
   var path = curry2(path_);
 
-  var mergeRight_ = function mergeRight_(left, right) {
+  var merge_ = function merge_(left, right) {
     if (isNil(left)) return right;
     if (isNil(right)) return left;
     if (type(left) !== type(right)) {
-      throw new Error("mergeRight received a " + type(left) + " and " + type(right) + " which aren't the same");
+      throw new Error("merge received a " + type(left) + " and " + type(right) + " which aren't the same");
     }
     switch (type(left)) {
       case "Array":
@@ -479,11 +479,11 @@
         }
       default:
         {
-          throw new Error("mergeRight doesn't know how to deal with " + type(left));
+          throw new Error("merge doesn't know how to deal with " + type(left));
         }
     }
   };
-  var index$c = curry2(mergeRight_);
+  var index$c = curry2(merge_);
 
   var of_ = function of_(key, value, functor) {
     switch (type(functor)) {
@@ -522,7 +522,7 @@
       });
     }
     return reduce_(function (accumulated, value, key) {
-      return mergeRight_(accumulated, of_(key, fn(value, key), accumulated));
+      return merge_(accumulated, of_(key, fn(value, key), accumulated));
     }, empty(functor), functor);
   };
   var index$e = curry2(mapValuesWithValueKey_);
@@ -838,7 +838,7 @@
 
   var mapKeysWithValueKey_ = function mapKeysWithValueKey_(fn, functor) {
     return reduce_(function (accumulated, value, key) {
-      return mergeRight_(accumulated, of_(fn(value, key), value, accumulated));
+      return merge_(accumulated, of_(fn(value, key), value, accumulated));
     }, empty(functor), functor);
   };
   var mapKeysWithValueKey = curry2(mapKeysWithValueKey_);
@@ -921,7 +921,7 @@
 
   var mergeDeepRight_ = function mergeDeepRight_(left, right) {
     if (isArray(left) && isArray(right)) {
-      return mergeRight_(left, right);
+      return merge_(left, right);
     }
     if (isObject(left) && isObject(right)) {
       return mergeWith_(mergeDeepRight_, left, right);
@@ -947,7 +947,7 @@
 
   var index$C = (function (functors) {
     if (last(functors)) {
-      return reduceValues_(mergeRight_, empty(last(functors)), functors);
+      return reduceValues_(merge_, empty(last(functors)), functors);
     }
     return functors;
   });
@@ -1037,14 +1037,14 @@
   var pick = function pick(keys, keyedEnumerable) {
     return reduceValues_(function (accumulated, key) {
       var v = prop_(key, keyedEnumerable);
-      return v ? mergeRight_(accumulated, objOf_(key, v)) : accumulated;
+      return v ? merge_(accumulated, objOf_(key, v)) : accumulated;
     }, empty(keyedEnumerable), keys);
   };
   var index$O = curry2(pick);
 
   var pickAll_ = function pickAll_(keys, keyedEnumerable) {
     return reduceValues_(function (accumulated, key) {
-      return mergeRight_(accumulated, objOf_(key, prop_(key, keyedEnumerable)));
+      return merge_(accumulated, objOf_(key, prop_(key, keyedEnumerable)));
     }, empty(keyedEnumerable), keys);
   };
   var index$P = curry2(pickAll_);
@@ -1211,7 +1211,7 @@
   exports.mergeDeepLeft = mergeDeepLeft;
   exports.mergeDeepRight = mergeDeepRight;
   exports.mergeLeft = mergeLeft;
-  exports.mergeRight = index$c;
+  exports.merge = index$c;
   exports.mergeWith = mergeWith;
   exports.mergeWithKey = index$D;
   exports.min = index$E;

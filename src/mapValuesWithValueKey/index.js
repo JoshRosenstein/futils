@@ -1,4 +1,4 @@
-import { mergeRight_ } from "../mergeRight"
+import { merge_ } from "../merge"
 import empty from "../empty"
 import { of_ } from "../of"
 import { reduce_ } from "../reduce"
@@ -11,7 +11,7 @@ export const mapValuesWithValueKey_ = (fn, functor) => {
 
   return reduce_(
     (accumulated, value, key) => {
-      return mergeRight_(accumulated, of_(key, fn(value, key), accumulated))
+      return merge_(accumulated, of_(key, fn(value, key), accumulated))
     },
     empty(functor),
     functor

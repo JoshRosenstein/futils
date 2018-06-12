@@ -1,4 +1,4 @@
-import { mergeRight_ } from "../mergeRight"
+import { merge_ } from "../merge"
 import { mergeWith_ } from "../mergeWith"
 import isObject from "../isObject"
 import isArray from "../isArray"
@@ -6,7 +6,7 @@ import { curry2 } from "../curry"
 
 export const mergeDeepRight_ = (left, right) => {
   if (isArray(left) && isArray(right)) {
-    return mergeRight_(left, right)
+    return merge_(left, right)
   }
 
   if (isObject(left) && isObject(right)) {

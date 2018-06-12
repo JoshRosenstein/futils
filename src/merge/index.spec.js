@@ -1,11 +1,11 @@
-import mergeRight from "./index";
+import merge from "./index";
 
-describe("mergeRight", () => {
+describe("merge", () => {
   it("Array", () => {
     const left = ["a", "b"];
     const right = ["c"];
 
-    const a = mergeRight(left)(right);
+    const a = merge(left)(right);
     const eA = ["a", "b", "c"];
 
     expect(a).toEqual(eA);
@@ -22,7 +22,7 @@ describe("mergeRight", () => {
       zeta: "3"
     };
 
-    const a = mergeRight(left)(right);
+    const a = merge(left)(right);
     const eA = {
       alpha: "1",
       beta: "2",
@@ -36,7 +36,7 @@ describe("mergeRight", () => {
     const left = new Map([["a", "1"], ["b", "0"]]);
     const right = new Map([["b", "2"], ["c", "3"]]);
 
-    const a = mergeRight(left)(right);
+    const a = merge(left)(right);
     const eA = new Map([["a", "1"], ["b", "2"], ["c", "3"]]);
 
     expect(a).toEqual(eA);
@@ -46,7 +46,7 @@ describe("mergeRight", () => {
     const left = "ab";
     const right = "c";
 
-    const a = mergeRight(left)(right);
+    const a = merge(left)(right);
     const eA = "abc";
 
     expect(a).toEqual(eA);
