@@ -857,41 +857,6 @@
   };
   var index$y = curry2(min_);
 
-  var mergeLeft_ = function mergeLeft_(left, right) {
-    if (isNil(left)) return right;
-    if (isNil(right)) return left;
-    if (type(left) !== type(right)) {
-      throw new Error("mergeLeft received a " + type(left) + " and " + type(right) + " which aren't the same");
-    }
-    switch (type(left)) {
-      case "Array":
-        {
-          return [].concat(toConsumableArray(right), toConsumableArray(left));
-        }
-      case "Object":
-        {
-          return _extends({}, right, left);
-        }
-      case "Map":
-        {
-          return new Map([].concat(toConsumableArray(right), toConsumableArray(left)));
-        }
-      case "Set":
-        {
-          return new Set([].concat(toConsumableArray(right), toConsumableArray(left)));
-        }
-      case "String":
-        {
-          return "" + right + left;
-        }
-      default:
-        {
-          throw new Error("mergeLeft doesn't know how to deal with " + type(left));
-        }
-    }
-  };
-  var mergeLeft = curry2(mergeLeft_);
-
   var mergeWith_ = function mergeWith_(fn, initial, functor) {
     return reduce_(function (acc, value, key) {
       if (prop_(key, acc)) {
@@ -900,24 +865,7 @@
       return attach_(key, value, acc);
     }, initial, functor);
   };
-  var mergeWith = curry3(mergeWith_);
-
-  var mergeDeepLeft = curry2(function (left, right) {
-    if (isArray(left) && isArray(right)) {
-      return mergeLeft(left)(right);
-    }
-    if (isObject(left) && isObject(right)) {
-      return mergeWith(mergeDeepLeft)(left)(right);
-    }
-    return left;
-  });
-
-  var index$z = (function (functors) {
-    if (head(functors)) {
-      return reduceValues(mergeDeepLeft)(empty(head(functors)))(functors);
-    }
-    return functors;
-  });
+  var index$z = curry3(mergeWith_);
 
   var mergeDeepRight_ = function mergeDeepRight_(left, right) {
     if (isArray(left) && isArray(right)) {
@@ -930,22 +878,39 @@
   };
   var mergeDeepRight = curry2(mergeDeepRight_);
 
-  var last$1 = nth(-1);
+  var mergeDeepLeft_ = function mergeDeepLeft_(left, right) {
+    return mergeDeepRight_(right, left);
+  };
+  var mergeDeepLeft = curry2(mergeDeepLeft_);
+
   var index$A = (function (functors) {
+    if (head(functors)) {
+      return reduceValues(mergeDeepLeft)(empty(head(functors)))(functors);
+    }
+    return functors;
+  });
+
+  var last$1 = nth(-1);
+  var index$B = (function (functors) {
     if (last$1(functors)) {
       return reduceValues(mergeDeepRight)(empty(last$1(functors)))(functors);
     }
     return functors;
   });
 
-  var index$B = (function (functors) {
+  var mergeLeft_ = function mergeLeft_(left, right) {
+    return merge_(right, left);
+  };
+  var mergeLeft = curry2(mergeLeft_);
+
+  var index$C = (function (functors) {
     if (head(functors)) {
       return reduceValues_(mergeLeft, empty(head(functors)), functors);
     }
     return functors;
   });
 
-  var index$C = (function (functors) {
+  var index$D = (function (functors) {
     if (last(functors)) {
       return reduceValues_(merge_, empty(last(functors)), functors);
     }
@@ -960,21 +925,21 @@
       return attach_(key, value, accumulated);
     }, initial, functor);
   };
-  var index$D = curry3(mergeWithKey_);
+  var index$E = curry3(mergeWithKey_);
 
   var min_$1 = function min_(a, b) {
     return head([].concat(toConsumableArray(toArray$1(a)), toConsumableArray(toArray$1(b))).sort(function (a, b) {
       return a > b;
     }));
   };
-  var index$E = curry2(min_$1);
+  var index$F = curry2(min_$1);
 
   var multiply_ = function multiply_(a, b) {
     return a * b;
   };
-  var index$F = curry2(multiply_);
+  var index$G = curry2(multiply_);
 
-  var index$G = (function (x) {
+  var index$H = (function (x) {
     return !x;
   });
 
@@ -994,7 +959,7 @@
         }
     }
   };
-  var index$H = curry2(prepend_);
+  var index$I = curry2(prepend_);
 
   var reverse$1 = (function (orderedList) {
     return reduceValues_(function (acc, v) {
@@ -1007,32 +972,32 @@
       return attach_(key, accumulated, {});
     }, value, reverse$1(toArray$1(keychain)));
   };
-  var index$I = curry2(objectFrom_);
+  var index$J = curry2(objectFrom_);
 
   var objOf_ = function objOf_(keychain, value) {
     return reduceValues_(function (accumulated, key) {
       return attach_(key, accumulated, {});
     }, value, reverse$1(toArray$1(keychain)));
   };
-  var index$J = curry2(objOf_);
+  var index$K = curry2(objOf_);
 
   var or_ = function or_(a, b) {
     return a || b;
   };
-  var index$K = curry2(or_);
+  var index$L = curry2(or_);
 
-  var index$L = (function (pairs) {
+  var index$M = (function (pairs) {
     return mapValues(head)(pairs);
   });
 
-  var index$M = (function (pairs) {
+  var index$N = (function (pairs) {
     return mapValues_(last, pairs);
   });
 
   var pathOr_ = function pathOr_(d, p, obj) {
     return defaultTo_(d, path_(p, obj));
   };
-  var index$N = curry3(pathOr_);
+  var index$O = curry3(pathOr_);
 
   var pick = function pick(keys, keyedEnumerable) {
     return reduceValues_(function (accumulated, key) {
@@ -1040,19 +1005,19 @@
       return v ? merge_(accumulated, objOf_(key, v)) : accumulated;
     }, empty(keyedEnumerable), keys);
   };
-  var index$O = curry2(pick);
+  var index$P = curry2(pick);
 
   var pickAll_ = function pickAll_(keys, keyedEnumerable) {
     return reduceValues_(function (accumulated, key) {
       return merge_(accumulated, objOf_(key, prop_(key, keyedEnumerable)));
     }, empty(keyedEnumerable), keys);
   };
-  var index$P = curry2(pickAll_);
+  var index$Q = curry2(pickAll_);
 
   var plucks_ = function plucks_(keychains, functor) {
     return mapValues_(juxt(mapValues_(path, keychains)), functor);
   };
-  var index$Q = curry2(plucks_);
+  var index$R = curry2(plucks_);
 
   var props_ = function props_(keys, obj) {
     if (typeof keys === "string") {
@@ -1066,9 +1031,9 @@
     }
     return result;
   };
-  var index$R = curry2(props_);
+  var index$S = curry2(props_);
 
-  var index$S = curry3(function (reducer, initial, functor) {
+  var index$T = curry3(function (reducer, initial, functor) {
     return reduce_(reducer, initial, functor, true);
   });
 
@@ -1079,17 +1044,17 @@
       res = fn(res, copy.shift());
     }return res;
   };
-  var index$T = curry4(reduceWhile_);
+  var index$U = curry4(reduceWhile_);
 
   var round_ = function round_(precision, num) {
     return Number(Math.round(num + 'e' + precision) + 'e-' + precision);
   };
-  var index$U = curry2(round_);
+  var index$V = curry2(round_);
 
   var split$1 = function split(separator, str) {
     return str.split(separator);
   };
-  var index$V = curry2(split$1);
+  var index$W = curry2(split$1);
 
   var isRegex = function isRegex(x) {
     return Object.prototype.toString.call(x) === "[object RegExp]";
@@ -1114,24 +1079,24 @@
   var startsWith_ = function startsWith_(subset, set) {
     return test(new RegExp("^" + escapeString(subset)))(set);
   };
-  var index$W = curry2(startsWith_);
+  var index$X = curry2(startsWith_);
 
-  var index$X = always(true);
+  var index$Y = always(true);
 
-  var index$Y = (function (x) {
+  var index$Z = (function (x) {
     return dropFirst_(1, x);
   });
 
-  var index$Z = (function (str) {
+  var index$$ = (function (str) {
     return str.toLowerCase();
   });
 
   var unless_ = function unless_(cond, fn, val) {
     return cond(val) ? val : fn(val);
   };
-  var index$$ = curry3(unless_);
+  var index$_ = curry3(unless_);
 
-  var index$_ = (function (functor) {
+  var index$10 = (function (functor) {
     return reduceValues(flip(append))([])(functor);
   });
 
@@ -1149,14 +1114,14 @@
       return input;
     };
   };
-  var index$10 = curry2(when_);
+  var index$11 = curry2(when_);
 
   var where_ = function where_(matcher, keyedEnumerable) {
     return reduce_(function (latest, value, key) {
       return latest && value(path_(toArray$1(key), keyedEnumerable));
     }, true, matcher);
   };
-  var index$11 = curry2(where_);
+  var index$12 = curry2(where_);
 
   exports.always = always;
   exports.anyPass = index;
@@ -1204,59 +1169,59 @@
   exports.mapValues = mapValues;
   exports.mapValuesWithValueKey = index$e;
   exports.max = index$y;
-  exports.mergeAllDeepLeft = index$z;
-  exports.mergeAllDeepRight = index$A;
-  exports.mergeAllLeft = index$B;
-  exports.mergeAllRight = index$C;
+  exports.merge = index$c;
+  exports.mergeAllDeepLeft = index$A;
+  exports.mergeAllDeepRight = index$B;
+  exports.mergeAllLeft = index$C;
+  exports.mergeAllRight = index$D;
   exports.mergeDeepLeft = mergeDeepLeft;
   exports.mergeDeepRight = mergeDeepRight;
   exports.mergeLeft = mergeLeft;
-  exports.merge = index$c;
-  exports.mergeWith = mergeWith;
-  exports.mergeWithKey = index$D;
-  exports.min = index$E;
-  exports.multiply = index$F;
-  exports.not = index$G;
+  exports.mergeWith = index$z;
+  exports.mergeWithKey = index$E;
+  exports.min = index$F;
+  exports.multiply = index$G;
+  exports.not = index$H;
   exports.nth = nth;
-  exports.objectFrom = index$I;
-  exports.objOf = index$J;
+  exports.objectFrom = index$J;
+  exports.objOf = index$K;
   exports.of = index$d;
-  exports.or = index$K;
-  exports.pairsKeys = index$L;
-  exports.pairValues = index$M;
+  exports.or = index$L;
+  exports.pairsKeys = index$M;
+  exports.pairValues = index$N;
   exports.path = path;
-  exports.pathOr = index$N;
-  exports.pick = index$O;
-  exports.pickAll = index$P;
+  exports.pathOr = index$O;
+  exports.pick = index$P;
+  exports.pickAll = index$Q;
   exports.pipe = pipe;
   exports.pluck = index$f;
-  exports.plucks = index$Q;
-  exports.prepend = index$H;
+  exports.plucks = index$R;
+  exports.prepend = index$I;
   exports.prop = index$b;
-  exports.props = index$R;
+  exports.props = index$S;
   exports.reduce = index$4;
   exports.reduceKeys = index$v;
-  exports.reduceRight = index$S;
+  exports.reduceRight = index$T;
   exports.reduceValues = reduceValues;
-  exports.reduceWhile = index$T;
+  exports.reduceWhile = index$U;
   exports.reject = index$6;
   exports.replace = replace;
   exports.reverse = reverse$1;
-  exports.round = index$U;
-  exports.split = index$V;
-  exports.startsWith = index$W;
-  exports.T = index$X;
-  exports.tail = index$Y;
+  exports.round = index$V;
+  exports.split = index$W;
+  exports.startsWith = index$X;
+  exports.T = index$Y;
+  exports.tail = index$Z;
   exports.test = test;
   exports.toArray = toArray$1;
-  exports.toLower = index$Z;
+  exports.toLower = index$$;
   exports.toPairs = toPairs;
   exports.toString = toString$2;
   exports.type = type;
-  exports.unless = index$$;
-  exports.values = index$_;
-  exports.when = index$10;
-  exports.where = index$11;
+  exports.unless = index$_;
+  exports.values = index$10;
+  exports.when = index$11;
+  exports.where = index$12;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 
