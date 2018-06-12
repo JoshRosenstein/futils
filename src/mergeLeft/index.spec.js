@@ -1,11 +1,9 @@
-import PLACEHOLDER from "./index";
+import mergeLeft from '.'
 
-describe.skip("PLACEHOLDER", () => {
-  it("Subtract One from Number", () => {
-    const a = PLACEHOLDER(1);
-    const eA = 0;
-
-    expect(a).toEqual(eA);
-  });
-
-});
+test('returns a new object with the 1st object merged with the 2nd', () => {
+  expect(mergeLeft({ a: 1, b: 1 }, { b: 2, c: 2 })).toEqual({
+    a: 1,
+    b: 1,
+    c: 2
+  })
+})
