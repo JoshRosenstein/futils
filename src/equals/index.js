@@ -41,7 +41,7 @@ function keys_(obj, isArray) {
   return extraKeys
 }
 
-export const equals_ = (a, b, aStack, bStack) => {
+export const equals_ = (a, b, aStack=[], bStack=[]) => {
   var result = true
   if (a === b) return true
   if (a == null || b == null) return a === b
@@ -124,4 +124,4 @@ export const equals_ = (a, b, aStack, bStack) => {
 
   return result
 }
-export default curry2((a, b) => equals_(a, b, [], []))
+export default curry2(equals_)
