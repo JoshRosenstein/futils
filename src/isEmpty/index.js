@@ -1,3 +1,3 @@
 import empty from "../empty";
-
-export default x => x != null && x === empty(x);
+import {equals_} from '../equals'
+export default x => x != null && equals_(x , empty(x))

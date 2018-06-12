@@ -1,11 +1,15 @@
-import PLACEHOLDER from "./index";
+import isEmpty from '.'
 
-describe.skip("PLACEHOLDER", () => {
-  it("Subtract One from Number", () => {
-    const a = PLACEHOLDER(1);
-    const eA = 0;
-
-    expect(a).toEqual(eA);
-  });
-
-});
+test('returns "true" if value is empty, otherwise "false"', () => {
+  expect(isEmpty([1, 2, 3])).toBeFalsy()
+  expect(isEmpty([])).toBeTruthy()
+  expect(isEmpty('')).toBeTruthy()
+  expect(isEmpty(null)).toBeFalsy()
+  expect(isEmpty({})).toBeTruthy()
+  expect(isEmpty(undefined)).toBeFalsy()
+  expect(isEmpty(false)).toBeFalsy()
+  expect(isEmpty(true)).toBeFalsy()
+  expect(isEmpty(0)).toBeFalsy()
+  expect(isEmpty(function() {})).toBeFalsy()
+  expect(isEmpty(NaN)).toBeFalsy()
+})
