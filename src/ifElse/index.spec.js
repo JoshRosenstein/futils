@@ -1,11 +1,11 @@
-import PLACEHOLDER from "./index";
+import ifElse from "./index";
 
-describe.skip("PLACEHOLDER", () => {
-  it("Subtract One from Number", () => {
-    const a = PLACEHOLDER(1);
-    const eA = 0;
+var getEven = ifElse(i => i % 2 === 0, i => i, i => i + 1)
 
-    expect(a).toEqual(eA);
-  });
+test('applies 1st callback if condition is true', () => {
+  expect(getEven(1)).toBe(2)
+})
 
-});
+test('applies 2nd callback if condition is false', () => {
+  expect(getEven(2)).toBe(2)
+})

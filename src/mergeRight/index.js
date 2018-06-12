@@ -1,6 +1,6 @@
 import type from "../type";
 import { curry2 } from "../curry";
-
+//// TODO: Create empty if left or Right is Null
 export const mergeRight_ = (left, right) => {
   if (type(left) !== type(right)) {
     throw new Error(
