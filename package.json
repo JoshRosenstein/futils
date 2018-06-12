@@ -1,6 +1,6 @@
 {
   "name": "@roseys/futils",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "",
   "keywords": [
     "ramda",
@@ -13,7 +13,7 @@
   "author": "Josh Rosenstein",
   "license": "MIT",
   "scripts": {
-    "precommit":"node scripts/create-export.js && rollup -c && jest --onlyChanged --runInBand",
+    "precommit": "node scripts/create-export.js && rollup -c && jest --onlyChanged --runInBand",
     "prepack": "rollup -c rollup.split.js && node scripts/create-export.js && rollup -c",
     "postpack": "npm run clean",
     "build": "rollup -c",
