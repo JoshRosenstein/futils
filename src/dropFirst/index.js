@@ -1,11 +1,11 @@
 import { gt_ } from "../gt"
 import { append_ } from "../append"
-import { reduceWithValueKey_ } from "../reduceWithValueKey"
+import { reduce_ } from "../reduce"
 import empty from "../empty"
 import { curry2 } from "../curry"
 
 export const dropFirst_ = (count, orderedList) => {
-  return reduceWithValueKey_(
+  return reduce_(
     (acc, value, index) => {
       if (gt_(index, count - 1)) {
         return append_(value, acc)

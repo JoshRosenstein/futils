@@ -1,6 +1,6 @@
 import startsWith from "./index"
 
-describe("reduceWithValueKey", () => {
+describe("reduce", () => {
   const reducer = acc => value => key => `${acc}/${value}:${key}`,
     initial = "."
 

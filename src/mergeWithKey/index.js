@@ -1,8 +1,8 @@
-import { reduceWithValueKey_ } from "../reduceWithValueKey"
+import { reduce_ } from "../reduce"
 import { attach_ } from "../attach"
 import { curry3 } from "../curry"
 export const mergeWithKey_ = (fn, initial, functor) =>
-  reduceWithValueKey_(
+  reduce_(
     (accumulated, value, key) => {
       if (accumulated[key]) {
         return {

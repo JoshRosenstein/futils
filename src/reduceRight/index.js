@@ -1,5 +1,5 @@
 import { curry3 } from "../curry";
-import {reduceWithValueKey_} from '../reduceWithValueKey'
+import {reduce_} from '../reduce'
 export default curry3((reducer, initial, functor) =>
-  reduceWithValueKey_(reducer, initial, functor, true)
+  reduce_(reducer, initial, functor, true)
 )

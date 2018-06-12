@@ -2,7 +2,7 @@ import toPairs from "../toPairs"
 import type from "../type"
 import { curry3 } from "../curry"
 
-export const reduceWithValueKey_ = (reducer, initial, functor, right) => {
+export const reduce_ = (reducer, initial, functor, right) => {
   let fn
   switch (type(functor)) {
     case "Array":
@@ -24,7 +24,7 @@ export const reduceWithValueKey_ = (reducer, initial, functor, right) => {
 
     default: {
       throw new Error(
-        `reduceWithValueKey couldn't figure out how to reduce ${type(functor)}`
+        `reduce couldn't figure out how to reduce ${type(functor)}`
       )
     }
   }
@@ -41,5 +41,5 @@ export const reduceWithValueKey_ = (reducer, initial, functor, right) => {
 }
 
 export default curry3((reducer, initial, functor) =>
-  reduceWithValueKey_(reducer, initial, functor, false)
+  reduce_(reducer, initial, functor, false)
 )

@@ -1,6 +1,6 @@
 import type from "../type";
 import { curry2 } from "../curry";
-import (isNil) from './isNil'
+import isNil from '../isNil'
 
 export const mergeLeft_ = (left, right) => {
   if(isNil(left)) return right
