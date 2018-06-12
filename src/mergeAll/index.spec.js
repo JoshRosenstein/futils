@@ -1,15 +1,15 @@
-import mergeAllRight from "./index";
+import mergeAll from "./index";
 
-describe("mergeAllRight", () => {
+describe("mergeAll", () => {
   it("Array", () => {
-    const a = mergeAllRight([["0"], ["1"], ["2"]]);
+    const a = mergeAll([["0"], ["1"], ["2"]]);
     const eA = ["0", "1", "2"];
 
     expect(a).toEqual(eA);
   });
 
   it("Object", () => {
-    const a = mergeAllRight([{ aaa: "aaa" }, { bbb: "bbb" }, { ccc: "ccc" }]);
+    const a = mergeAll([{ aaa: "aaa" }, { bbb: "bbb" }, { ccc: "ccc" }]);
     const eA = {
       aaa: "aaa",
       bbb: "bbb",
@@ -20,7 +20,7 @@ describe("mergeAllRight", () => {
   });
 
   it("Object2", () => {
-    const a = mergeAllRight([{ aaa: "aaa" }, { aaa: "bbb" }, { ccc: "ccc" }]);
+    const a = mergeAll([{ aaa: "aaa" }, { aaa: "bbb" }, { ccc: "ccc" }]);
     const eA = { aaa: "bbb", ccc: "ccc" };
 
     expect(a).toEqual(eA);
