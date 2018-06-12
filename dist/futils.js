@@ -562,6 +562,9 @@
   var reduceValues = curry3(reduceValues_);
 
   var path_ = function path_(keychain, tree) {
+    if (typeof keychain === "string") {
+      keychain = keys.trim().split(",");
+    }
     return reduceValues_(function (acc, val) {
       return prop_(val, acc);
     }, tree, keychain);
@@ -823,7 +826,7 @@
   });
 
   var index$v = (function (x) {
-    return x != null && x === empty(x);
+    return x != null && equals_(x, empty(x));
   });
 
   var isObject = (function (value) {

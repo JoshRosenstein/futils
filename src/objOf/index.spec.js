@@ -9,9 +9,15 @@ describe("objOf", () => {
     expect(objOf(5)("value")).toEqual({ "5": "value" })
   })
 
-  test("creates an nested object ", () => {
+  test("creates an nested object with Array Keys ", () => {
     expect(objOf(["key", "subkey"])("value")).toEqual({
       key: { subkey: "value" }
+    })
+  })
+
+  test("creates an nested object With object as Value ", () => {
+    expect(objOf(["key", "subkey"])({ a: "value" })).toEqual({
+      key: { subkey: { a: "value" } }
     })
   })
 })
