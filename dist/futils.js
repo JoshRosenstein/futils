@@ -21,11 +21,6 @@
     return f;
   });
 
-  var takesOne = function takesOne(name) {
-    return function (arg, f) {
-      return f[name](arg);
-    };
-  };
   var takesN = function takesN(name) {
     return function (f) {
       for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
@@ -34,7 +29,6 @@
       return f[name].apply(f, args);
     };
   };
-  var split = takesOne("split");
   var length = function length(x) {
     return x.length;
   };
@@ -44,7 +38,7 @@
   };
 
   var notFnErrPrefix = "`fn` in `curry(fn, ...args)`";
-  var curryN$1 = function curryN(executeArity, fn) {
+  var curryN = function curryN(executeArity, fn) {
     for (var _len = arguments.length, curriedArgs = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
       curriedArgs[_key - 2] = arguments[_key];
     }
@@ -61,16 +55,47 @@
     for (var _len3 = arguments.length, argsToCurry = Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
       argsToCurry[_key3 - 1] = arguments[_key3];
     }
-    return curryN$1.apply(undefined, [fnOrError(notFnErrPrefix, fn).length, fn].concat(argsToCurry));
+    return curryN.apply(undefined, [fnOrError(notFnErrPrefix, fn).length, fn].concat(argsToCurry));
   };
-  var curry2 = function curry2(fn) {
-    return curryN$1(2, fn);
+  var curry2 = function curry2(f) {
+    return function curried(a, b) {
+      return arguments.length >= 2 ? f(a, b) : function (b2) {
+        return f(a, b2);
+      };
+    };
   };
-  var curry3 = function curry3(fn) {
-    return curryN$1(3, fn);
+  var curry3 = function curry3(f) {
+    return function curried(a, b, c) {
+      if (arguments.length >= 3) return f(a, b, c);
+      if (arguments.length === 2) return function (c2) {
+        return f(a, b, c2);
+      };
+      return function (b2, c2) {
+        if (arguments.length === 2) return f(a, b2, c2);
+        return function (c3) {
+          return f(a, b2, c3);
+        };
+      };
+    };
   };
   var curry4 = function curry4(fn) {
-    return curryN$1(4, fn);
+    return curryN(4, fn);
+  };
+
+  var anyPass_ = function anyPass_(fns, value) {
+    var i = 0;
+    var length = fns.length;
+    while (i < length && !fns[i](value)) {
+      i += 1;
+    }
+    return i < length;
+  };
+  var index = curry2(anyPass_);
+
+  var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
   };
 
   var defineProperty = function (obj, key, value) {
@@ -171,7 +196,7 @@
   var applyTo_ = function applyTo_(value, fn) {
     return fn(value);
   };
-  var index = curry2(applyTo_);
+  var index$1 = curry2(applyTo_);
 
   var attach_ = function attach_(key, value, functor) {
     switch (type(functor)) {
@@ -201,99 +226,30 @@
         }
     }
   };
-  var attach = curry3(attach_);
+  var index$2 = curry3(attach_);
 
-  var complement_ = function complement_(predicate, anything) {
-    return !predicate(anything);
-  };
-  var index$1 = curry2(complement_);
-
-  var index$2 = (function () {
-    for (var _len = arguments.length, fns = Array(_len), _key = 0; _key < _len; _key++) {
-      fns[_key] = arguments[_key];
-    }
-    return fns.reduce(function (f, g) {
-      return function () {
-        return f(g.apply(undefined, arguments));
-      };
-    });
-  });
-
-  var notFnErrPrefix$1 = "`fn` in `curry(fn, ...args)`";
-  var index$3 = (function (executeArity, fn) {
-    for (var _len = arguments.length, curriedArgs = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
-      curriedArgs[_key - 2] = arguments[_key];
-    }
-    return function () {
-      for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-        args[_key2] = arguments[_key2];
-      }
-      var concatedArgs = concat(curriedArgs, args),
-          canBeCalled = length(concatedArgs) >= executeArity || !executeArity;
-      return !canBeCalled ? apply(curryN, concat([executeArity, fnOrError(notFnErrPrefix$1, fn)], concatedArgs)) : apply(fnOrError(notFnErrPrefix$1, fn), concatedArgs);
-    };
-  });
-
-  var is = curry(function (sig, value) {
+  var is_ = function is_(sig, value) {
     return sig === "null" ? value === null : sig === "undefined" ? value === undefined : value === undefined || value === null ? false : type(value) === sig;
-  });
+  };
+  var is = curry2(is_);
 
-  function replace(regex, replacer, str) {
-    if (replacer === undefined) {
-      return function (replacerHolder, strHolder) {
-        return replace(regex, replacerHolder, strHolder);
-      };
-    } else if (str === undefined) {
-      return function (strHolder) {
-        return replace(regex, replacer, strHolder);
-      };
-    }
-    return str.replace(regex, replacer);
+  var toString$1 = Object.prototype.toString;
+  function _has(prop, obj) {
+    return Object.prototype.hasOwnProperty.call(obj, prop);
   }
-
-  var isNil = (function (value) {
-    return is("undefined")(value) || is("null")(value);
+  var _isArguments = function () {
+    return toString$1.call(arguments) === "[object Arguments]" ? function _isArguments(x) {
+      return toString$1.call(x) === "[object Arguments]";
+    } : function _isArguments(x) {
+      return _has("callee", x);
+    };
+  }();
+  var empty = (function (x) {
+    return x != null && typeof x.empty === "function" ? x.empty() : x != null && x.constructor != null && typeof x.constructor.empty === "function" ? x.constructor.empty() : is_("Array", x) ? [] : is_("String", x) ? "" : is_("Object", x) ? {} : is_("Map", x) ? new Map() : is_("Set", x) ? new Set() : _isArguments(x) ? function () {
+      return arguments;
+    }() :
+    void 0;
   });
-
-  var _quote = function _quote(s) {
-    var escaped = s.replace(/\\/g, "\\\\").replace(/[\b]/g, "\\b")
-    .replace(/\f/g, "\\f").replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/\t/g, "\\t").replace(/\v/g, "\\v").replace(/\0/g, "\\0");
-    return '"' + escaped.replace(/"/g, '\\"') + '"';
-  };
-  var toString$1 = (function (value) {
-    if (value === null) {
-      return "null";
-    }
-    if (value === undefined) {
-      return "undefined";
-    }
-    if (is("String")(value)) {
-      return _quote(value);
-    }
-    return !isNil(value) && typeof value.toString === "function" ? value.toString() : Object.prototype.toString.apply(value);
-  });
-
-  var index$4 = (function (x) {
-    if (isNil(x)) {
-      return x;
-    }
-    if (is("String")(x)) {
-      var xx = parseInt(x);
-      return replace(toString$1(xx), toString$1(xx - 1), x);
-    } else {
-      return x - 1;
-    }
-  });
-
-  var divide = function divide(a, b) {
-    return a / b;
-  };
-  var index$5 = curry2(divide);
-
-  var gt_ = function gt_(a, b) {
-    return a > b;
-  };
-  var greaterThan = curry2(gt_);
 
   var fromIteratorToArrayIterator = function fromIteratorToArrayIterator(list) {
     return function (iterator) {
@@ -310,141 +266,322 @@
     return fromIteratorToArrayIterator([])(iterator);
   });
 
-  var fromMapping = {
-    Array: function Array(array) {
-      return array.reduce(function (pairs, value, index) {
-        return [].concat(toConsumableArray(pairs), [[index, value]]);
-      }, []);
-    },
-    Object: function (_Object) {
-      function Object(_x) {
-        return _Object.apply(this, arguments);
-      }
-      Object.toString = function () {
-        return _Object.toString();
-      };
-      return Object;
-    }(function (object) {
-      return Object.entries(object);
-    }),
-    Set: function Set(set$$1) {
-      return fromIteratorToArray(set$$1.values()).map(function (value) {
-        return [undefined, value];
-      });
-    },
-    Map: function Map(map) {
-      return fromIteratorToArray(map.entries());
-    }
-  };
-  var toPairs = (function (pairableValue) {
-    if (fromMapping[type(pairableValue)]) {
-      return fromMapping[type(pairableValue)](pairableValue);
-    }
-    throw new Error("fromFunctorToPairs doesn't know how to handle " + type(pairableValue));
-  });
-
-  var reduceWithValueKey_ = function reduceWithValueKey_(reducer, initial, functor) {
-    switch (type(functor)) {
+  var toPairs = (function (pairableObj) {
+    switch (type(pairableObj)) {
       case "Array":
         {
-          return functor.reduce(function (acc, value, key) {
-            return reducer(acc)(value)(key);
-          }, initial);
+          return pairableObj.reduce(function (pairs, value, index) {
+            return [].concat(toConsumableArray(pairs), [[index, value]]);
+          }, []);
         }
       case "Object":
         {
-          return toPairs(functor).reduce(function (acc, _ref) {
-            var _ref2 = slicedToArray(_ref, 2),
-                key = _ref2[0],
-                value = _ref2[1];
-            return reducer(acc)(value)(key);
-          }, initial);
+          return Object.entries(pairableObj);
         }
       case "Set":
         {
-          return toPairs(functor).reduce(function (acc, _ref3) {
-            var _ref4 = slicedToArray(_ref3, 2),
-                value = _ref4[1];
-            return reducer(acc)(value)();
-          }, initial);
+          return fromIteratorToArray(pairableObj.values()).map(function (value) {
+            return [undefined, value];
+          });
         }
       case "Map":
         {
-          return toPairs(functor).reduce(function (acc, _ref5) {
-            var _ref6 = slicedToArray(_ref5, 2),
-                key = _ref6[0],
-                value = _ref6[1];
-            return reducer(acc)(value)(key);
-          }, initial);
+          return fromIteratorToArray(pairableObj.entries());
         }
-      case "String":
+      default:
         {
-          return toPairs(functor.split("")).reduce(function (acc, _ref7) {
-            var _ref8 = slicedToArray(_ref7, 2),
-                key = _ref8[0],
-                value = _ref8[1];
-            return reducer(acc)(value)(key);
-          }, initial);
+          throw new Error("fromFunctorToPairs doesn't know how to handle " + type(pairableObj));
         }
+    }
+  });
+
+  var reduceWithValueKey_ = function reduceWithValueKey_(reducer, initial, functor, right) {
+    var fn = void 0;
+    switch (type(functor)) {
+      case "Array":
+        fn = function fn(acc, value, key) {
+          return reducer(acc, value, key);
+        };
+        break;
+      case "Object":
+      case "Map":
+        fn = function fn(acc, _ref) {
+          var _ref2 = slicedToArray(_ref, 2),
+              key = _ref2[0],
+              value = _ref2[1];
+          return reducer(acc, value, key);
+        };
+        functor = toPairs(functor);
+        break;
+      case "Set":
+        fn = function fn(acc, _ref3) {
+          var _ref4 = slicedToArray(_ref3, 2),
+              value = _ref4[1];
+          return reducer(acc, value);
+        };
+        functor = toPairs(functor);
+        break;
+      case "String":
+        fn = function fn(acc, _ref5) {
+          var _ref6 = slicedToArray(_ref5, 2),
+              key = _ref6[0],
+              value = _ref6[1];
+          return reducer(acc, value, key);
+        };
+        functor = toPairs(functor.split(""));
+        break;
       default:
         {
           throw new Error("reduceWithValueKey couldn't figure out how to reduce " + type(functor));
         }
     }
+    if (!right) {
+      return functor.reduce(fn, initial);
+    }
+    var idx = functor.length - 1;
+    while (idx >= 0) {
+      initial = fn(functor[idx], initial);
+      idx -= 1;
+    }
+    return initial;
   };
-  var reduceWithValueKey = curry3(reduceWithValueKey_);
-
-  var toString$2 = Object.prototype.toString;
-  function _has(prop, obj) {
-    return Object.prototype.hasOwnProperty.call(obj, prop);
-  }
-  var _isArguments = function () {
-    return toString$2.call(arguments) === "[object Arguments]" ? function _isArguments(x) {
-      return toString$2.call(x) === "[object Arguments]";
-    } : function _isArguments(x) {
-      return _has("callee", x);
-    };
-  }();
-  var fresh = (function (x) {
-    return x != null && typeof x.empty === "function" ? x.empty() : x != null && x.constructor != null && typeof x.constructor.empty === "function" ? x.constructor.empty() : is("Array")(x) ? [] : is("String")(x) ? "" : is("Object")(x) ? {} : is("Map")(x) ? new Map() : is("Set")(x) ? new Set() : _isArguments(x) ? function () {
-      return arguments;
-    }() :
-    void 0;
+  var index$3 = curry3(function (reducer, initial, functor) {
+    return reduceWithValueKey_(reducer, initial, functor, false);
   });
-
-  var dropFirst_ = function dropFirst_(count, orderedList) {
-    return reduceWithValueKey(function (accumulated) {
-      return function (value) {
-        return function (index) {
-          if (greaterThan(index)(count - 1)) {
-            return append(value)(accumulated);
-          }
-          return accumulated;
-        };
-      };
-    })(fresh(orderedList))(orderedList);
-  };
-  var index$6 = curry2(dropFirst_);
 
   var filter_ = function filter_(predicate, enumerable) {
     if (enumerable.filter) {
       return enumerable.filter(predicate);
     }
-    return reduceWithValueKey(function (accumulated) {
-      return function (value) {
-        return function (key) {
-          if (predicate(value)) {
-            return attach(key)(value)(accumulated);
-          }
-          return accumulated;
-        };
-      };
-    })(fresh(enumerable))(enumerable);
+    return reduceWithValueKey_(function (accumulated, value, key) {
+      return predicate(value) ? attach_(key, value, accumulated) : accumulated;
+    }, empty(enumerable), enumerable);
   };
-  var filter$1 = curry2(filter_);
+  var index$4 = curry2(filter_);
 
-  var flip = curry(function (fn, left, right) {
-    return fn(right)(left);
+  var reject_ = function reject_(predicate, enumerable) {
+    if (enumerable.reject) {
+      return enumerable.reject(predicate);
+    }
+    return filter_(function (v) {
+      return !predicate(v);
+    }, enumerable);
+  };
+  var index$5 = curry2(reject_);
+
+  var isNil = (function (value) {
+    return is_("undefined", value) || is_("null", value);
+  });
+
+  var index$6 = (function (collection) {
+    return reject_(isNil, collection);
+  });
+
+  var complement_ = function complement_(predicate, anything) {
+    return !predicate(anything);
+  };
+  var index$7 = curry2(complement_);
+
+  var index$8 = (function () {
+    for (var _len = arguments.length, fns = Array(_len), _key = 0; _key < _len; _key++) {
+      fns[_key] = arguments[_key];
+    }
+    return fns.reduce(function (f, g) {
+      return function () {
+        return f(g.apply(undefined, arguments));
+      };
+    });
+  });
+
+  var concat_ = function concat_(a, b) {
+    return is_("Array", a) && is_("Array", b) || is_("String", a) && is_("String", b) ? a.concat(b) : null;
+  };
+  var index$9 = curry2(concat_);
+
+  var notFnErrPrefix$1 = "`fn` in `curry(fn, ...args)`";
+  var curryN$1 = function curryN(executeArity, fn) {
+    for (var _len = arguments.length, curriedArgs = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+      curriedArgs[_key - 2] = arguments[_key];
+    }
+    return function () {
+      for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        args[_key2] = arguments[_key2];
+      }
+      var concatedArgs = concat(curriedArgs, args),
+          canBeCalled = length(concatedArgs) >= executeArity || !executeArity;
+      return !canBeCalled ? apply(curryN, concat([executeArity, fnOrError(notFnErrPrefix$1, fn)], concatedArgs)) : apply(fnOrError(notFnErrPrefix$1, fn), concatedArgs);
+    };
+  };
+
+  var replace_ = function replace_(regex, replacer, str) {
+    return str.replace(regex, replacer);
+  };
+  var replace = curry3(replace_);
+
+  var _quote = function _quote(s) {
+    var escaped = s.replace(/\\/g, "\\\\").replace(/[\b]/g, "\\b")
+    .replace(/\f/g, "\\f").replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/\t/g, "\\t").replace(/\v/g, "\\v").replace(/\0/g, "\\0");
+    return '"' + escaped.replace(/"/g, '\\"') + '"';
+  };
+  var toString$2 = (function (value) {
+    if (value === null) {
+      return "null";
+    }
+    if (value === undefined) {
+      return "undefined";
+    }
+    if (is_("String", value)) {
+      return _quote(value);
+    }
+    return !isNil(value) && typeof value.toString === "function" ? value.toString() : Object.prototype.toString.apply(value);
+  });
+
+  var index$a = (function (x) {
+    if (isNil(x)) {
+      return x;
+    }
+    if (is("String")(x)) {
+      var xx = parseInt(x);
+      return replace(toString$2(xx), toString$2(xx - 1), x);
+    } else {
+      return x - 1;
+    }
+  });
+
+  var defaultTo_ = function defaultTo_(def, val) {
+    return val == null || isNaN(val) ? def : val;
+  };
+  var index$b = curry2(defaultTo_);
+
+  var divide = function divide(a, b) {
+    return a / b;
+  };
+  var index$c = curry2(divide);
+
+  var gt_ = function gt_(a, b) {
+    return a > b;
+  };
+  var index$d = curry2(gt_);
+
+  var dropFirst_ = function dropFirst_(count, orderedList) {
+    return reduceWithValueKey_(function (acc, value, index) {
+      if (gt_(index, count - 1)) {
+        return append_(value, acc);
+      }
+      return acc;
+    }, empty(orderedList), orderedList);
+  };
+  var index$e = curry2(dropFirst_);
+
+  var index$f = (function (fn1, fn2) {
+    return function () {
+      return fn1.apply(fn1, arguments) || fn2.apply(fn2, arguments);
+    };
+  });
+
+  function hasKey_(obj, key) {
+    return Object.prototype.hasOwnProperty.call(obj, key);
+  }
+  function keys_(obj, isArray) {
+    var allKeys = function (o) {
+      var keys = [];
+      for (var key in o) {
+        if (hasKey_(o, key)) {
+          keys.push(key);
+        }
+      }
+      return keys.concat(Object.getOwnPropertySymbols(o).filter(
+      function (symbol) {
+        return Object.getOwnPropertyDescriptor(o, symbol).enumerable;
+      }));
+    }(obj);
+    if (!isArray) {
+      return allKeys;
+    }
+    var extraKeys = [];
+    if (allKeys.length === 0) {
+      return allKeys;
+    }
+    for (var x = 0; x < allKeys.length; x++) {
+      if (!allKeys[x].match(/^[0-9]+$/)) {
+        extraKeys.push(allKeys[x]);
+      }
+    }
+    return extraKeys;
+  }
+  var equals_ = function equals_(a, b, aStack, bStack) {
+    var result = true;
+    if (a === b) return true;
+    if (a == null || b == null) return a === b;
+    var typeA = type(a);
+    var typeB = type(b);
+    if (typeA !== typeB) return false;
+    switch (typeA) {
+      case "String":
+      case "Number":
+        {
+          return a.valueOf() === b.valueOf();
+        }
+      case "Boolean":
+      case "Date":
+        {
+          return +a === +b;
+        }
+      case "RegExp":
+        {
+          return a.toString() === b.toString();
+        }
+      default:
+
+    }
+    if ((typeof a === "undefined" ? "undefined" : _typeof(a)) !== "object" || (typeof b === "undefined" ? "undefined" : _typeof(b)) !== "object") {
+      return false;
+    }
+    var length = aStack.length;
+    while (length--) {
+      if (aStack[length] === a) {
+        return bStack[length] === b;
+      }
+    }
+    aStack.push(a);
+    bStack.push(b);
+    var size = 0;
+    if (typeA === "Array") {
+      size = a.length;
+      if (size !== b.length) {
+        return false;
+      }
+      while (size--) {
+        result = equals_(a[size], b[size], aStack, bStack, hasKey_);
+        if (!result) {
+          return false;
+        }
+      }
+    }
+    var aKeys = keys_(a, typeA === "Array");
+    var key;
+    size = aKeys.length;
+    var bKeys = keys_(b, typeB === "Array");
+    if (keys_(b, typeB === "Array").length !== size) {
+      return false;
+    }
+    while (size--) {
+      key = aKeys[size];
+      result = hasKey_(b, key) && equals_(a[key], b[key], aStack, bStack);
+      if (!result) {
+        return false;
+      }
+    }
+    aStack.pop();
+    bStack.pop();
+    return result;
+  };
+  var index$g = curry2(function (a, b) {
+    return equals_(a, b, [], []);
+  });
+
+  var flip = curry3(function (fn, left, right) {
+    return fn(right, left);
   });
 
   var pipe = (function () {
@@ -458,7 +595,7 @@
     });
   });
 
-  var index$7 = (function (value) {
+  var index$h = (function (value) {
     for (var _len = arguments.length, argsToGive = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
       argsToGive[_key - 1] = arguments[_key];
     }
@@ -479,42 +616,44 @@
       fn(value)(key);
     });
   };
-  var index$8 = curry2(forEach_);
+  var index$i = curry2(forEach_);
 
   var nth_ = function nth_(offset, list) {
     var idx = offset < 0 ? list.length + offset : offset;
-    return is("String")(list) ? list.charAt(idx) : list[idx];
+    return is_("String", list) ? list.charAt(idx) : list[idx];
   };
   var nth = curry2(nth_);
 
-  var head = nth(0);
+  var head = (function (list) {
+    return nth_(0, list);
+  });
 
-  var index$9 = (function (a) {
+  var index$j = (function (a) {
     return a;
   });
 
   var ifElse_ = function ifElse_(predicate, consequent, alternative, value) {
     predicate(value) ? consequent(value) : alternative(value);
   };
-  var index$a = curry4(ifElse_);
+  var index$k = curry4(ifElse_);
 
   var isArray = (function (value) {
-    return is("Array")(value);
+    return is_("Array", value);
   });
 
-  var index$b = (function (value) {
+  var index$l = (function (value) {
     return !(value === undefined || value === null);
   });
 
-  var index$c = (function (x) {
-    return x != null && x === fresh(x);
+  var index$m = (function (x) {
+    return x != null && x === empty(x);
   });
 
   var isObject = (function (value) {
-    return is("Object")(value);
+    return is_("Object", value);
   });
 
-  var fetchKey = curry(function (name, keyedFunctor) {
+  var prop_ = function prop_(name, keyedFunctor) {
     if (isNil(keyedFunctor)) {
       return keyedFunctor;
     }
@@ -522,21 +661,22 @@
       return keyedFunctor.get(name);
     }
     return keyedFunctor[name];
-  });
+  };
+  var index$n = curry2(prop_);
 
-  var reduceKeys = (function (fn) {
-    return reduceWithValueKey(function (acc) {
-      return function () {
-        return function (key) {
-          return fn(acc)(key);
-        };
-      };
-    });
-  });
+  var reduceValues_ = function reduceValues_(fn, initial, functor) {
+    return reduceWithValueKey_(function (acc, value) {
+      return fn(acc, value);
+    }, initial, functor);
+  };
+  var reduceValues = curry3(reduceValues_);
 
-  var index$d = (function (keyedEnumerable) {
-    return reduceKeys(flip(append))([])(keyedEnumerable);
-  });
+  var path_ = function path_(keychain, tree) {
+    return reduceValues_(function (acc, val) {
+      return prop_(val, acc);
+    }, tree, keychain);
+  };
+  var path = curry2(path_);
 
   var mergeRight_ = function mergeRight_(left, right) {
     if (type(left) !== type(right)) {
@@ -569,9 +709,9 @@
         }
     }
   };
-  var mergeRight = curry2(mergeRight_);
+  var index$o = curry2(mergeRight_);
 
-  var of = curry(function (key, value, functor) {
+  var of_ = function of_(key, value, functor) {
     switch (type(functor)) {
       case "Array":
         {
@@ -598,16 +738,87 @@
           throw new Error("of doesn't know how to type " + type(functor));
         }
     }
+  };
+  var index$p = curry3(of_);
+
+  var mapValuesWithValueKey_ = function mapValuesWithValueKey_(fn, functor) {
+    if (functor.map instanceof Function) {
+      return functor.map(function (value, key) {
+        return fn(value, key);
+      });
+    }
+    return reduceWithValueKey_(function (accumulated, value, key) {
+      return mergeRight_(accumulated, of_(key, fn(value, key), accumulated));
+    }, empty(functor), functor);
+  };
+  var index$q = curry2(mapValuesWithValueKey_);
+
+  var mapValues_ = function mapValues_(fn, functor) {
+    if (functor.map instanceof Function) {
+      return functor.map(function (value) {
+        return fn(value);
+      });
+    }
+    return mapValuesWithValueKey_(function (value) {
+      return fn(value);
+    }, functor);
+  };
+  var mapValues = curry2(mapValues_);
+
+  var toArray$1 = (function (value) {
+    if (is_("Array", value)) {
+      return value;
+    }
+    return [value];
+  });
+
+  var pluck_ = function pluck_(p, obj) {
+    return mapValues_(function (x) {
+      return path_(toArray$1(p), x);
+    }, obj);
+  };
+  var index$r = curry2(pluck_);
+
+  var converge = function converge(after, fns) {
+    return curryN$1(reduceValues_(function (a, b) {
+      return b > a ? b : a;
+    }, 0, pluck_("length", fns)), function () {
+      var args = arguments;
+      var context = this;
+      return after.apply(context, fns.map(function (fn) {
+        return fn.apply(context, args);
+      }));
+    });
+  };
+  var converge$1 = curry2(converge);
+
+  var juxt = (function (fns) {
+      return converge$1(function () {
+          return Array.prototype.slice.call(arguments, 0);
+      }, fns);
+  });
+
+  var reduceKeys_ = function reduceKeys_(fn, initial, functor) {
+    return reduceWithValueKey_(function (acc, val, key) {
+      return fn(acc, key);
+    }, initial, functor);
+  };
+  var index$s = curry3(reduceKeys_);
+
+  var index$t = (function (keyedObj) {
+    return reduceKeys_(function (acc, key) {
+      return append_(key, acc);
+    }, [], keyedObj);
+  });
+
+  var last = (function (list) {
+    return nth_(-1, list);
   });
 
   var mapKeysWithValueKey_ = function mapKeysWithValueKey_(fn, functor) {
-    return reduceWithValueKey(function (accumulated) {
-      return function (value) {
-        return function (key) {
-          return mergeRight(accumulated)(of(fn(value, key))(value)(accumulated));
-        };
-      };
-    })(fresh(functor))(functor);
+    return reduceWithValueKey_(function (accumulated, value, key) {
+      return mergeRight_(accumulated, of_(fn(value, key), value, accumulated));
+    }, empty(functor), functor);
   };
   var mapKeysWithValueKey = curry2(mapKeysWithValueKey_);
 
@@ -616,45 +827,7 @@
           return fn(key);
       })(functor);
   };
-  var index$e = curry2(mapKeys_);
-
-  var mapValuesWithValueKey_ = function mapValuesWithValueKey_(fn, functor) {
-    if (functor.map instanceof Function) {
-      return functor.map(function (value, key) {
-        return fn(value, key);
-      });
-    }
-    return reduceWithValueKey(function (accumulated) {
-      return function (value) {
-        return function (key) {
-          return mergeRight(accumulated)(of(key)(fn(value, key))(accumulated));
-        };
-      };
-    })(fresh(functor))(functor);
-  };
-  var mapValuesWithValueKey = curry2(mapValuesWithValueKey_);
-
-  var mapValues_ = function mapValues_(fn, functor) {
-    if (functor.map instanceof Function) {
-      return functor.map(function (value) {
-        return fn(value);
-      });
-    }
-    return mapValuesWithValueKey(function (value) {
-      return fn(value);
-    })(functor);
-  };
-  var mapValues = curry2(mapValues_);
-
-  var reduceValues = (function (fn) {
-    return reduceWithValueKey(function (acc) {
-      return function (value) {
-        return function () {
-          return fn(acc)(value);
-        };
-      };
-    });
-  });
+  var index$u = curry2(mapKeys_);
 
   var mergeLeft_ = function mergeLeft_(left, right) {
     if (type(left) !== type(right)) {
@@ -689,18 +862,15 @@
   };
   var mergeLeft = curry2(mergeLeft_);
 
-  var mergeWith = (function (fn) {
-    return reduceWithValueKey(function (accumulated) {
-      return function (value) {
-        return function (key) {
-          if (fetchKey(key)(accumulated)) {
-            return attach(key)(fn(fetchKey(key)(accumulated))(value))(accumulated);
-          }
-          return attach(key)(value)(accumulated);
-        };
-      };
-    });
-  });
+  var mergeWith_ = function mergeWith_(fn, initial, functor) {
+    return reduceWithValueKey_(function (acc, value, key) {
+      if (prop_(key, acc)) {
+        return attach_(key, fn(prop_(key, acc), value), acc);
+      }
+      return attach_(key, value, acc);
+    }, initial, functor);
+  };
+  var mergeWith = curry3(mergeWith_);
 
   var mergeDeepLeft = curry2(function (left, right) {
     if (isArray(left) && isArray(right)) {
@@ -712,75 +882,73 @@
     return left;
   });
 
-  var index$f = (function (functors) {
+  var index$v = (function (functors) {
     if (head(functors)) {
-      return reduceValues(mergeDeepLeft)(fresh(head(functors)))(functors);
+      return reduceValues(mergeDeepLeft)(empty(head(functors)))(functors);
     }
     return functors;
   });
 
-  var mergeDeepRight = curry2(function (left, right) {
+  var mergeDeepRight_ = function mergeDeepRight_(left, right) {
     if (isArray(left) && isArray(right)) {
-      return mergeRight(left)(right);
+      return mergeRight_(left, right);
     }
     if (isObject(left) && isObject(right)) {
-      return mergeWith(mergeDeepRight)(left)(right);
+      return mergeWith_(mergeDeepRight_, left, right);
     }
     return right;
-  });
-
-  var last = nth(-1);
-  var index$g = (function (functors) {
-    if (last(functors)) {
-      return reduceValues(mergeDeepRight)(fresh(last(functors)))(functors);
-    }
-    return functors;
-  });
-
-  function mergeAllLeft(functors) {
-    if (head(functors)) {
-      return reduceValues(mergeLeft)(fresh(head(functors)))(functors);
-    }
-    return functors;
-  }
+  };
+  var mergeDeepRight = curry2(mergeDeepRight_);
 
   var last$1 = nth(-1);
-  var index$h = (function (functors) {
+  var index$w = (function (functors) {
     if (last$1(functors)) {
-      return reduceValues(mergeRight)(fresh(last$1(functors)))(functors);
+      return reduceValues(mergeDeepRight)(empty(last$1(functors)))(functors);
     }
     return functors;
   });
 
-  var index$i = (function (fn) {
-    return reduceWithValueKey(function (accumulated) {
-      return function (value) {
-        return function (key) {
-          if (accumulated[key]) {
-            return _extends({}, accumulated, defineProperty({}, key, fn(accumulated[key])(value)(key)));
-          }
-          return attach(key)(value)(accumulated);
-        };
-      };
-    });
+  var index$x = (function (functors) {
+    if (head(functors)) {
+      return reduceValues_(mergeLeft, empty(head(functors)), functors);
+    }
+    return functors;
   });
 
-  var index$j = (function (x) {
-    return head(x.sort(function (a, b) {
+  var index$y = (function (functors) {
+    if (last(functors)) {
+      return reduceValues_(mergeRight_, empty(last(functors)), functors);
+    }
+    return functors;
+  });
+
+  var mergeWithKey_ = function mergeWithKey_(fn, initial, functor) {
+    return reduceWithValueKey_(function (accumulated, value, key) {
+      if (accumulated[key]) {
+        return _extends({}, accumulated, defineProperty({}, key, fn(accumulated[key], value, key)));
+      }
+      return attach_(key, value, accumulated);
+    }, initial, functor);
+  };
+  var index$z = curry3(mergeWithKey_);
+
+  var min_ = function min_(a, b) {
+    return head([].concat(toConsumableArray(toArray$1(a)), toConsumableArray(toArray$1(b))).sort(function (a, b) {
       return a > b;
     }));
-  });
+  };
+  var index$A = curry2(min_);
 
   var multiply_ = function multiply_(a, b) {
     return a * b;
   };
-  var index$k = curry2(multiply_);
+  var index$B = curry2(multiply_);
 
-  var index$l = (function (x) {
+  var index$C = (function (x) {
     return !x;
   });
 
-  var prepend = curry(function (value, orderedList) {
+  var prepend_ = function prepend_(value, orderedList) {
     switch (type(orderedList)) {
       case "String":
         {
@@ -795,96 +963,91 @@
           throw new Error("prepend doesn't know how to deal with " + type(orderedList));
         }
     }
-  });
+  };
+  var index$D = curry2(prepend_);
 
   var reverse$1 = (function (orderedList) {
-    return reduceValues(flip(prepend))(fresh(orderedList))(orderedList);
+    return reduceValues_(function (acc, v) {
+      return prepend_(v, acc);
+    }, empty(orderedList), orderedList);
   });
 
-  var objectFrom = curry(function (keychain, value) {
-    return reduceValues(function (accumulated) {
-      return function (key) {
-        return attach(key)(accumulated)({});
-      };
-    })(value)(reverse$1(keychain));
-  });
+  var objectFrom_ = function objectFrom_(keychain, value) {
+    return reduceValues_(function (accumulated, key) {
+      return attach_(key, accumulated, {});
+    }, value, reverse$1(keychain));
+  };
+  var index$E = curry2(objectFrom_);
 
   var or_ = function or_(a, b) {
     return a || b;
   };
-  var index$m = curry2(or_);
+  var index$F = curry2(or_);
 
-  var index$n = (function (pairs) {
+  var index$G = (function (pairs) {
     return mapValues(head)(pairs);
   });
 
-  var last$2 = nth(-1);
-  var index$o = (function (pairs) {
-    return mapValues(last$2)(pairs);
-  });
-
-  var prop_ = function prop_(name, keyedFunctor) {
-    if (isNil(keyedFunctor)) {
-      return keyedFunctor;
-    }
-    if (keyedFunctor.get) {
-      return keyedFunctor.get(name);
-    }
-    return keyedFunctor[name];
-  };
-  var get$1 = curry2(prop_);
-
-  var path = curry(function (keychain, tree) {
-    return reduceValues(flip(get$1))(tree)(keychain);
+  var index$H = (function (pairs) {
+    return mapValues_(last, pairs);
   });
 
   var pick = function pick(keys, keyedEnumerable) {
-    return reduceValues(function (accumulated) {
-      return function (key) {
-        var v = get$1(key)(keyedEnumerable);
-        return v ? mergeRight(accumulated)(objectFrom([key])(v)) : accumulated;
-      };
-    })(fresh(keyedEnumerable))(keys);
+    return reduceValues_(function (accumulated, key) {
+      var v = prop_(key, keyedEnumerable);
+      return v ? mergeRight_(accumulated, objectFrom_([key], v)) : accumulated;
+    }, empty(keyedEnumerable), keys);
   };
-  var index$p = curry2(pick);
+  var index$I = curry2(pick);
 
   var pickAll_ = function pickAll_(keys, keyedEnumerable) {
-    return reduceValues(function (accumulated) {
-      return function (key) {
-        return mergeRight(accumulated)(objectFrom([key])(get$1(key)(keyedEnumerable)));
-      };
-    })(fresh(keyedEnumerable))(keys);
+    return reduceValues_(function (accumulated, key) {
+      return mergeRight_(accumulated, objectFrom_([key], prop_(key, keyedEnumerable)));
+    }, empty(keyedEnumerable), keys);
   };
-  var index$q = curry2(pickAll_);
+  var index$J = curry2(pickAll_);
 
-  var toArray$1 = (function (value) {
-    if (is("Array")(value)) {
-      return value;
+  var plucks_ = function plucks_(keychains, functor) {
+    return mapValues_(juxt(mapValues_(path, keychains)), functor);
+  };
+  var index$K = curry2(plucks_);
+
+  var props_ = function props_(keys, obj) {
+    if (typeof keys === "string") {
+      keys = keys.trim().split(",");
     }
-    return [value];
-  });
-
-  var index$r = curry2(function (keychain, functor) {
-    return mapValues(path(toArray$1(keychain)))(functor);
-  });
-
-  var index$s = (function (a) {
-    return a;
-  });
-
-  var reject_ = function reject_(fn, list) {
-    return filter$1(function (v) {
-      return !fn(v);
-    }, list);
+    if (!Array.isArray(keys)) return [];
+    var length = keys.length;
+    var result = Array(length);
+    for (var i = 0; i < length; i++) {
+      result[i] = obj[keys[i]];
+    }
+    return result;
   };
-  var index$t = curry2(reject_);
+  var index$L = curry2(props_);
+
+  var index$M = curry3(function (reducer, initial, functor) {
+    return reduceWithValueKey_(reducer, initial, functor, true);
+  });
+
+  var reduceWhile_ = function reduceWhile_(pred, fn, init, list) {
+    var res = init;
+    var copy = [].concat(list);
+    while (copy.length && pred(res, copy[0])) {
+      res = fn(res, copy.shift());
+    }return res;
+  };
+  var index$N = curry4(reduceWhile_);
 
   var round_ = function round_(precision, num) {
     return Number(Math.round(num + 'e' + precision) + 'e-' + precision);
   };
-  var index$u = curry2(round_);
+  var index$O = curry2(round_);
 
-  var index$v = curry(split);
+  var split$1 = function split(separator, str) {
+    return str.split(separator);
+  };
+  var index$P = curry2(split$1);
 
   var isRegex = function isRegex(x) {
     return Object.prototype.toString.call(x) === "[object RegExp]";
@@ -892,12 +1055,13 @@
   var cloneRegExp = function cloneRegExp(pattern) {
     return new RegExp(pattern.source, (pattern.global ? "g" : "") + (pattern.ignoreCase ? "i" : "") + (pattern.multiline ? "m" : "") + (pattern.sticky ? "y" : "") + (pattern.unicode ? "u" : ""));
   };
-  var test = curry(function (pattern, str) {
+  var test_ = function test_(pattern, str) {
     if (!isRegex(pattern)) {
       throw new TypeError("‘test’ requires a value of type RegExp as its first argument; received " + toString(pattern));
     }
     return cloneRegExp(pattern).test(str);
-  });
+  };
+  var test = curry2(test_);
 
   var escapeString = function escapeString(str) {
     if (typeof str !== "string") {
@@ -908,13 +1072,22 @@
   var startsWith_ = function startsWith_(subset, set) {
     return test(new RegExp("^" + escapeString(subset)))(set);
   };
-  var index$w = curry2(startsWith_);
+  var index$Q = curry2(startsWith_);
 
-  var index$x = (function (x) {
+  var index$R = (function (x) {
     return dropFirst_(1, x);
   });
 
-  var index$y = (function (functor) {
+  var index$S = (function (str) {
+    return str.toLowerCase();
+  });
+
+  var unless_ = function unless_(cond, fn, val) {
+    return cond(val) ? val : fn(val);
+  };
+  var index$T = curry3(unless_);
+
+  var index$U = (function (functor) {
     return reduceValues(flip(append))([])(functor);
   });
 
@@ -932,97 +1105,105 @@
       return input;
     };
   };
-  var index$z = curry2(when_);
+  var index$V = curry2(when_);
 
   var where_ = function where_(matcher, keyedEnumerable) {
-    return reduceWithValueKey(function (latest) {
-      return function (value) {
-        return function (key) {
-          return latest && value(path(toArray$1(key))(keyedEnumerable));
-        };
-      };
-    })(true)(matcher);
+    return reduceWithValueKey_(function (latest, value, key) {
+      return latest && value(path_(toArray$1(key), keyedEnumerable));
+    }, true, matcher);
   };
-  var index$A = curry2(where_);
+  var index$W = curry2(where_);
 
+  exports.anyPass = index;
   exports.append = append;
-  exports.applyTo = index;
-  exports.attach = attach;
-  exports.complement = index$1;
-  exports.compose = index$2;
+  exports.applyTo = index$1;
+  exports.attach = index$2;
+  exports.compact = index$6;
+  exports.complement = index$7;
+  exports.compose = index$8;
+  exports.concat = index$9;
   exports.curry = curry;
-  exports.curryN = index$3;
-  exports.dec = index$4;
-  exports.divide = index$5;
-  exports.dropFirst = index$6;
-  exports.empty = fresh;
-  exports.filter = filter$1;
+  exports.curryN = curryN$1;
+  exports.dec = index$a;
+  exports.defaultTo = index$b;
+  exports.divide = index$c;
+  exports.dropFirst = index$e;
+  exports.either = index$f;
+  exports.empty = empty;
+  exports.equals = index$g;
+  exports.filter = index$4;
   exports.flip = flip;
-  exports.flow = index$7;
+  exports.flow = index$h;
   exports.fnOrError = fnOrError;
-  exports.forEach = index$8;
+  exports.forEach = index$i;
   exports.fromIteratorToArray = fromIteratorToArray;
-  exports.gt = greaterThan;
+  exports.gt = index$d;
   exports.head = head;
-  exports.identity = index$9;
-  exports.ifElse = index$a;
+  exports.identity = index$j;
+  exports.ifElse = index$k;
   exports.is = is;
   exports.isArray = isArray;
-  exports.isDefined = index$b;
-  exports.isEmpty = index$c;
+  exports.isDefined = index$l;
+  exports.isEmpty = index$m;
   exports.isNil = isNil;
   exports.isObject = isObject;
-  exports.key = fetchKey;
-  exports.keys = index$d;
-  exports.mapKeys = index$e;
+  exports.juxt = juxt;
+  exports.keys = index$t;
+  exports.last = last;
+  exports.mapKeys = index$u;
   exports.mapKeysWithValueKey = mapKeysWithValueKey;
   exports.mapValues = mapValues;
-  exports.mapValuesWithValueKey = mapValuesWithValueKey;
-  exports.mergeAllDeepLeft = index$f;
-  exports.mergeAllDeepRight = index$g;
-  exports.mergeAllLeft = mergeAllLeft;
-  exports.mergeAllRight = index$h;
+  exports.mapValuesWithValueKey = index$q;
+  exports.mergeAllDeepLeft = index$v;
+  exports.mergeAllDeepRight = index$w;
+  exports.mergeAllLeft = index$x;
+  exports.mergeAllRight = index$y;
   exports.mergeDeepLeft = mergeDeepLeft;
   exports.mergeDeepRight = mergeDeepRight;
   exports.mergeLeft = mergeLeft;
-  exports.mergeRight = mergeRight;
+  exports.mergeRight = index$o;
   exports.mergeWith = mergeWith;
-  exports.mergeWithKey = index$i;
-  exports.min = index$j;
-  exports.multiply = index$k;
-  exports.not = index$l;
+  exports.mergeWithKey = index$z;
+  exports.min = index$A;
+  exports.multiply = index$B;
+  exports.not = index$C;
   exports.nth = nth;
-  exports.objectFrom = objectFrom;
-  exports.of = of;
-  exports.or = index$m;
-  exports.pairsKeys = index$n;
-  exports.pairValues = index$o;
+  exports.objectFrom = index$E;
+  exports.of = index$p;
+  exports.or = index$F;
+  exports.pairsKeys = index$G;
+  exports.pairValues = index$H;
   exports.path = path;
-  exports.pick = index$p;
-  exports.pickAll = index$q;
+  exports.pick = index$I;
+  exports.pickAll = index$J;
   exports.pipe = pipe;
   exports.pluck = index$r;
-  exports.plucks = index$s;
-  exports.prepend = prepend;
-  exports.prop = get$1;
-  exports.reduceKeys = reduceKeys;
+  exports.plucks = index$K;
+  exports.prepend = index$D;
+  exports.prop = index$n;
+  exports.props = index$L;
+  exports.reduceKeys = index$s;
+  exports.reduceRight = index$M;
   exports.reduceValues = reduceValues;
-  exports.reduceWithValueKey = reduceWithValueKey;
-  exports.reject = index$t;
+  exports.reduceWhile = index$N;
+  exports.reduceWithValueKey = index$3;
+  exports.reject = index$5;
   exports.replace = replace;
   exports.reverse = reverse$1;
-  exports.round = index$u;
-  exports.split = index$v;
-  exports.startsWith = index$w;
-  exports.tail = index$x;
+  exports.round = index$O;
+  exports.split = index$P;
+  exports.startsWith = index$Q;
+  exports.tail = index$R;
   exports.test = test;
   exports.toArray = toArray$1;
+  exports.toLower = index$S;
   exports.toPairs = toPairs;
-  exports.toString = toString$1;
+  exports.toString = toString$2;
   exports.type = type;
-  exports.values = index$y;
-  exports.when = index$z;
-  exports.where = index$A;
+  exports.unless = index$T;
+  exports.values = index$U;
+  exports.when = index$V;
+  exports.where = index$W;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 

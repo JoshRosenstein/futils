@@ -20,3 +20,4 @@ My Personal utility functions. Mostly re-writing whats already out there but doi
 - [unctionjs](https://github.com/unctionjs)
 - [rambda](https://github.com/selfrefactor/rambda)
 - [kyanite](https://github.com/dhershman1/kyanite)
+- [nanoutils](https://github.com/nanoutils/nanoutils)
