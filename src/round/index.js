@@ -1,6 +1,8 @@
 import {curry2} from '../curry'
 
 
-const round_ = (precision, num) => Number(`${Math.round(`${num}e${precision}`)}e-${precision}`)
+const round_ = curry2(
+  (by, num) => Math.round(num * Math.pow(10, by)) / Math.pow(10, by)
+);
 
 export default curry2(round_)

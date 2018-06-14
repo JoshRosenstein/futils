@@ -1,4 +1,6 @@
-import { curry2 } from "../curry";
-export const applyTo_ = (value, fn) => fn(value);
+import curry2_ from '../_uncurried/curry2_'
+import applyTo_ from '../_uncurried/applyTo_'
 
-export default curry2(applyTo_);
+
+
+export default curry2_(applyTo_);

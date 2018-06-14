@@ -1,6 +1,4 @@
+import defaultTo_ from '../_uncurried/defaultTo_'
+import curry2_ from '../_uncurried/curry2_'
 
-
-import {curry2} from "../curry";
-
-export const defaultTo_ = (d, v) => v == null || v !== v ? d : v
-export default curry2(defaultTo_)
+export default curry2_(defaultTo_)

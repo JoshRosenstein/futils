@@ -1,5 +1,5 @@
 import { gt_ } from "../gt"
-import { append_ } from "../append"
+import append_ from '../_uncurried/append_'
 import { reduce_ } from "../reduce"
 import empty from "../empty"
 import { curry2 } from "../curry"

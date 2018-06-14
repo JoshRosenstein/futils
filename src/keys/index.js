@@ -1,4 +1,4 @@
-import { append_ } from "../append"
+import append_ from '../_uncurried/append_'
 import { reduceKeys_ } from "../reduceKeys"
 
 export default keyedObj =>

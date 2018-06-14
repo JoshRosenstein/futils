@@ -1,21 +1,6 @@
-import type from "../type"
-import { curry2 } from "../curry"
+import append_ from '../_uncurried/append_'
+import curry2_ from '../_uncurried/curry2_'
 
-export const append_ = (value, orderedList) => {
-  switch (type(orderedList)) {
-    case "String": {
-      return `${orderedList}${value}`
-    }
-    case "Array": {
-      return [...orderedList, value]
-    }
 
-    default: {
-      throw new TypeError(
-        `append doesn't know how to deal with ${type(orderedList)}`
-      )
-    }
-  }
-}
 
-export default curry2(append_)
+export default curry2_(append_)

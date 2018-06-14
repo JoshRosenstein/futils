@@ -1,20 +1,6 @@
-import { equals_ } from "../equals";
-import { curry2 } from "../curry";
+import contains_ from '../_uncurried/contains_'
+import curry2_ from '../_uncurried/curry2_'
 
-export const contains_=(x, arr) =>{
-  if (arr === undefined) {
-    return arrHolder => contains_(x, arrHolder);
-  }
-  let index = -1;
-  let flag = false;
 
-  while (++index < arr.length && !flag) {
-    if (equals_(arr[index], x)) {
-      flag = true;
-    }
-  }
 
-  return flag;
-}
-
-export default curry2(contains_)
+export default curry2_(contains_)

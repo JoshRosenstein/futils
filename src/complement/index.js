@@ -1,5 +1,4 @@
-import { curry2 } from "../curry";
+import complement_ from '../_uncurried/complement_'
+import curry2_ from '../_uncurried/curry2_'
 
-export const complement_ = (predicate, anything) => !predicate(anything);
-
-export default curry2(complement_);
+export default curry2_(complement_);
