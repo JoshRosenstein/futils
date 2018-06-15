@@ -1,17 +1,16 @@
 /coverage
 /demo/dist
-
+/lib
 node_modules/
 *.log
 .idea/
 packages/site/build
-package-lock.json
 .DS_Store
 .cache
 public/
 notes/
 
-
+package-lock.json
 yarn.lock
 lerna-debug.log
 npm-debug.log*
