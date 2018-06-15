@@ -1,7 +1,3 @@
-import { reduce_ } from "../reduce"
-import { curry3 } from "../curry"
-
-export const reduceKeys_ = (fn, initial, functor) =>
-  reduce_((acc, val, key) => fn(acc, key), initial, functor)
-
-export default curry3(reduceKeys_)
+import curry3_ from '../_uncurried/curry3_'
+import reduceKeys_ from '../_uncurried/reduceKeys_'
+export default curry3_(reduceKeys_)

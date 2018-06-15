@@ -1,3 +1,4 @@
-import { nth_ } from "../nth"
 
-export default list => nth_(-1, list)
+  import last_ from '../_uncurried/last_'
+
+  export default last_

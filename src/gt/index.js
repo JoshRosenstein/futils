@@ -1,5 +1,6 @@
-import { curry2 } from "../curry";
+import gt_ from '../_uncurried/gt_'
+import curry2_ from '../_uncurried/curry2_'
 
-export const gt_ = (a, b) => a > b;
 
-export default curry2(gt_);
+
+export default curry2_(gt_);

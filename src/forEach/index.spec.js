@@ -9,7 +9,7 @@ describe("dec", () => {
       { x: 234, y: 345 }
     ];
     var sideEffect = {};
-    forEach(value => key => (sideEffect[value.x] = value.y), list);
+    forEach((value,key) => (sideEffect[value.x] = value.y), list);
 
     expect(sideEffect).toEqual({ 1: 2, 100: 200, 300: 400, 234: 345 });
   });

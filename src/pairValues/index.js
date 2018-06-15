@@ -1,6 +1,2 @@
-import { mapValues_ } from "../mapValues"
-import last from "../last"
-
-export default pairs => {
-  return mapValues_(last, pairs)
-}
+import pairValues_ from '../_uncurried/pairValues_'
+export default pairValues_

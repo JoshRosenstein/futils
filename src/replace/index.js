@@ -1,7 +1,3 @@
-import { curry3 } from "../curry"
-
-export const replace_ = (regex, replacer, str) => {
-  return str.replace(regex, replacer)
-}
-
-export default curry3(replace_)
+import curry3_ from '../_uncurried/curry3_'
+import replace_ from '../_uncurried/replace_'
+export default curry3_(replace_)

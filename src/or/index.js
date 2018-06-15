@@ -1,4 +1,3 @@
-import {curry2} from '../curry'
-const or_ = (a, b) => a || b
-
-export default curry2(or_)
+import curry2_ from '../_uncurried/curry2_'
+import or_ from '../_uncurried/or_'
+export default curry2_(or_)

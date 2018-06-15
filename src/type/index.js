@@ -1,11 +1,2 @@
-export default value => {
-  if (value === null) {
-    return "null";
-  }
-
-  if (value === undefined) {
-    return "undefined";
-  }
-
-  return value.constructor.name;
-};
+import type_ from '../_uncurried/type_'
+export default type_

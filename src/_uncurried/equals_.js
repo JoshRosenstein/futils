@@ -1,6 +1,4 @@
-import _type from "./_type";
-
-
+import type_ from "./type_";
 
 // Extracted out of jest
 function hasKey_(obj, key) {
@@ -46,8 +44,8 @@ function keys_(obj, isArray) {
   if (a === b) return true
   if (a == null || b == null) return a === b
 
-  var typeA = _type(a)
-  var typeB = _type(b)
+  var typeA = type_(a)
+  var typeB = type_(b)
   if (typeA !== typeB) return false
 
   switch (typeA) {
@@ -91,7 +89,7 @@ function keys_(obj, isArray) {
     }
 
     while (size--) {
-      result = eq_(a[size], b[size], aStack, bStack, hasKey_)
+      result = _equals_(a[size], b[size], aStack, bStack, hasKey_)
       if (!result) {
         return false
       }
@@ -112,7 +110,7 @@ function keys_(obj, isArray) {
     key = aKeys[size]
 
     // Deep compare each member
-    result = hasKey_(b, key) && eq_(a[key], b[key], aStack, bStack)
+    result = hasKey_(b, key) && _equals_(a[key], b[key], aStack, bStack)
 
     if (!result) {
       return false

@@ -1,9 +1,2 @@
-import { is_ } from "../is"
-
-export default value => {
-  if (is_("Array", value)) {
-    return value
-  }
-
-  return [value]
-}
+import toArray_ from '../_uncurried/toArray_'
+export default toArray_

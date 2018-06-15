@@ -1,19 +1,3 @@
-import { curry2 } from "../curry";
-
-
-export const props_ = (keys, obj) => {
-  if (typeof keys === "string") {
-    keys = keys.trim().split(",")
-  }
-
-  if (!Array.isArray(keys)) return []
-
-  var length = keys.length
-  var result = Array(length)
-  for (var i = 0; i < length; i++) {
-    result[i] = obj[keys[i]]
-  }
-  return result
-}
-
-export default curry2(props_);
+import curry2_ from '../_uncurried/curry2_'
+import props_ from '../_uncurried/props_'
+export default curry2_(props_)

@@ -1,13 +1,3 @@
-import { reduceValues_ } from "../reduceValues"
-import { attach_ } from "../attach"
-import reverse from "../reverse"
-import { curry2 } from "../curry"
-import toArray from "../toArray"
-export const objOf_ = (keychain, value) =>
-  reduceValues_(
-    (accumulated, key) => attach_(key, accumulated, {}),
-    value,
-    reverse(toArray(keychain))
-  )
-
-export default curry2(objOf_)
+import curry2_ from '../_uncurried/curry2_'
+import objOf_ from '../_uncurried/objOf_'
+export default curry2_(objOf_)

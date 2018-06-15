@@ -12,7 +12,7 @@ export default (value, orderedList) => {
 
     default: {
       throw new TypeError(
-        `append doesn't know how to deal with ${type(orderedList)}`
+        `append doesn't know how to deal with ${type_(orderedList)}`
       )
     }
   }

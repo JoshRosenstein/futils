@@ -1,3 +1,3 @@
-import always from '../always'
+import F_ from '../_uncurried/F_'
 
-export default always(false)
+export default F_

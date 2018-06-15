@@ -38,7 +38,7 @@ describe("toPairs", () => {
 
   it("returns the string representation of a string primitive", () => {
     const a = toString("abc");
-    const eA = '"abc"';
+    const eA = 'abc';
     expect(a).toEqual(eA);
   });
 });

@@ -1,10 +1,7 @@
-import equals_from "./equals_";
+import equals_ from "./equals_";
 
 
 export default (x, arr) =>{
-  if (arr === undefined) {
-    return arrHolder => contains_(x, arrHolder);
-  }
   let index = -1;
   let flag = false;
 

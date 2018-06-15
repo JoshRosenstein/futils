@@ -1,5 +1,3 @@
-import {curry2} from '../curry'
-
-const multiply_= (a, b) => a * b
-
-export default curry2(multiply_)
+import curry2_ from '../_uncurried/curry2_'
+import multiply_ from '../_uncurried/multiply_'
+export default curry2_(multiply_)

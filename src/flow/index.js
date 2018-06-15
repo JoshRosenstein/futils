@@ -1,3 +1,3 @@
-import pipe from "../pipe";
+import flow_ from '../_uncurried/flow_'
 
-export default (value, ...argsToGive) => pipe(...argsToGive)(value);
+export default flow_

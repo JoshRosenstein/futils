@@ -1,3 +1,2 @@
-import { curry3 } from "../curry"
-
-export default curry3((fn, left, right) => fn(right, left))
+import flip_ from '../_uncurried/flip_'
+export default flip_

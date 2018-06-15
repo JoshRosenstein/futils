@@ -1,4 +1,4 @@
-import type_ from "../type_"
+import type_ from "./type_"
 
 
 export default (sig, value) =>

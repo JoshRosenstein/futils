@@ -1,5 +1,2 @@
-
-import {reject_} from "../reject";
-import isNil from "../isNil";
-
-export default collection => reject_(isNil,collection)
+import compact_ from '../_uncurried/compact_'
+export default compact_

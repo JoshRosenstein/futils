@@ -1,4 +1,3 @@
-import { is_ } from "../is"
-import isEmpty from '../isEmpty'
+import isNilOrEmpty_ from '../_uncurried/isNilOrEmpty_'
 
-export default value => is_("undefined", value) || is_("null", value) || isEmpty(value)
+export default isNilOrEmpty_

@@ -1,12 +1,3 @@
-import reduceValues from "../reduceValues";
-import mergeDeepLeft from "../mergeDeepLeft";
-import head from "../head";
-import fresh from "../empty";
+import mergeAllDeepLeft_ from '../_uncurried/mergeAllDeepLeft_'
 
-export default functors=> {
-  if (head(functors)) {
-    return reduceValues(mergeDeepLeft)(fresh(head(functors)))(functors);
-  }
-
-  return functors;
-}
+export default mergeAllDeepLeft_

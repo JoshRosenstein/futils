@@ -1,8 +1,3 @@
-import { curry2 } from "../curry"
-import toArray from "../toArray"
-import head from "../head"
-
-export const min_ = (a, b) =>
-  head([...toArray(a), ...toArray(b)].sort((a, b) => a > b))
-
-export default curry2(min_)
+import curry2_ from '../_uncurried/curry2_'
+import min_ from '../_uncurried/min_'
+export default curry2_(min_)

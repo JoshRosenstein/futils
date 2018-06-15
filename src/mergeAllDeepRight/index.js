@@ -1,12 +1,4 @@
-import reduceValues from "../reduceValues";
-import mergeDeepRight from "../mergeDeepRight";
-import nth from "../nth";
-import fresh from "../empty";
-var last = nth(-1);
-export default (functors) =>{
-  if (last(functors)) {
-    return reduceValues(mergeDeepRight)(fresh(last(functors)))(functors);
-  }
+import mergeAllDeepRight_ from '../_uncurried/mergeAllDeepRight_'
 
-  return functors;
-}
+
+export default mergeAllDeepRight_

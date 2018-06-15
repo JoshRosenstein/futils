@@ -1,11 +1,3 @@
-import {curry2} from '../curry'
-import {filter_} from '../filter'
-
-export const reject_ = (predicate, enumerable) => {
-  if (enumerable.reject) {
-    return enumerable.reject(predicate)
-  }
-
-  return filter_(v => !predicate(v),enumerable)
-}
-export default curry2(reject_)
+import curry2_ from '../_uncurried/curry2_'
+import reject_ from '../_uncurried/reject_'
+export default curry2_(reject_)

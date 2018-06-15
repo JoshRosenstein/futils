@@ -1,7 +1,7 @@
 import values from "./index";
 
 describe("Values", () => {
-  it("Subtract One from Number", () => {
+  it("Works", () => {
     const a = values({a:1,b:2});
     const eA = [1,2];
 

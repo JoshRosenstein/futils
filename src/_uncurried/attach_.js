@@ -2,7 +2,7 @@ import type_ from "./type_"
 
 
 export default (key, value, functor) => {
-  switch (type(functor)) {
+  switch (type_(functor)) {
     case "Object": {
       return {
         ...functor,
@@ -23,7 +23,7 @@ export default (key, value, functor) => {
     }
     default: {
       throw new Error(
-        `attach doesn't know how to set a key and value on ${type(functor)}`
+        `attach doesn't know how to set a key and value on ${type_(functor)}`
       );
     }
   }

@@ -1,3 +1,3 @@
-import { is_ } from "../is"
+import isObject_ from '../_uncurried/isObject_'
 
-export default value => is_("Object", value)
+export default isObject_
