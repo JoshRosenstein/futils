@@ -69,7 +69,8 @@
       "!**/build/**",
       "!**/dist/**",
       "!**/coverage/**",
-      "!**/scripts/**"
+      "!**/scripts/**",
+        "!**/lib/**"
     ],
     "coveragePathIgnorePatterns": [
       "./rollup.split.js"
