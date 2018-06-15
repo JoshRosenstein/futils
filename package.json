@@ -1,6 +1,6 @@
 {
   "name": "@roseys/futils",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "",
   "keywords": [
     "ramda",
@@ -30,14 +30,12 @@
     "reinstall": "yarn run clean:modules && yarn",
     "lint": "standard src/*.js"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
-      "babel-cli": "^6.26.0",
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-jest": "^22.4.3",
     "babel-plugin-external-helpers": "^6.22.0",
-    "babel-plugin-transform-modules": "^0.1.1",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-es2015": "^6.24.1",
@@ -70,7 +68,7 @@
       "!**/dist/**",
       "!**/coverage/**",
       "!**/scripts/**",
-        "!**/lib/**"
+      "!**/lib/**"
     ],
     "coveragePathIgnorePatterns": [
       "./rollup.split.js"
@@ -97,7 +95,8 @@
               "last 2 versions",
               "ie >= 9"
             ]
-          }, "modules": false
+          },
+          "modules": false
         }
       ],
       "react",
@@ -122,12 +121,15 @@
       "raw": {
         "presets": [
           [
-            "env",{    "targets": {
-                  "browsers": [
-                    "last 2 versions",
-                    "ie >= 9"
-                  ]
-                }}
+            "env",
+            {
+              "targets": {
+                "browsers": [
+                  "last 2 versions",
+                  "ie >= 9"
+                ]
+              }
+            }
           ],
           "react",
           "stage-0"
