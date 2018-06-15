@@ -14,10 +14,11 @@
   "license": "MIT",
   "scripts": {
     "precommit": "node scripts/create-export.js && rollup -c && jest --onlyChanged --runInBand",
-    "prepack": "rollup -c rollup.split.js && node scripts/create-export.js && rollup -c",
+    "prepack": "yarn run build && yarn run build:modules ",
     "postpack": "npm run clean",
-    "build": "rollup -c",
+    "build": "node scripts/create-export.js && rollup -c",
     "split": "rollup -c rollup.split.js",
+    "build:modules": "cross-env BABEL_ENV=raw babel src --out-dir lib --ignore index.spec.js,index.test.js --presets es2015",
     "scripts": "node scripts/create-export.js",
     "stats": "rollup -c rollup.split.js && node scripts/clean.js",
     "clean": "node scripts/clean.js",
@@ -29,14 +30,17 @@
     "reinstall": "yarn run clean:modules && yarn",
     "lint": "standard src/*.js"
   },
-  "dependencies": {},
+  "dependencies": {
+  },
   "devDependencies": {
+      "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-jest": "^22.4.3",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-transform-modules": "^0.1.1",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "bundlesize": "^0.17.0",
@@ -65,7 +69,8 @@
       "!**/build/**",
       "!**/dist/**",
       "!**/coverage/**",
-      "!**/scripts/**"
+      "!**/scripts/**",
+        "!**/lib/**"
     ],
     "coveragePathIgnorePatterns": [
       "./rollup.split.js"
@@ -92,8 +97,7 @@
               "last 2 versions",
               "ie >= 9"
             ]
-          },
-          "modules": false
+          }, "modules": false
         }
       ],
       "react",
@@ -107,6 +111,23 @@
         "presets": [
           [
             "env"
+          ],
+          "react",
+          "stage-0"
+        ],
+        "plugins": [
+          "transform-runtime"
+        ]
+      },
+      "raw": {
+        "presets": [
+          [
+            "env",{    "targets": {
+                  "browsers": [
+                    "last 2 versions",
+                    "ie >= 9"
+                  ]
+                }}
           ],
           "react",
           "stage-0"

@@ -1,6 +1,3 @@
-import { reduceValues_ } from "../reduceValues"
-import empty from "../empty"
-import { prepend_ } from "../prepend"
+import reverse_ from '../_uncurried/reverse_'
 
-export default orderedList =>
-  reduceValues_((acc, v) => prepend_(v, acc), empty(orderedList), orderedList)
+export default reverse_

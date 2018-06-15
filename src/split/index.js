@@ -1,4 +1,3 @@
-import { curry2 } from "../curry"
-
-export const split = (separator, str) => str.split(separator)
-export default curry2(split)
+import curry2_ from '../_uncurried/curry2_'
+import split_ from '../_uncurried/split_'
+export default curry2_(split_)

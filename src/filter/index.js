@@ -1,19 +1,6 @@
-import empty from "../empty"
-import attach, { attach_ } from "../attach"
-import { reduce_ } from "../reduce"
-import { curry2 } from "../curry"
+import filter_ from '../_uncurried/filter_'
+import curry2_ from '../_uncurried/curry2_'
 
-export const filter_ = (predicate, enumerable) => {
-  if (enumerable.filter) {
-    return enumerable.filter(predicate)
-  }
 
-  return reduce_(
-    (accumulated, value, key) =>
-      predicate(value) ? attach_(key, value, accumulated) : accumulated,
-    empty(enumerable),
-    enumerable
-  )
-}
 
-export default curry2(filter_)
+export default curry2_(filter_)

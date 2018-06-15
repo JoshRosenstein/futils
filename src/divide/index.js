@@ -1,4 +1,3 @@
-import {curry2} from  '../curry'
-const divide = (a, b) => a / b
-
-export default curry2(divide)
+import divide_ from '../_uncurried/divide_'
+import curry2_ from '../_uncurried/curry2_'
+export default curry2_(divide_)

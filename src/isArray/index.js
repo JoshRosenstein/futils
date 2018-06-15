@@ -1,3 +1,3 @@
-import { is_ } from "../is"
+import isArray_ from '../_uncurried/isArray_'
 
-export default value => is_("Array", value)
+export default isArray_

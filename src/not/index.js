@@ -1,1 +1,2 @@
-export default x => !x
+import not_ from '../_uncurried/not_'
+export default not_

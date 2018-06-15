@@ -1,4 +1,4 @@
-import converge from "../converge";
-export default (fns) => converge(function() {
-    return Array.prototype.slice.call(arguments, 0)
-  }, fns)
+
+  import juxt_ from '../_uncurried/juxt_'
+
+  export default juxt_

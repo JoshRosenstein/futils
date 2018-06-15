@@ -1,9 +1,3 @@
-import path from "../path"
-import { mapValues_ } from "../mapValues"
-import { curry2 } from "../curry"
-import  juxt  from "../juxt"
-
-const plucks_ = (keychains, functor) =>
-  mapValues_(juxt(mapValues_(path, keychains)), functor)
-
-export default curry2(plucks_)
+import curry2_ from '../_uncurried/curry2_'
+import plucks_ from '../_uncurried/plucks_'
+export default curry2_(plucks_)

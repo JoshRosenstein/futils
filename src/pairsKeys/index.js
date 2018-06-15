@@ -1,6 +1,2 @@
-import head from "../head";
-import mapValues from "../mapValues";
-
-export default pairs => {
-  return mapValues(head)(pairs);
-};
+import pairsKeys_ from '../_uncurried/pairsKeys_'
+export default pairsKeys_

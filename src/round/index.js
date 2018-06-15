@@ -1,6 +1,3 @@
-import {curry2} from '../curry'
-
-
-const round_ = (precision, num) => Number(`${Math.round(`${num}e${precision}`)}e-${precision}`)
-
-export default curry2(round_)
+import curry2_ from '../_uncurried/curry2_'
+import round_ from '../_uncurried/round_'
+export default curry2_(round_)

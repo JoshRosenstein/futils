@@ -1,11 +1,4 @@
-const fromIteratorToArrayIterator = list => iterator => {
-  const { value, done } = iterator.next();
+import fromIteratorToArray_ from '../_uncurried/fromIteratorToArray_'
 
-  if (done) {
-    return list;
-  }
 
-  return fromIteratorToArrayIterator([...list, value])(iterator);
-};
-
-export default iterator => fromIteratorToArrayIterator([])(iterator);
+export default fromIteratorToArray_

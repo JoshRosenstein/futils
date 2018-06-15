@@ -1,12 +1,6 @@
-import { mapValuesWithValueKey_ } from "../mapValuesWithValueKey"
-import { curry2 } from "../curry"
+import curry2_ from '../_uncurried/curry2_'
+import mapValues_ from '../_uncurried/mapValues_'
 
-export const mapValues_ = (fn, functor) => {
-  if (functor.map instanceof Function) {
-    return functor.map(value => fn(value))
-  }
 
-  return mapValuesWithValueKey_(value => fn(value), functor)
-}
 
-export default curry2(mapValues_)
+export default curry2_(mapValues_)

@@ -1,11 +1,3 @@
-import type from "../type";
+import fnOrError_ from '../_uncurried/fnOrError_'
 
-export default (symbolName, f) => {
-  if (!f || typeof f !== "function") {
-    throw new Error(
-      `${symbolName} should be a function. ` +
-        `Type received: ${type(f)};  Value received: ${f}.`
-    );
-  }
-  return f;
-};
+export default fnOrError_

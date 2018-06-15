@@ -1,8 +1,3 @@
-import { path_ } from "../path"
-import { mapValues_ } from "../mapValues"
-import { curry2 } from "../curry"
-import toArray from "../toArray"
-
-export const pluck_ = (p, obj) => mapValues_(x => path_(toArray(p), x), obj)
-
-export default curry2(pluck_)
+import curry2_ from '../_uncurried/curry2_'
+import pluck_ from '../_uncurried/pluck_'
+export default curry2_(pluck_)

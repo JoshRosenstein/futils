@@ -1,6 +1,6 @@
 
+import has_ from '../_uncurried/has_'
+import curry2_ from '../_uncurried/curry2_'
 
-import {curry2} from '../curry'
-export const has_=(prop, obj) =>obj.hasOwnProperty(prop)
 
-export default curry2(has_)
+export default curry2_(has_)

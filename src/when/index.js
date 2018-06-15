@@ -1,19 +1,3 @@
-import { curry2 } from "../curry";
-
-export const when_ = (condition, whenTrueFn) => {
-  if (whenTrueFn === undefined) {
-    return whenTrueFnHolder => when_(condition, whenTrueFnHolder);
-  }
-
-  return input => {
-    const flag = typeof condition === "boolean" ? condition : condition(input);
-
-    if (flag) {
-      return whenTrueFn(input);
-    }
-
-    return input;
-  };
-};
-
-export default curry2(when_);
+import curry2_ from '../_uncurried/curry2_'
+import when_ from '../_uncurried/when_'
+export default curry2_(when_)

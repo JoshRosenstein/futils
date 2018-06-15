@@ -1,11 +1,5 @@
-import type from "../type"
-import { curry2 } from "../curry"
+import is_ from '../_uncurried/is_'
+import curry2_ from '../_uncurried/curry2_'
 
-export const is_ = (sig, value) =>
-  sig === "null"
-    ? value === null
-    : sig === "undefined"
-      ? value === undefined
-      : value === undefined || value === null ? false : type(value) === sig
 
-export default curry2(is_)
+export default curry2_(is_)

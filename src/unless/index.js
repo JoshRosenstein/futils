@@ -1,6 +1,3 @@
-import { curry3 } from "../curry";
-
-const unless_ = (cond, fn, val) => (cond(val) ? val : fn(val))
-
-
-export default curry3(unless_);
+import curry3_ from '../_uncurried/curry3_'
+import unless_ from '../_uncurried/unless_'
+export default curry3_(unless_)

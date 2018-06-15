@@ -1,9 +1,6 @@
-import mapKeysWithValueKey from "../mapKeysWithValueKey";
-import {curry2} from "../curry";
-
-const mapKeys_=(fn,functor)=> {
-    return mapKeysWithValueKey((v,key)=> fn(key))(functor)
-  }
+import curry2_ from '../_uncurried/curry2_'
+import mapKeys_ from '../_uncurried/mapKeys_'
 
 
-export default curry2(mapKeys_);
+
+export default curry2_(mapKeys_);

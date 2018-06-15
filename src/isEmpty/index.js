@@ -1,3 +1,3 @@
-import empty from "../empty";
-import {equals_} from '../equals'
-export default x => x != null && equals_(x , empty(x))
+import isEmpty_ from '../_uncurried/isEmpty_'
+
+export default isEmpty_

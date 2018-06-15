@@ -1,11 +1,15 @@
-import PLACEHOLDER from "./index";
+import isNil from "./index";
 
-describe.skip("PLACEHOLDER", () => {
-  it("Subtract One from Number", () => {
-    const a = PLACEHOLDER(1);
-    const eA = 0;
+describe.skip("isNil", () => {
+  test('returns true for undefined and null', () => {
+    expect(isNil(null)).toBeTruthy()
+    expect(isNil(undefined)).toBeTruthy()
+  })
 
-    expect(a).toEqual(eA);
-  });
-
+  test('returns false otherwise', () => {
+    expect(isNil(true)).toBeFalsy()
+    expect(isNil('test')).toBeFalsy()
+    expect(isNil(5)).toBeFalsy()
+    expect(isNil({})).toBeFalsy()
+  })
 });

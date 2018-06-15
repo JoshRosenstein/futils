@@ -1,3 +1,5 @@
-import { nth_ } from "../nth"
 
-export default list => nth_(0, list)
+
+import head_ from '../_uncurried/head_'
+
+export default head_

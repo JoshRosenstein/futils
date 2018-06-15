@@ -25,9 +25,23 @@ const paths = globby.sync(['src/*.js', '!src/index.js', '!src/_internals','!src/
           main: true,
           browser: true
         }),
-        babel({
-      exclude: 'node_modules/**'
-    }),
+        babel({  babelrc: false,
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "browsers": [
+              "last 2 versions",
+              "ie >= 9"
+            ]
+          },
+          "modules": false
+        }
+      ],
+      "react",
+      "stage-0"
+    ]}),
         uglify(),
         filesize()
       ],

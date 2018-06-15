@@ -1,9 +1,3 @@
-
-import {mergeDeepRight_} from '../mergeDeepRight'
-import { curry2 } from "../curry"
-
-export const mergeDeepLeft_ = (left, right) => mergeDeepRight_(right,left)
-
-
-
-export default curry2(mergeDeepLeft_);
+import curry2_ from '../_uncurried/curry2_'
+import mergeDeepLeft_ from '../_uncurried/mergeDeepLeft_'
+export default curry2_(mergeDeepLeft_);
