@@ -1,6 +1,6 @@
 {
   "name": "@roseys/futils",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "",
   "keywords": [
     "ramda",
@@ -60,7 +60,10 @@
     "standard": "11.0.1"
   },
   "jest": {
-    "testMatch":[ "**/__tests__/**/*.js?(x)", "**/?(*.)+(spec).js?(x)" ],
+    "testMatch": [
+      "**/__tests__/**/*.js?(x)",
+      "**/?(*.)+(spec).js?(x)"
+    ],
     "collectCoverageFrom": [
       "**/*.{js,jsx}",
       "!**/*.css.js",
