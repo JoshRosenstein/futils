@@ -1,0 +1,11 @@
+import curryN from "./curryN";
+
+describe.skip("PLACEHOLDER", () => {
+  it("Subtract One from Number", () => {
+    const a = PLACEHOLDER(1);
+    const eA = 0;
+
+    expect(a).toEqual(eA);
+  });
+
+});

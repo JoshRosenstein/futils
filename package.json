@@ -17,8 +17,9 @@
     "prepack": "yarn run build && yarn run build:modules ",
     "postpack": "npm run clean",
     "build": "node scripts/create-export.js && rollup -c",
+    "move": "node scripts/move.js",
     "split": "rollup -c rollup.split.js",
-    "build:modules": "cross-env BABEL_ENV=raw babel src --out-dir lib --ignore index.spec.js,index.test.js --presets es2015",
+    "build:modules": "cross-env BABEL_ENV=raw babel src --out-dir lib --ignore *.spec.js,*.test.js --presets es2015",
     "scripts": "node scripts/create-export.js",
     "stats": "rollup -c rollup.split.js && node scripts/clean.js",
     "clean": "node scripts/clean.js",
@@ -59,6 +60,7 @@
     "standard": "11.0.1"
   },
   "jest": {
+    "testMatch":[ "**/__tests__/**/*.js?(x)", "**/?(*.)+(spec).js?(x)" ],
     "collectCoverageFrom": [
       "**/*.{js,jsx}",
       "!**/*.css.js",
