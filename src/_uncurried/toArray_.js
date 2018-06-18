@@ -1,9 +1,4 @@
-import is_ from "./is_"
+import isArray_ from "./isArray_"
+import isNil_ from "./isNil_"
 
-export default value => {
-  if (is_("Array", value)) {
-    return value
-  }
-
-  return [value]
-}
+export default v =>isNil_(v)?[]:isArray_(v)?v:[v] 
