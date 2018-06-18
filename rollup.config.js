@@ -8,27 +8,43 @@ import filesize from 'rollup-plugin-filesize'
 
 import pkg from './package.json'
 
+const BasePlugins = [
+  resolve({
+    jsnext: true,
+    main: true,
+    browser: true
+  }),
+  commonjs({
+    include: 'node_modules/**',
+    extensions: ['.js']
+  }),
+  babel(),
+  replace({
+    exclude: 'node_modules/**',
+    ENV: JSON.stringify(process.env.NODE_ENV || 'development')
+  }),
+]
+
+
+const minBase ={
+      treeshake: true,
+      plugins: [...BasePlugins,
+        uglify(),
+        filesize()
+      ]
+}
+
+const base ={
+      treeshake: true,
+      plugins: [...BasePlugins,
+        cleanup(),
+        filesize()
+      ]
+}
 
 export default [{
   input: './src/index.js',
-  plugins: [
-    resolve({
-      jsnext: true,
-      main: true,
-      browser: true
-    }),
-    commonjs({
-      include: 'node_modules/**',
-      extensions: ['.js']
-    }),
-    babel(),
-    replace({
-      exclude: 'node_modules/**',
-      ENV: JSON.stringify(process.env.NODE_ENV || 'development')
-    }),
-    uglify(),
-    filesize()
-  ],
+...minBase,
   output: {
     file: 'dist/futils.min.js',
     format: 'umd',
@@ -36,30 +52,32 @@ export default [{
   }
 }, {
   input: './src/index.js',
-  plugins: [
-    resolve({
-      jsnext: true,
-      main: true,
-      browser: true
-    }),
-    commonjs({
-      include: 'node_modules/**',
-      extensions: ['.js']
-    }),
-    babel(),
-    replace({
-      exclude: 'node_modules/**',
-      ENV: JSON.stringify(process.env.NODE_ENV || 'development')
-    }),
-    cleanup(),
-    filesize()
-  ],
+...base,
   output: {
     file: 'dist/futils.js',
     format: 'umd',
     name: 'futils'
   }
-}]
+},
+{
+  input: './src/index_.js',
+...minBase,
+  output: {
+    file: 'dist/futils_.min.js',
+    format: 'umd',
+    name: 'futils_'
+  }
+}, {
+  input: './src/index_.js',
+...base,
+  output: {
+    file: 'dist/futils_.js',
+    format: 'umd',
+    name: 'futils_'
+  }
+}
+
+]
 
 
 // const plugins = [
