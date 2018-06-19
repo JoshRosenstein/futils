@@ -112,6 +112,129 @@
     }
   };
 
+  var fromIteratorToArrayIterator = function fromIteratorToArrayIterator(list) {
+    return function (iterator) {
+      var _iterator$next = iterator.next(),
+          value = _iterator$next.value,
+          done = _iterator$next.done;
+      if (done) {
+        return list;
+      }
+      return fromIteratorToArrayIterator([].concat(toConsumableArray(list), [value]))(iterator);
+    };
+  };
+  var fromIteratorToArray_ = (function (iterator) {
+    return fromIteratorToArrayIterator([])(iterator);
+  });
+
+  var toPairs_ = (function (pairableObj) {
+    switch (type_(pairableObj)) {
+      case "Array":
+        {
+          return pairableObj.reduce(function (pairs, value, index) {
+            return [].concat(toConsumableArray(pairs), [[index, value]]);
+          }, []);
+        }
+      case "Object":
+        {
+          return Object.entries(pairableObj);
+        }
+      case "Set":
+        {
+          return fromIteratorToArray_(pairableObj.values()).map(function (value) {
+            return [undefined, value];
+          });
+        }
+      case "Map":
+        {
+          return fromIteratorToArray_(pairableObj.entries());
+        }
+      default:
+        {
+          throw new Error("toPairs doesn't know how to handle " + type_(pairableObj));
+        }
+    }
+  });
+
+  var reduceWhile_ = (function (pred, reducer, initial, functor) {
+    var fn = void 0;
+    var predfn = void 0;
+    switch (type_(functor)) {
+      case "Array":
+        fn = function fn(acc, value, key) {
+          return reducer(acc, value, key);
+        };
+        predfn = function predfn(acc, value, key) {
+          return pred(acc, value, key);
+        };
+        break;
+      case "Object":
+      case "Map":
+        fn = function fn(acc, _ref) {
+          var _ref2 = slicedToArray(_ref, 2),
+              key = _ref2[0],
+              value = _ref2[1];
+          return reducer(acc, value, key);
+        };
+        functor = toPairs_(functor);
+        predfn = function predfn(acc, _ref3) {
+          var _ref4 = slicedToArray(_ref3, 2),
+              key = _ref4[0],
+              value = _ref4[1];
+          return pred(acc, value, key);
+        };
+        break;
+      case "Set":
+        fn = function fn(acc, _ref5) {
+          var _ref6 = slicedToArray(_ref5, 2),
+              value = _ref6[1];
+          return reducer(acc, value);
+        };
+        functor = toPairs_(functor);
+        predfn = function predfn(acc, _ref7) {
+          var _ref8 = slicedToArray(_ref7, 2),
+              value = _ref8[1];
+          return pred(acc, value);
+        };
+        break;
+      case "String":
+        fn = function fn(acc, _ref9) {
+          var _ref10 = slicedToArray(_ref9, 2),
+              key = _ref10[0],
+              value = _ref10[1];
+          return reducer(acc, value, key);
+        };
+        functor = toPairs_(functor.split(""));
+        predfn = function predfn(acc, _ref11) {
+          var _ref12 = slicedToArray(_ref11, 2),
+              key = _ref12[0],
+              value = _ref12[1];
+          return pred(acc, value, key);
+        };
+        break;
+      default:
+        {
+          throw new Error("reduce couldn't figure out how to reduce " + type_(functor));
+        }
+    }
+    var length = functor.length;
+    var b = initial;
+    for (var i = 0; i < length; ++i) {
+      var a = functor[i];
+      if (!predfn(b, a, i)) break;
+      b = fn(b, a, i);
+    }
+    return b;
+  });
+
+  var any_ = (function (handlerFn, list) {
+    return reduceWhile_(function (acc) {
+      return acc === false;
+    }, function (acc, value, key) {
+      return handlerFn(value, key);
+    }, false, list);
+  });
+
   var append_ = (function (value, orderedList) {
     switch (type_(orderedList)) {
       case "String":
@@ -188,50 +311,6 @@
       return arguments;
     }() :
     void 0;
-  });
-
-  var fromIteratorToArrayIterator = function fromIteratorToArrayIterator(list) {
-    return function (iterator) {
-      var _iterator$next = iterator.next(),
-          value = _iterator$next.value,
-          done = _iterator$next.done;
-      if (done) {
-        return list;
-      }
-      return fromIteratorToArrayIterator([].concat(toConsumableArray(list), [value]))(iterator);
-    };
-  };
-  var fromIteratorToArray_ = (function (iterator) {
-    return fromIteratorToArrayIterator([])(iterator);
-  });
-
-  var toPairs_ = (function (pairableObj) {
-    switch (type_(pairableObj)) {
-      case "Array":
-        {
-          return pairableObj.reduce(function (pairs, value, index) {
-            return [].concat(toConsumableArray(pairs), [[index, value]]);
-          }, []);
-        }
-      case "Object":
-        {
-          return Object.entries(pairableObj);
-        }
-      case "Set":
-        {
-          return fromIteratorToArray_(pairableObj.values()).map(function (value) {
-            return [undefined, value];
-          });
-        }
-      case "Map":
-        {
-          return fromIteratorToArray_(pairableObj.entries());
-        }
-      default:
-        {
-          throw new Error("toPairs doesn't know how to handle " + type_(pairableObj));
-        }
-    }
   });
 
   var reduce_ = (function (reducer, initial, functor) {
@@ -491,7 +570,7 @@
 
   var path_ = (function (keys, tree) {
     if (typeof keys === "string") {
-      keys = keys.trim().split(",");
+      keys = keys.trim().split(".");
     }
     return reduceValues_(function (acc, val) {
       return prop_(val, acc);
@@ -682,19 +761,47 @@
     return a > b;
   });
 
-  var dropFirst_ = (function (count, orderedList) {
-    return reduce_(function (acc, value, index) {
-      if (gt_(index, count - 1)) {
-        return append_(value, acc);
-      }
-      return acc;
+  var flip_ = (function (fn) {
+    return curryN(fn.length, function (a, b) {
+      var args = Array.prototype.slice.call(arguments, 0);
+      args[0] = b;
+      args[1] = a;
+      return fn.apply(this, args);
+    });
+  });
+
+  var values_ = (function (functor) {
+    return reduceValues_(function (l, r) {
+      return append_(r, l);
+    }, [], functor);
+  });
+
+  var length_ = (function (obj) {
+    return obj.length || obj.size || values_(obj).length;
+  });
+
+  var dropLast_ = (function (count, orderedList) {
+    if (count < 0) return orderedList;
+    var cnt = length_(orderedList) - count - 1;
+    return reduce_(function (acc, v, idx) {
+      return gt_(idx, cnt) ? acc : append_(v, acc);
     }, empty_(orderedList), orderedList);
+  });
+
+  var drop_ = (function (count, orderedList) {
+     return reduce_(function (acc, value, index) {
+        return gt_(index, count - 1) ? append_(value, acc) : acc;
+     }, empty_(orderedList), orderedList);
   });
 
   var either_ = (function (fn1, fn2) {
     return function () {
       return fn1.apply(fn1, arguments) || fn2.apply(fn2, arguments);
     };
+  });
+
+  var endsWith_ = (function (subset, set) {
+    return set.endsWith(subset);
   });
 
   var escapeString_ = (function (str) {
@@ -704,13 +811,13 @@
     return str.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&");
   });
 
-  var flip_ = (function (fn) {
-    return curryN(fn.length, function (a, b) {
-      var args = Array.prototype.slice.call(arguments, 0);
-      args[0] = b;
-      args[1] = a;
-      return fn.apply(this, args);
-    });
+  var nth_ = (function (offset, list) {
+    var idx = offset < 0 ? list.length + offset : offset;
+    return is_("String", list) ? list.charAt(idx) : list[idx];
+  });
+
+  var first_ = (function (list) {
+    return nth_(0, list);
   });
 
   var pipe_ = (function () {
@@ -764,13 +871,8 @@
     return obj.hasOwnProperty(prop);
   });
 
-  var nth_ = (function (offset, list) {
-    var idx = offset < 0 ? list.length + offset : offset;
-    return is_("String", list) ? list.charAt(idx) : list[idx];
-  });
-
-  var head_ = (function (list) {
-    return nth_(0, list);
+  var head_ = (function (x) {
+    return dropLast_(1, x);
   });
 
   var identity_ = (function (a) {
@@ -795,6 +897,10 @@
 
   var isObject_ = (function (value) {
     return is_("Object", value);
+  });
+
+  var join_ = (function (del, arr) {
+    return arr.join(del);
   });
 
   var juxt_ = (function (fns) {
@@ -832,6 +938,10 @@
     return nth_(-1, list);
   });
 
+  var lt_ = (function (a, b) {
+    return a < b;
+  });
+
   var mapKeysWithValueKey_ = (function (fn, functor) {
     return reduce_(function (accumulated, value, key) {
       return merge_(accumulated, of_(fn(value, key), value, accumulated));
@@ -845,7 +955,7 @@
   });
 
   var max_ = (function (a, b) {
-    return head_([].concat(toConsumableArray(toArray_(a)), toConsumableArray(toArray_(b))).sort(function (a, b) {
+    return first_([].concat(toConsumableArray(toArray_(a)), toConsumableArray(toArray_(b))).sort(function (a, b) {
       return a < b;
     }));
   });
@@ -874,8 +984,8 @@
   });
 
   var mergeAllDeepLeft_ = (function (functors) {
-    if (head_(functors)) {
-      return reduceValues_(mergeDeepLeft_, empty_(head_(functors)), functors);
+    if (first_(functors)) {
+      return reduceValues_(mergeDeepLeft_, empty_(first_(functors)), functors);
     }
     return functors;
   });
@@ -892,8 +1002,8 @@
   });
 
   var mergeAllLeft_ = (function (functors) {
-    if (head_(functors)) {
-      return reduceValues_(mergeLeft_, empty_(head_(functors)), functors);
+    if (first_(functors)) {
+      return reduceValues_(mergeLeft_, empty_(first_(functors)), functors);
     }
     return functors;
   });
@@ -915,7 +1025,7 @@
   });
 
   var min_ = (function (l, r) {
-    return head_([].concat(toConsumableArray(toArray_(l)), toConsumableArray(toArray_(r))).sort(function (a, b) {
+    return first_([].concat(toConsumableArray(toArray_(l)), toConsumableArray(toArray_(r))).sort(function (a, b) {
       return a > b;
     }));
   });
@@ -965,7 +1075,7 @@
   });
 
   var pairsKeys_ = (function (pairs) {
-    return mapValues_(head_, pairs);
+    return mapValues_(first_, pairs);
   });
 
   var pairsValues_ = (function (pairs) {
@@ -997,6 +1107,10 @@
     }, keychains)), functor);
   });
 
+  var propEq_ = (function (name, v, obj) {
+    return equals_(v, prop_(name, obj));
+  });
+
   var propOr_ = (function (d, name, keyedFunctor) {
     return defaultTo_(d, prop_(name, keyedFunctor));
   });
@@ -1013,53 +1127,6 @@
 
   var reduceRight_ = (function (reducer, initial, functor) {
     return reduce_(reducer, initial, functor, true);
-  });
-
-  var reduceWhile_ = (function (pred, reducer, initial, functor) {
-    var fn = void 0;
-    switch (type_(functor)) {
-      case "Array":
-        fn = function fn(acc, value, key) {
-          return reducer(acc, value, key);
-        };
-        break;
-      case "Object":
-      case "Map":
-        fn = function fn(acc, _ref) {
-          var _ref2 = slicedToArray(_ref, 2),
-              key = _ref2[0],
-              value = _ref2[1];
-          return reducer(acc, value, key);
-        };
-        functor = toPairs_(functor);
-        break;
-      case "Set":
-        fn = function fn(acc, _ref3) {
-          var _ref4 = slicedToArray(_ref3, 2),
-              value = _ref4[1];
-          return reducer(acc, value);
-        };
-        functor = toPairs_(functor);
-        break;
-      case "String":
-        fn = function fn(acc, _ref5) {
-          var _ref6 = slicedToArray(_ref5, 2),
-              key = _ref6[0],
-              value = _ref6[1];
-          return reducer(acc, value, key);
-        };
-        functor = toPairs_(functor.split(""));
-        break;
-      default:
-        {
-          throw new Error("reduce couldn't figure out how to reduce " + type_(functor));
-        }
-    }
-    var res = initial;
-    var copy = [].concat(functor);
-    while (copy.length && pred(res, copy[0])) {
-      res = fn(res, copy.shift());
-    }return res;
   });
 
   var round_ = (function (precision, number) {
@@ -1089,11 +1156,25 @@
   });
 
   var startsWith_ = (function (subset, set) {
-    return test_(new RegExp("^" + escapeString_(subset)), set);
+    return set.startsWith(subset);
   });
 
   var tail_ = (function (x) {
-    return dropFirst_(1, x);
+    return drop_(1, x);
+  });
+
+  var takeLast_ = (function (count, orderedList) {
+    if (count < 0) return orderedList;
+    var cnt = length_(orderedList) - count;
+    return reduce_(function (acc, v, idx) {
+      return lt_(idx, cnt) ? acc : append_(v, acc);
+    }, empty_(orderedList), orderedList);
+  });
+
+  var take_ = (function (count, orderedList) {
+    return count < 0 ? orderedList : reduce_(function (acc, v, idx) {
+      return gt_(idx, count - 1) ? acc : append_(v, acc);
+    }, empty_(orderedList), orderedList);
   });
 
   var toLower_ = (function (str) {
@@ -1106,12 +1187,6 @@
 
   var unless_ = (function (cond, fn, val) {
     return cond(val) ? val : fn(val);
-  });
-
-  var values_ = (function (functor) {
-    return reduceValues_(function (l, r) {
-      return append_(r, l);
-    }, [], functor);
   });
 
   var when_ = (function (condition, whenTrueFn, input) {
@@ -1127,6 +1202,7 @@
 
   exports.always_ = always_;
   exports.anyPass_ = anyPass_;
+  exports.any_ = any_;
   exports.append_ = append_;
   exports.applyTo_ = applyTo_;
   exports.attach_ = attach_;
@@ -1146,12 +1222,15 @@
   exports.dec_ = dec_;
   exports.defaultTo_ = defaultTo_;
   exports.divide_ = divide_;
-  exports.dropFirst_ = dropFirst_;
+  exports.dropLast_ = dropLast_;
+  exports.drop_ = drop_;
   exports.either_ = either_;
   exports.empty_ = empty_;
+  exports.endsWith_ = endsWith_;
   exports.equals_ = equals_;
   exports.escapeString_ = escapeString_;
   exports.filter_ = filter_;
+  exports.first_ = first_;
   exports.flip_ = flip_;
   exports.flow_ = flow_;
   exports.fnOrError_ = fnOrError_;
@@ -1171,10 +1250,13 @@
   exports.isNil_ = isNil_;
   exports.isObject_ = isObject_;
   exports.is_ = is_;
+  exports.join_ = join_;
   exports.juxt_ = juxt_;
   exports.keys_ = keys_$1;
   exports.lambda_ = lambda_;
   exports.last_ = last_;
+  exports.length_ = length_;
+  exports.lt_ = lt_;
   exports.mapKeysWithValueKey_ = mapKeysWithValueKey_;
   exports.mapKeys_ = mapKeys_;
   exports.mapValuesWithValueKey_ = mapValuesWithValueKey_;
@@ -1207,6 +1289,7 @@
   exports.plucks_ = plucks_;
   exports.pluck_ = pluck_;
   exports.prepend_ = prepend_;
+  exports.propEq_ = propEq_;
   exports.propOr_ = propOr_;
   exports.props_ = props_;
   exports.prop_ = prop_;
@@ -1223,6 +1306,8 @@
   exports.split_ = split_;
   exports.startsWith_ = startsWith_;
   exports.tail_ = tail_;
+  exports.takeLast_ = takeLast_;
+  exports.take_ = take_;
   exports.test_ = test_;
   exports.toArray_ = toArray_;
   exports.toLower_ = toLower_;
