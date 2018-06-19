@@ -1,12 +1,16 @@
 import head from "./head";
 
-describe("head", () => {
-  test('returns first element of array', () => {
-    expect(head([1, 2, 3])).toBe(1)
-  })
 
-  test('returns first element of string', () => {
-    expect(head('hello')).toBe('h')
-  })
+describe("Head", () => {
+  test("Array", () => {
+    const a = head(["a", "b", "c"]);
+    const res = ["a", "b"];
+    expect(a).toEqual(res);
+  });
 
+  test("String", () => {
+    const a = head("abc");
+    const res = "ab";
+    expect(a).toEqual(res);
+  });
 });

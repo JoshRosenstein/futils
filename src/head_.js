@@ -1,3 +1,2 @@
-import nth_ from "./nth_"
-
-export default list => nth_(0, list)
+import dropLast_ from "./dropLast_"
+export default x=>dropLast_(1,x);

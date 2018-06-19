@@ -1,6 +1,6 @@
 
 import toArray_ from "./toArray_"
-import head_ from "./head_"
+import first_ from "./first_"
 
 export default (a, b) =>
-  head_([...toArray_(a), ...toArray_(b)].sort((a, b) => a < b))
+  first_([...toArray_(a), ...toArray_(b)].sort((a, b) => a < b))
