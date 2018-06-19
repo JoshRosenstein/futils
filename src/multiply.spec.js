@@ -1,7 +1,7 @@
 import multiply from "./multiply";
 
 describe("multiply", () => {
-  it("Subtract One from Number", () => {
+  it("Works", () => {
     const a = multiply(1,2);
     const eA = 2;
 

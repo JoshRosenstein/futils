@@ -7,6 +7,12 @@ describe("path", () => {
     );
   });
 
+  test("object with keys present DotNotation", () => {
+    expect(path("aaa.bbb.ccc")({ aaa: { bbb: { ccc: "1" } } })).toBe(
+      "1"
+    );
+  });
+
   test("object with keys missing", () => {
     expect(path(["aaa", "ddd", "ccc"])({ aaa: { bbb: { ccc: "1" } } })).toBe(
       undefined
