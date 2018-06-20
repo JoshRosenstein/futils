@@ -14,8 +14,8 @@ function keys_(obj, isArray) {
       }
     }
     return keys.concat(
-      (Object.getOwnPropertySymbols(o): Array<any>).filter(
-        //$FlowFixMe Jest complains about nullability, but we know for sure that property 'symbol' does exist.
+      (Object.getOwnPropertySymbols(o)).filter(
+
         symbol => Object.getOwnPropertyDescriptor(o, symbol).enumerable
       )
     )
