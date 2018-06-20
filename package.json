@@ -1,18 +1,21 @@
 {
   "name": "@roseys/futils",
   "version": "0.0.12",
-  "description": "",
-  "keywords": [
-    "ramda",
-    "functional",
-    "js"
-  ],
-  "main": "dist/futils.min.js",
-  "moduleName": "futils",
-  "unpkg": "dist/futils.min.js",
-  "author": "Josh Rosenstein",
-  "license": "MIT",
+  "description": "My JavaScript utils library",
+  "main": "dist/futils.cjs.js",
+  "module": "dist/futils.es.js",
+  "browser": {
+    "dist/buble.cjs.js": "./dist/futils-browser.cjs.js",
+    "dist/buble.es.js": "./dist/futils-browser.es.js"
+  },
+  "unpkg": "dist/futils-browser-deps.umd.js",
+  "files": [
+  "dist",
+  "register.js",
+  "README.md"
+],
   "scripts": {
+    "prepublish": "yarn test",
     "precommit": "node scripts/create-export.js && rollup -c && jest --onlyChanged --runInBand",
     "prepack": "yarn run build && yarn run build:modules ",
     "postpack": "npm run clean",
@@ -31,6 +34,17 @@
     "reinstall": "yarn run clean:modules && yarn",
     "lint": "standard src/*.js"
   },
+  "keywords": [
+    "ramda",
+    "functional",
+    "js"
+  ],
+    "author": "Josh Rosenstein",
+    "license": "MIT",
+    "bugs": {
+    "url": "https://github.com/JoshRosenstein/futils/issues"
+  },
+  "homepage": "https://github.com/JoshRosenstein/futils#README",
   "dependencies": {},
   "devDependencies": {
     "babel-cli": "^6.26.0",
