@@ -1,24 +1,21 @@
 {
   "name": "@roseys/futils",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "My JavaScript utils library",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "browser": {
-    "dist/futils.cjs.js": "./dist/futils-browser.cjs.js",
-    "dist/futils.es.js": "./dist/futils-browser.es.js"
-  },
   "unpkg": "dist/futils.min.js",
   "jsdelivr": "dist/futils.min.js",
   "files": [
     "dist",
     "lib",
+    "es",
     "README.md"
   ],
   "scripts": {
     "precommit": "node scripts/create-export.js && rollup -c && jest --onlyChanged --runInBand",
     "prepack": "yarn run build",
-    "postpack": "npm run clean",
+    "postpack": "npm run clean:scripts",
     "build": "node scripts/create-export.js && yarn run build:es && yarn run build:cjs && yarn run build:umd",
     "build:es": "cross-env BABEL_ENV=es babel src --out-dir es --ignore *.spec.js,*.test.js ",
     "build:cjs": "cross-env BABEL_ENV=cjs babel src --out-dir lib --ignore *.spec.js,*.test.js ",
