@@ -1,11 +1,26 @@
 import curryN from "./curryN";
 
-describe.skip("PLACEHOLDER", () => {
-  it("Subtract One from Number", () => {
-    const a = PLACEHOLDER(1);
-    const eA = 0;
+describe("curryN", () => {
+  function sum(x, y, z, missed) {
+  return x + y + z + (missed || 0)
+}
 
-    expect(a).toEqual(eA);
-  });
+var curry3Sum = curryN(3, sum)
+
+  test('curry3Sum(1, 2, 3) to equal 6', () => {
+    expect(curry3Sum(1, 2, 3)).toBe(6)
+  })
+
+  test('curry3Sum(1)(2, 3) to equal 6', () => {
+    expect(curry3Sum(1)(2, 3)).toBe(6)
+  })
+
+  test('curry3Sum(1, 2)(3) to equal 6', () => {
+    expect(curry3Sum(1, 2)(3)).toBe(6)
+  })
+
+  test('curry3Sum(1)(2)(3) to equal 6', () => {
+    expect(curry3Sum(1)(2)(3)).toBe(6)
+  })
 
 });

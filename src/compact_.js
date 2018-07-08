@@ -1,4 +1,4 @@
-import reject_ from "./reject_";
-import isNil_ from "./isNil_";
+import rejectNil_ from "./rejectNil_";
 
-export default collection => reject_(isNil_,collection)
+//backwards compatible
+export default rejectNil_

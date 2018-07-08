@@ -1,11 +1,11 @@
 import append from "./append";
 
-describe.skip("PLACEHOLDER", () => {
-  it("Subtract One from Number", () => {
-    const a = PLACEHOLDER(1);
-    const eA = 0;
+describe("append", () => {
+  it("Works", () => {
 
-    expect(a).toEqual(eA);
+    expect(append("a")(["b"])).toEqual(["b", "a"])
+        expect(append("c")("ab")).toEqual('abc')
+
   });
 
 });

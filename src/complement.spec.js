@@ -1,11 +1,13 @@
 import complement from "./complement";
 
-describe.skip("PLACEHOLDER", () => {
-  it("Subtract One from Number", () => {
-    const a = complement(Array.isArray, [])
-    const eA = false;
-
-    expect(a).toEqual(eA);
-  });
+describe("complement", () => {
+  test("complement with positive", () => {
+    expect(complement((value) => value === "0")("0"))
+      .toBe(false)
+  })
+  test("complement with negative", () => {
+    expect(complement((value) => value !== "0")("0"))
+      .toBe(true)
+  })
 
 });

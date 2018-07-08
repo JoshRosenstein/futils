@@ -284,11 +284,26 @@
 
   var append = /*#__PURE__*/curry2_(append_);
 
+  ///aka spread
+  var apply_ = (function (fn, arg) {
+    return fn.apply(fn, arg);
+  });
+
+  var apply = /*#__PURE__*/curry2_(apply_);
+
   var applyTo_ = (function (value, fn) {
     return fn(value);
   });
 
   var applyTo = /*#__PURE__*/curry2_(applyTo_);
+
+  var argsToList_ = (function () {
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return args;
+  });
 
   var attach_ = (function (key, value, functor) {
     switch (type_(functor)) {
@@ -342,23 +357,22 @@
     };
   });
 
-  var is_ = (function (sig, value) {
-    return sig === "null" ? value === null : sig === "undefined" ? value === undefined : value === undefined || value === null ? false : type_(value) === sig;
+  function call_ (fn) {
+    return arguments.length > 1 ? fn.apply(fn, [].slice.call(arguments, 1)) : function () {
+      return fn.apply(fn, arguments);
+    };
+  }
+
+  var when_ = (function (condition, whenTrueFn, input) {
+      var flag = typeof condition === "boolean" ? condition : condition(input);
+      return flag ? whenTrueFn(input) : input;
   });
 
-  var _isArguments = /*#__PURE__*/function () {
-    return Object.prototype.toString.call(arguments) === "[object Arguments]" ? function _isArguments(x) {
-      return Object.prototype.toString.call(x) === "[object Arguments]";
-    } : function _isArguments(x) {
-      return Object.prototype.hasOwnProperty.call(x, "callee");
-    };
-  }();
+  //const callIfDefined = (cond,fn, obj) => when(cond(obj), fn(obj))
 
-  var empty_ = (function (x) {
-    return x != null && typeof x.empty === "function" ? x.empty() : x != null && x.constructor != null && typeof x.constructor.empty === "function" ? x.constructor.empty() : is_("Array", x) ? [] : is_("String", x) ? "" : is_("Object", x) ? {} : is_("Map", x) ? new Map() : is_("Set", x) ? new Set() : _isArguments(x) ? function () {
-      return arguments;
-    }() : // else
-    void 0;
+  var callWhen = (function (condition, whenTrueFn, input) {
+      var flag = typeof condition === "boolean" ? condition : condition(input);
+      return flag ? whenTrueFn(input) : input;
   });
 
   var reduce_ = (function (reducer, initial, functor) {
@@ -419,6 +433,178 @@
     return initial;
   });
 
+  var reduceValues_ = (function (fn, initial, functor) {
+    return reduce_(function (acc, value) {
+      return fn(acc, value);
+    }, initial, functor);
+  });
+
+  var reduceValues = /*#__PURE__*/curry3_(reduceValues_);
+
+  var is_ = (function (sig, value) {
+    return sig === "null" ? value === null : sig === "undefined" ? value === undefined : value === undefined || value === null ? false : type_(value) === sig;
+  });
+
+  var isNil_ = (function (value) {
+    return is_("undefined", value) || is_("null", value);
+  });
+
+  var merge_ = (function (left, right) {
+    if (isNil_(left)) return right;
+    if (isNil_(right)) return left;
+    if (type_(left) !== type_(right)) {
+      throw new Error("merge received a " + type_(left) + " and " + type_(right) + " which aren't the same");
+    }
+    switch (type_(left)) {
+      case "Array":
+        {
+          return [].concat(toConsumableArray(left), toConsumableArray(right));
+        }
+
+      case "Object":
+        {
+          return _extends({}, left, right);
+        }
+
+      case "Map":
+        {
+          return new Map([].concat(toConsumableArray(left), toConsumableArray(right)));
+        }
+
+      case "Set":
+        {
+          return new Set([].concat(toConsumableArray(left), toConsumableArray(right)));
+        }
+
+      case "String":
+        {
+          return "" + left + right;
+        }
+
+      default:
+        {
+          throw new Error("merge doesn't know how to deal with " + type_(left));
+        }
+    }
+  });
+
+  var _isArguments = /*#__PURE__*/function () {
+    return Object.prototype.toString.call(arguments) === "[object Arguments]" ? function _isArguments(x) {
+      return Object.prototype.toString.call(x) === "[object Arguments]";
+    } : function _isArguments(x) {
+      return Object.prototype.hasOwnProperty.call(x, "callee");
+    };
+  }();
+
+  var empty_ = (function (x) {
+    return x != null && typeof x.empty === "function" ? x.empty() : x != null && x.constructor != null && typeof x.constructor.empty === "function" ? x.constructor.empty() : is_("Array", x) ? [] : is_("String", x) ? "" : is_("Object", x) ? {} : is_("Map", x) ? new Map() : is_("Set", x) ? new Set() : _isArguments(x) ? function () {
+      return arguments;
+    }() : // else
+    void 0;
+  });
+
+  var of_ = (function (key, value, functor) {
+    switch (type_(functor)) {
+      case "Array":
+        {
+          return [value];
+        }
+      case "Object":
+        {
+          return defineProperty({}, key, value);
+        }
+      case "Set":
+        {
+          return new Set([value]);
+        }
+      case "Map":
+        {
+          return new Map([[key, value]]);
+        }
+      case "String":
+        {
+          return "" + value;
+        }
+
+      default:
+        {
+          throw new Error("of doesn't know how to type " + type_(functor));
+        }
+    }
+  });
+
+  var mapValuesWithValueKey_ = (function (fn, functor) {
+    if (functor.map instanceof Function) {
+      return functor.map(function (value, key) {
+        return fn(value, key);
+      });
+    }
+
+    return reduce_(function (accumulated, value, key) {
+      return merge_(accumulated, of_(key, fn(value, key), accumulated));
+    }, empty_(functor), functor);
+  });
+
+  var mapValues_ = (function (fn, functor) {
+    if (functor.map instanceof Function) {
+      return functor.map(function (value) {
+        return fn(value);
+      });
+    }
+
+    return mapValuesWithValueKey_(function (value) {
+      return fn(value);
+    }, functor);
+  });
+
+  var replaceWhen_ = (function (predicate, replacement, obj) {
+    return mapValues_(function (val) {
+      return when_(predicate, always_(replacement), val);
+    }, obj);
+  });
+
+  var replaceWhen = /*#__PURE__*/curry3_(replaceWhen_);
+
+  var prop_ = (function (name, keyedFunctor) {
+    if (isNil_(keyedFunctor)) {
+      return keyedFunctor;
+    }
+
+    if (keyedFunctor.get) {
+      return keyedFunctor.get(name);
+    }
+
+    return keyedFunctor[name];
+  });
+
+  var path_ = (function (keys, tree) {
+    if (typeof keys === "string") {
+      keys = keys.trim().split(".");
+    }
+
+    return reduceValues_(function (acc, val) {
+      return prop_(val, acc);
+    }, tree, keys);
+  });
+
+  var dig = /*#__PURE__*/curry2_(path_);
+
+  var cascadingPath_ = (function (paths, tree) {
+    return reduceValues(function (filler, p) {
+      if (isNil_(filler)) {
+        return dig(p)(tree);
+      }
+
+      return dig(replaceWhen(isNil_, filler, p), tree);
+    }, null, paths);
+  });
+
+  var cascadingPath = /*#__PURE__*/curry2_(cascadingPath_);
+
+  var cleanWhitespace = (function (str) {
+    return str.replace(/\s\s+/g, ' ').trim();
+  });
+
   var filter_ = (function (predicate, enumerable) {
     if (enumerable.filter) {
       return enumerable.filter(predicate);
@@ -438,12 +624,8 @@
     }, enumerable);
   });
 
-  var isNil_ = (function (value) {
-    return is_("undefined", value) || is_("null", value);
-  });
-
-  var compact_ = (function (collection) {
-    return reject_(isNil_, collection);
+  var rejectNil_ = (function (obj) {
+    return reject_(isNil_, obj);
   });
 
   var complement_ = (function (predicate, anything) {
@@ -461,6 +643,8 @@
       return function () {
         return f(g.apply(undefined, arguments));
       };
+    }, function (arg) {
+      return arg;
     });
   });
 
@@ -469,6 +653,12 @@
   });
 
   var concat = /*#__PURE__*/curry2_(concat_);
+
+  function cond_(conds, data) {
+    return conds.length ? conds[0][0](data) ? conds[0][1](data) : cond_(conds.slice(1), data) : undefined;
+  }
+
+  var cond = /*#__PURE__*/curry2_(cond_);
 
   // Extracted out of jest
   function hasKey_(obj, key) {
@@ -562,7 +752,7 @@
       }
 
       while (size--) {
-        result = _equals_(a[size], b[size], aStack, bStack, hasKey_);
+        result = _equals_(a[size], b[size], aStack, bStack);
         if (!result) {
           return false;
         }
@@ -646,127 +836,6 @@
       return !canBeCalled ? curryN.apply(null, concat$1([executeArity, fnOrError_(notFnErrPrefix, fn)], concatedArgs)) : fnOrError_(notFnErrPrefix, fn).apply(null, concatedArgs);
     };
   };
-
-  var prop_ = (function (name, keyedFunctor) {
-    if (isNil_(keyedFunctor)) {
-      return keyedFunctor;
-    }
-
-    if (keyedFunctor.get) {
-      return keyedFunctor.get(name);
-    }
-
-    return keyedFunctor[name];
-  });
-
-  var reduceValues_ = (function (fn, initial, functor) {
-    return reduce_(function (acc, value) {
-      return fn(acc, value);
-    }, initial, functor);
-  });
-
-  var path_ = (function (keys, tree) {
-    if (typeof keys === "string") {
-      keys = keys.trim().split(".");
-    }
-
-    return reduceValues_(function (acc, val) {
-      return prop_(val, acc);
-    }, tree, keys);
-  });
-
-  var merge_ = (function (left, right) {
-    if (isNil_(left)) return right;
-    if (isNil_(right)) return left;
-    if (type_(left) !== type_(right)) {
-      throw new Error("merge received a " + type_(left) + " and " + type_(right) + " which aren't the same");
-    }
-    switch (type_(left)) {
-      case "Array":
-        {
-          return [].concat(toConsumableArray(left), toConsumableArray(right));
-        }
-
-      case "Object":
-        {
-          return _extends({}, left, right);
-        }
-
-      case "Map":
-        {
-          return new Map([].concat(toConsumableArray(left), toConsumableArray(right)));
-        }
-
-      case "Set":
-        {
-          return new Set([].concat(toConsumableArray(left), toConsumableArray(right)));
-        }
-
-      case "String":
-        {
-          return "" + left + right;
-        }
-
-      default:
-        {
-          throw new Error("merge doesn't know how to deal with " + type_(left));
-        }
-    }
-  });
-
-  var of_ = (function (key, value, functor) {
-    switch (type_(functor)) {
-      case "Array":
-        {
-          return [value];
-        }
-      case "Object":
-        {
-          return defineProperty({}, key, value);
-        }
-      case "Set":
-        {
-          return new Set([value]);
-        }
-      case "Map":
-        {
-          return new Map([[key, value]]);
-        }
-      case "String":
-        {
-          return "" + value;
-        }
-
-      default:
-        {
-          throw new Error("of doesn't know how to type " + type_(functor));
-        }
-    }
-  });
-
-  var mapValuesWithValueKey_ = (function (fn, functor) {
-    if (functor.map instanceof Function) {
-      return functor.map(function (value, key) {
-        return fn(value, key);
-      });
-    }
-
-    return reduce_(function (accumulated, value, key) {
-      return merge_(accumulated, of_(key, fn(value, key), accumulated));
-    }, empty_(functor), functor);
-  });
-
-  var mapValues_ = (function (fn, functor) {
-    if (functor.map instanceof Function) {
-      return functor.map(function (value) {
-        return fn(value);
-      });
-    }
-
-    return mapValuesWithValueKey_(function (value) {
-      return fn(value);
-    }, functor);
-  });
 
   var isArray_ = (function (value) {
     return is_("Array", value);
@@ -930,10 +999,12 @@
       fns[_key] = arguments[_key];
     }
 
-    return fns.reduce(function (f, g) {
+    return fns.reduceRight(function (f, g) {
       return function () {
-        return g(f.apply(undefined, arguments));
+        return f(g.apply(undefined, arguments));
       };
+    }, function (arg) {
+      return arg;
     });
   });
 
@@ -1003,6 +1074,16 @@
 
   var ifElse = /*#__PURE__*/curry4_(ifElse_);
 
+  var of = /*#__PURE__*/curry3_(of_);
+
+  var indexBy_ = (function (fn, list) {
+    return reduceValues(function (accumulated, value) {
+      return merge_(accumulated, of(fn(value), value, accumulated));
+    }, empty_(first_(Array.from(list))), list);
+  });
+
+  var indexBy = /*#__PURE__*/curry2_(indexBy_);
+
   var is = /*#__PURE__*/curry2_(is_);
 
   var isDefined_ = (function (value) {
@@ -1010,7 +1091,7 @@
   });
 
   var isEmpty_ = (function (x) {
-    return x != null && equals_(x, empty_(x));
+    return !(x === undefined || x === null) && equals_(x, empty_(x));
   });
 
   var isNilOrEmpty_ = (function (value) {
@@ -1054,6 +1135,8 @@
   });
 
   var lt = /*#__PURE__*/curry2_(lt_);
+
+  var map = /*#__PURE__*/curry2_(mapValuesWithValueKey_);
 
   var mapKeysWithValueKey_ = (function (fn, functor) {
     return reduce_(function (accumulated, value, key) {
@@ -1221,7 +1304,25 @@
 
   var objOf = /*#__PURE__*/curry2_(objOf_);
 
-  var of = /*#__PURE__*/curry3_(of_);
+  var omitKey_ = (function (key, keyedList) {
+    return reduce_(function (accumulated, value, k) {
+      return key === k ? accumulated : attach_(k, value, accumulated);
+    }, empty_(keyedList), keyedList);
+  });
+
+  var omit_ = (function (keys, obj) {
+    if (is_('String', keys)) {
+      keys = keys.trim().split(',');
+    }
+
+    return is_("Array", keys) ? reduce_(function (acc, key) {
+      return omitKey_(key, acc);
+    }, obj, keys) : obj;
+  });
+
+  var omit = /*#__PURE__*/curry2_(omit_);
+
+  var omitKey = /*#__PURE__*/curry2_(omitKey_);
 
   var or_ = (function (a, b) {
     return a || b;
@@ -1236,8 +1337,6 @@
   var pairsValues_ = (function (pairs) {
     return mapValues_(last_, pairs);
   });
-
-  var path = /*#__PURE__*/curry2_(path_);
 
   var pathOr_ = (function (d, p, obj) {
     return defaultTo_(d, path_(p, obj));
@@ -1276,7 +1375,7 @@
 
   var prepend = /*#__PURE__*/curry2_(prepend_);
 
-  var prop = /*#__PURE__*/curry2_(prop_);
+  var key_ = /*#__PURE__*/curry2_(prop_);
 
   var propEq_ = (function (name, v, obj) {
     return equals_(v, prop_(name, obj));
@@ -1306,8 +1405,6 @@
   var reduceRight = /*#__PURE__*/curry3_(function (reducer, initial, functor) {
     return reduce_(reducer, initial, functor, true);
   });
-
-  var reduceValues = /*#__PURE__*/curry3_(reduceValues_);
 
   var reduceWhile = /*#__PURE__*/curry4_(reduceWhile_);
 
@@ -1386,10 +1483,186 @@
 
   var takeLast = /*#__PURE__*/curry2_(takeLast_);
 
+  var safeEval_ = (function (v) {
+    var val = void 0;
+    try {
+      val = new Function('return ' + v)();
+    } catch (error) {
+      return v;
+    }
+    return val;
+  });
+
+  var template_ = (function (string, data) {
+    return is_('String', string) ? safeEval_(string.replace(/{\!([^}]+)}/g, function (_, key) {
+      var res = path_(key, data);
+      return res;
+    })) : string;
+  });
+
+  // export default (string, data) => string.replace(/\{\{([^\}]+)?\}\}/g, (_, key)=> {
+  //     var keyParts = key.split('.');
+  //     var value = data;
+  //     for (var i = 0; i < keyParts.length; i++) {
+  //       value = value[keyParts[i]];
+  //     }
+  //     return value || '';
+  //   })
+
+  var template = /*#__PURE__*/curry2_(template_);
+
   var test = /*#__PURE__*/curry2_(test_);
+
+  var toCamelCase_ = (function (str) {
+      return str.trim().split(/[\s\u2000-\u206F\u2E00-\u2E7F\\'!"#$%&()*+,\-.\/:;<=>?@\[\]^_`{|}~]+/).reduce(function (res, word, i) {
+          return word === '' ? res : res.concat(i > 0 ? word[0].toUpperCase() : word[0].toLowerCase(), word.slice(1));
+      }, '');
+  });
+
+  var toKebabCase_ = (function (str) {
+    return str.replace(/[A-Z\u00C0-\u00D6\u00D9-\u00DD]/g, function (match) {
+      return ' ' + (match.toLowerCase() || match);
+    }).trim().split(/[\s\u2000-\u206F\u2E00-\u2E7F\\'!"#$%&()*+,\-.\/:;<=>?@\[\]^_`{|}~]+/).join('-');
+  });
 
   var toLower_ = (function (str) {
     return str.toLowerCase();
+  });
+
+  var isFinite = (function (value) {
+    return !(typeof value !== 'number' || value !== value || value === Infinity || value === -Infinity);
+  });
+
+  ///https://github.com/marlun78/number-to-words/blob/master/src/toWords.js
+
+  var TEN = 10;
+  var ONE_HUNDRED = 100;
+  var ONE_THOUSAND = 1000;
+  var ONE_MILLION = 1000000;
+  var ONE_BILLION = 1000000000; //         1.000.000.000 (9)
+  var ONE_TRILLION = 1000000000000; //     1.000.000.000.000 (12)
+  var ONE_QUADRILLION = 1000000000000000; // 1.000.000.000.000.000 (15)
+  var MAX = 9007199254740992; // 9.007.199.254.740.992 (15)
+
+  var LESS_THAN_TWENTY = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
+
+  var TENTHS_LESS_THAN_HUNDRED = ['zero', 'ten', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+
+  function generateWords(number) {
+      var remainder,
+          word,
+          words = arguments[1];
+
+      // We’re done
+      if (number === 0) {
+          return !words ? 'zero' : words.join(' ').replace(/,$/, '');
+      }
+      // First run
+      if (!words) {
+          words = [];
+      }
+      // If negative, prepend “minus”
+      if (number < 0) {
+          words.push('minus');
+          number = Math.abs(number);
+      }
+
+      if (number < 20) {
+          remainder = 0;
+          word = LESS_THAN_TWENTY[number];
+      } else if (number < ONE_HUNDRED) {
+          remainder = number % TEN;
+          word = TENTHS_LESS_THAN_HUNDRED[Math.floor(number / TEN)];
+          // In case of remainder, we need to handle it here to be able to add the “-”
+          if (remainder) {
+              word += '-' + LESS_THAN_TWENTY[remainder];
+              remainder = 0;
+          }
+      } else if (number < ONE_THOUSAND) {
+          remainder = number % ONE_HUNDRED;
+          word = generateWords(Math.floor(number / ONE_HUNDRED)) + ' hundred';
+      } else if (number < ONE_MILLION) {
+          remainder = number % ONE_THOUSAND;
+          word = generateWords(Math.floor(number / ONE_THOUSAND)) + ' thousand,';
+      } else if (number < ONE_BILLION) {
+          remainder = number % ONE_MILLION;
+          word = generateWords(Math.floor(number / ONE_MILLION)) + ' million,';
+      } else if (number < ONE_TRILLION) {
+          remainder = number % ONE_BILLION;
+          word = generateWords(Math.floor(number / ONE_BILLION)) + ' billion,';
+      } else if (number < ONE_QUADRILLION) {
+          remainder = number % ONE_TRILLION;
+          word = generateWords(Math.floor(number / ONE_TRILLION)) + ' trillion,';
+      } else if (number <= MAX) {
+          remainder = number % ONE_QUADRILLION;
+          word = generateWords(Math.floor(number / ONE_QUADRILLION)) + ' quadrillion,';
+      }
+
+      words.push(word);
+      return generateWords(remainder, words);
+  }
+
+  var toWords_ = (function (number) {
+      var num = parseInt(number, 10);
+      if (!isFinite(num)) throw new TypeError('Not a finite number: ' + number + ' (' + (typeof number === 'undefined' ? 'undefined' : _typeof(number)) + ')');
+      return generateWords(num);
+  });
+
+  var toOrdinal_ = (function (number) {
+
+      var words = toWords_(number);
+      // Ends with *00 (100, 1000, etc.) or *teen (13, 14, 15, 16, 17, 18, 19)
+      if (/(hundred|thousand|(m|b|tr|quadr)illion)$/.test(words) || /teen$/.test(words)) {
+          return words + 'th';
+      }
+      // Ends with *y (20, 30, 40, 50, 60, 70, 80, 90)
+      else if (/y$/.test(words)) {
+              return words.replace(/y$/, 'ieth');
+          }
+          // Ends with one through twelve
+          else if (/(zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve)$/.test(words)) {
+                  var ordinalLessThanThirteen = {
+                      zero: 'zeroth',
+                      one: 'first',
+                      two: 'second',
+                      three: 'third',
+                      four: 'fourth',
+                      five: 'fifth',
+                      six: 'sixth',
+                      seven: 'seventh',
+                      eight: 'eighth',
+                      nine: 'ninth',
+                      ten: 'tenth',
+                      eleven: 'eleventh',
+                      twelve: 'twelfth'
+                  };
+                  return words.replace(/(zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve)$/, function (_, numberWord) {
+                      return ordinalLessThanThirteen[numberWord];
+                  });
+              }
+      return words;
+  });
+
+  var toPascalCase_ = (function (str) {
+      return str.split(/[\s\u2000-\u206F\u2E00-\u2E7F\\'!"#$%&()*+,\-.\/:;<=>?@\[\]^_`{|}~]+/).reduce(function (res, word) {
+          return word === '' ? res : res.concat(word[0].toUpperCase(), word.slice(1));
+      }, '');
+  });
+
+  var toSnakeCase_ = (function (str) {
+    return str.replace(/[A-Z\u00C0-\u00D6\u00D9-\u00DD]/g, function (match) {
+      return ' ' + (match.toLowerCase() || match);
+    }).trim().split(/[\s\u2000-\u206F\u2E00-\u2E7F\\'!"#$%&()*+,\-.\/:;<=>?@\[\]^_`{|}~]+/).join('_');
+  });
+
+  var unapply_ = (function (fn) {
+      return function () {
+          return fn(Array.prototype.slice.call(arguments, 0));
+      };
+  });
+
+  var uniq_ = (function (array) {
+    return [].concat(toConsumableArray(new Set(array)));
   });
 
   var unless_ = (function (cond, fn, val) {
@@ -1398,10 +1671,27 @@
 
   var unless = /*#__PURE__*/curry3_(unless_);
 
-  var when_ = (function (condition, whenTrueFn, input) {
-      var flag = typeof condition === "boolean" ? condition : condition(input);
-      return flag ? whenTrueFn(input) : input;
-  });
+  function useWith_(cb, enhancers) {
+    return curryN(enhancers.length, function () {
+      var args = arguments;
+      return cb.apply(cb, enhancers.map(function (enhancer, idx) {
+        return enhancer(args[idx]);
+      }));
+    });
+  }
+
+  // export default (fn, transformers) =>{
+  //   return curryN_(transformers.length, function() {
+  //     var args = [];
+  //     var idx = 0;
+  //     while (idx < transformers.length) {
+  //       args.push(transformers[idx].call(this, arguments[idx]));
+  //       idx += 1;
+  //     }
+  //     return fn.apply(this, args.concat(Array.prototype.slice.call(arguments, transformers.length)));
+  //   })}
+
+  var useWith = /*#__PURE__*/curry2_(useWith_);
 
   var when = /*#__PURE__*/curry3_(when_);
 
@@ -1413,17 +1703,73 @@
 
   var where = /*#__PURE__*/curry2_(where_);
 
+  var xprod_ = (function (a, b) {
+    var res = [];
+    var ia = 0;
+    var ib;
+    var alen = a.length;
+    var blen = b.length;
+    while (ia < alen) {
+      ib = 0;
+      while (ib < blen) {
+        res.push([a[ia], b[ib]]);
+        ib += 1;
+      }
+      ia += 1;
+    }
+    return res;
+  });
+
+  var xPairs_ = (function (a, b) {
+    return xprod_(toArray_(a), b);
+  });
+
+  var xPairs = /*#__PURE__*/curry2_(xPairs_);
+
+  var xprod = /*#__PURE__*/curry2_(xprod_);
+
+  var zip_ = (function (left, right) {
+    if (type_(left) !== type_(right)) {
+      throw new Error("left and right were not the same functor type_");
+    }
+
+    return reduce_(function (acc, point) {
+      return attach_(point, [key_(point, left), key_(point, right)], acc);
+    }, empty_(right), uniq_([].concat(toConsumableArray(keys_$1(left)), toConsumableArray(keys_$1(right)))));
+  });
+
+  var zip = /*#__PURE__*/curry2_(zip_);
+
+  var zipApply_ = (function (fns, functor) {
+    if (length_(fns) !== length_(functor)) {
+      throw new Error("left and right werent the same size");
+    }
+
+    return mapValues_(function (x) {
+      return reduceValues_(call_, call_, x);
+    }, zip_(fns, functor));
+  });
+
+  var zipApply = /*#__PURE__*/curry2_(zipApply_);
+
   exports.always = always_;
   exports.any = any;
   exports.anyPass = anyPass;
   exports.append = append;
+  exports.apply = apply;
   exports.applyTo = applyTo;
+  exports.argsToList = argsToList_;
   exports.attach = attach;
   exports.both = both_;
-  exports.compact = compact_;
+  exports.call = call_;
+  exports.callWhen = callWhen;
+  exports.cascadingPath = cascadingPath;
+  exports.cleanWhitespace = cleanWhitespace;
+  exports.compact = rejectNil_;
   exports.complement = complement;
   exports.compose = compose_;
   exports.concat = concat;
+  exports.cond = cond;
   exports.contains = contains;
   exports.converge = converge;
   exports.curry = curry_;
@@ -1451,6 +1797,7 @@
   exports.head = head_;
   exports.identity = identity_;
   exports.ifElse = ifElse;
+  exports.indexBy = indexBy;
   exports.is = is;
   exports.isArray = isArray_;
   exports.isDefined = isDefined_;
@@ -1464,6 +1811,7 @@
   exports.last = last_;
   exports.length = length_;
   exports.lt = lt;
+  exports.map = map;
   exports.mapKeys = mapKeys;
   exports.mapKeysWithValueKey = mapKeysWithValueKey;
   exports.mapValues = mapValues;
@@ -1485,10 +1833,12 @@
   exports.nth = nth;
   exports.objOf = objOf;
   exports.of = of;
+  exports.omit = omit;
+  exports.omitKey = omitKey;
   exports.or = or;
   exports.pairsKeys = pairsKeys_;
   exports.pairsValues = pairsValues_;
-  exports.path = path;
+  exports.path = dig;
   exports.pathOr = pathOr;
   exports.pick = pick;
   exports.pickAll = pickAll;
@@ -1496,7 +1846,7 @@
   exports.pluck = pluck;
   exports.plucks = plucks;
   exports.prepend = prepend;
-  exports.prop = prop;
+  exports.prop = key_;
   exports.propEq = propEq;
   exports.props = props;
   exports.reduce = reduce;
@@ -1505,7 +1855,9 @@
   exports.reduceValues = reduceValues;
   exports.reduceWhile = reduceWhile;
   exports.reject = reject;
+  exports.rejectNil = rejectNil_;
   exports.replace = replace;
+  exports.replaceWhen = replaceWhen;
   exports.reverse = reverse_;
   exports.round = round;
   exports.simplyEquals = simplyEquals;
@@ -1515,16 +1867,30 @@
   exports.tail = tail_;
   exports.take = take;
   exports.takeLast = takeLast;
+  exports.template = template;
   exports.test = test;
   exports.toArray = toArray_;
+  exports.toCamelCase = toCamelCase_;
+  exports.toKebabCase = toKebabCase_;
   exports.toLower = toLower_;
+  exports.toOrdinal = toOrdinal_;
   exports.toPairs = toPairs_;
+  exports.toPascalCase = toPascalCase_;
+  exports.toSnakeCase = toSnakeCase_;
   exports.toString = toString_;
+  exports.toWords = toWords_;
   exports.type = type_;
+  exports.unapply = unapply_;
+  exports.uniq = uniq_;
   exports.unless = unless;
+  exports.useWith = useWith;
   exports.values = values_;
   exports.when = when;
   exports.where = where;
+  exports.xPairs = xPairs;
+  exports.xprod = xprod;
+  exports.zip = zip;
+  exports.zipApply = zipApply;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 

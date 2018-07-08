@@ -1,9 +1,16 @@
 import reduceValues from "./reduceValues";
 
-describe.skip("reduceValues", () => {
-  it("PLACEHOLDER", () => {
-    const a =0
-    const eA = 0;
+describe("reduceValues", () => {
+  it("Works", () => {
+    const a =reduceValues(
+      (accumulation,current) =>
+          `${accumulation}/${current}`
+    )(
+      "."
+    )(
+      ["a", "b", "c"]
+    )
+    const eA =  "./a/b/c"
 
     expect(a).toEqual(eA);
   });

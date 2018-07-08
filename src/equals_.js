@@ -89,7 +89,7 @@ function keys_(obj, isArray) {
     }
 
     while (size--) {
-      result = _equals_(a[size], b[size], aStack, bStack, hasKey_)
+      result = _equals_(a[size], b[size], aStack, bStack)
       if (!result) {
         return false
       }

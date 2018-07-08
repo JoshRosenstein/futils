@@ -1,6 +1,6 @@
 import or from "./or";
 
-describe.skip("or", () => {
+describe("or", () => {
   test('confirms that at least one of two arguments is true', () => {
     expect(or(true, true)).toBeTruthy()
     expect(or(true, false)).toBeTruthy()

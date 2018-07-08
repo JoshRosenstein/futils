@@ -1,11 +1,43 @@
 import isDefined from "./isDefined";
 
-describe.skip("isDefined", () => {
-  it("Subtract One from Number", () => {
-    const a = PLACEHOLDER(1);
-    const eA = 0;
+describe("isDefined", () => {
+  it("array", () => {
+    const a=isDefined([])
+    expect(a).toBeTruthy()
+  })
 
-    expect(a).toEqual(eA);
-  });
+  it("object", () => {
+  const a=isDefined({})
+    expect(a).toBeTruthy()
+  })
+
+  it("string", () => {
+      const a=isDefined('')
+    expect(a).toBeTruthy()
+  })
+
+  it("zero", () => {
+      const a=isDefined(0)
+    expect(a).toBeTruthy()
+  })
+
+  it("true", () => {
+      const a=isDefined(true)
+    expect(a).toBeTruthy()
+  })
+
+  it("false", () => {
+      const a=isDefined(false)
+    expect(a).toBeTruthy()
+  })
+
+  it("null", () => {
+          const a=isDefined(null)
+    expect(a).toBeFalsy()
+  })
+  it("undefined", () => {
+          const a=isDefined(undefined)
+    expect(a).toBeFalsy()
+  })
 
 });

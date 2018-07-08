@@ -1,6 +1,6 @@
 import isObject from "./isObject";
 
-describe.skip("isObject", () => {
+describe("isObject", () => {
   it("Works", () => {
 
     expect(isObject([])).toBeFalsy();

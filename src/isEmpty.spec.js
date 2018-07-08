@@ -1,7 +1,7 @@
 import isEmpty from './isEmpty'
 
 
-describe.skip("isEmpty", () => {
+describe("isEmpty", () => {
 test('returns "true" if value is empty, otherwise "false"', () => {
   expect(isEmpty([1, 2, 3])).toBeFalsy()
   expect(isEmpty([])).toBeTruthy()

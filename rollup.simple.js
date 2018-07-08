@@ -25,6 +25,7 @@ const createConfig = (opts) => {
 			sourcemap: false
 		})),
 		external: external,
+		 treeshake: true,
 		plugins: [
       resolve(),
 			commonjs(),
