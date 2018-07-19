@@ -1,4 +1,4 @@
 
-  import juxt_ from './juxt_'
+import juxt_ from './juxt_'
 
-  export default juxt_
+export default juxt_

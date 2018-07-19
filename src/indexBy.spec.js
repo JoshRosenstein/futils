@@ -1,159 +1,159 @@
-import indexBy from "./indexBy";
+import indexBy from './indexBy'
 import prop from './prop'
 
-describe("indexBy", () => {
+describe('indexBy', () => {
 
-  it("Multiple Object different key in Array", () => {
+  it('Multiple Object different key in Array', () => {
     const a = indexBy(
-  prop("id")
-)([
-  {
-    id: "aaa",
-    name: "Jack Black",
-  },
-  {
-    id: "bbb",
-    name: "Pamela Johnson",
-  },
-])
-const ra={
-  aaa: {
-    id: "aaa",
-    name: "Jack Black",
-  },
-  bbb: {
-    id: "bbb",
-    name: "Pamela Johnson",
-  },
-}
-    expect(a).toEqual(ra);
-  })
-
-  it("Multiple Object same key in Array", () => {
-    const a =  indexBy(prop("id"))([
+      prop('id')
+    )([
       {
-        id: "aaa",
-        name: "Jack Black",
+        id: 'aaa',
+        name: 'Jack Black',
       },
       {
-        id: "aaa",
-        name: "Pamela Johnson",
+        id: 'bbb',
+        name: 'Pamela Johnson',
       },
     ])
-const ra= {
+    const ra={
       aaa: {
-        id: "aaa",
-        name: "Pamela Johnson",
+        id: 'aaa',
+        name: 'Jack Black',
+      },
+      bbb: {
+        id: 'bbb',
+        name: 'Pamela Johnson',
+      },
+    }
+    expect(a).toEqual(ra)
+  })
+
+  it('Multiple Object same key in Array', () => {
+    const a =  indexBy(prop('id'))([
+      {
+        id: 'aaa',
+        name: 'Jack Black',
+      },
+      {
+        id: 'aaa',
+        name: 'Pamela Johnson',
+      },
+    ])
+    const ra= {
+      aaa: {
+        id: 'aaa',
+        name: 'Pamela Johnson',
       }}
 
-    expect(a).toEqual(ra);
+    expect(a).toEqual(ra)
   })
 
-  it("Multiple Map different key in Set", () => {
+  it('Multiple Map different key in Set', () => {
     const a =  indexBy(
-      prop("id")
+      prop('id')
     )(
       new Set([
         new Map([
           [
-            "id",
-            "aaa",
+            'id',
+            'aaa',
           ],
           [
-            "name",
-            "Jack Black",
+            'name',
+            'Jack Black',
           ],
         ]),
         new Map([
           [
-            "id",
-            "bbb",
+            'id',
+            'bbb',
           ],
           [
-            "name",
-            "Pamela Johnson",
+            'name',
+            'Pamela Johnson',
           ],
         ]),
       ])
     )
 
-const ra= new Map([
+    const ra= new Map([
       [
-        "aaa",
+        'aaa',
         new Map([
           [
-            "id",
-            "aaa",
+            'id',
+            'aaa',
           ],
           [
-            "name",
-            "Jack Black",
+            'name',
+            'Jack Black',
           ],
         ]),
       ],
       [
-        "bbb",
+        'bbb',
         new Map([
           [
-            "id",
-            "bbb",
+            'id',
+            'bbb',
           ],
           [
-            "name",
-            "Pamela Johnson",
+            'name',
+            'Pamela Johnson',
           ],
         ]),
       ],
     ])
 
-    expect(a).toEqual(ra);
+    expect(a).toEqual(ra)
   })
 
-  it("Multiple Map same key in Set", () => {
+  it('Multiple Map same key in Set', () => {
     const a =   indexBy(
-      prop("id")
+      prop('id')
     )(
       new Set([
         new Map([
           [
-            "id",
-            "aaa",
+            'id',
+            'aaa',
           ],
           [
-            "name",
-            "Jack Black",
+            'name',
+            'Jack Black',
           ],
         ]),
         new Map([
           [
-            "id",
-            "aaa",
+            'id',
+            'aaa',
           ],
           [
-            "name",
-            "Pamela Johnson",
+            'name',
+            'Pamela Johnson',
           ],
         ]),
       ])
     )
 
-const ra= new Map([
+    const ra= new Map([
       [
-        "aaa",
+        'aaa',
         new Map([
           [
-            "id",
-            "aaa",
+            'id',
+            'aaa',
           ],
           [
-            "name",
-            "Pamela Johnson",
+            'name',
+            'Pamela Johnson',
           ],
         ]),
       ],
     ])
 
-    expect(a).toEqual(ra);
+    expect(a).toEqual(ra)
   })
 
-  });
+})

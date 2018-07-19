@@ -1,6 +1,6 @@
 export default str => {
-  if (typeof str !== "string") {
-    throw new TypeError("Expected a string")
+  if (typeof str !== 'string') {
+    throw new TypeError('Expected a string')
   }
-  return str.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&")
+  return str.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&')
 }

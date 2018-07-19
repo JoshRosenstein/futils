@@ -1,9 +1,9 @@
-import test from "./test";
+import test from './test'
 
-describe("test", () => {
+describe('test', () => {
 
 
-  it("works", () => {
+  it('works', () => {
 
     expect(test(/^x/, 'xyz')).toBeTruthy()
     expect(test(/^y/, 'xyz')).toBeFalsy()

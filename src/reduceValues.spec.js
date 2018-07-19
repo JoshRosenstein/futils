@@ -1,18 +1,18 @@
-import reduceValues from "./reduceValues";
+import reduceValues from './reduceValues'
 
-describe("reduceValues", () => {
-  it("Works", () => {
+describe('reduceValues', () => {
+  it('Works', () => {
     const a =reduceValues(
       (accumulation,current) =>
-          `${accumulation}/${current}`
+        `${accumulation}/${current}`
     )(
-      "."
+      '.'
     )(
-      ["a", "b", "c"]
+      ['a', 'b', 'c']
     )
-    const eA =  "./a/b/c"
+    const eA =  './a/b/c'
 
-    expect(a).toEqual(eA);
-  });
+    expect(a).toEqual(eA)
+  })
 
-});
+})

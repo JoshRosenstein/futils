@@ -1,6 +1,6 @@
-import isNil from "./isNil";
+import isNil from './isNil'
 
-describe("isNil", () => {
+describe('isNil', () => {
   test('returns true for undefined and null', () => {
     expect(isNil(null)).toBeTruthy()
     expect(isNil(undefined)).toBeTruthy()
@@ -12,4 +12,4 @@ describe("isNil", () => {
     expect(isNil(5)).toBeFalsy()
     expect(isNil({})).toBeFalsy()
   })
-});
+})

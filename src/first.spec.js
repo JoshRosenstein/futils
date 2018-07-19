@@ -1,6 +1,6 @@
-import first from "./first";
+import first from './first'
 
-describe("first", () => {
+describe('first', () => {
   test('returns first element of array', () => {
     expect(first([1, 2, 3])).toBe(1)
   })
@@ -9,4 +9,4 @@ describe("first", () => {
     expect(first('hello')).toBe('h')
   })
 
-});
+})

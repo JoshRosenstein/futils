@@ -1,8 +1,8 @@
-import reduce_ from "./reduce_"
-import path_ from "./path_"
-import toArray_ from "./toArray_"
+import reduce_ from './reduce_'
+import path_ from './path_'
+import toArray_ from './toArray_'
 
-
+ 
 export default (matcher, keyedEnumerable) =>
   reduce_(
     (latest, value, key) =>

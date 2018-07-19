@@ -1,9 +1,9 @@
-import takeLast from "./takeLast";
+import takeLast from './takeLast'
 
-describe("takeLast", () => {
+describe('takeLast', () => {
 
   test('takes last N last elements', () => {
-    expect(takeLast(2)(["a", "b", "c"])).toEqual( ["b", "c"])
+    expect(takeLast(2)(['a', 'b', 'c'])).toEqual( ['b', 'c'])
     expect(takeLast(2)('123456')).toEqual('56')
   })
 

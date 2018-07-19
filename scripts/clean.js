@@ -8,7 +8,7 @@ const ignoredFiles = [
   'docs',
   'rollup.config',
   'rollup.split',
-    'rollup.simple'
+  'rollup.simple'
 ]
 const results = fileList.filter(f => {
   const { ext, name } = path.parse(f)

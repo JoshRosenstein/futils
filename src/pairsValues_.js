@@ -1,6 +1,4 @@
-import mapValues_ from "./mapValues_"
-import last_ from "./last_"
+import mapValues_ from './mapValues_'
+import last_ from './last_'
 
-export default pairs => {
-  return mapValues_(last_, pairs)
-}
+export default pairs => mapValues_(last_, pairs)

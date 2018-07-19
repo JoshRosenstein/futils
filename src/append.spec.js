@@ -1,11 +1,11 @@
-import append from "./append";
+import append from './append'
 
-describe("append", () => {
-  it("Works", () => {
+describe('append', () => {
+  it('Works', () => {
+ 
+    expect(append('a')(['b'])).toEqual(['b', 'a'])
+    expect(append('c')('ab')).toEqual('abc')
 
-    expect(append("a")(["b"])).toEqual(["b", "a"])
-        expect(append("c")("ab")).toEqual('abc')
+  })
 
-  });
-
-});
+})

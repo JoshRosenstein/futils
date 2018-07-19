@@ -1,9 +1,9 @@
-import toLower from "./toLower";
+import toLower from './toLower'
 
-describe("toLower", () => {
+describe('toLower', () => {
 
 
-  it("works", () => {
+  it('works', () => {
     expect(toLower('ABC')).toEqual('abc')
 
   })

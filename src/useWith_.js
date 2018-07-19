@@ -2,18 +2,13 @@
 import curryN_ from './curryN_'
 
 export default function useWith_(cb, enhancers) {
-  return curryN_(enhancers.length,function() {
-    var args = arguments
-    return cb.apply(
-      cb,
-      enhancers.map((enhancer, idx) => {
-        return enhancer(args[idx])
-      })
-    )
-  })
+  return curryN_(enhancers.length,(...args)=> cb.apply(
+    cb,
+    enhancers.map((enhancer, idx) => enhancer(args[idx]))
+  ))
 }
 
-// export default (fn, transformers) =>{
+// export default (fn,  transformers) =>{
 //   return curryN_(transformers.length, function() {
 //     var args = [];
 //     var idx = 0;

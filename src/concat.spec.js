@@ -1,11 +1,11 @@
-import concat from "./concat";
+import concat from './concat'
 
-describe("concat", () => {
+describe('concat', () => {
 
 
-  it("works", () => {
+  it('works', () => {
     expect(concat('ABC', 'DEF')).toEqual('ABCDEF')
-  expect(concat([4, 5, 6], [1, 2, 3])).toEqual([4, 5, 6, 1, 2, 3])
+    expect(concat([4, 5, 6], [1, 2, 3])).toEqual([4, 5, 6, 1, 2, 3])
   })
 
 

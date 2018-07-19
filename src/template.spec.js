@@ -1,6 +1,6 @@
-import template from "./template";
+import template from './template'
 
-describe("template", () => {
+describe('template', () => {
 
   test('Works', () => {
     expect(template('{!a.b}')({a:{b:1}})).toEqual(1)

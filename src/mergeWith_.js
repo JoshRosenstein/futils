@@ -1,6 +1,6 @@
-import prop_ from "./prop_"
-import attach_ from "./attach_"
-import reduce_ from "./reduce_"
+import prop_ from './prop_'
+import attach_ from './attach_'
+import reduce_ from './reduce_'
 
 export default (fn, initial, functor) =>
   reduce_(

@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+
 const ignoredFiles = ['_internals', '_uncurried', 'index.js','index_.js','JS','lambda']
 
 const listFns = () => {
@@ -16,10 +17,9 @@ const listFns = () => {
 }
 
 
-
 const generateIndex = () => {
   const propertyRequireLines = listFns()
-      .map(fn => `export { default as ${fn.name} } from './${fn.name}'`)
+    .map(fn => `export { default as ${fn.name} } from './${fn.name}'`)
 
   const indexLines = []
     .concat(propertyRequireLines.join('\n'))

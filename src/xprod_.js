@@ -1,10 +1,10 @@
 
 export default (a, b)=> {
   const res = []
-  var ia = 0
-  var ib
-  var alen = a.length
-  var blen = b.length
+  let ia = 0
+  let ib
+  const alen = a.length
+  const blen = b.length
   while (ia < alen) {
     ib = 0
     while (ib < blen) {
@@ -15,3 +15,4 @@ export default (a, b)=> {
   }
   return res
 }
+ 

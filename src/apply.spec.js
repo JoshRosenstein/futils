@@ -1,14 +1,14 @@
-import apply from "./apply";
+import apply from './apply'
 
-describe("apply", () => {
+describe('apply', () => {
   function expectNumberOfArgs(f, n, args) {
-  let k = n
-  while (k > 0) {
-    expect(typeof f).toBe('function')
-    f = f(args[n - k--])
+    let k = n
+    while (k > 0) {
+      expect(typeof f).toBe('function')
+      f = f(args[n - k--])
+    }
+    expect(typeof f).not.toBe('function')
   }
-  expect(typeof f).not.toBe('function')
-}
 
   test('it accepts exact 2 arguments', () => {
     expectNumberOfArgs(
@@ -19,10 +19,10 @@ describe("apply", () => {
   })
 
   test('applies array of arguments to cb', () => {
-    var a = apply(function() {
+    const a = apply(function() {
       return Array.prototype.slice.call(arguments)
     })
     expect(a([1, 2, 3])).toEqual([1, 2, 3])
   })
 
-});
+})

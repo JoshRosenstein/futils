@@ -1,4 +1,4 @@
-import isNil_ from "./isNil_"
+import isNil_ from './isNil_'
 
 
 export default (name, keyedFunctor) => {

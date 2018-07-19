@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+
 const ignoredFiles = ['_internals', '_uncurried', 'index.js','index_.js','JS','lambda']
 
 const listFns = () => {
@@ -14,7 +15,7 @@ const listFns = () => {
 
   return ret
 }
-
+ 
 const listFns_ = () => {
   const files = fs.readdirSync(path.join(process.cwd(), 'src'))
   const ret=files
@@ -30,7 +31,7 @@ const listFns_ = () => {
 
 const generateIndex = () => {
   const propertyRequireLines = listFns()
-      .map(fn => `export { default as ${fn.name} } from './${fn.name}'`)
+    .map(fn => `export { default as ${fn.name} } from './${fn.name}'`)
 
   const indexLines = []
     .concat(propertyRequireLines.join('\n'))
@@ -40,7 +41,7 @@ const generateIndex = () => {
 }
 const generateIndex_ = () => {
   const propertyRequireLines = listFns_()
-      .map(fn => `export { default as ${fn.name} } from './${fn.name}'`)
+    .map(fn => `export { default as ${fn.name} } from './${fn.name}'`)
 
   const indexLines = []
     .concat(propertyRequireLines.join('\n'))

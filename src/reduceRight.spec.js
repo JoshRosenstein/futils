@@ -1,28 +1,24 @@
-import reduceRight from "./reduceRight";
+import reduceRight from './reduceRight'
 
-describe("reduceRight", () => {
-  var avg = function(a, b) {
+describe('reduceRight', () => {
+  const avg = function(a, b) {
     return (a + b) / 2
   }
 
-  it("folds lists in the right order", function() {
+  it('folds lists in the right order', () => {
     expect(
       reduceRight(
-        function(a, b) {
-          return a + b
-        },
-        "",
-        ["a", "b", "c", "d"]
+        (a, b) => a + b,
+        '',
+        ['a', 'b', 'c', 'd']
       )
-    ).toEqual("abcd")
+    ).toEqual('abcd')
   })
 
-  it("folds lists in the right order", function() {
+  it('folds lists in the right order', () => {
     expect(
       reduceRight(
-        function(a, b) {
-          return a - b
-        },
+        (a, b) => a - b,
         0,
         [1, 2, 3, 4]
       )

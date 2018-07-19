@@ -1,3 +1,1 @@
-export default (regex, replacer, str) => {
-  return str.replace(regex, replacer)
-}
+export default (regex, replacer, str) => str.replace(regex, replacer)

@@ -1,4 +1,2 @@
 
-export default fn=>function() {
-    return fn(Array.prototype.slice.call(arguments, 0));
-  }
+export default fn=>(...args)=> fn(Array.prototype.slice.call(args, 0))

@@ -1,6 +1,6 @@
-import not from "./not";
+import not from './not'
 
-describe("not", () => {
+describe('not', () => {
   test('should return inverted boolean', () => {
     expect(not(true)).toBe(false)
     expect(not(false)).toBe(true)
@@ -12,4 +12,4 @@ describe("not", () => {
     expect(not({})).toBe(false)
   })
 
-});
+})

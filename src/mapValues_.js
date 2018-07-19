@@ -1,4 +1,4 @@
-import mapValuesWithValueKey_ from "./mapValuesWithValueKey_"
+import mapValuesWithValueKey_ from './mapValuesWithValueKey_'
 
 
 export default (fn, functor) => {

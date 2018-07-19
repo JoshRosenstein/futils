@@ -1,6 +1,6 @@
-import empty_ from "./empty_"
-import attach_ from "./attach_"
-import reduce_ from "./reduce_"
+import empty_ from './empty_'
+import attach_ from './attach_'
+import reduce_ from './reduce_'
 
 
 export default (predicate, enumerable) => {

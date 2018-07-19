@@ -1,6 +1,6 @@
-import fromPairs from "./fromPairs";
+import fromPairs from './fromPairs'
 
-describe("fromPairs ", () => {
+describe('fromPairs ', () => {
   test('returns object created from list key-value pairs', () => {
     expect(fromPairs([['a', 1], ['b', 2], ['c', 3]])).toMatchObject({ a: 1, b: 2, c: 3 })
   })
@@ -12,4 +12,4 @@ describe("fromPairs ", () => {
   test('returns empty object if provided empty array', () => {
     expect(fromPairs([])).toMatchObject({})
   })
-});
+})

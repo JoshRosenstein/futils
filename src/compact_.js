@@ -1,4 +1,4 @@
-import rejectNil_ from "./rejectNil_";
+import rejectNil_ from './rejectNil_'
 
-//backwards compatible
+// backwards compatible
 export default rejectNil_

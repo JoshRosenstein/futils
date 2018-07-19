@@ -1,3 +1,3 @@
-import is_ from "./is_"
+import is_ from './is_'
 
-export default value => is_("Object", value)
+export default value => is_('Object', value)

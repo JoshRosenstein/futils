@@ -1,6 +1,6 @@
-import take from "./take";
+import take from './take'
 
-describe("take", () => {
+describe('take', () => {
 
   test('takes N first elements', () => {
     expect(take(2)([1, 2, 3, 4, 5, 6])).toEqual([1, 2])

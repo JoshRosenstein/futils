@@ -1,1 +1,1 @@
-export default  (predicate, anything) => !predicate(anything);
+export default  (predicate, anything) => !predicate(anything)

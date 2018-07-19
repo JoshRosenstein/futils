@@ -25,13 +25,13 @@ describe('divides strings', () => {
   })
 
   test('not-a-number-like', () => {
-    expect(divide('qwe')('rty')).toEqual(NaN);
+    expect(divide('qwe')('rty')).toEqual(NaN)
   })
 })
 
 describe('divides booleans', () => {
   test('true values', () => {
-    expect(divide(true)(true)).toEqual(1);
+    expect(divide(true)(true)).toEqual(1)
   })
 
   test('false values', () => {

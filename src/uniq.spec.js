@@ -1,12 +1,11 @@
+import uniq from './uniq'
 
-import uniq from "./uniq"
-describe("uniq", () => {
+describe('uniq', () => {
 
-  test("Works", () => {
-    const list = [1, 2, 3, 1, 2, 3, 1, 2, 3];
-    expect(uniq([1, 2, 3, 1, 2, 3, 1, 2, 3])).toEqual([1, 2, 3])
+  test('Works', () => {
+    const list = [1, 2, 3, 1, 2, 3, 1, 2, 3]
+    expect(uniq(list)).toEqual([1, 2, 3])
   })
-
 
 
 })

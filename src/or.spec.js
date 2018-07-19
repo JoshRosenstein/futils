@@ -1,6 +1,6 @@
-import or from "./or";
+import or from './or'
 
-describe("or", () => {
+describe('or', () => {
   test('confirms that at least one of two arguments is true', () => {
     expect(or(true, true)).toBeTruthy()
     expect(or(true, false)).toBeTruthy()
@@ -8,4 +8,4 @@ describe("or", () => {
     expect(or(false, false)).toBeFalsy()
   })
 
-});
+})

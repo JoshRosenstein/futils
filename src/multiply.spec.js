@@ -1,11 +1,11 @@
-import multiply from "./multiply";
+import multiply from './multiply'
 
-describe("multiply", () => {
-  it("Works", () => {
-    const a = multiply(1,2);
-    const eA = 2;
+describe('multiply', () => {
+  it('Works', () => {
+    const a = multiply(1,2)
+    const eA = 2
 
-    expect(a).toEqual(eA);
-  });
+    expect(a).toEqual(eA)
+  })
 
-});
+})

@@ -1,8 +1,8 @@
-import mergeDeepRight_ from "./mergeDeepRight_"
-import reduceValues_ from "./reduceValues_"
-import empty_ from "./empty_"
-import of_ from "./of_"
-import objOf_ from "./objOf_"
+import mergeDeepRight_ from './mergeDeepRight_'
+import reduceValues_ from './reduceValues_'
+import empty_ from './empty_'
+import of_ from './of_'
+import objOf_ from './objOf_'
 
 export default (unction, list) =>
   reduceValues_(

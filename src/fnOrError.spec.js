@@ -1,11 +1,11 @@
-import fnOrError from "./fnOrError";
+import fnOrError from './fnOrError'
 
-describe.skip("PLACEHOLDER", () => {
-  it("Subtract One from Number", () => {
-    const a = PLACEHOLDER(1);
-    const eA = 0;
+describe.skip('PLACEHOLDER', () => {
+  it('Subtract One from Number', () => {
+    const a = PLACEHOLDER(1)
+    const eA = 0
 
-    expect(a).toEqual(eA);
-  });
+    expect(a).toEqual(eA)
+  })
 
-});
+})

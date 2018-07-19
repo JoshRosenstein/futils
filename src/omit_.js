@@ -1,4 +1,4 @@
-import reduce_ from "./reduce_"
+import reduce_ from './reduce_'
 import omitKey_ from './omitKey_'
 import is_ from './is_'
 
@@ -7,7 +7,7 @@ export default (keys, obj) => {
     keys = keys.trim().split(',')
   }
 
-  return is_("Array",keys)? reduce_(
+  return is_('Array',keys)? reduce_(
     (acc, key) => omitKey_(key, acc),
     obj,
     keys

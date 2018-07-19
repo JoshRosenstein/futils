@@ -1,5 +1,5 @@
 
-import type_ from "./type_"
+import type_ from './type_'
 
 export default value => {
   const t= type_(value)
@@ -10,7 +10,7 @@ export default value => {
     return value
   }
 
-  return  typeof value.toString === "function"
+  return  typeof value.toString === 'function'
     ? value.toString()
     : Object.prototype.toString.apply(value)
 }

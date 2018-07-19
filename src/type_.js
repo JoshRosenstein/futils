@@ -1,11 +1,11 @@
 export default value => {
   if (value === null) {
-    return "null";
+    return 'null'
   }
 
   if (value === undefined) {
-    return "undefined";
+    return 'undefined'
   }
 
-  return value.constructor.name;
-};
+  return value.constructor.name
+}

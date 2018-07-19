@@ -1,4 +1,4 @@
-import type_ from "./type_";
+import type_ from './type_'
 
 // Extracted out of jest
 function hasKey_(obj, key) {
@@ -6,9 +6,9 @@ function hasKey_(obj, key) {
 }
 
 function keys_(obj, isArray) {
-  var allKeys = (function(o) {
-    var keys = []
-    for (var key in o) {
+  const allKeys = (function(o) {
+    const keys = []
+    for (const key in o) {
       if (hasKey_(o, key)) {
         keys.push(key)
       }
@@ -25,12 +25,12 @@ function keys_(obj, isArray) {
     return allKeys
   }
 
-  var extraKeys = []
+  const extraKeys = []
   if (allKeys.length === 0) {
     return allKeys
   }
 
-  for (var x = 0; x < allKeys.length; x++) {
+  for (let x = 0; x < allKeys.length; x++) {
     if (!allKeys[x].match(/^[0-9]+$/)) {
       extraKeys.push(allKeys[x])
     }
@@ -39,36 +39,36 @@ function keys_(obj, isArray) {
   return extraKeys
 }
 
- const _equals_ = (a, b, aStack=[], bStack=[]) => {
-  var result = true
+const _equals_ = (a, b, aStack=[], bStack=[]) => {
+  let result = true
   if (a === b) return true
   if (a == null || b == null) return a === b
 
-  var typeA = type_(a)
-  var typeB = type_(b)
+  const typeA = type_(a)
+  const typeB = type_(b)
   if (typeA !== typeB) return false
 
   switch (typeA) {
-    case "String":
-    case "Number": {
-      return a.valueOf() === b.valueOf()
-    }
-    case "Boolean":
-    case "Date": {
-      return +a === +b
-    }
-    case "RegExp": {
-      return a.toString() === b.toString()
-    }
-    default: {
-    }
+  case 'String':
+  case 'Number': {
+    return a.valueOf() === b.valueOf()
+  }
+  case 'Boolean':
+  case 'Date': {
+    return +a === +b
+  }
+  case 'RegExp': {
+    return a.toString() === b.toString()
+  }
+  default: {
+  }
   }
 
-  if (typeof a !== "object" || typeof b !== "object") {
+  if (typeof a !== 'object' || typeof b !== 'object') {
     return false
   }
 
-  var length = aStack.length
+  let length = aStack.length
   while (length--) {
     // Linear search. Performance is inversely proportional to the number of
     // unique nested structures.
@@ -80,9 +80,9 @@ function keys_(obj, isArray) {
   // Add the first object to the stack of traversed objects.
   aStack.push(a)
   bStack.push(b)
-  var size = 0
+  let size = 0
 
-  if (typeA === "Array") {
+  if (typeA === 'Array') {
     size = a.length
     if (size !== b.length) {
       return false
@@ -97,12 +97,12 @@ function keys_(obj, isArray) {
   }
 
   // Deep compare objects.
-  var aKeys = keys_(a, typeA === "Array")
-  var key
+  const aKeys = keys_(a, typeA === 'Array')
+  let key
   size = aKeys.length
 
-  var bKeys = keys_(b, typeB === "Array")
-  if (keys_(b, typeB === "Array").length !== size) {
+  const bKeys = keys_(b, typeB === 'Array')
+  if (keys_(b, typeB === 'Array').length !== size) {
     return false
   }
 

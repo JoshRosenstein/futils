@@ -1,6 +1,6 @@
-import replaceWhen from "./replaceWhen";
+import replaceWhen from './replaceWhen'
 
-describe("replaceWhen", () => {
+describe('replaceWhen', () => {
   const isEven = (value) => value % 2 === 0
 
   test('Works', () => {
@@ -8,4 +8,4 @@ describe("replaceWhen", () => {
 
   })
 
-});
+})

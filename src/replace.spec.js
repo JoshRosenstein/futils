@@ -1,6 +1,6 @@
-import replace from "./replace";
+import replace from './replace'
 
-describe("replace", () => {
+describe('replace', () => {
   test('it replaces first found substring', () => {
     expect(replace('foo', 'bar', 'foo foo foo')).toBe('bar foo foo')
     expect(replace('foo', 'bar')('foo foo foo')).toBe('bar foo foo')
@@ -14,4 +14,4 @@ describe("replace", () => {
     expect(replace(/foo/g)('bar', 'foo foo foo')).toBe('bar bar bar')
     expect(replace(/foo/g)('bar')('foo foo foo')).toBe('bar bar bar')
   })
-});
+})

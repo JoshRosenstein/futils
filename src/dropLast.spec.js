@@ -1,6 +1,6 @@
-import dropLast from "./dropLast";
+import dropLast from './dropLast'
 
-describe("dropLast", () => {
+describe('dropLast', () => {
 
   test('returns all but last N elements', () => {
     expect(dropLast(2)([1, 2, 3, 4, 5, 6])).toEqual([1, 2, 3, 4])

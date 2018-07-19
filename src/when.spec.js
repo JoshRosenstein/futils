@@ -1,7 +1,7 @@
-import when from "./when";
+import when from './when'
 
-describe("When", () => {
-  var getEven = when(i => i % 2 === 1, i => i + 1)
+describe('When', () => {
+  const getEven = when(i => i % 2 === 1, i => i + 1)
 
   test('applies callback if condition is true', () => {
     expect(getEven(1)).toBe(2)
@@ -10,4 +10,5 @@ describe("When", () => {
   test('returns passed value if condition is false', () => {
     expect(getEven(2)).toBe(2)
   })
-});
+})
+ 

@@ -1,7 +1,7 @@
-import reduceValues from "./reduceValues"
-import replaceWhen from "./replaceWhen"
-import isNil from "./isNil"
-import dig from "./path"
+import reduceValues from './reduceValues'
+import replaceWhen from './replaceWhen'
+import isNil from './isNil'
+import dig from './path'
 
 
 export default (paths,tree)=>reduceValues(
@@ -12,8 +12,8 @@ export default (paths,tree)=>reduceValues(
 
     return dig(replaceWhen(isNil,filler,p),tree)
   }
-,
+  ,
   null
-,
+  ,
   paths
 )

@@ -1,7 +1,7 @@
-import reduceValues_ from "./reduceValues_"
-import merge_ from "./merge_"
-import last_ from "./last_"
-import empty_ from "./empty_"
+import reduceValues_ from './reduceValues_'
+import merge_ from './merge_'
+import last_ from './last_'
+import empty_ from './empty_'
 
 export default functors => {
   if (last_(functors)) {

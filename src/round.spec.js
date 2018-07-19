@@ -1,13 +1,13 @@
-import round from "./round";
+import round from './round'
 
-describe("round", () => {
-  it("works", () => {
+describe('round', () => {
+  it('works', () => {
 
-      const a = round(2, 112.336);
-      const eA = 112.34
+    const a = round(2, 112.336)
+    const eA = 112.34
 
-      expect(a).toBeTruthy();
+    expect(a).toBeTruthy()
 
 
-  });
-});
+  })
+})

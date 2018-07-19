@@ -1,7 +1,7 @@
-import merge_ from "./merge_"
-import mergeWith_ from "./mergeWith_"
-import isObject_ from "./isObject_"
-import isArray_ from "./isArray_"
+import merge_ from './merge_'
+import mergeWith_ from './mergeWith_'
+import isObject_ from './isObject_'
+import isArray_ from './isArray_'
 
 
 const mergeDeepRight_=(left, right) => {
