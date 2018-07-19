@@ -40,10 +40,9 @@ function keys_(obj, isArray) {
 }
 
 const _equals_ = (a, b, aStack=[], bStack=[]) => {
-  let result = true
   if (a === b) return true
   if (a == null || b == null) return a === b
-
+  let result = true
   const typeA = type_(a)
   const typeB = type_(b)
   if (typeA !== typeB) return false
@@ -60,8 +59,7 @@ const _equals_ = (a, b, aStack=[], bStack=[]) => {
   case 'RegExp': {
     return a.toString() === b.toString()
   }
-  default: {
-  }
+  default: 
   }
 
   if (typeof a !== 'object' || typeof b !== 'object') {

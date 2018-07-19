@@ -1,12 +1,11 @@
 import curryN_ from './curryN_'
 import pluck_ from './pluck_'
-import reduceValues_ from './reduceValues_'
+import max_ from './max_'
+
+const converge_=(after, fns)=>(...args)=>after.apply(converge_, fns.map(fn => fn.apply(converge_, args)))
+
 
 export default (after, fns) => curryN_(
-  reduceValues_((a, b) => (b > a ? b : a), 0, pluck_('length', fns)),
-  function() {
-    const args = arguments
-    const context = this
-    return after.apply(context, fns.map(fn => fn.apply(context, args)))
-  }
+  max_(0,pluck_('length', fns)) ,converge_(after, fns)
+
 )

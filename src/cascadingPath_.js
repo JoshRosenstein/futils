@@ -1,16 +1,16 @@
-import reduceValues from './reduceValues'
-import replaceWhen from './replaceWhen'
-import isNil from './isNil'
-import dig from './path'
+import reduceValues_ from './reduceValues_'
+import replaceWhen_ from './replaceWhen_'
+import isNil_ from './isNil_'
+import path_ from './path_'
 
 
-export default (paths,tree)=>reduceValues(
+export default (paths,tree)=>reduceValues_(
   (filler,p) => {
-    if (isNil(filler)) {
-      return dig(p)(tree)
+    if (isNil_(filler)) {
+      return path_(p,tree)
     }
 
-    return dig(replaceWhen(isNil,filler,p),tree)
+    return path_(replaceWhen_(isNil_,filler,p),tree)
   }
   ,
   null
