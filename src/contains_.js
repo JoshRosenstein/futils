@@ -5,10 +5,11 @@ export default (x, arr) =>{
   let index = -1
   let flag = false
 
-  while (++index < arr.length && !flag) {
+  while (index < arr.length && !flag) {
     if (equals_(arr[index], x)) {
       flag = true
     }
+    index+=1
   }
 
   return flag

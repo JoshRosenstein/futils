@@ -1,9 +1,9 @@
-import applicators from './zipApply'
+import zipApply from './zipApply'
 import objOf from './objOf'
 
-describe('applicators', () => {
+describe('zipApply', () => {
   it('Object', () => {
-    const a = applicators({
+    const a = zipApply({
       x: x=>x+1,
       y: x=>x-1
     })({
@@ -14,12 +14,12 @@ describe('applicators', () => {
       x: 0,
       y: 0
     }
- 
+
     expect(a).toEqual(eA)
   })
 
   it('Object Nested', () => {
-    const a = applicators({
+    const a = zipApply({
       x: x=>x+1,
       y: x=>x-1
     })({
@@ -35,7 +35,7 @@ describe('applicators', () => {
   })
 
   it('Array', () => {
-    const a = applicators([
+    const a = zipApply([
       objOf(['point', 'x']),
       objOf(['point', 'y']),
       objOf(['point', 'z']),

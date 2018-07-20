@@ -5,9 +5,8 @@ const concat = (f, ...args) => f.concat(...args)
 
 const notFnErrPrefix = '`fn` in `curry(fn, ...args)`'
 const curryN = (executeArity, fn, ...curriedArgs) => (...args) => {
-  let concatedArgs = concat(curriedArgs, args),
-    canBeCalled = concatedArgs.length >= executeArity || !executeArity
-  return !canBeCalled
+  const concatedArgs = concat(curriedArgs, args)
+  return !(concatedArgs.length >= executeArity || !executeArity)
     ?  curryN(...concat([executeArity, fnOrError_(notFnErrPrefix, fn)], concatedArgs))
     :  fnOrError_(notFnErrPrefix, fn)(...concatedArgs)
 }
