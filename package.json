@@ -16,6 +16,7 @@
     "precommit": "node scripts/create-export.js && rollup -c && jest --onlyChanged --runInBand",
     "prepack": "yarn run build",
     "postpack": "npm run clean:scripts",
+    "travis":"test:coverage && yarn run build",
     "build": "node scripts/create-export.js && yarn run clean && yarn run build:es && yarn run build:cjs && yarn run build:umd",
     "build:es": "cross-env BABEL_ENV=es babel src --out-dir es --ignore *.spec.js,*.test.js ",
     "build:cjs": "cross-env BABEL_ENV=cjs babel src --out-dir lib --ignore *.spec.js,*.test.js ",
