@@ -8,7 +8,7 @@ node_modules/
 packages/site/build
 .DS_Store
 .cache
-public/
+docs/build/
 notes/
 
 package-lock.json
