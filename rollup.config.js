@@ -1,5 +1,4 @@
 import babel from 'rollup-plugin-babel'
-import buble from 'rollup-plugin-buble';
 import {uglify} from 'rollup-plugin-uglify'
 import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
@@ -9,124 +8,122 @@ import filesize from 'rollup-plugin-filesize'
 import pkg from './package.json'
 
 
-
-
 const bconfig={
-	babelrc: false,
-	exclude: 'node_modules/**',
-	"presets": [
-	["env",{"targets": {
-		"browsers": ["Firefox ESR"]},
-			"modules": false,loose:true
-		}
-	],"minify","react","stage-0"
-	],
-	"plugins": ["external-helpers"]
+  babelrc: false,
+  exclude: 'node_modules/**',
+  'presets': [
+    ['env',{'targets': {
+      'browsers': ['Firefox ESR']},
+    'modules': false,loose:true
+    }
+    ],'minify','react','stage-0'
+  ],
+  'plugins': ['external-helpers']
 }
 const attachMin=str=>str.replace('.js','.min.js')
-const ensureArray = maybeArr => Array.isArray(maybeArr) ? maybeArr : [maybeArr];
+const ensureArray = maybeArr => Array.isArray(maybeArr) ? maybeArr : [maybeArr]
 const createConfig = (opts) => {
-	opts = opts || {};
-	const browser = opts.browser || false;
-	const external = opts.external
-	const output = ensureArray(opts.output);
+  opts = opts || {}
+  const browser = opts.browser || false
+  const external = opts.external
+  const output = ensureArray(opts.output)
 
-	return {
-		input: 'src/index.js',
-		output: output.map(format => Object.assign({}, format, {
-			name: 'futils',
-			sourcemap: false
-		})),
-		external: external,
-		plugins: [
+  return {
+    input: 'src/index.js',
+    output: output.map(format => Object.assign({}, format, {
+      name: 'futils',
+      sourcemap: false
+    })),
+    external,
+    plugins: [
       resolve({
         jsnext: true,
         main: true,
         browser: true
       }),
-			commonjs(),
+      commonjs(),
       babel(),
       cleanup(),
-        filesize()
-		],
-	};
-};
+      filesize()
+    ],
+  }
+}
 
 const createUglyConfig = (opts) => {
-	opts = opts || {};
-	const browser = opts.browser || false;
-	const external = opts.external
-	const output = ensureArray(opts.output);
+  opts = opts || {}
+  const browser = opts.browser || false
+  const external = opts.external
+  const output = ensureArray(opts.output)
 
-	return {
-		input: 'src/index.js',
-		output: output.map(format => Object.assign({}, format, {
-			name: 'futils',
-			sourcemap: true
-		})),
-		external: external,
-		plugins: [
+  return {
+    input: 'src/index.js',
+    output: output.map(format => Object.assign({}, format, {
+      name: 'futils',
+      sourcemap: true
+    })),
+    external,
+    plugins: [
       resolve(),
-			commonjs(),
+      commonjs(),
       babel(),
-			uglify(),
-			filesize()
-		],
-	};
-};
+      uglify(),
+      filesize()
+    ],
+  }
+}
 
 const createESConfig = (opts) => {
-	opts = opts || {};
-	const browser = opts.browser || false;
-	const external = opts.external
-	const output = ensureArray(opts.output);
+  opts = opts || {}
+  const browser = opts.browser || false
+  const external = opts.external
+  const output = ensureArray(opts.output)
 
-	return {
-		input: 'src/index.js',
-		output: output.map(format => Object.assign({}, format, {
-			name: 'futils',
-			sourcemap: true
-		})),
-		external: external,
-		plugins: [
+  return {
+    input: 'src/index.js',
+    output: output.map(format => Object.assign({}, format, {
+      name: 'futils',
+      sourcemap: true
+    })),
+    external,
+    plugins: [
       babel(bconfig),
-			filesize()
-		],
-	};
-};
+      filesize()
+    ],
+  }
+}
 
 const configs = [
-	/* node ESM/CJS builds */
-	createESConfig({
-		output: [
-			{ format: 'es', file: pkg.module },
-		],
-	})
+  /* node ESM/CJS builds */
+  createESConfig({
+    output: [
+      { format: 'es', file: pkg.module },
+    ],
+  })
 ]
 const configs2 = [
-	/* node ESM/CJS builds */
-	createConfig({
-		output: [
-			{ format: 'es', file: pkg.module },
-			{ format: 'cjs', file: pkg.main }
-		],
-	}),
-	/* browser ESM/CJS builds (for bundlers) */
-	createConfig({
-		browser: true,
-		output: [
-			{ format: 'es', file: pkg.browser[pkg.module] },
-			{ format: 'cjs', file: pkg.browser[pkg.main] }
-		],
-	}),
-	/* UMD with bundled dependencies, ready for browsers */
-	createConfig({
-		browser: true,
-		external: [],
-		output: { format: 'umd', file: pkg.unpkg },
-	}),
+  /* node ESM/CJS builds */
+  createConfig({
+    output: [
+      { format: 'es', file: pkg.module },
+      { format: 'cjs', file: pkg.main }
+    ],
+  }),
+  /* browser ESM/CJS builds (for bundlers) */
+  createConfig({
+    browser: true,
+    output: [
+      { format: 'es', file: pkg.browser[pkg.module] },
+      { format: 'cjs', file: pkg.browser[pkg.main] }
+    ],
+  }),
+  /* UMD with bundled dependencies, ready for browsers */
+  createConfig({
+    browser: true,
+    external: [],
+    output: { format: 'umd', file: pkg.unpkg },
+  }),
 
-	//// UGLIFY
+  // // UGLIFY
   createUglyConfig({
     output: [
   	{ format: 'cjs', file: attachMin(pkg.main) }
@@ -138,14 +135,14 @@ const configs2 = [
       { format: 'cjs', file: attachMin(pkg.browser[pkg.main]) }
     ],
   }),
-	createUglyConfig({
-		browser: true,
-		external: [],
-		output: { format: 'umd', file: attachMin(pkg.unpkg) },
-	}),
-];
+  createUglyConfig({
+    browser: true,
+    external: [],
+    output: { format: 'umd', file: attachMin(pkg.unpkg) },
+  }),
+]
 
-export default configs;
+export default configs
 
 // const BasePlugins = [
 //   resolve({
@@ -280,4 +277,4 @@ export default configs;
 //   plugins
 // }
 
-//export default configBase
+// export default configBase
