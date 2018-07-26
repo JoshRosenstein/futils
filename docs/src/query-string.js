@@ -31,7 +31,7 @@ function decodeComponents(components, split) {
 	return Array.prototype.concat.call([], decodeComponents(left), decodeComponents(right));
 }
 
-function decode(input) {
+function decodeIt(input) {
 	try {
 		return decodeURIComponent(input);
 	} catch (err) {
@@ -60,7 +60,7 @@ function customDecodeURIComponent(input) {
 			// Decode as big chunks as possible
 			replaceMap[match[0]] = decodeURIComponent(match[0]);
 		} catch (err) {
-			var result = decode(match[0]);
+			var result = decodeIt(match[0]);
 
 			if (result !== match[0]) {
 				replaceMap[match[0]] = result;

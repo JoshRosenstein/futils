@@ -3,18 +3,14 @@ import stringifyCompact from 'json-stringify-pretty-compact'
 import PropTypes from 'prop-types'
 import styled from 'react-emotion'
 import * as R from 'ramda'
-import { isNil, toString } from 'ramda'
+
 
 const ramdaStr = `const {${R.keys(R).join(',')}} = R;`
-const evalSource = R.compose(
-  R.toString,
-  eval,
-) // eslint-disable-line no-eval
+
 const errRedeclaringRamdaFn = new RegExp(
   `^ramda: Duplicate declaration "(${R.keys(R).join('|')})"`,
 )
 
-const formatCode = code => evalSource(code).replace('"use strict"', '')
 
 const formatError = err =>
   err.message
@@ -25,15 +21,7 @@ const formatError = err =>
       'ramda: Cannot redeclare "$1" that has already been imported from Ramda',
     )
 
-const sharedBoxStyles = {
-  flex: '0 0 auto',
-  maxHeight: '33%',
-  overflow: 'auto',
-  margin: 0,
-  padding: '0.5rem 0.75rem',
-  whiteSpace: 'pre-wrap',
-  '-webkit-overflow-scrolling': 'touch',
-}
+
 
 const Error = styled('div')({
   color: 'red',

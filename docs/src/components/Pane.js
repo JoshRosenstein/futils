@@ -20,21 +20,21 @@ const Root = styled('div')({
   },
 })
 
-const Title = styled('div')({
-  display: 'flex',
+// const Title = styled('div')({
+//   display: 'flex',
+//
+//   position: 'relative',
+//   padding: '5px var(--default-padding)',
+//   backgroundColor: 'var(--silver)',
+//   color: 'var(--black)',
+//   fontSize: '12px',
+// })
 
-  position: 'relative',
-  padding: '5px var(--default-padding)',
-  backgroundColor: 'var(--silver)',
-  color: 'var(--black)',
-  fontSize: '12px',
-})
-
-const Content = styled('div')({
-  fontFamily: "'Inconsolata', monospace",
-
-  overflowY: 'auto',
-})
+// const Content = styled('div')({
+//   fontFamily: "'Inconsolata', monospace",
+//
+//   overflowY: 'auto',
+// })
 // < Title > { props.title }</Title>
 //   <Content>{props.children}</Content>
 const Pane = props => {

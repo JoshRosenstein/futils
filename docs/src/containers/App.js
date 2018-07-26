@@ -4,11 +4,11 @@ import InputContainer from './InputContainer'
 import Navbar from '../components/Navbar'
 import OutputContainer from './OutputContainer'
 import CM from 'codemirror/lib/codemirror.css'
-import { Sidebar, SidebarCategory } from '../components/sidebar/components'
-import SidebarOptions from '../components/sidebar/SidebarOptions'
+import { Sidebar } from '../components/sidebar/components'
+
 import { Button } from '../components/Buttons'
-import Option from '../components/sidebar/options'
-import { Toggle,State  } from 'react-powerplug'
+
+import { State  } from 'react-powerplug'
 
 injectGlobal`
 .CodeMirror{
@@ -40,36 +40,28 @@ const Editors = styled('div')({
   // flex: '1',
 })
 
-const Editor = styled('div')({
-  label: 'Editor',
-  boxSizing: 'border-box',
-  display: 'flex',
-  flex: '1 1 100%',
-  position: 'relative',
-  borderBottom: '1px solid #ddd',
-
-  '@media (min-width: 800px)': {
-    flexBasis: '50%',
-    borderLeft: '1px solid #ddd',
-    marginLeft: '-1px',
-  },
-  '@media (min-width: 1200px)': {
-    flexBasis: '25%',
-  },
-})
+// const Editor = styled('div')({
+//   label: 'Editor',
+//   boxSizing: 'border-box',
+//   display: 'flex',
+//   flex: '1 1 100%',
+//   position: 'relative',
+//   borderBottom: '1px solid #ddd',
+//
+//   '@media (min-width: 800px)': {
+//     flexBasis: '50%',
+//     borderLeft: '1px solid #ddd',
+//     marginLeft: '-1px',
+//   },
+//   '@media (min-width: 1200px)': {
+//     flexBasis: '25%',
+//   },
+// })
 
 //() => setState(s => ({ on: !s.on }))
 
 
 const App = () => {
-  const Toggler=(toggle,isOtherShowing,hideOther)=>()=>{
-
-  if(isOtherShowing){
-    hideOther()
-  }
-  toggle()
-
-  }
   return (
     <State initial={{ optionsShowing: false, examplesShowing: false }}>
   {({ state, setState }) => (
