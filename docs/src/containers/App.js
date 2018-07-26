@@ -5,8 +5,8 @@ import Navbar from '../components/Navbar'
 import OutputContainer from './OutputContainer'
 import CM from 'codemirror/lib/codemirror.css'
 import { Sidebar } from '../components/sidebar/components'
-
-import { Button } from '../components/Buttons'
+import {toArray} from '@roseys/futils'
+import { Button,LinkButton } from '../components/Buttons'
 
 import { State  } from 'react-powerplug'
 
@@ -60,11 +60,43 @@ const Editors = styled('div')({
 
 //() => setState(s => ({ on: !s.on }))
 
+const GISTID='64956aea8f0f09bb97e7ee7dd2fe5c85'
 
-const App = () => {
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      exampleFiles: [],
+    };
+  }
+
+  componentDidMount() {
+    this.setState({ isLoading: true });
+
+    fetch(`https://api.github.com/gists/${GISTID}`)
+        .then(res => res.json())
+        .then(({ files }) => {
+          if (!files) {
+            return []
+          }
+
+
+              return   Object.keys(files).filter(name=>name.endsWith('.js'))
+          }).then(value=>this.setState({ exampleFiles: toArray(value)}))
+
+
+  }
+
+  render() {
+      const { exampleFiles } = this.state;
+
+console.log(exampleFiles)
+
   return (
-    <State initial={{ optionsShowing: false, examplesShowing: false }}>
+    <State initial={{ optionsShowing: false, examplesShowing: false , exampleFiles:exampleFiles }}>
   {({ state, setState }) => (
+
         <Container className="playground-container">
           <Navbar title="FUTILS" />
           <EditorsContainer className="editors-container">
@@ -72,6 +104,8 @@ const App = () => {
               {state.examplesShowing &&
                 <div className="sub-options">
                   TODO Examples List
+                {exampleFiles.map((file,id)=>
+                   <Button key={`${file}${id}`}onClick={()=> window.open(`/#/?gist=${GISTID}/${file}`, "_blank")} >{file}</Button>)}
                 </div>}
               {state.optionsShowing &&
                 <div className="sub-options">
@@ -97,6 +131,6 @@ const App = () => {
 </State>
 
   )
-}
+}}
 
 export default App

@@ -1,12 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
 import * as codeActions from '../actions/code'
 
 import Editor from '../components/Editor'
 import Pane from '../components/Pane'
 
 class InputContainer extends React.Component {
+
   componentDidMount() {
     const { gist } = this.props
     if (gist) {
@@ -41,7 +41,13 @@ class InputContainer extends React.Component {
           }
         })
         .then(file => {
-          this.props.changeValue(file.content, { gist })
+
+
+
+      this.props.changeValue(file.content, { gist})
+      ///HACK Reload page to populate gistFile in input
+window.location.reload();
+
         })
     }
   }
@@ -49,7 +55,7 @@ class InputContainer extends React.Component {
     const { props } = this
     return (
       <Pane className="editor input" title="Input">
-        <Editor onChange={props.changeValue} value={props.value} />
+        <Editor onChange={props.changeValue} value={props.value } />
       </Pane>
     )
   }
