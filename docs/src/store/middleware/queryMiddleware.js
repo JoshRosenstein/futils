@@ -10,14 +10,17 @@ export default function queryMiddleware({ getState }) {
       return next(action)
     }
 
+
     // Don't update the URL if this change is from a gist parameter.
-    if (action.payload.gist) {
-      return next(action)
-    }
+    // if (action.payload.gist) {
+    //   return next(action);
+    // }
 
     const query = {
-      q: base64.encode(action.payload.value),
-    }
+      q: base64.encode(action.payload.value)
+    };
+
+
 
     const scripts = getState().script.scripts
     const jsonStringify = getState().code.stringify
