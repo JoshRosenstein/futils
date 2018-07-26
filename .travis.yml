@@ -3,6 +3,18 @@ node_js:
   - "8"
 script: "npm run test:coverage"
 
-
 after_success:
   - cat ./coverage/lcov.info | ./node_modules/codecov/bin/codecov
+
+before_deploy:
+  - cd docs
+  - yarn install
+  - yarn run build
+  - cd ..
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GH_TOKEN
+  local_dir: ./docs/build
+  on:
+    branch: master
