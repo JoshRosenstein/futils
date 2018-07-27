@@ -3,7 +3,7 @@ import stringifyCompact from 'json-stringify-pretty-compact'
 import PropTypes from 'prop-types'
 import styled from 'react-emotion'
 import * as R from 'ramda'
-
+import {transform} from 'babel-standalone'
 
 const ramdaStr = `const {${R.keys(R).join(',')}} = R;`
 
@@ -59,7 +59,7 @@ const Evaluator = props => {
   try {
     /* eslint-disable */
     result = eval(
-      global.Babel.transform(props.value, {
+      transform(props.value, {
         presets: ['es2015', 'react', 'stage-0'],
       }).code,
     )

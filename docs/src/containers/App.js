@@ -5,8 +5,8 @@ import Navbar from '../components/Navbar'
 import OutputContainer from './OutputContainer'
 import CM from 'codemirror/lib/codemirror.css'
 import { Sidebar } from '../components/sidebar/components'
-import {toArray} from '@roseys/futils'
-import { Button,LinkButton } from '../components/Buttons'
+
+import { Button } from '../components/Buttons'
 
 import { State  } from 'react-powerplug'
 
@@ -83,7 +83,7 @@ class App extends React.Component {
 
 
               return   Object.keys(files).filter(name=>name.endsWith('.js'))
-          }).then(value=>this.setState({ exampleFiles: toArray(value)}))
+          }).then(value=>this.setState({ exampleFiles: value }))
 
 
   }

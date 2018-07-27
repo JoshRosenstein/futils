@@ -1,4 +1,4 @@
-import * as Babel from 'babel-standalone'
+
 import * as R from 'ramda'
 import * as F from '@roseys/futils/dist/futils'
 import React from 'react'
@@ -18,11 +18,10 @@ F.keys(F).forEach(method => {
   global[method] = F[method]
 })
 
-global.Babel = Babel
+
 global.F = F
 global.R = R
-global.React = React
-global.ReactDOM = ReactDOM
+
 
 const initialState = parse(history.location.search)
 
