@@ -418,7 +418,7 @@
     }
   });
 
-  var mapValuesWithValueKey_ = (function (fn, functor) {
+  var map_ = (function (fn, functor) {
     if (functor.map instanceof Function) {
       return functor.map(function (value, key) {
         return fn(value, key);
@@ -437,7 +437,7 @@
       });
     }
 
-    return mapValuesWithValueKey_(function (value) {
+    return map_(function (value) {
       return fn(value);
     }, functor);
   });
@@ -614,21 +614,8 @@
     }
 
     return reduce_(function (accumulated, value, key) {
-      return predicate(value) ? attach_(key, value, accumulated) : accumulated;
+      return predicate(value, key) ? attach_(key, value, accumulated) : accumulated;
     }, empty_(enumerable), enumerable);
-  });
-
-  var reject_ = (function (predicate, enumerable) {
-    if (enumerable.reject) {
-      return enumerable.reject(predicate);
-    }
-    return filter_(function (v) {
-      return !predicate(v);
-    }, enumerable);
-  });
-
-  var rejectNil_ = (function (obj) {
-    return reject_(isNil_, obj);
   });
 
   var fnOrError_ = (function (symbolName, f) {
@@ -666,6 +653,17 @@
     return curryN(pred.length, function () {
       return !pred.apply(undefined, arguments);
     });
+  });
+
+  var reject_ = (function (predicate, enumerable) {
+    if (enumerable.reject) {
+      return enumerable.reject(predicate);
+    }
+    return filter_(complement_(predicate), enumerable);
+  });
+
+  var rejectNil_ = (function (obj) {
+    return reject_(isNil_, obj);
   });
 
   var compose_ = (function () {
@@ -933,7 +931,7 @@
     }, fns);
   });
 
-  var map = /*#__PURE__*/curry2_(mapValuesWithValueKey_);
+  var map = /*#__PURE__*/curry2_(map_);
 
   var last_ = (function (list) {
     return nth_(-1, list);
@@ -1408,7 +1406,7 @@
 
   var mapValues = /*#__PURE__*/curry2_(mapValues_);
 
-  var mapValuesWithValueKey = /*#__PURE__*/curry2_(mapValuesWithValueKey_);
+  var mapValuesWithValueKey = /*#__PURE__*/curry2_(map_);
 
   var max = /*#__PURE__*/curry2_(max_);
 
@@ -1624,10 +1622,8 @@
 
   var round = /*#__PURE__*/curry2_(round_);
 
-  var mapValues$1 = /*#__PURE__*/curry2_(mapValues_);
-
   var sequence_ = (function (fns, value) {
-    return mapValues$1(function (fn) {
+    return map_(function (fn) {
       return applyTo_(value, fn);
     }, fns);
   });
@@ -1723,7 +1719,7 @@
   var test = /*#__PURE__*/curry2_(test_);
 
   var toCamelCase_ = (function (str) {
-    return str.trim().split(/[\s\u2000-\u206F\u2E00-\u2E7F\\'!"#$%&()*+,\-.\/:;<=>?@\[\]^_`{|}~]+/).reduce(function (res, word, i) {
+    return str.trim().split(/[\s\u2000-\u206F\u2E00-\u2E7F\\'!"#$%&()*+,\-./:;<=>?@[\]^_`{|}~]+/).reduce(function (res, word, i) {
       return word === '' ? res : res.concat(i > 0 ? word[0].toUpperCase() : word[0].toLowerCase(), word.slice(1));
     }, '');
   });

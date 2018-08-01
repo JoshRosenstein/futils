@@ -10,7 +10,7 @@ export default (predicate, enumerable) => {
 
   return reduce_(
     (accumulated, value, key) =>
-      predicate(value) ? attach_(key, value, accumulated) : accumulated,
+      predicate(value,key) ? attach_(key, value, accumulated) : accumulated,
     empty_(enumerable),
     enumerable
   )

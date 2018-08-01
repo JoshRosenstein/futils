@@ -32,4 +32,25 @@ describe('filter', () => {
     ).toEqual(new Map([['a', 1], ['c', 3]]))
   })
 
+  test('Filter By Keys Array', () => {
+    const words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present']
+    const pred=(word,idx) => idx > 3
+    expect(filter(pred)(words)).toEqual(['destruction', 'present'])
+  })
+
+  test('Filter By Keys Object', () => {
+    const obj = {
+      a1: 1,
+      a2: 2,
+      ccc: 3,
+      ddd: 4
+    }
+
+    const pred=(value,key) => key.startsWith('a')
+    expect(filter(pred)(obj)).toEqual({
+      a1: 1,
+      a2: 2,
+    })
+  })
+
 })
