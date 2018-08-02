@@ -1,98 +1,54 @@
 {
-  "presets":[
+  "presets": [
     [
       "env",
       {
-        "targets":{
-          "browsers":[
-            "Firefox ESR"
-          ]
-        },
-        "modules":false,
-        "loose":false
+        "modules": false,
       }
     ],
     "react",
     "stage-0"
   ],
-  "plugins":[
-
-  ],
-  "env":{
-    "test":{
-      "presets":[
-        [
-          "env"
-        ],
+  "plugins": [],
+  "env": {
+    "test": {
+      "presets": [
+        ["env"],
         "react",
         "stage-0"
       ],
-      "plugins":[
+      "plugins": [
         "transform-runtime"
       ]
     },
-    "es":{
-      "presets":[
-        [
-          "env",
-          {
-            "targets":{
-              "browsers":[
-                "last 1 safari version",
-                "last 1 Chrome versions"
-              ]
-            },
-            "modules":false
-          }
-        ]
-      ],
-      "compact":false,
-      "comments":true,
-      "plugins":[
-        "annotate-pure-calls"
-      ]
+    "es": {
+      "presets": ["react", "stage-0", [
+        "env", {
+          "useBuiltIns": false,
+          "modules": false,
+          "targets": {
+            "node": 8
+          },
+        }
+      ]],
+      "compact": false,
+      "comments": true,
     },
-    "cjs":{
-      "presets":[[
-                    "env",
-                    {
-                        "targets": { "browsers": [
-                          "last 1 safari version",
-                          "last 1 Chrome versions"] },
-
-                    },
-                ],
-        ["react"]
-      ],
-      "compact":false,
-      "comments":false,
-      "plugins":[
-        "annotate-pure-calls"
-      ]
+    "cjs": {
+      "presets": ["env", "stage-0"],
+      "compact": false,
+      "comments": false,
+      "plugins": ["babel-plugin-transform-es2015-modules-simple-commonjs"]
     },
-    "temp":{
-      "presets":[],
-      "compact":false,
-      "comments":false,
-      "plugins":["transform-name-export-default"]
+    "temp": {
+      "presets": ["env", "stage-0"],
+      "compact": false,
+      "comments": false,
+      "plugins": ["transform-name-export-default"]
     },
-    "raw":{
-      "presets":[
-        [
-          "env",
-          {
-            "targets":{
-              "browsers":[
-                "last 2 versions",
-                "ie >= 9"
-              ]
-            }
-          }
-        ],
-        "react",
-        "stage-0"
-      ],
-      "plugins":[
+    "raw": {
+      "presets": ["env", "stage-0"],
+      "plugins": [
         "transform-runtime"
       ]
     }

@@ -12,6 +12,5 @@ import xPairs from './xPairs'
 
 const getPredicates = compose_(map(juxt_([apply(compose_), last])),xPairs)
 
-const dispatchWith = converge_(call(cond), [getPredicates])
 
-export default dispatchWith
+export default converge_(call(cond), [getPredicates])

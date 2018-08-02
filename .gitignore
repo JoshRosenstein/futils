@@ -1,6 +1,7 @@
 /coverage
 /demo/dist
 /lib
+/dist/
 /es
 node_modules/
 *.log
