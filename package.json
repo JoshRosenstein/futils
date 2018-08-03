@@ -79,6 +79,7 @@
     "rollup-plugin-uglify": "4.0.0"
   },
   "jest": {
+    "testURL": "http://localhost",
     "testMatch": [
       "**/__tests__/**/*.js?(x)",
       "**/?(*.)+(spec).js?(x)"
@@ -101,11 +102,9 @@
       "./rollup.split.js"
     ]
   },
-  "bundlesize": [
-    {
-      "path": "dist/futils.min.js"
-    }
-  ],
+  "bundlesize": [{
+    "path": "dist/index.min.js"
+  }],
   "lint-staged": {
     "*.js": [
       "prettier --no-semi --single-quote --write",
