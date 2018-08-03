@@ -1,6 +1,6 @@
 {
   "name": "@roseys/futils",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "My JavaScript utils library",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -45,15 +45,14 @@
     "url": "https://github.com/JoshRosenstein/futils/issues"
   },
   "homepage": "https://github.com/JoshRosenstein/futils#README",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-jest": "^22.4.3",
     "babel-plugin-annotate-pure-calls": "^0.3.0",
-    "babel-plugin-transform-es2015-modules-simple-commonjs": "^0.3.0",
     "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-transform-es2015-modules-simple-commonjs": "^0.3.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-minify": "^0.4.3",
@@ -102,9 +101,11 @@
       "./rollup.split.js"
     ]
   },
-  "bundlesize": [{
-    "path": "dist/futils.min.js"
-  }],
+  "bundlesize": [
+    {
+      "path": "dist/futils.min.js"
+    }
+  ],
   "lint-staged": {
     "*.js": [
       "prettier --no-semi --single-quote --write",
