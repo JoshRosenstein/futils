@@ -48,37 +48,35 @@ const outputs = [
   {
     format: 'umd',
     name: 'F',
-    file: removeMin(pkg.unpkg),
-    plugins: [terser(terserConfig)]
-  }, {
+    file: pkg.unpkg,
+    plugins: [terser(terserConfig)],  exports: 'named',
+  },
+  {
     format: 'cjs',
-    interop:false,
     plugins: [terser(terserConfig)],
     file: 'dist/index.min.js',
+  exports: 'named',
   },
   {
     format: 'cjs',
       interop:false,
     plugins: [cleanup()],
     file: 'dist/index.js',
+  exports: 'named',
   },
   {
     format: 'es',
       interop:false,
     plugins: [cleanup()],
     file: 'dist/index.es.js',
-  },
-  {
-    format: 'es',
-      interop:false,
-    plugins: [terser()],
-    file: 'dist/index.es.min.js',
+  exports: 'named',
   }
 ]
 
 
 export default outputs.map(({ fileExt, plugins = [],babelc={},...output }) => ({
   input: 'src/index.js',
+
 output,
   plugins: [
     babel(deafultBabel(babelc)), ...plugins, filesize()]
