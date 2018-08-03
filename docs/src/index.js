@@ -1,6 +1,6 @@
 
 import * as R from 'ramda'
-import * as F from '@roseys/futils/dist/futils'
+import * as F from '@roseys/futils'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import base64 from 'base-64'
