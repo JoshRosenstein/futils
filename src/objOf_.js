@@ -4,7 +4,7 @@ import reverse_ from './reverse_'
 import toArray_ from './toArray_'
 
 export default (keys, value) =>{
-  if (typeof keys === 'string') {
+  if (typeof keys === 'string' && !/\s/g.test(keys)) {
     keys = keys.trim().split('.')
   }
   return reduceValues_(
