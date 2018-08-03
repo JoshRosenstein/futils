@@ -104,11 +104,9 @@
       "./rollup.split.js"
     ]
   },
-  "bundlesize": [
-    {
-      "path": "dist/index.min.js"
-    }
-  ],
+  "bundlesize": [{
+    "path": "dist/futils.min.js"
+  }],
   "lint-staged": {
     "*.js": [
       "prettier --no-semi --single-quote --write",
