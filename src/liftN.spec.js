@@ -18,6 +18,7 @@ const check = (n, product) => {
 describe('liftN', () => {
   const addN = (...args)=>args.reduce((a, b) => a + b, 0)
   const addN3 = liftN(3, addN)
+  const addN4 = liftN(4, addN)
 
   it('Works', () => {
     expect(
@@ -29,6 +30,17 @@ describe('liftN', () => {
     ).toEqual([6, 15])
   })
 
+
+  it('can lift functions of any arity', () => {
+    expect(
+      addN3([1, 10], [2], [3])
+    ).toEqual([6, 15])
+
+    expect(
+      addN4([1, 10], [2], [3], [40])
+    ).toEqual([46, 55])
+
+  })
   test('returns the cartesian product for arity = 1', () => {
     const product = [[1], [2], [3], [4]]
     check(1, product)
@@ -121,7 +133,7 @@ describe('liftN', () => {
       [ 4, 4, 2 ],
       [ 4, 4, 3 ],
       [ 4, 4, 4 ] ]
-    
+
     check(3, product)
   })
 
