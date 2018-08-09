@@ -1,8 +1,10 @@
-export default (fns, value) => {
-  let i = 0
-  const length = fns.length
-  while (i < length && !fns[i](value)) {
-    i += 1
-  }
-  return i < length
-} 
+import reduceWhile_ from './reduceWhile_'
+import toArray from './toArray'
+
+export default (fns, ...args) =>
+  reduceWhile_(
+    acc => acc === false,
+    (acc, fn) => fn(...args),
+    false,
+    toArray(fns)
+  )
