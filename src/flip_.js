@@ -1,16 +1,7 @@
 
-import curryN_ from './curryN_'
-// export default (fn, left, right) => fn(right, left)
-// export default (fn) =>{
-//   return function() {
-//     return fn.apply(fn,[].slice.call(arguments).reverse())
-//   }
-// }
+import curry from './curry'
 
-// Uses Ramdas to flip curried or non-curried Fns
-export default fn => curryN_(fn.length, function(a, b) {
-  const args = Array.prototype.slice.call(arguments, 0)
-  args[0] = b
-  args[1] = a
-  return fn.apply(this, args)
-})
+export default   fn =>
+  curry(
+    (x, y, ...args) => fn(y, x, ...args)
+  )
