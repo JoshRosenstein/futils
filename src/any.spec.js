@@ -3,7 +3,7 @@ import is from './is'
 import either from './either'
 import both from './both'
 
- 
+
 describe('any', () => {
   const isBool = is('Boolean')
   const isTruthy = either(x=>Boolean(x), x=>x===0)
@@ -26,6 +26,25 @@ describe('any', () => {
     const anyGt5 = any(i => i > 5)
     expect(anyGt5([1, 2, 3, 4, 5, 6])).toBeTruthy()
     expect(anyGt5([1, 2, 3, 4])).toBeFalsy()
+  })
+  it('testObj', () => {
+    const isBiggerThanZero = x => x > 0
+
+    expect(any(isBiggerThanZero, { a: 0 })).toBe(false)
+    expect(any(isBiggerThanZero, { a: 0, b: 0, c: 1 })).toBe(true)
+    expect(any(isBiggerThanZero, { a: 1, b: 0, c: 0 })).toBe(true)
+    expect(any(isBiggerThanZero, { a: 0, b: 1, c: 0 })).toBe(true)
+    expect(any(isBiggerThanZero, { a: 0, b: 0, c: 0 })).toBe(false)
+    expect(any(isBiggerThanZero)({ a: 0, b: 0, c: 0 })).toBe(false)
+    expect(any(isBiggerThanZero)({ a: 0, b: 1, c: 0 })).toBe(true)
+    expect(any(isBiggerThanZero, null)).toBe(false)
+    expect(any(isBiggerThanZero, undefined)).toBe(false)
+    expect(any(isBiggerThanZero, {})).toBe(false)
+  })
+  it('testArray', () => {
+    expect(any(x => x > 3, [1, 2, 3])).toBe(false)
+    expect(any(x => x > 3, [1, 2, 3, 4])).toBe(true)
+    expect(any(x => true, [])).toBe(false)
   })
 
 })
