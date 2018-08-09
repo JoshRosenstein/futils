@@ -7,5 +7,6 @@ describe('contains', () => {
     expect(contains({ name: 'Fred' }, [{ name: 'Fred' }])).toBeTruthy()
     expect(contains('a', 'va')).toBeTruthy()
     expect(contains([42], [[42]])).toBeTruthy()
+    expect(contains('ba', 'banana')).toBeTruthy()
   })
 })
