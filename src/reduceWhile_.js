@@ -1,7 +1,9 @@
 import toPairs_ from './toPairs_'
 import type_ from './type_'
+import isDefined_ from './isDefined_'
 
 export default (pred,reducer, initial, functor) => {
+  if(!isDefined_(functor)) return initial
   let fn
   let predfn
   switch (type_(functor)) {
@@ -11,19 +13,19 @@ export default (pred,reducer, initial, functor) => {
     break
   case 'Object':
   case 'Map':
-    fn = (acc, [key, value]) => reducer(acc, value, key)
+    fn = (acc, [key, value],idx) => reducer(acc, value, key, idx)
     functor = toPairs_(functor)
-    predfn = (acc, [key, value]) => pred(acc, value, key)
+    predfn = (acc, [key, value],idx) => pred(acc, value, key, idx)
     break
   case 'Set':
-    fn = (acc, [, value]) => reducer(acc, value)
+    fn = (acc, [, value],idx) => reducer(acc, value,idx)
     functor = toPairs_(functor)
-    predfn = (acc, [, value]) => pred(acc, value)
+    predfn = (acc, [, value],idx) => pred(acc, value, idx)
     break
   case 'String':
-    fn = (acc, [key, value]) => reducer(acc, value, key)
+    fn = (acc, [key, value],idx) => reducer(acc, value, key,idx)
     functor = toPairs_(functor.split(''))
-    predfn = (acc, [key, value]) => pred(acc, value, key)
+    predfn = (acc, [key, value],idx) => pred(acc, value, key, idx)
     break
 
   default: {
@@ -39,7 +41,6 @@ export default (pred,reducer, initial, functor) => {
   for (let i = 0; i < length; ++i) {
     const a = functor[i]
     if (!predfn(b, a, i)) break
-
     b = fn(b, a, i)
   }
 
