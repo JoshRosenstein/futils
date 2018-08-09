@@ -1,14 +1,14 @@
-import fnOrError_ from './fnOrError_'
+import unapply_ from './unapply_'
+import partial_ from './partial_'
 
-const concat = (f, ...args) => f.concat(...args)
 
+// curryN :: Number -> ((a, b, ...) -> z) -> a -> b -> ... -> z
+const curryN_ = (n, f) =>
+  n < 1 ? f : unapply_(args => {
+    const left = n - args.length
+    return left > 0
+      ? curryN_(left, partial_(f, args))
+      : f(...args) 
+  })
 
-const notFnErrPrefix = '`fn` in `curry(fn, ...args)`'
-const curryN = (executeArity, fn, ...curriedArgs) => (...args) => {
-  const concatedArgs = concat(curriedArgs, args)
-  return !(concatedArgs.length >= executeArity || !executeArity)
-    ?  curryN(...concat([executeArity, fnOrError_(notFnErrPrefix, fn)], concatedArgs))
-    :  fnOrError_(notFnErrPrefix, fn)(...concatedArgs)
-}
-
-export default curryN
+export default curryN_
