@@ -1,2 +1,2 @@
 // aka spread
-export default (fn, arg)=> fn.apply(fn, arg)
+export default (fn, arg)=> fn(...arg)

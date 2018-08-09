@@ -1,2 +1,2 @@
-
-export default fn=>(...args)=> fn(Array.prototype.slice.call(args, 0))
+// unapply :: ([a] -> b) -> a... -> b
+export default f => (...args) =>f(args)
