@@ -1,4 +1,4 @@
-import dispatchWith from './dispatchWith_'
+import dispatchWith from './dispatchWith'
 import complement from './complement'
 import equals from './equals'
 import F from './F'
