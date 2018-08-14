@@ -7,5 +7,5 @@ export default value => {
     return 'undefined'
   }
 
-  return value.constructor.name
+  return Object.prototype.toString.call(value).slice(8, -1)
 }
