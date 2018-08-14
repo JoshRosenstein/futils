@@ -1,17 +1,9 @@
-import is_ from './is_'
 import replace_ from './replace_'
-import toString_ from './toString_'
-import isNil_ from './isNil_'
+import isString from './isString'
+
 
 export default x => {
-  if (isNil_(x)) {
-    return x
-  }
-  if (is_('String',x)) {
-    const xx = parseInt(x)
-
-    return replace_(toString_(xx), toString_(xx - 1), x)
-  } 
-  return x - 1
-  
+  const xx = parseFloat(x)
+  return !xx? x:isString(x)?replace_(`${xx}`, `${xx-1}`, x):xx-1
 }
+// export default (v)=>add_(-1,v)

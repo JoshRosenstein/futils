@@ -1,7 +1,8 @@
 import path_ from './path_'
 import mapValues_ from './mapValues_'
-import toArray_ from './toArray_'
-import juxt_ from './juxt_'
+import splitWhenNoSpace_ from './splitWhenNoSpace_'
 
 export default (keychains, functor) =>
-  mapValues_(juxt_(mapValues_(p=>o=>path_(p,o), keychains)), functor)
+  mapValues_(obj=>
+    mapValues_(p=>path_(p,obj), splitWhenNoSpace_(keychains,',')),
+  functor)

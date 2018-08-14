@@ -1,8 +1,3 @@
+import isBoolean from './isBoolean'
 
-
-export default (condition, whenTrueFn,input) => {
-  const flag = typeof condition === 'boolean' ? condition : condition(input)
-  return flag? whenTrueFn(input):input
-
-}
- 
+export default (condition, whenTrueFn,input) => (isBoolean(condition) ? condition : condition(input))? whenTrueFn(input):input

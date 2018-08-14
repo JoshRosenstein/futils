@@ -2,8 +2,26 @@ import cond from './cond'
 import always from './always'
 import T from './T'
 import equals from './equals'
+import F from './F'
+import identity from './identity'
 
 describe('cond', () => {
+  it('should call fn if predicate satisfies', () => {
+    const fns = [
+      [jest.fn(F), jest.fn(identity)],
+      [jest.fn(T), jest.fn(identity)],
+      [jest.fn(T), jest.fn(identity)]
+    ]
+
+    expect(cond(fns)('test')).toBe('test')
+    expect(fns[0][0]).toBeCalledWith('test')
+    expect(fns[0][1]).not.toBeCalled()
+    expect(fns[1][0]).toBeCalledWith('test')
+    expect(fns[1][1]).toBeCalledWith('test')
+    expect(fns[2][0]).not.toBeCalled()
+    expect(fns[2][1]).not.toBeCalled()
+  })
+
   test('returns value from callback for matched condition', () => {
     const val = cond([
       [i => i === 3, i => 3],

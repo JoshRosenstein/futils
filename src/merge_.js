@@ -1,6 +1,6 @@
 import type_ from './type_'
 import isNil_ from './isNil_'
-
+ 
 export default (left, right) => {
   if(isNil_(left)) return right
   if(isNil_(right)) return left

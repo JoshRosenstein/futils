@@ -91,7 +91,7 @@ class App extends React.Component {
   render() {
       const { exampleFiles } = this.state;
 
-console.log(exampleFiles)
+
 
   return (
     <State initial={{ optionsShowing: false, examplesShowing: false , exampleFiles:exampleFiles }}>

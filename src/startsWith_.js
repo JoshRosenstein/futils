@@ -1,5 +1,4 @@
-import test_ from './test_'
-import escapeString_ from './escapeString_'
+import take_ from './take_'
+import equals_ from './equals_'
 
-
-export default (subset, set) =>  set.startsWith(subset)
+export default (prefix, list) =>  equals_(take_(prefix.length, list),prefix)

@@ -31,7 +31,7 @@
     "test": "jest --coverage --no-cache --ci --runInBand",
     "test:wcache": "jest --coverage --ci --runInBand",
     "test:quick": "jest --onlyChanged --runInBand",
-    "test:watch": "jest --watchAll",
+    "test:watch": "jest --watchAll --runInBand",
     "test:coverage": "jest --coverage",
     "reinstall": "yarn run clean:modules && yarn",
     "lint": "eslint src/*.js --fix"

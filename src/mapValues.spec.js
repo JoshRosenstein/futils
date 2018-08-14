@@ -1,6 +1,14 @@
 import mapValues from './mapValues'
 
 describe('mapValues', () => {
+
+  it('interprets ((->) r) as a functor', () => {
+    const f = a=>a - 1
+    const g = b=> b * 2
+    const h = mapValues(f, g)
+    expect(h(10)).toEqual( (10 * 2) - 1)
+  })
+
   test('String', () => {
     const a = mapValues(value => `a${value}`)('abc')
     const eA = 'aaabac'

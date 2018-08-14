@@ -1,43 +1,7 @@
 import type_ from './type_'
+import has_ from './has_'
+import keys_ from './keys_'
 
-// Extracted out of jest
-function hasKey_(obj, key) {
-  return Object.prototype.hasOwnProperty.call(obj, key)
-}
-
-function keys_(obj, isArray) {
-  const allKeys = (function(o) {
-    const keys = []
-    for (const key in o) {
-      if (hasKey_(o, key)) {
-        keys.push(key)
-      }
-    }
-    return keys.concat(
-      (Object.getOwnPropertySymbols(o)).filter(
-
-        symbol => Object.getOwnPropertyDescriptor(o, symbol).enumerable
-      )
-    )
-  })(obj)
-
-  if (!isArray) {
-    return allKeys
-  }
-
-  const extraKeys = []
-  if (allKeys.length === 0) {
-    return allKeys
-  }
-
-  for (let x = 0; x < allKeys.length; x++) {
-    if (!allKeys[x].match(/^[0-9]+$/)) {
-      extraKeys.push(allKeys[x])
-    }
-  }
-
-  return extraKeys
-}
 
 const _equals_ = (a, b, aStack=[], bStack=[]) => {
   if (a === b) return true
@@ -59,7 +23,7 @@ const _equals_ = (a, b, aStack=[], bStack=[]) => {
   case 'RegExp': {
     return a.toString() === b.toString()
   }
-  default: 
+  default:
   }
 
   if (typeof a !== 'object' || typeof b !== 'object') {
@@ -95,11 +59,11 @@ const _equals_ = (a, b, aStack=[], bStack=[]) => {
   }
 
   // Deep compare objects.
-  const aKeys = keys_(a, typeA === 'Array')
+  const aKeys = keys_(a)
   let key
   size = aKeys.length
 
-  const bKeys = keys_(b, typeB === 'Array')
+  const bKeys = keys_(b)
   if (keys_(b, typeB === 'Array').length !== size) {
     return false
   }
@@ -108,7 +72,7 @@ const _equals_ = (a, b, aStack=[], bStack=[]) => {
     key = aKeys[size]
 
     // Deep compare each member
-    result = hasKey_(b, key) && _equals_(a[key], b[key], aStack, bStack)
+    result = has_(key,b) && _equals_(a[key], b[key], aStack, bStack)
 
     if (!result) {
       return false

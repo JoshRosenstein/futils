@@ -8,7 +8,7 @@ describe('startsWith', () => {
 
   test('False Sentence', () => {
     const a = startsWith('period')('I have no period')
-    expect(a).toBeFalsy
+    expect(a).toBeFalsy()
   })
 
   test('Curried', () => {

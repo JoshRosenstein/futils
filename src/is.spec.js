@@ -1,6 +1,20 @@
 import is from './is'
+import isObject from './isObject'
+import isFunction from './isFunction'
+import isObjLike from './isObjLike'
+
 
 describe('is', () => {
+  test('isObjLike', () => {
+
+    expect(isObjLike({})).toBeTruthy()
+    expect(isObjLike([])).toBeTruthy()
+    expect(isObjLike((a) => ({'result':a}))).toBeFalsy()
+    expect(isObjLike(null)).toBeFalsy()
+    expect(isObjLike(undefined)).toBeFalsy()
+
+  })
+
   it('isNull', () => {
     const a = is('null')(null)
     expect(a).toBeTruthy()
@@ -31,7 +45,7 @@ describe('is', () => {
   })
 
   it('isObject', () => {
-    const a = is('Object')({})
+    const a = isObject({})
     expect(a).toBeTruthy()
   })
 
@@ -39,4 +53,9 @@ describe('is', () => {
     const a = is('Number')(1)
     expect(a).toBeTruthy()
   })
+
+  it('isFunction', () => {
+    expect(isFunction(()=>1)).toBeTruthy()
+  })
+
 })

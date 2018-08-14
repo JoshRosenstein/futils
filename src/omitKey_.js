@@ -1,5 +1,4 @@
 import reduce_ from './reduce_'
-import is_ from './is_'
 import attach_ from './attach_'
 import empty_ from './empty_'
 
