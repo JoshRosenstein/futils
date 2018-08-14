@@ -1,6 +1,6 @@
 {
   "name": "@roseys/futils",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "modulename": "futils",
   "description": "My JavaScript utils library",
   "main": "lib/index.js",
@@ -104,9 +104,11 @@
       "./rollup.split.js"
     ]
   },
-  "bundlesize": [{
-    "path": "dist/futils.min.js"
-  }],
+  "bundlesize": [
+    {
+      "path": "dist/futils.min.js"
+    }
+  ],
   "lint-staged": {
     "*.js": [
       "prettier --no-semi --single-quote --write",
