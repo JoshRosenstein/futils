@@ -1,6 +1,6 @@
 import reduce_ from './reduce_'
-import ap_ from './ap'
-import curryN_ from './curryN'
+import ap_ from './ap_'
+import curryN_ from './curryN_'
 import mapValues_ from './mapValues_'
 
 export default (arity, fn) =>

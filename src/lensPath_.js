@@ -1,8 +1,8 @@
-import assocPath from './assocPath'
-import lens_ from './lens'
+import assocPath_ from './assocPath_'
+import lens_ from './lens_'
 import path_ from './path_'
 
 
 export default
 k =>
-  lens_(o=>path_(k,o), assocPath(k))
+  lens_(o=>path_(k,o), (v,o)=>assocPath_(k,v,o))

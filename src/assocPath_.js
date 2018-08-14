@@ -2,7 +2,8 @@ import assoc_ from './assoc'
 import splitWhenNoSpace_ from './splitWhenNoSpace_'
 import empty_ from './empty_'
 
-const assocPath=(path,val, obj) => {
+
+export default (path,val, obj) => {
   const empt=empty_(obj)
   path=splitWhenNoSpace_(path,'.')
   if (path.length===0){
@@ -13,5 +14,3 @@ const assocPath=(path,val, obj) => {
 
   return  inner(path,val,obj)
 }
-
-export default assocPath

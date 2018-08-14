@@ -33,4 +33,20 @@ describe('tryCatch', () => {
 
     expect(tryCatch(tryer, catcher)).toThrow()
   })
+
+  it('Curried', () => {
+
+    const tryer = jest.fn((a,b,c) => a+b+c)
+
+    const catcher = jest.fn((a,b,c) => a+b+c)
+    let result
+
+    expect(() => {
+      result = tryCatch(tryer, catcher)(1)(2)(3)
+    }).not.toThrow()
+    expect(result).toBe(6)
+
+
+  })
+
 })

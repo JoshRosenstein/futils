@@ -1,8 +1,10 @@
-export default (tryer, catcher) => (...args) => {
+import curryN_ from './curryN_'
+
+export default (tryer, catcher) => curryN_(tryer.length,(...args) => {
   try {
-    return tryer.apply(this, args)
+    return tryer(...args)
   } catch (e) {
-    args.unshift(e)
-    return catcher.apply(this, args)
+    return catcher(e,...args)
   }
 }
+)
