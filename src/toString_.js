@@ -1,5 +1,6 @@
 
 import type_ from './type_'
+import isFunction from './isFunction'
 
 export default value => {
   const t= type_(value)
@@ -10,7 +11,7 @@ export default value => {
     return value
   }
 
-  return  typeof value.toString === 'function'
+  return isFunction(value.toString)
     ? value.toString()
     : Object.prototype.toString.apply(value)
 }

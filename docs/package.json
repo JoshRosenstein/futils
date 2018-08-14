@@ -6,7 +6,7 @@
   "main": "src/index.js",
   "homepage": "https://joshrosenstein.github.io/futils",
   "dependencies": {
-    "@roseys/futils": "file:../",
+    "@roseys/futils": "file:../lib",
     "babel-standalone": "6.26.0",
     "base-64": "0.1.0",
     "codemirror": "5.39.2",
