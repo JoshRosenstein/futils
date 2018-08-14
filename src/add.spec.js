@@ -8,4 +8,9 @@ describe('add', () => {
   it('is curried', () =>
     expect(add(1)(2)).toEqual(3)
   )
+
+  it('adds two numbers', () =>
+    expect(add('1')('2')).toEqual(3)
+  )
+
 })
