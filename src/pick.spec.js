@@ -28,4 +28,19 @@ describe('Pick', () => {
       beta: '2'
     })
   })
+
+  test('pick with values of 0', () => {
+    expect(
+      pick(['alpha', 'feta'])({
+        alpha: '1',
+        beta: '2',
+        delta: '2',
+        feta: 0
+      })
+    ).toEqual({
+      alpha: '1',
+      feta: 0
+    })
+  })
+
 })
