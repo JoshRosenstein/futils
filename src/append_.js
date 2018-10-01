@@ -1,9 +1,10 @@
 import type_ from './type_'
- 
+
 
 export default (value, orderedList) =>
 {
   switch (type_(orderedList)) {
+  case 'Number':
   case 'String': {
     return `${orderedList}${value}`
   }
