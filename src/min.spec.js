@@ -13,8 +13,6 @@ describe('min', () => {
   })
 
   it('Works with string Arrays', () => {
-    const a = min(['a'], ['b'])
-    const eA = 'a'
     expect(min(['a'], ['b'])).toEqual('a')
     expect(min(['c', 'e', 'd'], ['f'])).toEqual('c')
   })
