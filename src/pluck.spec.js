@@ -2,19 +2,18 @@ import pluck from './pluck'
 
 describe('pluck', () => {
   test('Object', () => {
-    expect(pluck('val', { a: { val: 3 }, b: { val: 5 } })).toEqual({
+    expect(pluck('val', {a: {val: 3}, b: {val: 5}})).toEqual({
       a: 3,
-      b: 5
+      b: 5,
     })
   })
 
   it('returns a function that maps the appropriate property over an array', () => {
     const people = [
-      { name: 'Fred', age: 23 },
-      { name: 'Wilma', age: 21 },
-      { name: 'Pebbles', age: 2 }
+      {name: 'Fred', age: 23},
+      {name: 'Wilma', age: 21},
+      {name: 'Pebbles', age: 2},
     ]
-
 
     expect(pluck('name', people)).toEqual(['Fred', 'Wilma', 'Pebbles'])
   })
@@ -24,8 +23,6 @@ describe('pluck', () => {
   })
 
   it('Array Objects', () => {
-    expect(pluck('a', [{ a: 1 }, { a: 2 }])).toEqual([1, 2])
+    expect(pluck('a', [{a: 1}, {a: 2}])).toEqual([1, 2])
   })
-
-
 })

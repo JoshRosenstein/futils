@@ -1,7 +1,6 @@
 import dropLast from './dropLast'
 
 describe('dropLast', () => {
-
   test('returns all but last N elements', () => {
     expect(dropLast(2)([1, 2, 3, 4, 5, 6])).toEqual([1, 2, 3, 4])
     expect(dropLast(2)('123456')).toEqual('1234')
@@ -16,5 +15,4 @@ describe('dropLast', () => {
     expect(dropLast(-8)([1, 2, 3, 4])).toEqual([1, 2, 3, 4])
     expect(dropLast(-8)('1234')).toEqual('1234')
   })
-
 })

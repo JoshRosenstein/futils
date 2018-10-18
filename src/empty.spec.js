@@ -9,7 +9,7 @@ describe('empty', () => {
   })
 
   it('Object (filled)', () => {
-    const a = empty({ aaa: 'aaa' })
+    const a = empty({aaa: 'aaa'})
     const eA = {}
 
     expect(a).toEqual(eA)

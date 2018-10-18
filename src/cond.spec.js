@@ -10,7 +10,7 @@ describe('cond', () => {
     const fns = [
       [jest.fn(F), jest.fn(identity)],
       [jest.fn(T), jest.fn(identity)],
-      [jest.fn(T), jest.fn(identity)]
+      [jest.fn(T), jest.fn(identity)],
     ]
 
     expect(cond(fns)('test')).toBe('test')
@@ -24,9 +24,9 @@ describe('cond', () => {
 
   test('returns value from callback for matched condition', () => {
     const val = cond([
-      [i => i === 3, i => 3],
-      [i => i > 1, i => 2],
-      [i => true, i => 1]
+      [i => i === 3, () => 3],
+      [i => i > 1, () => 2],
+      [() => true, () => 1],
     ])
     expect(val(1)).toBe(1)
     expect(val(2)).toBe(2)
@@ -34,7 +34,7 @@ describe('cond', () => {
   })
 
   test('returns undefined when no one condition is true', () => {
-    const val = cond([[i => i === 3, i => 3]])
+    const val = cond([[i => i === 3, () => 3]])
     expect(val(4)).toBe(undefined)
   })
 
@@ -45,9 +45,9 @@ describe('cond', () => {
 
   test('R', () => {
     const fn = cond([
-      [equals(0),   always('water freezes at 0°C')],
+      [equals(0), always('water freezes at 0°C')],
       [equals(100), always('water boils at 100°C')],
-      [T,           temp => `nothing special happens at ${  temp  }°C`]
+      [T, temp => `nothing special happens at ${temp}°C`],
     ])
 
     expect(fn(0)).toBe('water freezes at 0°C')

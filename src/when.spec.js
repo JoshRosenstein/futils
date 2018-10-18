@@ -11,4 +11,3 @@ describe('When', () => {
     expect(getEven(2)).toBe(2)
   })
 })
- 

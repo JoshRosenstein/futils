@@ -5,4 +5,3 @@ describe('xPairs', () => {
     expect(xPairs(1, [1, 2])).toEqual([[1, 1], [1, 2]])
   })
 })
- 

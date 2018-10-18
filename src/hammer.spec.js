@@ -13,9 +13,6 @@ describe('hammer', () => {
       id: 1,
       name: 'Kurtis Rainbolt-Greene',
       age: 26,
-    },
-    )
-
-
+    })
   })
 })

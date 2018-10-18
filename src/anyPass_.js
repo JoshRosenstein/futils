@@ -6,5 +6,5 @@ export default (fns, ...args) =>
     acc => acc === false,
     (acc, fn) => fn(...args),
     false,
-    toArray(fns)
+    toArray(fns),
   )

@@ -1,6 +1,5 @@
 import lift from './lift'
 
-
 const array = [1, 2, 3, 4]
 
 const check = (n, identity, product) => {
@@ -9,12 +8,11 @@ const check = (n, identity, product) => {
   while (i > 0) {
     expect(typeof g).toEqual('function')
     g = g(array)
-    i-=1
+    i -= 1
   }
   expect(Array.isArray(g)).toBeTruthy()
   expect(g).toEqual(product)
 }
-
 
 describe('lift', () => {
   test('returns the cartesian product for arity = 1', () => {
@@ -78,5 +76,4 @@ describe('lift', () => {
     }
     check(5, identity, product)
   })
-
 })

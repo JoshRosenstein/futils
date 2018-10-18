@@ -1,9 +1,9 @@
+// @flow
 import type_ from './type_'
 import has_ from './has_'
 import keys_ from './keys_'
 
-
-const _equals_ = (a, b, aStack=[], bStack=[]) => {
+const eq = (a, b, aStack = [], bStack = []) => {
   if (a === b) return true
   if (a == null || b == null) return a === b
   let result = true
@@ -12,18 +12,18 @@ const _equals_ = (a, b, aStack=[], bStack=[]) => {
   if (typeA !== typeB) return false
 
   switch (typeA) {
-  case 'String':
-  case 'Number': {
-    return a.valueOf() === b.valueOf()
-  }
-  case 'Boolean':
-  case 'Date': {
-    return +a === +b
-  }
-  case 'RegExp': {
-    return a.toString() === b.toString()
-  }
-  default:
+    case 'String':
+    case 'Number': {
+      return a.valueOf() === b.valueOf()
+    }
+    case 'Boolean':
+    case 'Date': {
+      return +a === +b
+    }
+    case 'RegExp': {
+      return a.toString() === b.toString()
+    }
+    default:
   }
 
   if (typeof a !== 'object' || typeof b !== 'object') {
@@ -51,7 +51,7 @@ const _equals_ = (a, b, aStack=[], bStack=[]) => {
     }
 
     while (size--) {
-      result = _equals_(a[size], b[size], aStack, bStack)
+      result = eq(a[size], b[size], aStack, bStack)
       if (!result) {
         return false
       }
@@ -64,7 +64,7 @@ const _equals_ = (a, b, aStack=[], bStack=[]) => {
   size = aKeys.length
 
   const bKeys = keys_(b)
-  if (keys_(b, typeB === 'Array').length !== size) {
+  if (bKeys.length !== size) {
     return false
   }
 
@@ -72,7 +72,7 @@ const _equals_ = (a, b, aStack=[], bStack=[]) => {
     key = aKeys[size]
 
     // Deep compare each member
-    result = has_(key,b) && _equals_(a[key], b[key], aStack, bStack)
+    result = has_(key, b) && eq(a[key], b[key], aStack, bStack)
 
     if (!result) {
       return false
@@ -85,4 +85,4 @@ const _equals_ = (a, b, aStack=[], bStack=[]) => {
   return result
 }
 
-export default (a,b)=>_equals_(a,b)
+export default (a: any, b: any): boolean => eq(a, b)

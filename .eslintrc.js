@@ -1,14 +1,26 @@
 module.exports = {
-  extends: ['plugin:import/errors', 'prettier', 'prettier/flowtype'],
-  plugins: ['import', 'prettier', 'flowtype'],
+  extends: [
+    'plugin:import/errors',
+    'prettier',
+    'prettier/flowtype',
+    'plugin:flowtype/recommended',
+  ],
+  plugins: ['import', 'prettier', 'flowtype', 'babel'],
   parser: 'babel-eslint',
+  settings: {
+    'import/resolver': {
+      'babel-module': {
+        alias: {'^types/(.*)': './types/$1'},
+      },
+    },
+  },
   rules: {
     'arrow-body-style': 2,
     'flowtype/boolean-style': 2,
     'flowtype/no-primitive-constructor-types': 2,
     'flowtype/require-valid-file-annotation': 2,
     'import/no-duplicates': 2,
-    'import/order': 1,
+    'import/order': 0,
     'no-console': 1,
     'no-unused-vars': 2,
     'prettier/prettier': [

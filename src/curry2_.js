@@ -1,7 +1,4 @@
-// export default f => function curried(a, b) {
-//   return arguments.length >= 2 ? f(a, b) : b2 => f(a, b2)
-// }
 import curryN_ from './curryN_'
+const curry2_ = fn => curryN_(2, fn)
 
-
-export default fn => curryN_(2, fn)
+export default curry2_

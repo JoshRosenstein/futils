@@ -11,5 +11,4 @@ describe('not', () => {
     expect(not([])).toBe(false)
     expect(not({})).toBe(false)
   })
-
 })

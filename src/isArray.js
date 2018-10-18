@@ -1,3 +1,5 @@
+//flow
 import isArray_ from './isArray_'
 
-export default isArray_
+const isArray = isArray_
+export default isArray

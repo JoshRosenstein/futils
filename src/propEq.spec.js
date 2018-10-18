@@ -2,16 +2,16 @@ import propEq from './propEq'
 
 describe('propEq', () => {
   it('Object found key', () => {
-    const a = propEq('aaa')('1')({ aaa: '1' })
+    const a = propEq('aaa')('1')({aaa: '1'})
     expect(a).toBeTruthy()
   })
 
   it('Object found key Not Equal', () => {
-    const a = propEq('aaa')(3)({ aaa: '1' })
+    const a = propEq('aaa')(3)({aaa: '1'})
     expect(a).toBeFalsy()
   })
   it('Object missing key', () => {
-    const a = propEq('bbb')(undefined)({ aaa: '1' })
+    const a = propEq('bbb')(undefined)({aaa: '1'})
 
     expect(a).toBeTruthy()
   })

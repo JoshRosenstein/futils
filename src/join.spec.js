@@ -1,7 +1,6 @@
 import join from './join'
 
 describe('join', () => {
-
   test('joins array into string using delimiter', () => {
     const arr = [1, 2, 3, 4, 5]
     expect(join('-', arr)).toBe('1-2-3-4-5')
@@ -12,5 +11,4 @@ describe('join', () => {
     const delimiter = join('~')
     expect(delimiter(arr)).toBe('1~2~3~4~5')
   })
-
 })

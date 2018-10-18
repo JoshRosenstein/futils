@@ -2,7 +2,7 @@ import props from './props'
 
 describe('props', () => {
   test('getMany with Object', () => {
-    expect(props(['x', 'y'], { x: 1, y: 2 })).toEqual([1, 2])
+    expect(props(['x', 'y'], {x: 1, y: 2})).toEqual([1, 2])
   })
 
   test('Array', () => {
@@ -14,6 +14,6 @@ describe('props', () => {
   })
 
   test('Splits Comma Seperated Strings', () => {
-    expect(props('x,y', { x: 1, y: 2 })).toEqual([1, 2])
+    expect(props('x,y', {x: 1, y: 2})).toEqual([1, 2])
   })
 })

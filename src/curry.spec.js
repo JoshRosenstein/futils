@@ -4,7 +4,7 @@ const jestFn = fn => {
   const mock = jest.fn(fn)
 
   Object.defineProperty(mock, 'length', {
-    value: fn.length
+    value: fn.length,
   })
   return mock
 }
@@ -21,7 +21,8 @@ describe('curry', () => {
     expect(f).toBeCalledWith(1, 2, 3)
   })
 
-    it('should return function if number of parameters is not enough', () => { // eslint-disable-line
+  it('should return function if number of parameters is not enough', () => {
+    // eslint-disable-line
     let f = jestFn(a => a * 2)
     let curried = curry(f)
     let called = curried()

@@ -15,4 +15,5 @@
 /tests/performance/**
 /tmp/**
 /config/
+/genFlowDefs/**
 !.eslintrc.js

@@ -8,5 +8,4 @@ describe('first', () => {
   test('returns first element of string', () => {
     expect(first('hello')).toBe('h')
   })
-
 })

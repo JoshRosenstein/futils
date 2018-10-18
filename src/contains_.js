@@ -1,9 +1,9 @@
 import equals_ from './equals_'
 import type_ from './type_'
 
-export default (x, arr) =>{
-  const t= type_(x)
-  if(t!=='Array' && t!=='Object'){
+export default (x, arr) => {
+  const t = type_(x)
+  if (t !== 'Array' && t !== 'Object') {
     return arr.includes(x)
   }
   let index = -1
@@ -13,7 +13,7 @@ export default (x, arr) =>{
     if (equals_(arr[index], x)) {
       flag = true
     }
-    index+=1
+    index += 1
   }
 
   return flag

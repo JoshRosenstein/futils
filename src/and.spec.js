@@ -1,3 +1,4 @@
+// @flow
 import and from './and'
 
 describe('And', () => {
@@ -6,5 +7,7 @@ describe('And', () => {
     expect(and(true, false)).toBeFalsy()
     expect(and(false, true)).toBeFalsy()
     expect(and(false, false)).toBeFalsy()
+    // $FlowExpectedError
+    expect(and(0, false)).toBeFalsy() // 0 isNot boolean
   })
 })

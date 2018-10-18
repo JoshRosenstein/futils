@@ -1,12 +1,11 @@
 import curryN_ from './curryN_'
 import last from './last'
 
-export default functor=>curryN_(functor.length,(fn,...rest)=>{
-  let cnt = 0
+export default functor =>
+  curryN_(functor.length, (fn, ...rest) => {
+    let cnt = 0
 
-  const newFn = (...args) => fn(...args, cnt++,last(rest))
+    const newFn = (...args) => fn(...args, cnt++, last(rest))
 
-  return functor(newFn,...rest) // eslint-disable-line no-plusplus
-
-}
-)
+    return functor(newFn, ...rest)
+  })

@@ -1,33 +1,36 @@
 import toPairs_ from './toPairs_'
 import type_ from './type_'
+import isEnumerable_ from './isEnumerable_'
+const commonFN = fn => (acc, [key, value]) => fn(acc, value, key)
 
+const fromMapping = {
+  Array: (reducer, functor) => [
+    (acc, value, key) => reducer(acc, value, key),
+    functor,
+  ],
+  Object: (reducer, functor) => [commonFN(reducer), toPairs_(functor)],
+  Map: (reducer, functor) => [commonFN(reducer), toPairs_(functor)],
+  Set: (reducer, functor) => [
+    (acc, [, value]) => reducer(acc, value),
+    toPairs_(functor),
+  ],
 
-export default (reducer, initial, functor, right=false) => {
+  String: (reducer, functor) => [
+    commonFN(reducer),
+    toPairs_(functor.split('')),
+  ],
+}
+
+export default (reducer, initial, functor, right = false) => {
+  const type = type_(functor)
+
+  if (!isEnumerable_(functor)) {
+    throw new Error(`reduce cant reduce ${type}`)
+  }
+
   let fn
-  switch (type_(functor)) {
-  case 'Array':
-    fn = (acc, value, key) => reducer(acc, value, key)
-    break
-  case 'Object':
-  case 'Map':
-    fn = (acc, [key, value]) => reducer(acc, value, key)
-    functor = toPairs_(functor)
-    break
-  case 'Set':
-    fn = (acc, [, value]) => reducer(acc, value)
-    functor = toPairs_(functor)
-    break
-  case 'String':
-    fn = (acc, [key, value]) => reducer(acc, value, key)
-    functor = toPairs_(functor.split(''))
-    break
+  ;[fn, functor] = fromMapping[type](reducer, functor)
 
-  default: {
-    throw new Error(
-      `reduce couldn't figure out how to reduce ${type_(functor)}`
-    )
-  }
-  }
   if (!right) {
     return functor.reduce(fn, initial)
   }

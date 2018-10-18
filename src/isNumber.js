@@ -1,3 +1,4 @@
+// @flow
 import is_ from './is_'
 
-export default v => is_('Number', v)
+export default (value: mixed): boolean => is_('Number', value)

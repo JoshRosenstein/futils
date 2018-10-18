@@ -1,39 +1,49 @@
 import toPairs_ from './toPairs_'
 import type_ from './type_'
 import isDefined_ from './isDefined_'
+import isEnumerable_ from './isEnumerable_'
 
-export default (pred,reducer, initial, functor) => {
-  if(!isDefined_(functor)) return initial
-  let fn
-  let predfn
-  switch (type_(functor)) {
-  case 'Array':
-    fn = (acc, value, key) => reducer(acc, value, key)
-    predfn = (acc, value, key) => pred(acc, value, key)
-    break
-  case 'Object':
-  case 'Map':
-    fn = (acc, [key, value],idx) => reducer(acc, value, key, idx)
-    functor = toPairs_(functor)
-    predfn = (acc, [key, value],idx) => pred(acc, value, key, idx)
-    break
-  case 'Set':
-    fn = (acc, [, value],idx) => reducer(acc, value,idx)
-    functor = toPairs_(functor)
-    predfn = (acc, [, value],idx) => pred(acc, value, idx)
-    break
-  case 'String':
-    fn = (acc, [key, value],idx) => reducer(acc, value, key,idx)
-    functor = toPairs_(functor.split(''))
-    predfn = (acc, [key, value],idx) => pred(acc, value, key, idx)
-    break
+const commonFN = fn => (acc, [key, value], idx) => fn(acc, value, key, idx)
 
-  default: {
-    throw new Error(
-      `reduce couldn't figure out how to reduce ${type_(functor)}`
-    )
+const fromMapping = {
+  Array: (pred, reducer, functor) => [
+    (acc, value, key) => reducer(acc, value, key),
+    (acc, value, key) => pred(acc, value, key),
+    functor,
+  ],
+  Object: (pred, reducer, functor) => [
+    commonFN(reducer),
+    commonFN(pred),
+    toPairs_(functor),
+  ],
+  Map: (pred, reducer, functor) => [
+    commonFN(reducer),
+    commonFN(pred),
+    toPairs_(functor),
+  ],
+  Set: (pred, reducer, functor) => [
+    (acc, [, value], idx) => reducer(acc, value, idx),
+    (acc, [, value], idx) => pred(acc, value, idx),
+    toPairs_(functor),
+  ],
+
+  String: (pred, reducer, functor) => [
+    commonFN(reducer),
+    commonFN(pred),
+    toPairs_(functor.split('')),
+  ],
+}
+
+export default (pred, reducer, initial, functor) => {
+  if (!isDefined_(functor)) return initial
+  const type = type_(functor)
+
+  if (!isEnumerable_(functor)) {
+    throw new Error(`reduceWhile cant reduce ${type}`)
   }
-  }
+
+  let fn, predfn
+  ;[fn, predfn, functor] = fromMapping[type](pred, reducer, functor)
 
   const length = functor.length
   let b = initial

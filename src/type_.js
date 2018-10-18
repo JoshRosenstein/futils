@@ -1,4 +1,6 @@
-export default value => {
+// @flow
+
+export default (value: ?any): string => {
   if (value === null) {
     return 'null'
   }

@@ -15,7 +15,7 @@ describe('reduce', () => {
     const a = reduce(reducer, initial)({
       aaa: 'a',
       bbb: 'b',
-      ccc: 'c'
+      ccc: 'c',
     })
 
     const eA = './a:aaa/b:bbb/c:ccc'
@@ -31,7 +31,7 @@ describe('reduce', () => {
 
   test('Map', () => {
     const a = reduce(reducer, initial)(
-      new Map([['aaa', 'a'], ['bbb', 'b'], ['ccc', 'c']])
+      new Map([['aaa', 'a'], ['bbb', 'b'], ['ccc', 'c']]),
     )
     const eA = './a:aaa/b:bbb/c:ccc'
     expect(a).toEqual(eA)

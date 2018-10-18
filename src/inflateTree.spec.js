@@ -1,18 +1,13 @@
-
 import inflateTree from './inflateTree'
 
 describe('inflateTree', () => {
   it('Works', () => {
-    const a=inflateTree(
-      '-'
-    )(
-      {
-        'data-profile-name': 'Black Jack',
-        'data-profile-age': 93,
-        'data-metadata-interval': '10s',
-        'data-location': 'http://api.example.com/profiles/24',
-      }
-    )
+    const a = inflateTree('-')({
+      'data-profile-name': 'Black Jack',
+      'data-profile-age': 93,
+      'data-metadata-interval': '10s',
+      'data-location': 'http://api.example.com/profiles/24',
+    })
 
     expect(a).toEqual({
       data: {
@@ -24,6 +19,5 @@ describe('inflateTree', () => {
         location: 'http://api.example.com/profiles/24',
       },
     })
-
-
-  })})
+  })
+})

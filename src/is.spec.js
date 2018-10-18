@@ -3,16 +3,13 @@ import isObject from './isObject'
 import isFunction from './isFunction'
 import isObjLike from './isObjLike'
 
-
 describe('is', () => {
   test('isObjLike', () => {
-
     expect(isObjLike({})).toBeTruthy()
     expect(isObjLike([])).toBeTruthy()
-    expect(isObjLike((a) => ({'result':a}))).toBeFalsy()
+    expect(isObjLike(a => ({result: a}))).toBeFalsy()
     expect(isObjLike(null)).toBeFalsy()
     expect(isObjLike(undefined)).toBeFalsy()
-
   })
 
   it('isNull', () => {
@@ -55,7 +52,6 @@ describe('is', () => {
   })
 
   it('isFunction', () => {
-    expect(isFunction(()=>1)).toBeTruthy()
+    expect(isFunction(() => 1)).toBeTruthy()
   })
-
 })

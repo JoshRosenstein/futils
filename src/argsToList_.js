@@ -1,2 +1,1 @@
-
-export default (...args)=>args
+export default (...args) => args

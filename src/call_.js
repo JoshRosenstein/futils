@@ -1,5 +1,7 @@
-export default function (fn) {
+export default function(fn) {
   return arguments.length > 1
     ? fn.apply(fn, [].slice.call(arguments, 1))
-    : function() { return fn.apply(fn, arguments) }
+    : function() {
+        return fn.apply(fn, arguments)
+      }
 }

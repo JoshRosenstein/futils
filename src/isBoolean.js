@@ -1,3 +1,6 @@
+// @flow
 import is_ from './is_'
 
-export default value => is_('Boolean', value)
+const isBoolean = (value: mixed): boolean => is_('Boolean', value)
+
+export default isBoolean

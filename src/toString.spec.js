@@ -5,17 +5,14 @@ describe('toString', () => {
     const a = toString({
       aaa: 'a',
       bbb: 'b',
-      ccc: 'c'
+      ccc: 'c',
     })
-    const eA = [['aaa', 'a'], ['bbb', 'b'], ['ccc', 'c']]
     expect(a).toEqual('[object Object]')
   })
 
   it('Fn', () => {
     const a = toString(x => x)
-    const eA = `function (x) {
-      return x;
-    }`
+    const eA = 'function (x) {return x;}'
     expect(a).toEqual(eA)
   })
 

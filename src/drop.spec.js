@@ -1,6 +1,5 @@
 import drop from './drop'
 
-
 describe('drop', () => {
   test('Array', () => {
     const a = drop(2)(['a', 'b', 'c'])

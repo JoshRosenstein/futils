@@ -15,7 +15,7 @@ describe('reduceKeys', () => {
     const a = reduceKeys(reducer)(initial)({
       aaa: 'a',
       bbb: 'b',
-      ccc: 'c'
+      ccc: 'c',
     })
     const eA = './aaa/bbb/ccc'
 

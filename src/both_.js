@@ -1,1 +1,1 @@
-export default (f, g) =>(...args) => f(...args) && g(...args)
+export default (f, g) => (...args) => f(...args) && g(...args)

@@ -2,7 +2,9 @@ import reject from './reject'
 
 describe('reject', () => {
   const isOdd = value => value % 2 !== 0
-  const even = function (x) { return x % 2 === 0 }
+  const even = function(x) {
+    return x % 2 === 0
+  }
   test('reject with Array', () => {
     expect(reject(isOdd)([1, 2, 3, 4])).toEqual([2, 4])
   })
@@ -13,15 +15,14 @@ describe('reject', () => {
   })
 
   test('returns an empty array if no element matche', () => {
-    const a = reject((x) => x < 100, [1, 9, 99])
+    const a = reject(x => x < 100, [1, 9, 99])
     expect(a).toEqual([])
   })
 
   test('returns an empty array if asked to filter an empty array', () => {
-    const a = reject((x) => x > 100, [])
+    const a = reject(x => x > 100, [])
     expect(a).toEqual([])
   })
-
 
   test('reject with Object', () => {
     expect(
@@ -29,11 +30,11 @@ describe('reject', () => {
         aaa: 1,
         bbb: 2,
         ccc: 3,
-        ddd: 4
-      })
+        ddd: 4,
+      }),
     ).toEqual({
       bbb: 2,
-      ddd: 4
+      ddd: 4,
     })
   })
 
@@ -43,7 +44,7 @@ describe('reject', () => {
 
   test('reject with Map', () => {
     expect(
-      reject(isOdd)(new Map([['a', 1], ['b', 2], ['c', 3], ['d', 4]]))
+      reject(isOdd)(new Map([['a', 1], ['b', 2], ['c', 3], ['d', 4]])),
     ).toEqual(new Map([['b', 2], ['d', 4]]))
   })
 })

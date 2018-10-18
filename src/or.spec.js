@@ -7,5 +7,4 @@ describe('or', () => {
     expect(or(false, true)).toBeTruthy()
     expect(or(false, false)).toBeFalsy()
   })
-
 })

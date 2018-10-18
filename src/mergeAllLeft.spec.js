@@ -9,21 +9,21 @@ describe('mergeAllLeft', () => {
   })
 
   it('Object', () => {
-    const a = mergeAllLeft([{ aaa: 'aaa' }, { bbb: 'bbb' }, { ccc: 'ccc' }])
+    const a = mergeAllLeft([{aaa: 'aaa'}, {bbb: 'bbb'}, {ccc: 'ccc'}])
     const eA = {
       aaa: 'aaa',
       bbb: 'bbb',
-      ccc: 'ccc'
+      ccc: 'ccc',
     }
 
     expect(a).toEqual(eA)
   })
 
   it('Object2', () => {
-    const a = mergeAllLeft([{ aaa: 'aaa' }, { aaa: 'bbb' }, { ccc: 'ccc' }])
+    const a = mergeAllLeft([{aaa: 'aaa'}, {aaa: 'bbb'}, {ccc: 'ccc'}])
     const eA = {
       aaa: 'aaa',
-      ccc: 'ccc'
+      ccc: 'ccc',
     }
 
     expect(a).toEqual(eA)

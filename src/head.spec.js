@@ -1,6 +1,5 @@
 import head from './head'
 
-
 describe('Head', () => {
   test('Array', () => {
     const a = head(['a', 'b', 'c'])

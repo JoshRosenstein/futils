@@ -11,11 +11,12 @@ describe('apply', () => {
   }
 
   test('it accepts exact 2 arguments', () => {
-    expectNumberOfArgs(
-      apply,
-      2,
-      [function() { return [].slice.call(arguments) }, [1, 2, 3]]
-    )
+    expectNumberOfArgs(apply, 2, [
+      function() {
+        return [].slice.call(arguments)
+      },
+      [1, 2, 3],
+    ])
   })
 
   test('applies array of arguments to cb', () => {
@@ -24,5 +25,4 @@ describe('apply', () => {
     })
     expect(a([1, 2, 3])).toEqual([1, 2, 3])
   })
-
 })

@@ -1,3 +1,6 @@
+// @flow
 import is_ from './is_'
 
-export default value => is_('Array', value)
+const isArray_ = (value: any): boolean => is_('Array', value)
+
+export default isArray_

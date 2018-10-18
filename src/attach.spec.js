@@ -3,16 +3,16 @@ import attach from './attach'
 describe('attach', () => {
   it('Object (Empty)', () => {
     const a = attach('hello')('world')({})
-    const eA = { hello: 'world' }
+    const eA = {hello: 'world'}
 
     expect(a).toEqual(eA)
   })
 
   it('Object (Filled)', () => {
-    const a = attach('hello')('world')({ test: 'case' })
+    const a = attach('hello')('world')({test: 'case'})
     const eA = {
       hello: 'world',
-      test: 'case'
+      test: 'case',
     }
 
     expect(a).toEqual(eA)

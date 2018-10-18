@@ -13,9 +13,7 @@ describe('isNilOrEmptyOrEmpty', () => {
     expect(isNilOrEmpty(true)).toBeFalsy()
     expect(isNilOrEmpty('test')).toBeFalsy()
     expect(isNilOrEmpty(5)).toBeFalsy()
-    expect(isNilOrEmpty({a:1})).toBeFalsy()
+    expect(isNilOrEmpty({a: 1})).toBeFalsy()
     expect(isNilOrEmpty([1])).toBeFalsy()
   })
-
-
 })

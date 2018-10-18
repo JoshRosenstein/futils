@@ -1,6 +1,5 @@
 import isPopulated from './isPopulated'
 
-
 describe('isPopulated', () => {
   test('returns "true" if value is empty, otherwise "false"', () => {
     expect(isPopulated([1, 2, 3])).toBeTruthy()

@@ -3,7 +3,7 @@ import of from './of'
 describe('of', () => {
   it('Object', () => {
     const a = of('aaa')('bbb')({})
-    const eA = { aaa: 'bbb' }
+    const eA = {aaa: 'bbb'}
 
     expect(a).toEqual(eA)
   })

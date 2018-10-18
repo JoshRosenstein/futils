@@ -55,6 +55,6 @@ describe('divides objects', () => {
   })
 
   test('non-empty', () => {
-    expect(divideBy({ a: 1 })({ b: 2 })).toEqual(NaN)
+    expect(divideBy({a: 1})({b: 2})).toEqual(NaN)
   })
 })

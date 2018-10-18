@@ -46,10 +46,10 @@ describe('equals', () => {
 
   it('handles objects', () => {
     expect(equals({}, {})).toBeTruthy()
-    expect(equals({ a: 1, b: 2 }, { a: 1, b: 2 })).toBeTruthy()
-    expect(equals({ a: 2, b: 3 }, { b: 3, a: 2 })).toBeTruthy()
-    expect(equals({ a: 2, b: 3 }, { a: 3, b: 3 })).toBeFalsy()
-    expect(equals({ a: 2, b: 3, c: 1 }, { a: 2, b: 3 })).toBeFalsy()
+    expect(equals({a: 1, b: 2}, {a: 1, b: 2})).toBeTruthy()
+    expect(equals({a: 2, b: 3}, {b: 3, a: 2})).toBeTruthy()
+    expect(equals({a: 2, b: 3}, {a: 3, b: 3})).toBeFalsy()
+    expect(equals({a: 2, b: 3, c: 1}, {a: 2, b: 3})).toBeFalsy()
   })
 
   it('handles regex', () => {

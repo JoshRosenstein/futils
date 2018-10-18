@@ -14,19 +14,19 @@ describe('merge', () => {
   it('Object', () => {
     const left = {
       alpha: '2',
-      beta: '1'
+      beta: '1',
     }
     const right = {
       alpha: '1',
       beta: '2',
-      zeta: '3'
+      zeta: '3',
     }
 
     const a = merge(left)(right)
     const eA = {
       alpha: '1',
       beta: '2',
-      zeta: '3'
+      zeta: '3',
     }
 
     expect(a).toEqual(eA)

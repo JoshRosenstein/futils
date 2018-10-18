@@ -1,4 +1,3 @@
-
 import toOrdinal from './toOrdinal'
 
 describe('toOrdinal', () => {
@@ -11,5 +10,4 @@ describe('toOrdinal', () => {
     expect(toOrdinal(30, true)).toEqual('thirtieth')
     expect(toOrdinal(123, true)).toEqual('one hundred twenty-third')
   })
-
 })

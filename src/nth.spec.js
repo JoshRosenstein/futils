@@ -1,6 +1,5 @@
 import nth from './nth'
 
-
 describe('nth', () => {
   const list = ['foo', 'bar', 'baz', 'quux']
   test('Array', () => {

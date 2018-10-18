@@ -1,4 +1,3 @@
-
 import simplyEquals from './simplyEquals'
 
 describe('simplyEquals', () => {
@@ -12,9 +11,8 @@ describe('simplyEquals', () => {
     expect(simplyEquals(1, -1)).toBeFalsy()
   })
 
-
   test('confirms that functions are equal', () => {
-    const a = function a () { }
+    const a = function a() {}
     expect(simplyEquals(a, a)).toBeTruthy()
   })
 })

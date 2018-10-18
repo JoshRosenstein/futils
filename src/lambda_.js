@@ -1,7 +1,7 @@
 import is_ from './is_'
 
 export default function(exp) {
-  if (!is_('String',exp)) {
+  if (!is_('String', exp)) {
     return
   }
 

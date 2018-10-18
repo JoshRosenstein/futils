@@ -17,4 +17,3 @@ describe('unless', () => {
     expect(unless(isArray)(arrOf)([10])).toEqual([10])
   })
 })
- 

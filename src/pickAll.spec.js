@@ -7,12 +7,12 @@ describe('pickAll', () => {
         alpha: '1',
         beta: '2',
         delta: '3',
-        feta: '0'
-      })
+        feta: '0',
+      }),
     ).toEqual({
       alpha: '1',
       beta: '2',
-      delta: '3'
+      delta: '3',
     })
   })
   test('pickAll with some missing keys', () => {
@@ -21,12 +21,12 @@ describe('pickAll', () => {
         alpha: '1',
         beta: '2',
         delta: '2',
-        feta: '0'
-      })
+        feta: '0',
+      }),
     ).toEqual({
       alpha: '1',
       beta: '2',
-      omega: undefined
+      omega: undefined,
     })
   })
 })

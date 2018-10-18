@@ -8,8 +8,5 @@ describe('isNil', () => {
     expect(isEnumerable({})).toBeTruthy()
     expect(isEnumerable(new Map())).toBeTruthy()
     expect(isEnumerable(new Set())).toBeTruthy()
-
   })
-
-
 })

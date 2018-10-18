@@ -11,9 +11,9 @@ describe('type', () => {
     expect(type(null)).toEqual('null')
     expect(type(undefined)).toEqual('undefined')
     expect(type(undefined)).toEqual('undefined')
-    expect(type(  new Map([['aaa', 'a'], ['bbb', 'b'], ['ccc', 'c']]))).toEqual('Map')
+    expect(type(new Map([['aaa', 'a'], ['bbb', 'b'], ['ccc', 'c']]))).toEqual(
+      'Map',
+    )
     expect(type(new Set(['a', 'b', 'c']))).toEqual('Set')
   })
-
 })
- 

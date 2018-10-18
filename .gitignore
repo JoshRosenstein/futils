@@ -20,3 +20,5 @@ yarn-debug.log*
 yarn-error.log*
 /.changelog
 rollup.configOG.js
+/genFlowDefs/**
+/flow-typed/**

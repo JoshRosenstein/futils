@@ -6,22 +6,12 @@ describe('reduceRight', () => {
   }
 
   it('folds lists in the right order', () => {
-    expect(
-      reduceRight(
-        (a, b) => a + b,
-        '',
-        ['a', 'b', 'c', 'd']
-      )
-    ).toEqual('abcd')
+    expect(reduceRight((a, b) => a + b, '', ['a', 'b', 'c', 'd'])).toEqual(
+      'abcd',
+    )
   })
 
   it('folds lists in the right order', () => {
-    expect(
-      reduceRight(
-        (a, b) => a - b,
-        0,
-        [1, 2, 3, 4]
-      )
-    ).toEqual(-2)
+    expect(reduceRight((a, b) => a - b, 0, [1, 2, 3, 4])).toEqual(-2)
   })
 })

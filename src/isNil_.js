@@ -1,2 +1,6 @@
+// @flow
 
-export default value => value === undefined || value === null
+const isNil_ = (value: mixed): boolean %checks =>
+  value === undefined || value === null
+
+export default isNil_

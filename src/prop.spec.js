@@ -2,14 +2,14 @@ import prop from './prop'
 
 describe('prop', () => {
   it('Object found key', () => {
-    const a = prop('aaa')({ aaa: '1' })
+    const a = prop('aaa')({aaa: '1'})
     const eA = '1'
 
     expect(a).toEqual(eA)
   })
 
   it('Object missing key', () => {
-    const a = prop('bbb')({ aaa: '1' })
+    const a = prop('bbb')({aaa: '1'})
     const eA = undefined
 
     expect(a).toEqual(eA)
