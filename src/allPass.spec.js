@@ -1,3 +1,4 @@
+// @flow
 import allPass from './allPass'
 
 describe('utils/function/allPass', () => {
