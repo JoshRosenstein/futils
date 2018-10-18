@@ -7,6 +7,7 @@ describe('isNil', () => {
   })
 
   test('returns false otherwise', () => {
+    expect(isNil(0)).toBeFalsy()
     expect(isNil(true)).toBeFalsy()
     expect(isNil('test')).toBeFalsy()
     expect(isNil(5)).toBeFalsy()

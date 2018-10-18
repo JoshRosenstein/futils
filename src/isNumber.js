@@ -1,4 +1,3 @@
 // @flow
-import is_ from './is_'
-
-export default (value: mixed): boolean => is_('Number', value)
+///Change to support flow type checks
+export default (val: *): %checks => val == val && typeof val === 'number'

@@ -1,6 +1,5 @@
 // @flow
-import is_ from './is_'
 
-const isArray_ = (value: any): boolean => is_('Array', value)
+const isArray_ = (val: *): %checks => Array.isArray(val)
 
 export default isArray_
