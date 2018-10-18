@@ -5,6 +5,6 @@ describe('round', () => {
     const a = round(2, 112.336)
     const eA = 112.34
 
-    expect(a).toBeTruthy()
+    expect(a).toEqual(eA)
   })
 })

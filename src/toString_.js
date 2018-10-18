@@ -1,9 +1,8 @@
-
 import type_ from './type_'
 import isFunction from './isFunction'
 
 export default value => {
-  const t= type_(value)
+  const t = type_(value)
   if (t === 'null' || t === 'undefined') {
     return t
   }

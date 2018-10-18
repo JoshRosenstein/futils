@@ -5,5 +5,5 @@ export default (predicate, enumerable) => {
   if (enumerable.reject) {
     return enumerable.reject(predicate)
   }
-  return filter_(complement_(predicate),enumerable)
+  return filter_(complement_(predicate), enumerable)
 }

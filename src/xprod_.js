@@ -1,5 +1,4 @@
-
-export default (a, b)=> {
+export default (a, b) => {
   const res = []
   let ia = 0
   let ib
@@ -15,4 +14,3 @@ export default (a, b)=> {
   }
   return res
 }
- 

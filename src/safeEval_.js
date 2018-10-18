@@ -1,9 +1,8 @@
-export default v=>{
+export default v => {
   let val
   try {
-    val= (new Function( `return ${  v}` ) )()
-  }
-  catch(error) {
+    val = new Function(`return ${v}`)()
+  } catch (error) {
     return v
   }
   return val

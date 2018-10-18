@@ -1,2 +1,1 @@
-
-export default ()=>true
+export default () => true

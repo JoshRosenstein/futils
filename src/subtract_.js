@@ -1,1 +1,1 @@
-export default (a,b) => Number(a)-Number(b)
+export default (a, b) => Number(a) - Number(b)
