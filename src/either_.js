@@ -1,2 +1,12 @@
+//@flow
+import type {FunctionBoolType} from 'types'
 
-export default (f, g) =>(...args) => f(...args) || g(...args)
+type Either_ = (
+  funcA: FunctionBoolType,
+  funcB: FunctionBoolType,
+) => FunctionBoolType
+
+export const either_: Either_ = (funcA, funcB) => (...args) =>
+  funcA(...args) || funcB(...args)
+
+export default either_
