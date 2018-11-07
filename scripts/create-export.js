@@ -54,7 +54,9 @@ const generateIndex = () => {
     fn => `export { default as ${fn.name} } from './${fn.name}'`,
   )
 
-  const indexLines = [].concat(propertyRequireLines.join('\n')).join('\n')
+  const indexLines = ['//@flow']
+    .concat(propertyRequireLines.join('\n'))
+    .join('\n')
 
   return `${indexLines}\n`
 }
@@ -63,7 +65,9 @@ const generateIndex_ = () => {
     fn => `export { default as ${fn.name} } from './${fn.name}'`,
   )
 
-  const indexLines = [].concat(propertyRequireLines.join('\n')).join('\n')
+  const indexLines = ['//@flow']
+    .concat(propertyRequireLines.join('\n'))
+    .join('\n')
 
   return `${indexLines}\n`
 }

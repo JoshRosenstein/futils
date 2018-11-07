@@ -1,5 +1,5 @@
 // @flow
 
-const isNil_ = (val: *): %checks => val == null
+const isNil_ = (val: mixed): boolean %checks => val == null
 
 export default isNil_

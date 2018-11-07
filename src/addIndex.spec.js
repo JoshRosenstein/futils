@@ -1,3 +1,4 @@
+// @flow
 import addIndex from './addIndex'
 import mapValues from './mapValues'
 import reduceValues from './reduceValues'

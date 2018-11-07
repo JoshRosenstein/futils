@@ -1,3 +1,4 @@
+// @flow
 // /https://github.com/marlun78/number-to-words/blob/master/src/toWords.js
 
 import isFinite from './isFinite_'
@@ -47,10 +48,8 @@ const TENTHS_LESS_THAN_HUNDRED = [
   'ninety',
 ]
 
-function generateWords(number) {
-  let remainder,
-    word,
-    words = arguments[1]
+function generateWords(number: number, words?: Array<string>) {
+  let remainder, word
 
   // We’re done
   if (number === 0) {
@@ -101,9 +100,11 @@ function generateWords(number) {
   return generateWords(remainder, words)
 }
 
-export default number => {
+const toWords = (number: number): string => {
   const num = parseInt(number, 10)
   if (!isFinite(num))
     throw new TypeError(`Not a finite number: ${number} (${typeof number})`)
   return generateWords(num)
 }
+
+export default toWords

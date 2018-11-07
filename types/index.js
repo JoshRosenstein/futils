@@ -1,6 +1,7 @@
 // @flow
 
 export type * from './curried'
+export type * from './curry'
 export type AccumulatedType = mixed
 export type ValueType = mixed
 export type NumberType = number
@@ -9,6 +10,10 @@ export type StringType = string
 export type TextType = StringType ///bufer ?
 export type ArrayKeyType = NumberType
 export type ObjectKeyType = StringType
+export type FunctionType = (...args: Array<any>) => *
+
+export type FunctionBoolType = (...args: Array<any>) => boolean
+
 export type KeyType = ObjectKeyType | ArrayKeyType | MapKeyType
 
 export type MapTypeT<K = MapKeyType, V = ValueType> = Map<K, V>
@@ -61,8 +66,8 @@ export type MapTreeType = Map<ValueType | FunctorType>
 export type ListTreeType = ArrayTreeType | SetTreeType
 export type RecordTreeType = ObjectTreeType | MapTreeType
 export type TreeType = ListTreeType | RecordTreeType
-export type PredicateFunctionTypeT<I = mixed> = I => boolean
-export type PredicateFunctionTypeWithKeyT<I = mixed> = (I, KeyType) => boolean
+export type PredicateFunctionTypeT<I: mixed> = I => boolean
+export type PredicateFunctionTypeWithKeyT<T: mixed> = (T, KeyType) => boolean
 export type PredicateFunctionType = mixed => boolean
 
 export type UnaryFunctionType<I: mixed, O: mixed> = I => O

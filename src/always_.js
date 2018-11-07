@@ -1,9 +1,7 @@
 // @flow
 
-declare function always_<T: mixed>(value: T): () => T
+type Always_ = <T>(x: T) => (...args?: any[]) => T
 
-export default function always_(value) {
-  return function alwaysValue() {
-    return value
-  }
-}
+const always_: Always_ = x => (...args) => x
+
+export default always_

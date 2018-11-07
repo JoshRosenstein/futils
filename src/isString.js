@@ -1,3 +1,4 @@
-import isString_ from './isString_'
+// @flow
 
-export default isString_
+const isString = (val: mixed): %checks => typeof val === 'string'
+export default isString

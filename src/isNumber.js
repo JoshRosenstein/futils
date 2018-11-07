@@ -1,3 +1,5 @@
 // @flow
 ///Change to support flow type checks
-export default (val: *): %checks => val == val && typeof val === 'number'
+const isNumber = (val: mixed): boolean %checks =>
+  val === val && typeof val === 'number'
+export default isNumber

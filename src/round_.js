@@ -1,7 +1,8 @@
+// @flow
 // From Lodash
 import split_ from './split_'
 
-export default (precision, number) => {
+export default (precision: number, number: number): number => {
   precision = precision == null ? 0 : Math.min(precision, 292)
   if (precision) {
     let pair = split_('e', `${number}e`)

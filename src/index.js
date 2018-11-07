@@ -1,3 +1,4 @@
+//@flow
 export { default as add } from './add'
 export { default as addIndex } from './addIndex'
 export { default as all } from './all'

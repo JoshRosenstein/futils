@@ -11,7 +11,6 @@ const errRedeclaringRamdaFn = new RegExp(
   `^ramda: Duplicate declaration "(${R.keys(R).join('|')})"`,
 )
 
-
 const formatError = err =>
   err.message
     .replace(ramdaStr, '')
@@ -20,8 +19,6 @@ const formatError = err =>
       errRedeclaringRamdaFn,
       'ramda: Cannot redeclare "$1" that has already been imported from Ramda',
     )
-
-
 
 const Error = styled('div')({
   color: 'red',
@@ -49,7 +46,7 @@ const Output = styled('pre')({
 const stringifiers = {
   compact: stringifyCompact,
   expand: json => JSON.stringify(json, null, 2),
-  object: json => stringifyCompact(json, { indent: 2,margins:true }),
+  object: json => stringifyCompact(json, {indent: 2, margins: true}),
 }
 let currentContent = 'Result...'
 const Evaluator = props => {
@@ -74,7 +71,15 @@ const Evaluator = props => {
   let content
   if (!error) {
     content = stringify(result)
-    currentContent = content
+    if (content === undefined) {
+      content = (
+        <React.Fragment>
+          {currentContent} <Error>{`undefined`}</Error>
+        </React.Fragment>
+      )
+    } else {
+      currentContent = content
+    }
   } else {
     content = (
       <React.Fragment>
@@ -87,7 +92,7 @@ const Evaluator = props => {
 }
 
 Evaluator.displayName = 'Evaluator'
-Evaluator.defaultProps = { stringify: 'object' }
+Evaluator.defaultProps = {stringify: 'object'}
 Evaluator.propTypes = {
   value: PropTypes.string.isRequired,
 }

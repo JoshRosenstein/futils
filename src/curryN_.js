@@ -13,4 +13,13 @@ function curryN_<T: Array<any>, A: (...args: T) => any>(
       }
 }
 
+// const curryN_ = (
+//   numOfArgs: number,
+//   fn: Function,
+//   ...args: Array<*>
+// ): Function =>
+//   args.length >= numOfArgs
+//     ? fn(...args)
+//     : curryN_.bind(null, numOfArgs, fn, ...args)
+
 export default curryN_

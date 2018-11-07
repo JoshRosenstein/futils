@@ -14,7 +14,7 @@ const eq = (a, b, aStack = [], bStack = []) => {
   switch (typeA) {
     case 'String':
     case 'Number': {
-      return a.valueOf() === b.valueOf()
+      return a.valueOf() === b.valueOf() 
     }
     case 'Boolean':
     case 'Date': {

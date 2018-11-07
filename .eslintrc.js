@@ -5,7 +5,7 @@ module.exports = {
     'prettier/flowtype',
     'plugin:flowtype/recommended',
   ],
-  plugins: ['import', 'prettier', 'flowtype', 'babel'],
+  plugins: ['import', 'prettier', 'flowtype', 'babel', 'jsdoc'],
   parser: 'babel-eslint',
   settings: {
     'import/resolver': {

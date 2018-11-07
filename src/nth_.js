@@ -1,12 +1,13 @@
 // @flow
-import is_ from './is_'
+import isString_ from './isString_'
 
-declare function nth_<V, T: Array<V>>(i: number, orderedList: T): ?V
-declare function nth_<T: string>(i: number, orderedList: T): T
+type Nth_ = (i: number, orderedList: Array<*> | string) => any
 
-function nth_(i, orderedList) {
+const nth_: Nth_ = (i, orderedList) => {
   const idx = i < 0 ? orderedList.length + i : i
-  return is_('String', orderedList) ? orderedList.charAt(idx) : orderedList[idx]
+  if (isString_(orderedList)) {
+    return orderedList.charAt(idx)
+  }
+  return orderedList[idx]
 }
-
 export default nth_

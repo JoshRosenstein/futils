@@ -1,10 +1,10 @@
 // @flow
-/*eslint no-unused-vars: 1*/
+/*eslint no-unused-vars: 0*/
 import either from './either'
 
 describe('either', () => {
   it('Types', () => {
-    //$FlowExpectedError
+    // FlowExpectedError
     const t = either(() => true, () => 1) //Error FuncB does not result in boolean
     //$FlowExpectedError
     const tt: number = either(() => true, () => false) //Error FuncB does not result in boolean

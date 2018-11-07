@@ -10,6 +10,7 @@ const fromMapping = {
   ],
   Object: (reducer, functor) => [commonFN(reducer), toPairs_(functor)],
   Map: (reducer, functor) => [commonFN(reducer), toPairs_(functor)],
+
   Set: (reducer, functor) => [
     (acc, [, value]) => reducer(acc, value),
     toPairs_(functor),
@@ -41,4 +42,5 @@ export default (reducer, initial, functor, right = false) => {
     idx -= 1
   }
   return initial
+
 }

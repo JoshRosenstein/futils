@@ -1,11 +1,18 @@
+// @flow
 import curryN_ from './curryN_'
 import last from './last'
 
-export default functor =>
-  curryN_(functor.length, (fn, ...rest) => {
-    let cnt = 0
+type AddIndex_ = <A, B>(
+  iterFn: (fn: (x: A) => B, xs: Array<A>) => Array<B>,
+) => (fn: (x: A, idx: number, xs: Array<A>) => B, xs: Array<A>) => Array<B>
 
-    const newFn = (...args) => fn(...args, cnt++, last(rest))
+const addIndex_: AddIndex_ = iterFn =>
+  curryN_(iterFn.length, (fn, ...rest) => {
+    let idx = 0
 
-    return functor(newFn, ...rest)
+    const newFn = (...args) => fn(...args, idx++, last(rest))
+
+    return iterFn(newFn, ...rest)
   })
+
+export default addIndex_
