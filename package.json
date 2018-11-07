@@ -85,6 +85,7 @@
     "cross-env": "^5.1.6",
     "cz-cli": "^1.0.0",
     "cz-conventional-changelog-emoji": "^0.1.0",
+    "cz-conventional-kawaii": "^1.0.1",
     "eslint": "^5.7.0",
     "eslint-config-prettier": "^3.1.0",
     "eslint-config-react-tools": "^1.1.6",
@@ -126,7 +127,7 @@
   },
   "config": {
     "commitizen": {
-      "path": "node_modules/@metahub/cz-conventional-commit"
+      "path": "node_modules/cz-conventional-kawaii"
     }
   },
   "prettier": {
