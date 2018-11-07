@@ -22,7 +22,6 @@
   "scripts": {
     "commit": "git-cz",
     "copy:dist": "node ./scripts/copy-dist-typedefs.js",
-    "precommit": "node scripts/create-export.js && rollup -c config/rollup.simple.js && jest --onlyChanged --runInBand",
     "prepack": "yarn run build",
     "postpack": "npm run clean:scripts",
     "flow:gen": "rimraf genFlowDefs/* && flow gen-flow-files src --out-dir genFlowDefs",
@@ -75,6 +74,7 @@
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-flow": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
+    "@metahub/cz-conventional-commit": "^3.0.2",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
     "babel-plugin-module-resolver": "^3.1.1",
@@ -126,7 +126,7 @@
   },
   "config": {
     "commitizen": {
-      "path": "node_modules/cz-conventional-changelog-emoji"
+      "path": "node_modules/@metahub/cz-conventional-commit"
     }
   },
   "prettier": {
