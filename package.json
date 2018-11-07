@@ -20,6 +20,7 @@
   },
   "sideEffects": false,
   "scripts": {
+    "commit": "git-cz",
     "copy:dist": "node ./scripts/copy-dist-typedefs.js",
     "precommit": "node scripts/create-export.js && rollup -c config/rollup.simple.js && jest --onlyChanged --runInBand",
     "prepack": "yarn run build",
@@ -120,7 +121,7 @@
   "lint-staged": {
     "*.js": [
       "prettier --no-semi --single-quote --write",
-      "git add"
+      "git add --all"
     ]
   },
   "prettier": {
