@@ -3,7 +3,7 @@
   "version": "0.0.22",
   "modulename": "futils",
   "description": "My JavaScript utils library",
-  "main": "dist/index.js",
+  "main": "lib/index.js",
   "module": "es/index.js",
   "browser": "dist/futils.min.js",
   "unpkg": "dist/futils.min.js",
@@ -14,10 +14,7 @@
     "es",
     "README.md"
   ],
-  "typings": "dist/futils-nonambient.d.ts",
-  "typescript": {
-    "definition": "dist/futils.d.ts"
-  },
+  "typings": "./type-definitions/futils.d.ts",
   "sideEffects": false,
   "scripts": {
     "commit": "git-cz",
@@ -85,6 +82,7 @@
     "cross-env": "^5.1.6",
     "cz-cli": "^1.0.0",
     "cz-conventional-kawaii": "^1.0.1",
+    "dtslint": "^0.3.0",
     "eslint": "^5.7.0",
     "eslint-config-prettier": "^3.1.0",
     "eslint-config-react-tools": "^1.1.6",
@@ -95,6 +93,7 @@
     "eslint-plugin-jsdoc": "^3.8.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-prettier": "^3.0.0",
+    "eslint-plugin-typescript": "^0.13.0",
     "flow-bin": "^0.83.0",
     "flow-copy-source": "^2.0.2",
     "flow-typed": "^2.5.1",
@@ -111,7 +110,8 @@
     "rollup-plugin-commonjs": "^9.1.3",
     "rollup-plugin-filesize": "^2.0.0",
     "rollup-plugin-node-resolve": "^3.3.0",
-    "rollup-plugin-terser": "^1.0.1"
+    "rollup-plugin-terser": "^1.0.1",
+    "typescript-eslint-parser": "^20.1.1"
   },
   "bundlesize": [
     {

@@ -1,0 +1,8 @@
+//https://github.com/flow-typed/flow-typed/blob/master/definitions/npm/ramda_v0.x.x/flow_v0.82.x-/ramda_v0.x.x.js
+export type Prop_=
+
+export type Prop_ = <T extends string, O>(key: T, o: O)=>$ElementType<O, T>
+export type Prop = Prop_ &(
+  <T extends string, O>(key: T, o: O)=>$ElementType<O, T>)
+
+
