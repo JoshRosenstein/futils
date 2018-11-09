@@ -1,6 +1,6 @@
-
-import has_ from './has_'
 import curry2_ from './curry2_'
+export const has_ = (prop, obj) =>
+  Object.prototype.hasOwnProperty.call(obj, prop)
+export const has = curry2_(has_)
 
-
-export default curry2_(has_)
+export default has

@@ -1,4 +1,6 @@
-import capitalize_ from './capitalize_'
+export const capitalize_ = (str = '') =>
+  `${str.charAt(0).toUpperCase()}${str.slice(1).toLowerCase()}`
 
-export default capitalize_
+export const capitalize = capitalize_
 
+export default capitalize

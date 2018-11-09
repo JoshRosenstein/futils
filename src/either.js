@@ -1,14 +1,9 @@
-// @flow
-import either_ from './either_'
 import curry2_ from './curry2_'
-import type {FunctionBoolType} from 'types'
+import isFunction from './isFunction'
 
-type Either = ((
-  funcA: FunctionBoolType,
-  funcB: FunctionBoolType,
-) => FunctionBoolType) &
-  ((funcA: FunctionBoolType) => (funcB: FunctionBoolType) => FunctionBoolType)
+export const either_ = (funcA, funcB) => (...args) =>
+  isFunction(funcA) ? funcA(...args) || funcB(...args) : funcA || funcB
 
-const either: Either = curry2_(either_)
+export const either = curry2_(either_)
 
 export default either

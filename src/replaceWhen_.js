@@ -1,6 +1,6 @@
-import always_ from './always_'
-import mapValues_ from './mapValues_'
-import when_ from './when_'
+import {always_} from './always'
+import {mapValues_} from './mapValues'
+import {when_} from './when'
 
-export default (predicate, replacement, obj) =>
+export const replaceWhen = (predicate, replacement, obj) =>
   mapValues_(val => when_(predicate, always_(replacement), val), obj)

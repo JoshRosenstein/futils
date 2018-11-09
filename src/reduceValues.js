@@ -1,4 +1,9 @@
 import curry3_ from './curry3_'
-import reduceValues_ from './reduceValues_'
+import {reduce_} from './reduce'
 
-export default curry3_(reduceValues_)
+export const reduceValues_ = (fn, initial, functor) =>
+  reduce_((acc, value) => fn(acc, value), initial, functor)
+
+export const reduceValues = curry3_(reduceValues_)
+
+export default reduceValues

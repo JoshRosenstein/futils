@@ -1,4 +1,12 @@
-import curry2_ from './curry2_'
-import converge_ from './converge_'
+import curryN_ from './curryN_'
+import maxArgs_ from './maxArgs_'
 
-export default curry2_(converge_)
+const internalConverge = (after, fns) => (...args) =>
+  after.apply(internalConverge, fns.map(fn => fn.apply(internalConverge, args)))
+
+export const converge_ = (after, fns) =>
+  curryN_(maxArgs_(fns), internalConverge(after, fns))
+
+export const converge = curryN_(2, converge_)
+
+export default converge

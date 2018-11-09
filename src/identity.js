@@ -1,3 +1,4 @@
-import identity_ from './identity_'
+export const identity_ = a => a
+export const identity = identity_
 
-export default identity_
+export default identity

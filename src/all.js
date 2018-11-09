@@ -1,14 +1,14 @@
-// @flow
-import all_ from './all_'
-import type {FunctorTypeT, PredicateFunctionTypeWithKeyT} from 'types'
+import {reduceWhile_} from './reduceWhile'
 import curry2_ from './curry2_'
 
-export const all: (<T>(
-  fn: PredicateFunctionTypeWithKeyT<T>,
-  functor: FunctorTypeT<T>,
-) => boolean) &
-  (<T>(
-    fn: PredicateFunctionTypeWithKeyT<T>,
-  ) => (functor: FunctorTypeT<T>) => boolean) = curry2_(all_)
+export const all_ = (fn, functor) =>
+  reduceWhile_(
+    acc => acc === true,
+    (acc, value, key) => fn(value, key),
+    true,
+    functor,
+  )
+
+export const all = curry2_(all_)
 
 export default all

@@ -1,4 +1,5 @@
 import curry3_ from './curry3_'
-import replace_ from './replace_'
 
-export default curry3_(replace_)
+export const replace_ = (regex, replacer, str) => str.replace(regex, replacer)
+export const replace = curry3_(replace_)
+export default replace

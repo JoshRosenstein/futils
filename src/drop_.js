@@ -1,7 +1,7 @@
-import gt_ from './gt_'
-import append_ from './append_'
-import reduce_ from './reduce_'
-import empty_ from './empty_'
+import {gt_} from './gt'
+import {append_} from './append'
+import {reduce_} from './reduce'
+import {empty_} from './empty'
 
 export default (count, orderedList) =>
   reduce_(

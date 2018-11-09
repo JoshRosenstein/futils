@@ -1,13 +1,17 @@
-// @flow
 import curryN_ from './curryN_'
-import allPass_ from './allPass_'
 import maxArgs_ from './maxArgs_'
+import {reduceWhile_} from './reduceWhile'
+import toArray from './toArray'
 
-type AllPass = <T>(
-  fns: Array<(...args: Array<T>) => boolean>,
-) => (...args: Array<T>) => boolean
+export const allPass_ = (fns, ...args) =>
+  reduceWhile_(
+    acc => acc === true,
+    (acc, fn) => fn(...args),
+    true,
+    toArray(fns),
+  )
 
-const allPass: AllPass = fns =>
+export const allPass = fns =>
   curryN_(maxArgs_(fns), (...args) => allPass_(fns, ...args))
 
 export default allPass

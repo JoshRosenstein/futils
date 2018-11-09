@@ -1,4 +1,6 @@
 import curry2_ from './curry2_'
-import endsWith_ from './endsWith_'
 
-export default curry2_(endsWith_)
+export const endsWith_ = (subset, set) => set.endsWith(subset)
+export const endsWith = curry2_(endsWith_)
+
+export default endsWith

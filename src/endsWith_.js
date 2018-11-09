@@ -1,1 +1,1 @@
-export default (subset, set) =>  set.endsWith(subset)
+export default (subset, set) => set.endsWith(subset)

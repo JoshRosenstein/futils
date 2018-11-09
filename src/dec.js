@@ -1,3 +1,10 @@
-import dec_ from './dec_'
+import {replace_} from './replace'
+import isString from './isString'
 
-export default dec_
+export const dec_ = x => {
+  const xx = parseFloat(x)
+  return !xx ? x : isString(x) ? replace_(`${xx}`, `${xx - 1}`, x) : xx - 1
+}
+export const dec = dec_
+
+export default dec

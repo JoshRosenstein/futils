@@ -1,3 +1,3 @@
-import always_ from './always_'
-
-export default always_
+export const always_ = x => () => x
+export const always = always_
+export default always

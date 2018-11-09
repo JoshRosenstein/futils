@@ -1,4 +1,13 @@
 import curry2_ from './curry2_'
-import reject_ from './reject_'
+import {filter_} from './filter'
+import {complement_} from './complement'
 
-export default curry2_(reject_)
+export const reject_ = (predicate, enumerable) => {
+  if (enumerable.reject) {
+    return enumerable.reject(predicate)
+  }
+  return filter_(complement_(predicate), enumerable)
+}
+export const reject = curry2_(reject_)
+
+export default reject

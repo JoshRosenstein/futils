@@ -1,9 +1,6 @@
-// @flow
-import defaultTo_ from './defaultTo_'
 import curry2_ from './curry2_'
 
-type DefaultTo = (<T, V>(d: T, x: ?V) => V | T) & (<T, V>(d: T, x: ?V) => V | T)
-
-const defaultTo: DefaultTo = curry2_(defaultTo_)
+export const defaultTo_ = (d, v) => (v == null || v !== v ? d : v)
+export const defaultTo = curry2_(defaultTo_)
 
 export default defaultTo

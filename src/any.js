@@ -1,4 +1,14 @@
 import curry2_ from './curry2_'
-import any_ from './any_'
+import {reduceWhile_} from './reduceWhile'
 
-export default curry2_(any_)
+export const any_ = (handlerFn, functor) =>
+  reduceWhile_(
+    acc => acc === false,
+    (acc, value, key) => handlerFn(value, key),
+    false,
+    functor,
+  )
+
+export const any = curry2_(any_)
+
+export default any

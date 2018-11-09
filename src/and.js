@@ -1,8 +1,7 @@
-// @flow
 import curry2_ from './curry2_'
-import and_ from './and_'
 
-const and: (boolean => boolean => boolean) &
-  ((boolean, boolean) => boolean) = curry2_(and_)
+export const and_ = (a, b) => a && b
+
+const and = curry2_(and_)
 
 export default and

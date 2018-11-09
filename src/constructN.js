@@ -1,4 +1,13 @@
-import curry2_ from './curry2_'
-import constructN_ from './constructN_'
+import curryN_ from './curryN_'
 
-export default curry2_(constructN_)
+const throwConstructError = () => {
+  throw new Error('Constructor with greater than ten arguments')
+}
+
+export const constructN_ = (n, Func) =>
+  Func.length > 10
+    ? throwConstructError()
+    : curryN_(n, (...args) => new Func(...args))
+export const constructN = curryN_(2, constructN_)
+
+export default constructN

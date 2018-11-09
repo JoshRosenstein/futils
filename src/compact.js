@@ -1,3 +1,6 @@
-import compact_ from './compact_'
+import {rejectNil_} from './rejectNil'
 
-export default compact_
+export const compact_ = rejectNil_
+export const compact = compact_
+
+export default compact

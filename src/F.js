@@ -1,3 +1,3 @@
-import F_ from './F_'
-
-export default F_
+export const F_ = () => false
+export const F = F_
+export default F

@@ -1,3 +1,3 @@
-import T_ from './T_'
-
-export default T_
+export const T_ = () => true
+export const T = T_
+export default T
