@@ -1,4 +1,16 @@
-import curry2_ from './curry2_'
-import test_ from './test_'
+import {curry2_} from './curry2_'
+import {type_} from './type'
+import cloneRegExp_ from './cloneRegExp_'
 
-export default curry2_(test_)
+export const test_ = (pattern, str) => {
+  if (type_(pattern) !== 'RegExp') {
+    throw new TypeError(
+      `‘test’ requires a value of type RegExp as its first argument; received ${type_(
+        pattern,
+      )}`,
+    )
+  }
+  return cloneRegExp_(pattern).test(str)
+}
+export const test = curry2_(test_)
+export default test

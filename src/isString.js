@@ -1,4 +1,3 @@
-// @flow
+import isString from 'typed-is/lib/isString'
 
-const isString = (val: mixed): %checks => typeof val === 'string'
 export default isString

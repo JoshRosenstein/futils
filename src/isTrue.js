@@ -1,1 +1,3 @@
-export default val => val === true || val === 'true'
+import isTrue from 'typed-is/lib/isTrue'
+
+export default isTrue

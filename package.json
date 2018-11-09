@@ -60,7 +60,9 @@
     "url": "https://github.com/JoshRosenstein/futils/issues"
   },
   "homepage": "https://github.com/JoshRosenstein/futils#README",
-  "dependencies": {},
+  "dependencies": {
+    "typed-is": "^1.0.3"
+  },
   "devDependencies": {
     "@babel/cli": "^7.1.0",
     "@babel/core": "^7.1.2",
@@ -82,6 +84,7 @@
     "cross-env": "^5.1.6",
     "cz-cli": "^1.0.0",
     "cz-conventional-kawaii": "^1.0.1",
+    "deprecate": "^1.1.0",
     "dtslint": "^0.3.0",
     "eslint": "^5.7.0",
     "eslint-config-prettier": "^3.1.0",

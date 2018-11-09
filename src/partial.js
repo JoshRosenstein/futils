@@ -1,4 +1,5 @@
-import partial_ from './partial_'
-import curryN_ from './curryN_'
+import {curry2_} from './curry2_'
+// partial_ :: ((a... -> b), [a]) -> a... -> b
+export const partial_ = (f, args) => f.bind(null, ...args)
 
-export default curryN_(2, partial_)
+export default curry2_(partial_)

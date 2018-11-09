@@ -1,3 +1,8 @@
-import toArray_ from './toArray_'
+import isArray_ from './isArray_'
+import isNil_ from './isNil_'
 
-export default toArray_
+export const toArray_ = v => (isNil_(v) ? [] : isArray_(v) ? v : [v])
+
+export const toArray = toArray_
+
+export default toArray

@@ -1,6 +1,5 @@
 // @flow
 /* eslint-disable no-unused-vars, no-redeclare, flowtype/generic-spacing */
-
 export type UnaryFn<A, R> = (a: A) => R
 export type UnaryPromiseFn<A, R> = UnaryFn<A, Promise<R>>
 export type BinaryFn<A, B, R> = ((a: A, b: B) => R) & ((a: A) => (b: B) => R)

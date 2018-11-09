@@ -1,3 +1,2 @@
-import isPopulated_ from './isPopulated_'
-
-export default isPopulated_
+import isEmpty from 'typed-is/lib/isEmpty'
+export default x => !isEmpty(x)

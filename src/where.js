@@ -1,4 +1,14 @@
 import curry2_ from './curry2_'
-import where_ from './where_'
+import {reduce_} from './reduce'
+import {path_} from './path'
+import {toArray_} from './toArray'
 
-export default curry2_(where_)
+export const where_ = (matcher, keyedEnumerable) =>
+  reduce_(
+    (latest, value, key) =>
+      latest && value(path_(toArray_(key), keyedEnumerable)),
+    true,
+    matcher,
+  )
+export const where = curry2_(where_)
+export default where

@@ -1,16 +1,12 @@
-// @flow
+import {curry2_} from './curry2_'
+import isString_ from './isString_'
 
-import nth_ from './nth_'
-
-declare function nth<V, T: Array<V>>(i: number, orderedList: T): ?V
-declare function nth<V, T: Array<V> | string>(
-  i: number,
-): ((orderedList: string) => string) & ((orderedList: T) => ?V)
-declare function nth<T: string>(i: number, orderedList: T): T
-
-export default function nth(i, orderedList) {
-  if (arguments.length === 1) {
-    return i => nth_(i, orderedList)
+export const nth_ = (i, orderedList) => {
+  const idx = i < 0 ? orderedList.length + i : i
+  if (isString_(orderedList)) {
+    return orderedList.charAt(idx)
   }
-  return nth_(i, orderedList)
+  return orderedList[idx]
 }
+export const nth = curry2_(nth_)
+export default nth

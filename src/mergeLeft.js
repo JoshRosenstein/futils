@@ -1,4 +1,7 @@
-import curry2_ from './curry2_'
-import mergeLeft_ from './mergeLeft_'
+import {curry2_} from './curry2_'
+import {merge_} from './merge'
 
-export default curry2_(mergeLeft_)
+export const mergeLeft_ = (left, right) => merge_(right, left)
+export const mergeLeft = curry2_(mergeLeft_)
+
+export default mergeLeft

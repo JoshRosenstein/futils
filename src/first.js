@@ -1,5 +1,5 @@
+import {nth_} from './nth'
 
-
-import first_ from './first_'
-
+export const first_ = list => nth_(0, list)
+export const first = first_
 export default first_

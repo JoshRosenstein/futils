@@ -1,3 +1,3 @@
-import isNil_ from './isNil_'
-
-export default isNil_
+export const isNil_ = val => val == null
+export const isNil = isNil_
+export default isNil

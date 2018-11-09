@@ -1,4 +1,16 @@
 import curry2_ from './curry2_'
-import prop_ from './prop_'
+import {isNil} from './isNil'
 
-export default curry2_(prop_)
+export const prop_ = (name, keyedFunctor) => {
+  if (isNil(keyedFunctor)) {
+    return keyedFunctor
+  }
+
+  if (keyedFunctor.get) {
+    return keyedFunctor.get(name)
+  }
+
+  return keyedFunctor[name]
+}
+export const prop = curry2_(prop_)
+export default prop

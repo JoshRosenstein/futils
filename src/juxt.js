@@ -1,3 +1,6 @@
-import juxt_ from './juxt_'
+import converge_ from './converge_'
+import argsToList from './argsToList'
 
-export default juxt_
+export const juxt_ = fns => converge_(argsToList, fns)
+export const juxt = juxt_
+export default juxt

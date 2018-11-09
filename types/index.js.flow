@@ -1,5 +1,5 @@
 // @flow
-
+/* eslint-disable  import/no-unresolved */
 export type * from './curried'
 export type * from './curry'
 export type AccumulatedType = mixed

@@ -5,8 +5,4 @@ describe('isTrue', () => {
     expect(isTrue(true)).toBeTruthy()
     expect(isTrue(false)).toBeFalsy()
   })
-  it('works correctly with string', () => {
-    expect(isTrue('true')).toBeTruthy()
-    expect(isTrue('false')).toBeFalsy()
-  })
 })

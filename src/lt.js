@@ -1,4 +1,6 @@
-import lt_ from './lt_'
 import curry2_ from './curry2_'
 
-export default curry2_(lt_)
+export const lt_ = (a, b) => a < b
+export const lt = curry2_(lt_)
+
+export default lt

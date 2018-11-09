@@ -8,7 +8,7 @@
   },
   "editor.formatOnSave": true,
   "flow.useNPMPackagedFlow": true,
-  "javascript.validate.enable": false,
+  "javascript.validate.enable": true,
   "jest.pathToJest": "yarn jest",
   "prettier.eslintIntegration": true,
   "flow.runOnEdit": false

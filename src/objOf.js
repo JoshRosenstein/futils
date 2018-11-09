@@ -1,4 +1,15 @@
 import curry2_ from './curry2_'
-import objOf_ from './objOf_'
+import {reduceValues_} from './reduceValues'
+import {attach_} from './attach'
+import {reverse_} from './reverse'
+import {splitWhenNoSpace_} from './splitWhenNoSpace_'
 
+export const objOf_ = (keys, value) =>
+  reduceValues_(
+    (acc, key) => attach_(key, acc, {}),
+    value,
+    reverse_(splitWhenNoSpace_(keys, '.')),
+  )
+
+export const objOf = curry2_(objOf_)
 export default curry2_(objOf_)

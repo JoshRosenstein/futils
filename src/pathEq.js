@@ -1,7 +1,8 @@
-import path_ from './path_'
-import curryN_ from './curryN_'
+import {path_} from './path'
+import {curry3_} from './curry3_'
 
-export default curryN_(
-  3,
-  (paths = [], value, obj = {}) => path_(paths, obj) === value,
-)
+export const pathEq_ = (paths = [], value, obj = {}) =>
+  path_(paths, obj) === value
+export const pathEq = curry3_(pathEq_)
+
+export default pathEq
