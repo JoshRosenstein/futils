@@ -1,4 +1,4 @@
-import curryN_ from './curryN_'
+import {curryN_} from './curryN'
 
 export const complement_ = pred =>
   curryN_(pred.length, (...args) => !pred(...args))

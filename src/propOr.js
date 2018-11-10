@@ -1,4 +1,8 @@
-import curry3_ from './curry3_'
-import propOr_ from './propOr_'
+import {curry3_} from './curry3_'
+import {prop_} from './prop'
+import {defaultTo_} from './defaultTo'
 
-export default curry3_(propOr_)
+export const propOr_ = (d, name, keyedFunctor) =>
+  defaultTo_(d, prop_(name, keyedFunctor))
+export const propOr = curry3_(propOr_)
+export default propOr

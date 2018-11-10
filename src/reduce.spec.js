@@ -24,8 +24,8 @@ describe('reduce', () => {
   })
 
   test('Set', () => {
-    const a = reduce(reducer, initial)(new Set(['a', 'b', 'c']))
-    const eA = './a:undefined/b:undefined/c:undefined'
+    const a = reduce(reducer, initial, new Set(['a', 'b', 'c']))
+    const eA = './a:a/b:b/c:c'
     expect(a).toEqual(eA)
   })
 

@@ -1,4 +1,4 @@
-import curry2_ from './curry2_'
+import {curry2_} from './curry2_'
 import isArray from './isArray'
 import isString from './isString'
 

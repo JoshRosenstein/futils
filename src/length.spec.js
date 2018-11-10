@@ -1,15 +1,16 @@
-import isNil from './isNil'
+import length from './length'
 
-describe('isNil', () => {
-  test('returns true for undefined and null', () => {
-    expect(isNil(null)).toBeTruthy()
-    expect(isNil(undefined)).toBeTruthy()
-  })
-
-  test('returns false otherwise', () => {
-    expect(isNil(true)).toBeFalsy()
-    expect(isNil('test')).toBeFalsy()
-    expect(isNil(5)).toBeFalsy()
-    expect(isNil({})).toBeFalsy()
+describe('length', () => {
+  test('Works', () => {
+    expect(length(null)).toBe(undefined)
+    expect(length(undefined)).toBe(undefined)
+    expect(length([])).toBe(0)
+    expect(length([1])).toBe(1)
+    expect(length({a: 1})).toBe(1)
+    expect(length('')).toBe(0)
+    expect(length('abc')).toBe(3)
+    expect(length(new Map([['aaa', 'aaa'], ['bbb', 'bbb']]))).toBe(2)
+    expect(length(new Set([1, 2, 3]))).toBe(3)
+    expect(length({length: -10})).toBe(1)
   })
 })

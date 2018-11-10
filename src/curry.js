@@ -1,3 +1,6 @@
-import curry_ from './curry_'
+import {curryN_} from './curryN'
 
-export default curry_
+export const curry_ = f => curryN_(f.length, f)
+export const curry = curry_
+
+export default curry

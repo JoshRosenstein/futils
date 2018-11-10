@@ -5,7 +5,7 @@ describe('reduceWhile', () => {
     return x % 2 === 1
   }
 
-  test.skip('Array', () => {
+  test('Array', () => {
     expect(
       reduceWhile(isOdd, (acc, val) => acc + val, 0, [1, 3, 1, 5, 20, 7, 7, 7]),
     ).toEqual(10)

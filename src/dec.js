@@ -1,5 +1,5 @@
 import {replace_} from './replace'
-import isString from './isString'
+import {isString} from 'typed-is'
 
 export const dec_ = x => {
   const xx = parseFloat(x)

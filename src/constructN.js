@@ -1,4 +1,4 @@
-import curryN_ from './curryN_'
+import {curryN_} from './curryN'
 
 const throwConstructError = () => {
   throw new Error('Constructor with greater than ten arguments')

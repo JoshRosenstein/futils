@@ -1,8 +1,8 @@
-import curry2_ from './curry2_'
-import merge_ from './merge_'
+import {curry2_} from './curry2_'
+import {merge_} from './merge'
 import {empty_} from './empty'
-import of_ from './of_'
-import reduce_ from './reduce_'
+import {of_} from './of'
+import {reduce_} from './reduce'
 
 export const map_ = (fn, functor) => {
   if (functor.map instanceof Function) {
