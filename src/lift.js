@@ -1,3 +1,5 @@
-import lift_ from './lift_'
+import {liftN_} from './liftN'
 
-export default lift_
+export const lift_ = fn => liftN_(fn.length, fn)
+export const lift = lift_
+export default lift

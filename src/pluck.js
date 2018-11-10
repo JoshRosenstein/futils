@@ -1,4 +1,7 @@
-import curry2_ from './curry2_'
-import pluck_ from './pluck_'
+import {curry2_} from './curry2_'
+import {path_} from './path'
+import {mapValues_} from './mapValues'
 
-export default curry2_(pluck_)
+export const pluck_ = (p, obj) => mapValues_(x => path_(p, x), obj)
+export const pluck = curry2_(pluck_)
+export default pluck

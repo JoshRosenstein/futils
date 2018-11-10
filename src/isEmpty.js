@@ -1,3 +1,3 @@
-import isEmpty_ from './isEmpty_'
+import {isEmpty} from 'typed-is'
 
-export default isEmpty_
+export default isEmpty

@@ -1,3 +1,4 @@
-import toLower_ from './toLower_'
+export const toLower_ = str => str.toLowerCase()
+export const toLower = toLower_
 
-export default toLower_
+export default toLower

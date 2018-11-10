@@ -1,15 +1,7 @@
 // @flow
 
-import type_ from './type_'
+import {type_} from './type'
 import fromIteratorToArray_ from './fromIteratorToArray_'
-import type {
-  ArrayType,
-  ValueType,
-  ObjectType,
-  SetType,
-  MapType,
-  KeyType,
-} from 'types'
 
 const fromMapping = {
   Array: (array: ArrayType): Array<[number, mixed]> =>

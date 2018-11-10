@@ -1,3 +1,3 @@
-import isNilOrEmpty_ from './isNilOrEmpty_'
+import {isNil, isEmpty} from 'typed-is'
 
-export default isNilOrEmpty_
+export default value => isNil(value) || isEmpty(value)

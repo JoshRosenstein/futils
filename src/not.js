@@ -1,3 +1,3 @@
-import not_ from './not_'
-
-export default not_
+export const not_ = x => !x
+export const not = not_
+export default not

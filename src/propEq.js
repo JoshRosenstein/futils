@@ -1,4 +1,9 @@
-import curry3_ from './curry3_'
-import propEq_ from './propEq_'
+import {curry3_} from './curry3_'
+import {prop_} from './prop'
+import {equals_} from './equals'
 
-export default curry3_(propEq_)
+export const propEq_ = (name, v, obj) => equals_(v, prop_(name, obj))
+
+export const propEq = curry3_(propEq_)
+
+export default propEq

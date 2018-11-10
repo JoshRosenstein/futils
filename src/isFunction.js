@@ -1,3 +1,3 @@
-import isFunction_ from './isFunction_'
+import isFunction from 'typed-is/lib/isFunction'
 
-export default isFunction_
+export default isFunction

@@ -1,3 +1,6 @@
-import pairsKeys_ from './pairsKeys_'
+import {first_} from './first'
+import {mapValues_} from './mapValues'
 
-export default pairsKeys_
+export const pairsKeys_ = pairs => mapValues_(first_, pairs)
+export const pairsKeys = pairsKeys_
+export default pairsKeys

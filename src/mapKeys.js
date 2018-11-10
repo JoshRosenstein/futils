@@ -1,4 +1,9 @@
-import curry2_ from './curry2_'
-import mapKeys_ from './mapKeys_'
+import {curry2_} from './curry2_'
+import {mapKeysWithValueKey_} from './mapKeysWithValueKey'
 
-export default curry2_(mapKeys_)
+export const mapKeys_ = (fn, functor) =>
+  mapKeysWithValueKey_((_, key) => fn(key), functor)
+
+export const mapKeys = curry2_(mapKeys_)
+
+export default mapKeys

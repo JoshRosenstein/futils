@@ -1,3 +1,3 @@
-import uniq_ from './uniq_'
-
-export default uniq_
+export const uniq_ = array => [...new Set(array)]
+export const uniq = uniq_
+export default uniq

@@ -1,13 +1,10 @@
-// @flow
+export const type_ = value =>
+  value === null
+    ? 'null'
+    : value === undefined
+      ? 'undefined'
+      : Object.prototype.toString.call(value).slice(8, -1)
 
-export default (value: ?any): string => {
-  if (value === null) {
-    return 'null'
-  }
+export const type = type_
 
-  if (value === undefined) {
-    return 'undefined'
-  }
-
-  return Object.prototype.toString.call(value).slice(8, -1)
-}
+export default type

@@ -1,5 +1,5 @@
-import curry2_ from './curry2_'
-import type_ from './type_'
+import {curry2_} from './curry2_'
+import {type_} from './type'
 import isNil_ from './isNil_'
 
 export const is_ = (sig, value) => {

@@ -1,4 +1,8 @@
-import lens_ from './lens_'
 import curry2_ from './curry2_'
+import {mapValues_} from './mapValues'
 
-export default curry2_(lens_)
+export const lens_ = (getter, setter) => toFunctorFn => target =>
+  mapValues_(v => setter(v, target), toFunctorFn(getter(target)))
+export const lens = curry2_(lens_)
+
+export default lens

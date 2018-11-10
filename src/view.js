@@ -1,4 +1,8 @@
-import curryN_ from './curryN_'
-import view_ from './view_'
+import curry2_ from './curry2_'
+import {construct_} from './construct'
 
-export default curryN_(2, view_)
+const Const = x => ({value: x, map: () => Const(x)})
+export const view_ = (lens, x) => lens(construct_(Const))(x).value
+export const view = curry2_(view_)
+
+export default view

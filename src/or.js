@@ -1,4 +1,4 @@
-import curry2_ from './curry2_'
-import or_ from './or_'
-
-export default curry2_(or_)
+import {curry2_} from './curry2_'
+export const or_ = (a, b) => a || b
+export const or = curry2_(or_)
+export default or

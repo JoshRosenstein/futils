@@ -1,5 +1,8 @@
-import curry4_ from './curry4_'
-import ifElse_ from './ifElse_'
+import {curryN_} from './curryN'
 
+export const ifElse_ = (predicate, consequent, alternative, value) =>
+  predicate(value) ? consequent(value) : alternative(value)
 
-export default curry4_(ifElse_)
+export const ifElse = curryN_(4, ifElse_)
+
+export default ifElse

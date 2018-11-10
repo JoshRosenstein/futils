@@ -1,4 +1,4 @@
-import converge_ from './converge_'
+import {converge_} from './converge'
 import argsToList from './argsToList'
 
 export const juxt_ = fns => converge_(argsToList, fns)

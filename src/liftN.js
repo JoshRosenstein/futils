@@ -1,4 +1,12 @@
-import liftN_ from './liftN_'
-import curry2_ from './curry2_'
+import {reduce_} from './reduce'
+import {ap_} from './ap'
+import {curryN_} from './curryN'
+import {mapValues_} from './mapValues'
 
-export default curry2_(liftN_)
+export const liftN_ = (arity, fn) =>
+  curryN_(arity, (x, ...args) =>
+    reduce_((acc, v) => ap_(acc, v), mapValues_(curryN_(arity, fn), x), args),
+  )
+export const liftN = curryN_(2, liftN_)
+
+export default liftN

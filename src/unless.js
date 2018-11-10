@@ -1,5 +1,7 @@
-import curry3_ from './curry3_'
-import unless_ from './unless_'
+import {curry3_} from './curry3_'
 
-export default curry3_(unless_)
- 
+export const unless_ = (cond, fn, val) => (cond(val) ? val : fn(val))
+
+export const unless = curry3_(unless_)
+
+export default unless

@@ -1,5 +1,3 @@
-// @flow
+import isFunction from 'typed-is/lib/isFunction'
 
-import is_ from './is_'
-
-export default (value: mixed): boolean => is_('Function', value)
+export default isFunction

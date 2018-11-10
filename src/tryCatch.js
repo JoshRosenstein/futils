@@ -1,4 +1,13 @@
-import curry2_ from './curry2_'
-import tryCatch_ from './tryCatch_'
+import curryN_ from './curryN_'
 
-export default curry2_(tryCatch_)
+export const tryCatch_ = (tryer, catcher) =>
+  curryN_(tryer.length, (...args) => {
+    try {
+      return tryer(...args)
+    } catch (e) {
+      return catcher(e, ...args)
+    }
+  })
+
+export const tryCatch = curryN_(2, tryCatch_)
+export default tryCatch

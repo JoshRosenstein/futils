@@ -1,5 +1,17 @@
-import zipApply_ from './zipApply_'
-import curry2_ from './curry2_'
+import {curry2_} from './curry2_'
+import {mapValues_} from './mapValues'
+import {zip_} from './zip'
+import {length_} from './length'
+import {call_} from './call'
+import {reduceValues_} from './reduceValues'
 
-export default curry2_(zipApply_)
- 
+export const zipApply_ = (fns, functor) => {
+  if (length_(fns) !== length_(functor)) {
+    throw new Error('left and right werent the same size')
+  }
+
+  return mapValues_(x => reduceValues_(call_, call_, x), zip_(fns, functor))
+}
+
+export const zipApply = curry2_(zipApply_)
+export default zipApply

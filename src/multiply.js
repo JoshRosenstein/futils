@@ -1,4 +1,5 @@
-import curry2_ from './curry2_'
-import multiply_ from './multiply_'
+import {curry2_} from './curry2_'
 
-export default curry2_(multiply_)
+export const multiply_ = (a, b) => a * b
+export const multiply = curry2_(multiply_)
+export default multiply
