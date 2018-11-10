@@ -1,4 +1,4 @@
-import curry2_ from './curry2_'
+import curry2_ from './_internal/curry2_'
 import {merge_} from './merge'
 import {mergeWith_} from './mergeWith'
 import isObject from './isObject'

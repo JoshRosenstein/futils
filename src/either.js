@@ -1,4 +1,4 @@
-import curry2_ from './curry2_'
+import curry2_ from './_internal/curry2_'
 import isFunction from './isFunction'
 
 export const either_ = (funcA, funcB) => (...args) =>

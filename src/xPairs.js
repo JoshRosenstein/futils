@@ -1,4 +1,4 @@
-import {curry2_} from './curry2_'
+import {curry2_} from './_internal/curry2_'
 import {toArray_} from './toArray'
 import {xprod_} from './xprod'
 

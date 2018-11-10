@@ -1,5 +1,5 @@
 // TODO: Remove this Alias of Map
-import {curry2_} from './curry2_'
+import {curry2_} from './_internal/curry2_'
 import {merge_} from './merge'
 import {empty_} from './empty'
 import {of_} from './of'

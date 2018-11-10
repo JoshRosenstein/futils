@@ -1,4 +1,4 @@
-import {curry2_} from './curry2_'
+import {curry2_} from './_internal/curry2_'
 import {split_} from './split'
 
 export const round_ = (precision, number) => {
@@ -13,5 +13,5 @@ export const round_ = (precision, number) => {
   return Math.round(number)
 }
 
-const round = curry2_(round_)
+export const round = curry2_(round_)
 export default round

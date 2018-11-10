@@ -1,11 +1,11 @@
-import {curry2_} from './curry2_'
+import {curry2_} from './_internal/curry2_'
 import {path_} from './path'
-import safeEval_ from './safeEval_'
+import eval_ from './_internal/eval_'
 import {isString} from 'typed-is'
 
 export const template_ = (string, data) =>
   isString(string)
-    ? safeEval_(
+    ? eval_(
         string.replace(/{\!([^}]+)}/g, (_, key) => {
           const res = path_(key, data)
           return res

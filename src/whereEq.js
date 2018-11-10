@@ -1,6 +1,6 @@
 import {where_} from './where'
 import {equals_} from './equals'
-import {curry2_} from './curry2_'
+import {curry2_} from './_internal/curry2_'
 import {mapValues_} from './mapValues'
 
 export const whereEq_ = (spec, testObj) =>

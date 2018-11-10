@@ -1,4 +1,4 @@
-import {curry3_} from './curry3_'
+import {curry3_} from './_internal/curry3_'
 
 export const doWhile_ = (cond, fn, val) =>
   cond(val) ? doWhile_(cond, fn, fn(val)) : val

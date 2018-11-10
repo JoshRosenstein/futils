@@ -1,5 +1,5 @@
 import {map_} from './map'
-import curryN_ from './curryN_'
+import {curryN_} from './curryN'
 import isFunction from './isFunction'
 
 export const mapValues_ = (fn, functor) => {
@@ -13,4 +13,5 @@ export const mapValues_ = (fn, functor) => {
   return map_(value => fn(value), functor)
 }
 
-export default curryN_(2, mapValues_)
+export const mapValues = curryN_(2, mapValues_)
+export default mapValues

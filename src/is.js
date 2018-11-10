@@ -1,14 +1,14 @@
-import {curry2_} from './curry2_'
+import {curry2_} from './_internal/curry2_'
 import {type_} from './type'
-import isNil_ from './isNil_'
+import {isNil} from 'typed-is'
 
 export const is_ = (sig, value) => {
   if (typeof sig === 'string') {
     return type_(value) === sig
   }
-  return (!isNil_(value) && value.constructor === sig) || value instanceof sig
+  return (!isNil(value) && value.constructor === sig) || value instanceof sig
 }
 
-const is = curry2_(is_)
+export const is = curry2_(is_)
 
 export default is

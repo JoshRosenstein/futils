@@ -1,4 +1,4 @@
-import curry2_ from './curry2_'
+import curry2_ from './_internal/curry2_'
 import {reduce_} from './reduce'
 import {path_} from './path'
 import {toArray_} from './toArray'

@@ -1,4 +1,4 @@
-import curry2_ from './curry2_'
+import curry2_ from './_internal/curry2_'
 import {gt_} from './gt'
 import {append_} from './append'
 import {reduce_} from './reduce'

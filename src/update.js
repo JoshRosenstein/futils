@@ -1,4 +1,4 @@
-import {curry3_} from './curry3_'
+import {curry3_} from './_internal/curry3_'
 import {assoc_} from './assoc'
 
 export const update_ = (i, v, l) =>

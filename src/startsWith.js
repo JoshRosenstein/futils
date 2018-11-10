@@ -1,4 +1,4 @@
-import {curry2_} from './curry2_'
+import {curry2_} from './_internal/curry2_'
 import {take_} from './take'
 import {equals_} from './equals'
 

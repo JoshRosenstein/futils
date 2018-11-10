@@ -1,5 +1,5 @@
 import {evolve_} from './evolve'
-import {curry3_} from './curry3_'
+import {curry3_} from './_internal/curry3_'
 import {identity_} from './identity'
 
 export const xfrm_ = (xfrms, val, key) => {

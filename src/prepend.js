@@ -1,4 +1,4 @@
-import curry2_ from './curry2_'
+import {curry2_} from './_internal/curry2_'
 import {type_} from './type'
 
 export const prepend_ = (value, orderedList) => {
@@ -17,6 +17,6 @@ export const prepend_ = (value, orderedList) => {
   }
 }
 
-const prepend = curry2_(prepend_)
+export const prepend = curry2_(prepend_)
 
 export default prepend

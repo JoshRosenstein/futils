@@ -1,4 +1,4 @@
-import {curry2_} from './curry2_'
+import {curry2_} from './_internal/curry2_'
 import {mapValues_} from './mapValues'
 import {zip_} from './zip'
 import {length_} from './length'

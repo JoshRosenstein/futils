@@ -1,8 +1,8 @@
-import {curry2_} from './curry2_'
+import {curry2_} from './_internal/curry2_'
 import {reduceValues_} from './reduceValues'
 import {append_} from './append'
 import {path_} from './path'
-import {splitWhenNoSpace_} from './splitWhenNoSpace_'
+import {splitWhenNoSpace_} from './_internal/splitWhenNoSpace_'
 
 export const paths_ = (keys, keyedEnumerable) =>
   reduceValues_(

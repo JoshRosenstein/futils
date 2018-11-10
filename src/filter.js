@@ -1,4 +1,4 @@
-import curry2_ from './curry2_'
+import curry2_ from './_internal/curry2_'
 import {empty_} from './empty'
 import {attach_} from './attach'
 import {reduce_} from './reduce'

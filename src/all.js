@@ -1,5 +1,5 @@
 import {reduceWhile_} from './reduceWhile'
-import curry2_ from './curry2_'
+import curry2_ from './_internal/curry2_'
 
 export const all_ = (fn, functor) =>
   reduceWhile_(

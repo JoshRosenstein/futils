@@ -1,5 +1,5 @@
-import curryN_ from './curryN_'
-import maxArgs_ from './maxArgs_'
+import {curryN_} from './curryN'
+import maxArgs_ from './_internal/maxArgs_'
 import {reduceWhile_} from './reduceWhile'
 import toArray from './toArray'
 //// TODO: Fix

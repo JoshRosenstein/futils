@@ -1,5 +1,4 @@
-import curryN_ from './curryN_'
-
+import {curryN_} from './curryN'
 export const tryCatch_ = (tryer, catcher) =>
   curryN_(tryer.length, (...args) => {
     try {

@@ -1,8 +1,8 @@
-import {curry2_} from './curry2_'
+import {curry2_} from './_internal/curry2_'
 import {reduceValues_} from './reduceValues'
 import {append_} from './append'
 import {prop_} from './prop'
-import {splitWhenNoSpace_} from './splitWhenNoSpace_'
+import {splitWhenNoSpace_} from './_internal/splitWhenNoSpace_'
 
 export const props_ = (keys, keyedEnumerable) =>
   reduceValues_(

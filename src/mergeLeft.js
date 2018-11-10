@@ -1,4 +1,4 @@
-import {curry2_} from './curry2_'
+import {curry2_} from './_internal/curry2_'
 import {merge_} from './merge'
 
 export const mergeLeft_ = (left, right) => merge_(right, left)

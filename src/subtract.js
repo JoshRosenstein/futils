@@ -1,5 +1,5 @@
-import {curry2_} from './curry2_'
+import {curry2_} from './_internal/curry2_'
 
-const subtract_ = (a, b) => Number(a) - Number(b)
-const subtract = curry2_(subtract_)
+export const subtract_ = (a, b) => Number(a) - Number(b)
+export const subtract = curry2_(subtract_)
 export default subtract

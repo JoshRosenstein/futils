@@ -1,4 +1,4 @@
-import curryN_ from './curryN_'
+import {curryN_} from './curryN'
 
 export const useWith_ = (cb, enhancers) =>
   curryN_(enhancers.length, (...args) =>

@@ -1,5 +1,5 @@
 import {toPairs_} from './toPairs'
-import {curry2_} from './curry2_'
+import {curry2_} from './_internal/curry2_'
 
 export const forEach_ = (fn, functor) => {
   if (typeof functor.forEach === 'function') {

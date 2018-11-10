@@ -1,4 +1,4 @@
-import curryN_ from './curryN_'
+import {curryN_} from './curryN'
 import last from './last'
 
 export const addIndex_ = iterFn =>
@@ -9,5 +9,5 @@ export const addIndex_ = iterFn =>
 
     return iterFn(newFn, ...rest)
   })
-
+export const addIndex = addIndex_
 export default addIndex_

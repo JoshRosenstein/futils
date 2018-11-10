@@ -1,4 +1,4 @@
 // alias
 import omitKey from './omitKey'
-
-export default omitKey
+export const dissoc = omitKey
+export default dissoc

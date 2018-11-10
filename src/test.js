@@ -1,6 +1,6 @@
-import {curry2_} from './curry2_'
+import {curry2_} from './_internal/curry2_'
 import {type_} from './type'
-import cloneRegExp_ from './cloneRegExp_'
+import cloneRegExp_ from './_internal/cloneRegExp_'
 
 export const test_ = (pattern, str) => {
   if (type_(pattern) !== 'RegExp') {

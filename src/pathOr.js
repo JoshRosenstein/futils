@@ -1,4 +1,4 @@
-import {curry3_} from './curry3_'
+import {curry3_} from './_internal/curry3_'
 import {path_} from './path'
 import {defaultTo_} from './defaultTo'
 

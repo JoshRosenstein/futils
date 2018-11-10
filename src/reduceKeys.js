@@ -1,4 +1,4 @@
-import {curry3_} from './curry3_'
+import {curry3_} from './_internal/curry3_'
 import {reduce_} from './reduce'
 
 export const reduceKeys_ = (fn, initial, functor) =>

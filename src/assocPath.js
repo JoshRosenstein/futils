@@ -1,6 +1,6 @@
-import {curry3_} from './curry3_'
+import {curry3_} from './_internal/curry3_'
 import {assoc_} from './assoc'
-import {splitWhenNoSpace_} from './splitWhenNoSpace_'
+import {splitWhenNoSpace_} from './_internal/splitWhenNoSpace_'
 import {empty_} from './empty'
 
 export const assocPath_ = (path, val, obj) => {

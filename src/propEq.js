@@ -1,4 +1,4 @@
-import {curry3_} from './curry3_'
+import {curry3_} from './_internal/curry3_'
 import {prop_} from './prop'
 import {equals_} from './equals'
 

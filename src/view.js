@@ -1,4 +1,4 @@
-import curry2_ from './curry2_'
+import curry2_ from './_internal/curry2_'
 import {construct_} from './construct'
 
 const Const = x => ({value: x, map: () => Const(x)})

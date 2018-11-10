@@ -1,4 +1,4 @@
-import curry2_ from './curry2_'
+import curry2_ from './_internal/curry2_'
 import {filter_} from './filter'
 import {complement_} from './complement'
 

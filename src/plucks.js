@@ -1,7 +1,7 @@
-import {curry2_} from './curry2_'
+import {curry2_} from './_internal/curry2_'
 import {path_} from './path'
 import {mapValues_} from './mapValues'
-import {splitWhenNoSpace_} from './splitWhenNoSpace_'
+import {splitWhenNoSpace_} from './_internal/splitWhenNoSpace_'
 
 export const plucks_ = (keychains, functor) =>
   mapValues_(

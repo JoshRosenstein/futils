@@ -1,6 +1,6 @@
 import {isString} from 'typed-is'
-import {toArray_} from './toArray'
-import {split_} from './split'
+import {toArray_} from '../toArray'
+import {split_} from '../split'
 
 export const splitWhenNoSpace_ = (keys, delim) =>
   isString(keys)

@@ -1,4 +1,4 @@
-import curry2_ from './curry2_'
+import curry2_ from './_internal/curry2_'
 import {mapValues_} from './mapValues'
 
 export const lens_ = (getter, setter) => toFunctorFn => target =>

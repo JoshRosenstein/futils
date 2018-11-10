@@ -1,4 +1,4 @@
-import {curry2_} from './curry2_'
+import {curry2_} from './_internal/curry2_'
 import {mergeDeepRight_} from './mergeDeepRight'
 import {reduceValues_} from './reduceValues'
 import {empty_} from './empty'

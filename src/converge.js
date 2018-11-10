@@ -1,5 +1,5 @@
 import {curryN_} from './curryN'
-import {maxArgs_} from './maxArgs_'
+import {maxArgs_} from './_internal/maxArgs_'
 
 const internalConverge = (after, fns) => (...args) =>
   after.apply(internalConverge, fns.map(fn => fn.apply(internalConverge, args)))

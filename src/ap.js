@@ -1,4 +1,4 @@
-import curry2_ from './curry2_'
+import curry2_ from './_internal/curry2_'
 import {concat_} from './concat'
 import {reduce_} from './reduce'
 import {mapValues_} from './mapValues'
