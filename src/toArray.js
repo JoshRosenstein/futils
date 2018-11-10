@@ -1,7 +1,6 @@
-import isArray_ from './isArray_'
-import isNil_ from './isNil_'
+import {isNil, isArray} from 'typed-is'
 
-export const toArray_ = v => (isNil_(v) ? [] : isArray_(v) ? v : [v])
+export const toArray_ = v => (isNil(v) ? [] : isArray(v) ? v : [v])
 
 export const toArray = toArray_
 

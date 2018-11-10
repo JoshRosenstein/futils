@@ -1,4 +1,4 @@
-import curry2_ from './curry2_'
+import {curry2_} from './curry2_'
 import {reduce_} from './reduce'
 import {merge_} from './merge'
 import {join_} from './join'

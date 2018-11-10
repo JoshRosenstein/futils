@@ -1,4 +1,4 @@
-// @flow
-import isObject_ from './isObject_'
+import {isPlainObject} from 'typed-is'
+export const isObject = isPlainObject
 
-export default isObject_
+export default isObject

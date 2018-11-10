@@ -1,20 +1,18 @@
-// @flow
+import {toPairs_} from './toPairs'
+import {curry2_} from './curry2_'
 
-import forEach_ from './forEach_'
+export const forEach_ = (fn, functor) => {
+  if (typeof functor.forEach === 'function') {
+    functor.forEach((value, key) => {
+      fn(value, key)
+    })
 
-
-
-declare function forEach<T, V>(fn: (x: T) => ?V, xs: Array<T>): Array<T>;
-declare function forEach<T, V>(
-  fn: (x: T) => ?V,
-): (xs: Array<T>) => Array<T>;
-
-export default function forEach (fn, arr) {
-    if (arguments.length === 1) { return arrHolder => forEach_(fn, arrHolder) }
-  
-    return forEach_(fn, arr)
+    return functor
   }
+  return toPairs_(functor).forEach(([key, value]) => {
+    fn(value, key)
+  })
+}
+export const forEach = curry2_(forEach_)
 
-
-
-//export default curry2_(forEach_)
+export default forEach

@@ -1,3 +1,6 @@
-import flip_ from './flip_'
+import {curry_} from './curry'
 
-export default flip_
+const flip_ = fn => curry_((x, y, ...args) => fn(y, x, ...args))
+const flip = flip_
+
+export default flip

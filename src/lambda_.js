@@ -1,4 +1,4 @@
-import is_ from './is_'
+import {is_} from './is'
 
 export default function(exp) {
   if (!is_('String', exp)) {

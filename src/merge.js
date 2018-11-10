@@ -1,10 +1,10 @@
 import curry2_ from './curry2_'
-import type_ from './type_'
-import isNil_ from './isNil_'
+import type_ from './type'
+import {isNil} from 'typed-is'
 
 export const merge_ = (left, right) => {
-  if (isNil_(left)) return right
-  if (isNil_(right)) return left
+  if (isNil(left)) return right
+  if (isNil(right)) return left
   if (type_(left) !== type_(right)) {
     throw new Error(
       `merge received a ${type_(left)} and ${type_(

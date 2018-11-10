@@ -1,2 +1,3 @@
-const IdentityFunc_=(x)=>({value: x, map: f=>IdentityFunc_(f(x))  })
-export default IdentityFunc_
+export const identityFunc_ = x => ({value: x, map: f => identityFunc_(f(x))})
+
+export default identityFunc_

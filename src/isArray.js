@@ -1,5 +1,3 @@
-//flow
-import isArray_ from './isArray_'
+import {isArray} from 'typed-is'
 
-const isArray = isArray_
 export default isArray

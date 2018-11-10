@@ -1,7 +1,7 @@
-import curry2_ from './curry2_'
+import {curry2_} from './curry2_'
 import {prop_} from './prop'
 import {reduceValues_} from './reduceValues'
-import splitWhenNoSpace_ from './splitWhenNoSpace_'
+import {splitWhenNoSpace_} from './splitWhenNoSpace_'
 
 export const path_ = (keys, tree) =>
   reduceValues_(

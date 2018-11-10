@@ -1,3 +1,7 @@
-import isEnumerable_ from './isEnumerable_'
+import {type_} from './type'
 
-export default isEnumerable_
+export const isEnumerable_ = value =>
+  ['Array', 'Object', 'Map', 'Set', 'String'].includes(type_(value))
+
+export const isEnumerable = isEnumerable_
+export default isEnumerable

@@ -1,4 +1,5 @@
-import curry2_ from './curry2_'
-import simplyEquals_ from './simplyEquals_'
+import {curry2_} from './curry2_'
 
-export default curry2_(simplyEquals_)
+export const simplyEquals_ = (a, b) => a === b
+export const simplyEquals = curry2_(simplyEquals_)
+export default simplyEquals
