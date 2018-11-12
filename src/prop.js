@@ -1,4 +1,4 @@
-import curry2_ from './_internal/curry2_'
+import {curry2_} from './_internal/curry2_'
 import {isNil} from './isNil'
 
 export const prop_ = (name, keyedFunctor) => {

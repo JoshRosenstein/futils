@@ -1,5 +1,7 @@
-// @flow
+import isBoolean from 'typed-is/lib/isBoolean'
 
-const isBoolean = (val: *): %checks => typeof val === 'boolean'
+const isBoolean_ = isBoolean
+
+export {isBoolean_, isBoolean}
 
 export default isBoolean

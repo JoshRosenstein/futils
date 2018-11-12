@@ -1,5 +1,5 @@
-// @flow
-///Change to support flow type checks
-const isNumber = (val: mixed): boolean %checks =>
-  val === val && typeof val === 'number'
+import {isNumber} from 'typed-is/lib/isNumber'
+
+const isNumber_ = isNumber
+export {isNumber, isNumber_}
 export default isNumber

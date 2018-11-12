@@ -1,5 +1,5 @@
 import flip from './flip'
-import prop from './prop'
+import {prop} from './prop'
 
 describe('flip', () => {
   it('Works', () => {

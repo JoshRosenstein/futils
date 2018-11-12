@@ -1,4 +1,5 @@
 // Alias
-import toArray from './toArray'
+import {toArray_, toArray} from './toArray'
+export const ensureArray_ = toArray_
 export const ensureArray = toArray
-export default toArray
+export default ensureArray

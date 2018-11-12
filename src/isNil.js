@@ -1,3 +1,6 @@
-export const isNil_ = val => val == null
-export const isNil = isNil_
+import isNil from 'typed-is/lib/isNil'
+const isNil_ = isNil
+
+export {isNil, isNil_}
+
 export default isNil
