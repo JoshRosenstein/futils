@@ -1,26 +1,33 @@
 language: node_js
-node_js:
-  - "8"
-before_install:
-  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.7.0
-  - export PATH=$HOME/.yarn/bin:$PATH
+node_js: '10'
 cache: yarn
+install: yarn
 
-script:
-    - yarn run travis
+stages:
+  - Test
+  - Docs
 
-after_success:
-  - cat ./coverage/lcov.info | ./node_modules/codecov/bin/codecov
+jobs:
+  include:
+    - stage: Test
+      name: 'Running Tests'
+      script: yarn run test:coverage
+      after_success: cat ./coverage/lcov.info | ./node_modules/codecov/bin/codecov
 
-before_deploy:
-  - cd docs
-  - yarn install
-  - yarn run build
-  - cd ..
-deploy:
-  provider: pages
-  skip_cleanup: true
-  github_token: $GH_TOKEN
-  local_dir: ./docs/build
-  on:
-    branch: master
+    - stage: Docs
+      name: 'Building Docs'
+      if: branch = master
+      script: yarn run build
+      before_deploy:
+        - cd docs
+        - yarn install
+        - yarn run build
+        - cd ..
+      deploy:
+        provider: pages
+        skip_cleanup: true
+        github_token: $GH_TOKEN
+        local_dir: ./docs/build
+        target_branch: gh-pages
+        on:
+          branch: master
