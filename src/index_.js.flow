@@ -1,4 +1,4 @@
-//Exports of nonCurried versions
+//@flow
 export {add_} from './add'
 export {addIndex_} from './addIndex'
 export {all_} from './all'
