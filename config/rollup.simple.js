@@ -107,7 +107,7 @@ const outputs3 = {
 export default [
   // browser-friendly UMD build
   {
-    input: 'src/index.js',
+    input: 'es/index.js',
     output: {
       name: 'futils',
       file: 'dist/futils.umd.js',
@@ -123,8 +123,8 @@ export default [
   // an array for the `output` option, where we can specify
   // `file` and `format` for each target)
   {
-    input: 'src/index.js',
-    external: ['ms'],
+    input: 'es/index.js',
+    external: ['typed-is'],
     output: [
       {file: 'dist/futils.js', format: 'cjs'},
       {file: 'dist/futils.es.js', format: 'es'},

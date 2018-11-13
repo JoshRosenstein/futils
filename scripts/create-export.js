@@ -60,10 +60,9 @@ const generateIndex_ = (isFlow = false) => {
   const propertyRequireLines = listFns().map(
     fn => `export {${fn.name}_} from './${fn.name}'`,
   )
+  const first = isFlow ? ['//@flow'] : ['//Exports of nonCurried versions']
 
-  const indexLines = ['//Exports of nonCurried versions']
-    .concat(propertyRequireLines.join('\n'))
-    .join('\n')
+  const indexLines = first.concat(propertyRequireLines.join('\n')).join('\n')
 
   return `${indexLines}\n`
 }

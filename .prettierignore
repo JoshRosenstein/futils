@@ -1,0 +1,3 @@
+/src/_types/**
+**/*.d.ts
+**/*.js.flow
