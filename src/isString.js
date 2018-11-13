@@ -1,4 +1,6 @@
-import isString from 'typed-is/lib/isString'
+import {isString} from 'typed-is/lib/isString'
 
-export {isString}
+const isString_ = isString
+
+export {isString, isString_}
 export default isString

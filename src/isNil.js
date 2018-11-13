@@ -1,4 +1,4 @@
-import isNil from 'typed-is/lib/isNil'
+import {isNil} from 'typed-is/lib/isNil'
 const isNil_ = isNil
 
 export {isNil, isNil_}

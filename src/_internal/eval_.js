@@ -1,4 +1,4 @@
-export default v => {
+export const eval_ = v => {
   let val
   try {
     val = new Function(`return ${v}`)()
@@ -7,3 +7,5 @@ export default v => {
   }
   return val
 }
+
+export default eval_

@@ -1,4 +1,4 @@
-import curry2_ from './_internal/curry2_'
+import {curry2_} from './_internal/curry2_'
 import {type_} from './type'
 
 export const append_ = (value, orderedList) => {

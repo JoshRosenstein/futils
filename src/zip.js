@@ -1,4 +1,4 @@
-import curry2_ from './_internal/curry2_'
+import {curry2_} from './_internal/curry2_'
 import {empty_} from './empty'
 import {keys_} from './keys'
 import {prop_} from './prop'

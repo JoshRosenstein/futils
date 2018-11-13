@@ -1,11 +1,11 @@
 import {curryN_} from './curryN'
-import last from './last'
+import {last_} from './last'
 
 export const addIndex_ = iterFn =>
   curryN_(iterFn.length, (fn, ...rest) => {
     let idx = 0
 
-    const newFn = (...args) => fn(...args, idx++, last(rest))
+    const newFn = (...args) => fn(...args, idx++, last_(rest))
 
     return iterFn(newFn, ...rest)
   })

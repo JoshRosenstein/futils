@@ -1,4 +1,4 @@
-import curry2_ from './_internal/curry2_'
+import {curry2_} from './_internal/curry2_'
 
 export const divide_ = (a, b) => Number(a) / Number(b)
 

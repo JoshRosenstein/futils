@@ -1,4 +1,4 @@
-import curryN_ from './curryN'
+import {curryN_} from './curryN'
 
 export const invoker_ = (arity, name) =>
   curryN_(arity + 1, (...args) => {

@@ -1,4 +1,4 @@
-import curry3_ from './_internal/curry3_'
+import {curry3_} from './_internal/curry3_'
 import {always_} from './always'
 import {mapValues_} from './mapValues'
 import {when_} from './when'

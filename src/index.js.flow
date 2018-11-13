@@ -1,3 +1,4 @@
+//@flow
 export {add} from './add'
 export {addIndex} from './addIndex'
 export {all} from './all'

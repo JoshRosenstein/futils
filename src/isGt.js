@@ -1,4 +1,8 @@
 import {gt_} from './gt'
-import flip2curry2_ from './_internal/flip2curry2_'
+import {flip2} from './_internal/flip2'
+import {curry2_} from './_internal/curry2_'
 
-export default flip2curry2_(gt_)
+export const isGt_ = flip2(gt_)
+export const isGt = curry2_(isGt_)
+
+export default isGt

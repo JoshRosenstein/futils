@@ -1,1 +1,5 @@
-export default val => val === false || val === 'false'
+import {isFalse} from 'typed-is/lib/isFalse'
+const isFalse_ = isTrue
+
+export {isFalse, isFalse_}
+export default isFalse

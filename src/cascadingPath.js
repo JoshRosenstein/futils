@@ -1,4 +1,4 @@
-import curry2_ from './_internal/curry2_'
+import {curry2_} from './_internal/curry2_'
 import {reduceValues_} from './reduceValues'
 import {replaceWhen_} from './replaceWhen'
 import isNil from './isNil'

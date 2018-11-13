@@ -1,4 +1,4 @@
-import curry3_ from './_internal/curry3_'
+import {curry3_} from './_internal/curry3_'
 import {type_} from './type'
 
 const fromMapping = {

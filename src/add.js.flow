@@ -1,0 +1,9 @@
+// @flow
+export type Add_ = (a: number, b: number) => number
+export type Add = Add_ & ((a: number) => (b: number) => number)
+
+declare var add_: Add_
+declare var add: Add
+
+export {add_, add}
+declare export default Add

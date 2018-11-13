@@ -1,4 +1,4 @@
-import curry2_ from './_internal/curry2_'
+import {curry2_} from './_internal/curry2_'
 import {path_} from './path'
 import {merge_} from './merge'
 import {omitKey_} from './omitKey'

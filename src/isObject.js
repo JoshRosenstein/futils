@@ -1,4 +1,4 @@
-import {isPlainObject} from 'typed-is'
+import {isPlainObject} from 'typed-is/lib/isPlainObject'
 
 export const isObject_ = isPlainObject
 export const isObject = isPlainObject

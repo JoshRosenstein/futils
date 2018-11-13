@@ -1,3 +1,6 @@
-import {always_} from './always'
+// Alias
+import {noop_} from './noop'
 
-export default always_(void 0) // eslint-disable-line no-void
+export const stubUndefined_ = noop_
+export const stubUndefined = stubUndefined_
+export default stubUndefined

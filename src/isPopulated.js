@@ -1,4 +1,4 @@
-import isEmpty from 'typed-is/lib/isEmpty'
+import {isEmpty} from 'typed-is/lib/isEmpty'
 export const isPopulated_ = x => !isEmpty(x)
 export const isPopulated = isPopulated_
 

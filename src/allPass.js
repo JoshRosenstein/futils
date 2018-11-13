@@ -1,7 +1,7 @@
 import {curryN_} from './curryN'
-import maxArgs_ from './_internal/maxArgs_'
+import {maxArgs_} from './_internal/maxArgs_'
 import {reduceWhile_} from './reduceWhile'
-import toArray from './toArray'
+import {toArray} from './toArray'
 
 export const allPass_ = (fns, ...args) =>
   reduceWhile_(

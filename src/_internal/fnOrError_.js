@@ -1,4 +1,4 @@
-import {type_} from './type'
+import {type_} from '../type'
 
 export default (symbolName, f) => {
   if (!f || type_(f) !== 'Function') {

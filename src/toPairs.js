@@ -1,6 +1,6 @@
-import isFunction from 'typed-is/lib/isFunction'
-import isNil from 'typed-is/lib/isNil'
-import isString from 'typed-is/lib/isString'
+import {isFunction} from 'typed-is/lib/isFunction'
+import {isNil} from 'typed-is/lib/isNil'
+import {isString} from 'typed-is/lib/isString'
 
 export const toPairs_ = value => {
   if (isNil(value)) {

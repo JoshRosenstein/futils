@@ -1,3 +1,6 @@
-import isTypeOf_ from './_internal/isTypeOf_'
+import {isTypeOf_} from './_internal/isTypeOf_'
 
-export default value => isTypeOf_('object', value)
+export const isObjLike_ = value => isTypeOf_('object', value)
+export const isObjLike = isObjLike_
+
+export default isObjLike

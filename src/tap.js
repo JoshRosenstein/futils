@@ -1,4 +1,4 @@
-import curry2_ from './_internal/curry2_'
+import {curry2_} from './_internal/curry2_'
 export const tap_ = (fn, value) => {
   fn(value)
   return value

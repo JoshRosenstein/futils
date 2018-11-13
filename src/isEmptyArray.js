@@ -1,13 +1,7 @@
-import isArray from './isArray'
-import isEmpty from './isEmpty'
+import {isArray} from 'typed-is/lib/isArray'
+import {isEmpty} from 'typed-is/lib/isEmpty'
 
-export default function isEmptyArray(value) {
-  return isArray(value) && isEmpty(value)
-}
+export const isEmptyArray_ = v => isArray(v) && isEmpty(v)
+export const isEmptyArray = isEmptyArray_
 
-// const a = (v: any) => {
-//   if (!isEmptyArray(v)) {
-//     return v[1]
-//   }
-//   return v
-// }
+export default isEmptyArray

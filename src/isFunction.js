@@ -1,4 +1,4 @@
-import isFunction from 'typed-is/lib/isFunction'
+import {isFunction} from 'typed-is/lib/isFunction'
 
 const isFunction_ = isFunction
 

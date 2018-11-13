@@ -1,6 +1,6 @@
-import curry2_ from './_internal/curry2_'
+import {curry2_} from './_internal/curry2_'
 import {reduceWhile_} from './reduceWhile'
-import toArray from './toArray'
+import {toArray} from './toArray'
 
 export const anyPass_ = (fns, ...args) =>
   reduceWhile_(
