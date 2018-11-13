@@ -1,0 +1,10 @@
+// @flow
+import type {Property} from './_types/flow/$types'
+export type DefaultTo_ = (a: number, b: number) => number
+export type DefaultTo = DefaultTo_ & ((a: number) => (b: number) => number)
+
+declare var defaultTo_: DefaultTo_
+declare var defaultTo: DefaultTo
+
+export {defaultTo_, defaultTo}
+declare export default DefaultTo
