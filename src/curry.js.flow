@@ -1,0 +1,10 @@
+// @flow
+import {Curried} from './_types/flow/$curried'
+export type Curry_ = Curried
+export type Curry = Curry_
+
+declare var curry_: Curry_
+declare var curry: Curry
+
+export {curry_, curry}
+declare export default Curry
