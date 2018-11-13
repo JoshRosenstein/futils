@@ -1,2 +1,0 @@
-export type Add_ = {(a: number, b: number): number}
-export type Add = ((a: number) => (b: number) => number) & Add_
