@@ -10,6 +10,8 @@ const listFns = () => {
       file =>
         /^[^._]/.test(file) &&
         !ignoredFiles.includes(file) &&
+        !RegExp('.flow').test(file) &&
+        !RegExp('.d.ts').test(file) &&
         !RegExp('_').test(file) &&
         !RegExp('spec*').test(file),
     )
@@ -29,6 +31,8 @@ const listFns_ = () => {
       file =>
         /^[^._]/.test(file) &&
         !ignoredFiles.includes(file) &&
+        !RegExp('.flow.js').test(file) &&
+        !RegExp('.d.ts').test(file) &&
         RegExp('_').test(file) &&
         !RegExp('spec*').test(file),
     )
@@ -41,26 +45,38 @@ const listFns_ = () => {
   return ret
 }
 
-const generateIndex = () => {
+const generateIndex = (isFlow = false) => {
   const propertyRequireLines = listFns().map(
-    fn => `export {default as ${fn.name}} from './${fn.name}'`,
+    // fn => `export {default as ${fn.name}} from './${fn.name}'`,
+    fn => `export {${fn.name}} from './${fn.name}'`,
   )
 
-  const indexLines = [''].concat(propertyRequireLines.join('\n')).join('\n')
+  const first = isFlow ? ['//@flow'] : []
+  const indexLines = first.concat(propertyRequireLines.join('\n')).join('\n')
 
   return `${indexLines}\n`
 }
-const generateIndex_ = () => {
+const generateIndex_ = (isFlow = false) => {
   const propertyRequireLines = listFns().map(
     fn => `export {${fn.name}_} from './${fn.name}'`,
   )
 
-  const indexLines = ['//@flow']
+  const indexLines = ['//Exports of nonCurried versions']
     .concat(propertyRequireLines.join('\n'))
     .join('\n')
 
   return `${indexLines}\n`
 }
 
-fs.writeFileSync('./src/index.js', generateIndex())
-fs.writeFileSync('./src/index_.js', generateIndex_())
+const files = generateIndex()
+const filesFlow = generateIndex(true)
+const unCurriedfiles = generateIndex_()
+const unCurriedfilesFlow = generateIndex_(true)
+
+fs.writeFileSync('./src/index.js', files)
+fs.writeFileSync('./src/index.js.flow', filesFlow)
+fs.writeFileSync('./src/index.d.ts', files)
+
+fs.writeFileSync('./src/index_.js', unCurriedfiles)
+fs.writeFileSync('./src/index_.js.flow', unCurriedfilesFlow)
+fs.writeFileSync('./src/index_.d.ts', unCurriedfiles)
