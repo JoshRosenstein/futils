@@ -7,15 +7,15 @@ describe('either', () => {
     // FlowExpectedError
     const t = either(() => true, () => 1) //Error FuncB does not result in boolean
     //$FlowExpectedError
-    const tt: number = either(() => true, () => false) //Error FuncB does not result in boolean
+    const tt = either(() => true, () => false) //Error FuncB does not result in boolean
     expect(true).toBeTruthy()
   })
 
   it('combines two boolean-returning functions into one', () => {
-    const even = function(x: number): boolean {
+    const even = function(x) {
       return x % 2 === 0
     }
-    const gt10 = function(x: number): boolean {
+    const gt10 = function(x) {
       return x > 10
     }
     const f = either(even, gt10)

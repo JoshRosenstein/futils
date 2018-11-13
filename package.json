@@ -1,6 +1,6 @@
 {
   "name": "@roseys/futils",
-  "version": "0.0.22",
+  "version": "1.0.0",
   "modulename": "futils",
   "description": "My JavaScript utils library",
   "main": "lib/index.js",
@@ -23,7 +23,6 @@
     "copy:types": "node ./scripts/transferTypes.js",
     "copy:dist": "node ./scripts/copy-dist-typedefs.js",
     "prepack": "yarn run build",
-    "postpack": "npm run clean:scripts",
     "flow:gen": "rimraf genFlowDefs/* && flow gen-flow-files src --out-dir genFlowDefs",
     "travis": "yarn run test:coverage && yarn run build",
     "build:modules": "node scripts/create-export.js && yarn run clean && yarn run build:es && yarn run build:cjs  && yarn run copy:types",
@@ -34,7 +33,6 @@
     "build:bundles": "cross-env NODE_ENV=development rollup -c config/rollup.simple.js",
     "scripts": "node scripts/create-export.js",
     "clean": "rimraf es/* lib/* dist/**/*.js coverage/* ",
-    "clean:scripts": "node scripts/clean.js",
     "clean:modules": "rimraf node_modules/*",
     "test": "cross-env BABEL_ENV=test jest --coverage --no-cache --ci --runInBand",
     "test:wcache": "jest --coverage --ci --runInBand",

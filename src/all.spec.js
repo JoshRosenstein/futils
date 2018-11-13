@@ -6,8 +6,8 @@ import both from './both'
 
 describe('all', () => {
   const isBool = is('Boolean')
-  const isTruthy: any => boolean = either(x => Boolean(x), x => x === 0)
-  const isTrueBool: any => boolean = both(isBool, isTruthy)
+  const isTruthy = either(x => Boolean(x), x => x === 0)
+  const isTrueBool = both(isBool, isTruthy)
 
   test('Object', () => {
     expect(all(isTrueBool, {prop1: true, prop2: true})).toBeTruthy()
@@ -27,7 +27,7 @@ describe('all', () => {
     expect(allGt5([6, 7, 8, 9])).toBeTruthy()
   })
   it('testObj', () => {
-    const isBiggerThanZero = (x: number): boolean => x > 0
+    const isBiggerThanZero = (x) => x > 0
 
     expect(all(isBiggerThanZero, {a: 1, b: 1, c: 1})).toBe(true)
     expect(all(isBiggerThanZero, {a: 0, b: 1, c: 1})).toBe(false)
