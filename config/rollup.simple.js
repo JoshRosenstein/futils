@@ -4,6 +4,7 @@ import pkg from '../package.json'
 import babel from 'rollup-plugin-babel'
 import {terser} from 'rollup-plugin-terser'
 import commonjs from 'rollup-plugin-commonjs'
+import resolve from 'rollup-plugin-node-resolve'
 
 const ensureArray = maybeArr =>
   Array.isArray(maybeArr) ? maybeArr : [maybeArr]
@@ -18,22 +19,22 @@ const deafultBabel = (additions = {}) => ({
     [
       '@babel/preset-env',
       {
+        targets: {node: 'current'},
         modules: false,
       },
     ],
     '@babel/preset-react',
-    '@babel/preset-flow',
   ],
   plugins: [
-    [
-      'module-resolver',
-      {
-        alias: {
-          '^types$': './types',
-        },
-        cwd: 'packagejson',
-      },
-    ],
+    // [
+    //   'module-resolver',
+    //   {
+    //     alias: {
+    //       '^types$': './types',
+    //     },
+    //     cwd: 'packagejson',
+    //   },
+    // ],
   ],
   ...additions,
 })
@@ -77,11 +78,58 @@ const outputs = [
   },
 ]
 
-export default outputs.map(
-  ({fileExt, plugins = [], babelc = {}, ...output}) => ({
+const outputs2 = {
+  //external: false,
+  input: 'src/index.js',
+  treeshake: true,
+  plugins: [resolve(), commonjs(), babel(), filesize()],
+  output: [
+    {
+      file: 'dist/futils.umd.js',
+      format: 'umd',
+      name: 'R',
+    },
+  ],
+}
+const outputs3 = {
+  external: false,
+  input: 'src/index.js',
+  treeshake: true,
+  plugins: [resolve(), commonjs(), babel(), terser(terserConfig), filesize()],
+  output: [
+    {
+      file: 'dist/futils.umd.min.js',
+      format: 'umd',
+      name: 'R',
+    },
+  ],
+}
+export default [
+  // browser-friendly UMD build
+  {
     input: 'src/index.js',
+    output: {
+      name: 'futils',
+      file: 'dist/futils.umd.js',
+      format: 'umd',
+    },
+    plugins: [resolve(), commonjs(), babel(), terser(terserConfig), filesize()],
+  },
 
-    output,
-    plugins: [babel(deafultBabel(babelc)), ...plugins, filesize()],
-  }),
-)
+  // CommonJS (for Node) and ES module (for bundlers) build.
+  // (We could have three entries in the configuration array
+  // instead of two, but it's quicker to generate multiple
+  // builds from a single configuration where possible, using
+  // an array for the `output` option, where we can specify
+  // `file` and `format` for each target)
+  {
+    input: 'src/index.js',
+    external: ['ms'],
+    output: [
+      {file: 'dist/futils.js', format: 'cjs'},
+      {file: 'dist/futils.es.js', format: 'es'},
+    ],
+    plugins: [babel(), filesize()],
+  },
+]
+//export default [outputs2, outputs3]

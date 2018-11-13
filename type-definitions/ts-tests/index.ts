@@ -1,5 +1,5 @@
 import {add, curry, any, pipe, prop} from '../../'
-
+ 
 type Morphism<T, U> = (value: T) => U
 type Predicate<T> = Morphism<T, boolean>
 

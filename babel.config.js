@@ -1,7 +1,7 @@
 const presets = [
   '@babel/preset-env',
-  '@babel/preset-react',
-  '@babel/preset-flow',
+  // '@babel/preset-react',
+  // '@babel/preset-flow',
 ]
 const resolver = [
   'module-resolver',
@@ -18,6 +18,7 @@ const esPresents = assign(presets, [
   [
     '@babel/preset-env',
     {
+      targets: {node: 'current'},
       modules: false,
     },
   ],
@@ -27,36 +28,47 @@ module.exports = function babelConfig(api) {
   api.cache(true)
   return {
     presets: esPresents,
-    plugins: [resolver],
+    plugins: [],
     retainLines: true,
     env: {
       test: {
         presets: [
           '@babel/preset-env',
-          '@babel/preset-react',
-          '@babel/preset-flow',
+          //  '@babel/preset-react',
+          //  '@babel/preset-flow',
         ],
         retainLines: true,
       },
       cjs: {
         presets: [
-          '@babel/preset-env',
-          '@babel/preset-react',
-          '@babel/preset-flow',
+          ['@babel/preset-env', {targets: {node: 'current'}}],
+          // '@babel/preset-react',
+          //  '@babel/preset-flow',
         ],
-        retainLines: false,
+        //  retainLines: false,
         comments: false,
-        plugins: [
-          [
-            '@babel/transform-modules-commonjs',
-            {noInterop: true, strict: true},
-          ],
-        ],
+        // plugins: [
+        //   [
+        //     '@babel/transform-modules-commonjs',
+        //     {noInterop: true, strict: true},
+        //   ],
+        // ],
       },
       es: {
         presets: esPresents,
         retainLines: false,
         comments: false,
+        plugins: [
+          [
+            'transform-module-imports',
+            {
+              'typed-is': {
+                transform: 'typed-is/lib/${member}',
+                preventFullImport: true,
+              },
+            },
+          ],
+        ],
       },
       docz: {
         presets: presets,

@@ -11,5 +11,6 @@
   "javascript.validate.enable": true,
   "jest.pathToJest": "yarn jest",
   "prettier.eslintIntegration": true,
-  "flow.runOnEdit": false
+  "flow.runOnEdit": false,
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
