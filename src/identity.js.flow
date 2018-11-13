@@ -1,0 +1,10 @@
+// @flow
+
+export type Identity_ =  <T>(value: T)=> T
+export type Identity = Identity_
+
+declare var identity_: Identity_
+declare var identity: Identity
+
+export {identity_, identity}
+declare export default Identity
