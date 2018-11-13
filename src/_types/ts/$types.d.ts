@@ -1,6 +1,12 @@
 export type MorphismWithKey<T,K, U> = (value: T,key:K) => U;
 export type PredicateWithKey<T,K> = MorphismWithKey<T, K,boolean>;
+export interface IterableValues<V> {
+  values(): IterableIterator<V>;
+}
 
+export interface IterableKeys<K> {
+  keys(): IterableIterator<K>;
+}
 // From @types/ramda
 
 export type Property = string | number | symbol;
