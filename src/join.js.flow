@@ -1,0 +1,10 @@
+// @flow
+
+export type Join_ =   (separator: string, list: any[])=> string
+export type Join =  ((separator: string)=>(list: any[])=>string) & Join_
+
+declare var join_: Join_
+declare var join: Join
+
+export {join_, join}
+declare export default Join
