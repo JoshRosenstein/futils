@@ -6,6 +6,6 @@ import {when_} from './when'
 export const replaceWhen_ = (predicate, replacement, obj) =>
   mapValues_(val => when_(predicate, always_(replacement), val), obj)
 
-export const replaceWhen = replaceWhen
+export const replaceWhen = curry3_(replaceWhen_)
 
-export default curry3_(replaceWhen_)
+export default replaceWhen
