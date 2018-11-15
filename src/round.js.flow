@@ -1,0 +1,10 @@
+// @flow
+import type {Property} from './_types/flow/$types'
+export type Round_ = (a: number, b: number) => number
+export type Round = Round_ & ((a: number) => (b: number) => number)
+
+declare var round_: Round_
+declare var round: Round
+
+export {round_, round}
+declare export default Round
