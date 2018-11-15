@@ -1,0 +1,10 @@
+// @flow
+import type {Property} from './_types/flow/$types'
+export type ToString_ = (value: any) => string
+export type ToString = ToString_
+
+declare var toString_: ToString_
+declare var toString: ToString
+
+export {toString_, toString}
+declare export default ToString
