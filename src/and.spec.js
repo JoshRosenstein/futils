@@ -1,4 +1,3 @@
-// @flow
 import and from './and'
 
 describe('And', () => {
