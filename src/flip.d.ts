@@ -3,7 +3,7 @@ import {  Curried2,
   Curried3,
   Curried4,
   Curried5,
-  Curried6,} from './_types/ts/$Curried'
+  Curried6,} from './_types/ts/$curried'
 
 
 export declare var flip_: Flip

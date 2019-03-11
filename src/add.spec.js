@@ -1,4 +1,3 @@
-// @flow
 import add from './add'
 
 describe('add', () => {

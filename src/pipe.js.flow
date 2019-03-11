@@ -1,7 +1,7 @@
 // @flow
 
-declare var pipe_: Pipe
-declare var pipe: Pipe
+declare var pipe_: $ComposeReverse
+declare var pipe: $ComposeReverse
 
 export {pipe_, pipe}
 declare export default Pipe
