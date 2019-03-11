@@ -84,3 +84,8 @@ export interface Foldable<T> {
 export interface Traversable<T> extends Functor<T>, Foldable<T> {
     traverse<U, V>(fn: Morphism<T, Applicative<U>>, of: Morphism<V, Applicative<V>>): Applicative<Traversable<U>>;
 }
+
+export type Simplify<T> = {[K in keyof T]: T[K]}
+export type Omit<T, K extends keyof any> = T extends any ? Pick<T, Exclude<keyof T, K>> : never;
+
+export type Overwrite<T, U> = Omit<T, keyof T & keyof U> & U;

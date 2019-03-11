@@ -1,6 +1,7 @@
 {
   "extends": "dtslint/dt.json",
   "rules": {
+    "no-namespace": false,
     "no-any-union": false,
     "no-unnecessary-generics": false,
     "semicolon": false,

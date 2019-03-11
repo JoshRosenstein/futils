@@ -2,8 +2,15 @@ module.exports = {
   transform: {
     //  '\\.css$': '<rootDir>/test/styleTransform.js',
     '^.+\\.js?$': 'babel-jest',
+    '\\.ts$': 'ts-jest',
   },
-  testMatch: ['**/__tests__/**/*.js?(x)', '**/?(*.)+(spec).js?(x)'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
+  testMatch: [
+    '**/__tests__/**/*.js?(x)',
+    '**/?(*.)+(spec).js?(x)',
+    '**/__tests__/**/*.ts?(x)',
+    '**/?(*.)+(spec).ts?(x)',
+  ],
   testPathIgnorePatterns: [
     '/node_modules/',
     '/__fixtures__/',
