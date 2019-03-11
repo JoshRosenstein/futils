@@ -1,0 +1,10 @@
+// @flow
+import type {Property} from './_types/flow/$types'
+export type Path_ = (a: number, b: number) => number
+export type Path = Path_ & ((a: number) => (b: number) => number)
+
+declare var path_: Path_
+declare var path: Path
+
+export {path_, path}
+declare export default Path

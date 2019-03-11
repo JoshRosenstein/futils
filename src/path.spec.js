@@ -40,4 +40,8 @@ describe('path', () => {
   test('array with keys missing', () => {
     expect(path([0, 1, 0])([[['1']]])).toBe(undefined)
   })
+
+  test('Gets Key if has a Dot and match', () => {
+    expect(path('aaa.bbb.ccc')({'aaa.bbb.ccc': '1'})).toBe('1')
+  })
 })
