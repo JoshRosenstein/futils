@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 
-const ignoredFiles = ['_internals', 'index.js', 'index_.js']
+const ignoredFiles = ['_internals', 'index.ts', 'index_.ts']
 
 const listFns = () => {
   const files = fs.readdirSync(path.join(process.cwd(), 'src'))
@@ -68,14 +68,14 @@ const generateIndex_ = (isFlow = false) => {
 }
 
 const files = generateIndex()
-const filesFlow = generateIndex(true)
-const unCurriedfiles = generateIndex_()
-const unCurriedfilesFlow = generateIndex_(true)
+// const filesFlow = generateIndex(true)
+// const unCurriedfiles = generateIndex_()
+// const unCurriedfilesFlow = generateIndex_(true)
 
-fs.writeFileSync('./src/index.js', files)
-fs.writeFileSync('./src/index.js.flow', filesFlow)
-fs.writeFileSync('./src/index.d.ts', files)
+fs.writeFileSync('./src/index.ts', files)
+// fs.writeFileSync('./src/index.js.flow', filesFlow)
+// fs.writeFileSync('./src/index.d.ts', files)
 
-fs.writeFileSync('./src/index_.js', unCurriedfiles)
-fs.writeFileSync('./src/index_.js.flow', unCurriedfilesFlow)
-fs.writeFileSync('./src/index_.d.ts', unCurriedfiles)
+// fs.writeFileSync('./src/index_.js', unCurriedfiles)
+// fs.writeFileSync('./src/index_.js.flow', unCurriedfilesFlow)
+// fs.writeFileSync('./src/index_.d.ts', unCurriedfiles)

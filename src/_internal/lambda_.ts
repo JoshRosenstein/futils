@@ -1,7 +1,7 @@
 import {isString} from 'typed-is'
 
 export default function(exp) {
-  if (!is_('String', exp)) {
+  if (!isString(exp)) {
     return
   }
 

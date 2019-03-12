@@ -1,6 +1,6 @@
 // Alias
-import {noop_} from './noop'
+import {noop} from './noop'
 
-export const stubUndefined_ = noop_
+export const stubUndefined_ = noop
 export const stubUndefined = stubUndefined_
 export default stubUndefined

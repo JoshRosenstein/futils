@@ -1,8 +1,9 @@
-export function call_(fn) {
-  return arguments.length > 1
-    ? fn.apply(fn, [].slice.call(arguments, 1))
-    : function() {
-        return fn.apply(fn, arguments)
+export function call_(fn: ((...a: any[]) => any), ...args: any[])
+export function call_(fn, ...args) {
+  return args.length > 0
+    ? fn.apply(fn, args)
+    : function(...args2) {
+        return fn.apply(fn, args2)
       }
 }
 

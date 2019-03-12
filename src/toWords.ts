@@ -45,7 +45,7 @@ const TENTHS_LESS_THAN_HUNDRED = [
 ]
 
 const NativeFloor = Math.floor
-function generateWords(number, words) {
+function generateWords(number, words?: string[]) {
   let remainder, word
 
   // We’re done

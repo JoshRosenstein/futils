@@ -1,9 +1,9 @@
-import reduce_ from './reduce_'
-import merge_ from './merge_'
-import empty_ from './empty_'
-import type_ from './type_'
-import is_ from './is_'
-import of_ from './of_'
+import {reduce_} from './reduce'
+import {merge_} from './merge'
+import {empty_} from './empty'
+import {type_} from './type'
+import {is_} from './is'
+import {of_} from './of'
 
 export default (functor, recursive = true) => {
   const reducer = (subFuc, init = empty_(functor)) =>
