@@ -1,7 +1,7 @@
 import {curry2_} from './_internal/curry2_'
 
 export const xprod_ = (a, b) => {
-  const res = []
+  const res: any[] = []
   let ia = 0
   let ib
   const alen = a.length

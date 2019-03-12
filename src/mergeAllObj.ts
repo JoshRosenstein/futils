@@ -1,6 +1,6 @@
 // https://github.com/remeda/remeda/blob/master/src/mergeAll.ts
 
-import {Assign} from './_types/ts/Assign'
+import {Assign} from './_types/Assign'
 // type Simplify<T> = Pick<T, keyof T>
 /**
  * Merges a list of objects into a single object.

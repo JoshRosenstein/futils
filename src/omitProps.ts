@@ -1,5 +1,5 @@
 import {purry} from './purry'
-import {Omit} from './_types/ts/Omit'
+import {Omit} from './_types/Omit'
 
 /**
  * Returns a partial copy of an object omitting the keys specified.

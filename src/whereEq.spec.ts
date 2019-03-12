@@ -42,8 +42,10 @@ describe('whereEq', () => {
     expect(whereEq({a: 1}, {a: 1})).toEqual(true)
   })
 
-  function Parent() {
-    this.y = 6
+  class Parent {
+    y = 6
+    a: any
+    x: any
   }
   Parent.prototype.a = undefined
   Parent.prototype.x = 5

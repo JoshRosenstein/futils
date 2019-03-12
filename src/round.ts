@@ -1,16 +1,25 @@
 import {curry2_} from './_internal/curry2_'
-import {split_} from './split'
 
-export const round_ = (precision, number) => {
-  precision = precision == null ? 0 : Math.min(precision, 292)
-  if (precision) {
-    let pair = split_('e', `${number}e`)
-    const value = Math.round(`${pair[0]}e${+pair[1] + precision}`)
-    pair = split_('e', `${value}e`)
-    return +`${pair[0]}e${+pair[1] - precision}`
+export function decimalPlaces(value: number | string) {
+  const match = String(value).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/)
+
+  if (!match) {
+    return 0
   }
 
-  return Math.round(number)
+  return Math.max(
+    0,
+    // Number of digits right of decimal point.
+    (match[1] ? match[1].length : 0) -
+      // Adjust for scientific notation.
+      (match[2] ? +match[2] : 0),
+  )
+}
+
+export const round_ = (precision = 1, number: number) => {
+  number = Math.round(number / precision) * precision
+  // return number.toPrecision(precision)
+  return Number(number.toFixed(decimalPlaces(precision)))
 }
 
 export const round = curry2_(round_)

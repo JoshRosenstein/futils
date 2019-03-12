@@ -1,4 +1,4 @@
-import {is_} from '../is'
+import {isString} from 'typed-is'
 
 export default function(exp) {
   if (!is_('String', exp)) {

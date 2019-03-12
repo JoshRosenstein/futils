@@ -1,6 +1,6 @@
 import {curry2_} from './_internal/curry2_'
 import {reduceWhile_} from './reduceWhile'
-import {Property} from './_types/ts/$types'
+import {Property} from './_types/$types'
 
 export type Any_ = <T>(
   predicateFn: (value: T, key?: Property) => boolean,
