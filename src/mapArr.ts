@@ -65,11 +65,14 @@ const _lazy = (indexed: boolean) => <T, K>(fn: PredIndexedOptional<T, K>) => {
 }
 
 export namespace mapArr {
+  export const lazy = _lazy(false)
+  export const lazyIndexed = _toLazyIndexed(_lazy(true))
+
   export function indexed<T, K>(array: T[], fn: PredIndexed<T, K>): K[]
   export function indexed<T, K>(fn: PredIndexed<T, K>): (array: T[]) => K[]
   export function indexed() {
-    return purry(_mapArr(true), arguments, mapArr.lazyIndexed)
+    return purry(_mapArr(true), arguments, lazyIndexed)
   }
-  export const lazy = _lazy(false)
-  export const lazyIndexed = _toLazyIndexed(_lazy(true))
 }
+
+export default mapArr

@@ -16,7 +16,7 @@ const listFns = () => {
         !RegExp('spec*').test(file),
     )
     .map(file => ({
-      name: file.replace('.js', ''),
+      name: file.replace('.js', '').replace('.ts', ''),
       path: `./${file}`,
       fullPath: `${file}/index.js`,
     }))
@@ -37,7 +37,7 @@ const listFns_ = () => {
         !RegExp('spec*').test(file),
     )
     .map(file => ({
-      name: file.replace('.js', ''),
+      name: file.replace('.js', '').replace('.ts', ''),
       path: `./${file}`,
       fullPath: `${file}/index.js`,
     }))

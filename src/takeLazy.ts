@@ -63,3 +63,5 @@ export namespace takeLazy {
     }
   }
 }
+
+export default takeLazy

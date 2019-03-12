@@ -82,3 +82,5 @@ export namespace filterArr {
     return purry(_filterArr(true), arguments, lazyIndexed)
   }
 }
+
+export default filterArr

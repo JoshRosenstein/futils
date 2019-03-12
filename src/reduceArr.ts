@@ -41,10 +41,10 @@ export function reduceArr<T, K>(
 ): (items: T[]) => K
 
 export function reduceArr() {
-  return purry(_reduceArr(false), arguments)
+  return purry(reduceArr_(false), arguments)
 }
 
-const _reduceArr = (indexed: boolean) => <T, K>(
+export const reduceArr_ = (indexed: boolean) => <T, K>(
   items: T[],
   fn: (acc: K, item: T, index?: number, items?: T[]) => K,
   initialValue: K,
@@ -67,6 +67,8 @@ export namespace reduceArr {
     initialValue: K,
   ): (array: T[]) => Record<string, T>
   export function indexed() {
-    return purry(_reduceArr(true), arguments)
+    return purry(reduceArr_(true), arguments)
   }
 }
+
+export default reduceArr

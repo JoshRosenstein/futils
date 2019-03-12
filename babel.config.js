@@ -1,4 +1,5 @@
 const presets = [
+  '@babel/preset-typescript',
   '@babel/preset-env',
   // '@babel/preset-react',
   // '@babel/preset-flow',
@@ -14,7 +15,8 @@ const resolver = [
 ]
 const assign = Object.assign
 
-const esPresents = assign(presets, [
+const esPresents = [
+  '@babel/preset-typescript',
   [
     '@babel/preset-env',
     {
@@ -22,7 +24,7 @@ const esPresents = assign(presets, [
       modules: false,
     },
   ],
-])
+]
 
 module.exports = function babelConfig(api) {
   api.cache(true)

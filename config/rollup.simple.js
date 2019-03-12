@@ -17,6 +17,7 @@ const deafultBabel = (additions = {}) => ({
   exclude: 'node_modules/**',
   presets: [
     [
+      '@babel/preset-typescript',
       '@babel/preset-env',
       {
         targets: {node: 'current'},

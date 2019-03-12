@@ -1,18 +1,18 @@
 import anyPass from './anyPass'
 
 describe('anyPass', () => {
-  const odd = function(n) {
+  const odd = function(n: number) {
     return n % 2 !== 0
   }
-  const gt20 = function(n) {
+  const gt20 = function(n: number) {
     return n > 20
   }
-  const lt5 = function(n) {
+  const lt5 = function(n: number) {
     return n < 5
   }
 
   it('reports whether any predicates are satisfied by a given value', () => {
-    const ok = anyPass([odd, gt20, lt5])
+    const ok = anyPass<number>([odd, gt20, lt5])
 
     expect(ok(7)).toBeTruthy()
     expect(ok(9)).toBeTruthy()
@@ -31,7 +31,7 @@ describe('anyPass', () => {
     const f2 = jest.fn(() => false)
     const f3 = jest.fn(() => false)
 
-    expect(anyPass([f1, f2, f3], 1, 2, 3)).toBe(false)
+    expect(anyPass<number>([f1, f2, f3], 1, 2, 3)).toBe(false)
     expect(f1).toBeCalledWith(1, 2, 3)
     expect(f2).toBeCalledWith(1, 2, 3)
     expect(f3).toBeCalledWith(1, 2, 3)
@@ -41,7 +41,7 @@ describe('anyPass', () => {
     const f2 = jest.fn(() => true)
     const f3 = jest.fn(() => false)
 
-    expect(anyPass([f1, f2, f3], 1, 2, 3)).toBe(true)
+    expect(anyPass<number>([f1, f2, f3], 1, 2, 3)).toBe(true)
     expect(f1).toBeCalledWith(1, 2, 3)
     expect(f2).toBeCalledWith(1, 2, 3)
     expect(f3).not.toBeCalled()

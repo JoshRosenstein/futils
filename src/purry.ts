@@ -47,3 +47,5 @@ export function purry(fn: any, args: IArguments | any[], lazy?: any) {
   }
   throw new Error('Wrong number of arguments')
 }
+
+export default purry
