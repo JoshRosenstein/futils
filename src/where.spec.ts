@@ -25,7 +25,7 @@ describe('Where', () => {
   test('Object vs Map partial true', () => {
     expect(
       where({name: equals('Jack Black')})(
-        new Map([['name', 'Jack Black'], ['age', 30]]),
+        new Map([['name', 'Jack Black'], ['age', '30']]),
       ),
     ).toBe(true)
   })
@@ -57,7 +57,7 @@ describe('Where', () => {
   test('Object vs Map all false', () => {
     expect(
       where({name: equals('Jac Black')})(
-        new Map([['name', 'Jack Black'], ['age', 30]]),
+        new Map([['name', 'Jack Black'], ['age', '30']]),
       ),
     ).toBe(false)
   })
@@ -98,8 +98,8 @@ describe('Where', () => {
     expect(
       where({
         name: equals('Jack Black'),
-        age: equals(31),
-      })(new Map([['name', 'Jack Black'], ['age', 30]])),
+        age: equals('31'),
+      })(new Map([['name', 'Jack Black'], ['age', '30']])),
     ).toBe(false)
   })
 

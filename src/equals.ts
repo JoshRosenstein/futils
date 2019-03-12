@@ -3,7 +3,7 @@ import {has_} from './has'
 import {keys_} from './keys'
 import {curry2_} from './_internal/curry2_'
 
-const eq = (a, b, aStack = [], bStack = []) => {
+const eq = (a: any, b: any, aStack: any[] = [], bStack: any[] = []) => {
   if (a === b) return true
   if (a == null || b == null) return a === b
   let result = true

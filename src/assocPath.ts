@@ -10,7 +10,7 @@ export const assocPath_ = (path, val, obj) => {
     return val
   }
   const inner = ([head, ...tail], x, o) =>
-    assoc_(head, tail.length ? inner(tail, x, o[head] || empt) : x, o)
+    assoc_(head, tail.length ? inner(tail as any, x, o[head] || empt) : x, o)
 
   return inner(path, val, obj)
 }

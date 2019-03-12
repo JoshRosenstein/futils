@@ -1,13 +1,13 @@
 import {flow} from './flow'
 import {filterArr} from './filterArr'
+import {mapArr} from './mapArr'
 
-import {map} from './map'
 const createCounter = () => {
   const count = jest.fn()
   return {
     count,
     fn: <T>() =>
-      map<T, T>(x => {
+      mapArr<T, T>(x => {
         count()
         return x
       }),

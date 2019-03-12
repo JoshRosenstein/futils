@@ -11,7 +11,7 @@ const reduceRight = (arr, reducer, initial) => {
   return initial
 }
 
-export const reduce_ = (reducer, initial, functor, right) => {
+export const reduce_ = (reducer, initial, functor, right = false) => {
   if (isNil(functor)) {
     return initial
   }

@@ -23,7 +23,7 @@ describe('lift', () => {
 
   test('returns the cartesian product for arity = 2', () => {
     const identity = (a, b) => [a, b]
-    const product = []
+    const product: any[] = []
     for (const a of array) {
       for (const b of array) {
         product.push([a, b])
@@ -34,7 +34,7 @@ describe('lift', () => {
 
   test('returns the cartesian product for arity = 3', () => {
     const identity = (a, b, c) => [a, b, c]
-    const product = []
+    const product: any[] = []
     for (const a of array) {
       for (const b of array) {
         for (const c of array) {
@@ -47,7 +47,7 @@ describe('lift', () => {
 
   test('returns the cartesian product for arity = 4', () => {
     const identity = (a, b, c, d) => [a, b, c, d]
-    const product = []
+    const product: any[] = []
     for (const a of array) {
       for (const b of array) {
         for (const c of array) {
@@ -62,7 +62,7 @@ describe('lift', () => {
 
   test('returns the cartesian product for arity = 5', () => {
     const identity = (a, b, c, d, e) => [a, b, c, d, e]
-    const product = []
+    const product: any[] = []
     for (const a of array) {
       for (const b of array) {
         for (const c of array) {
