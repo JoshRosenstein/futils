@@ -83,6 +83,6 @@ describe('toPairs', () => {
   //   })
 
   test.each(data)('KV.entries(%O) === %o', (value, expected) => {
-    expect(toPairs(value)).toStrictEqual(expected)
+    expect(toPairs(value)).toEqual(expected)
   })
 })

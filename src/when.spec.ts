@@ -1,7 +1,7 @@
 import when from './when'
 
 describe('When', () => {
-  const getEven = when(i => i % 2 === 1, i => i + 1)
+  const getEven = when<any, any>(i => i % 2 === 1, i => i + 1)
 
   test('applies callback if condition is true', () => {
     expect(getEven(1)).toBe(2)

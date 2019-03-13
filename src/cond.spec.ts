@@ -1,7 +1,6 @@
 import cond from './cond'
 import always from './always'
 import T from './T'
-import equals from './equals'
 import F from './F'
 import identity from './identity'
 
@@ -12,7 +11,7 @@ describe('cond', () => {
       [jest.fn(T), jest.fn(identity)],
       [jest.fn(T), jest.fn(identity)],
     ]
-
+    //@ts-ignore
     expect(cond(fns)('test')).toBe('test')
     expect(fns[0][0]).toBeCalledWith('test')
     expect(fns[0][1]).not.toBeCalled()
@@ -40,13 +39,13 @@ describe('cond', () => {
 
   test('returns undefined when no conditions passes', () => {
     const val = cond([])
-    expect(val(4)).toBe(undefined)
+    expect(val()).toBe(undefined)
   })
 
   test('R', () => {
     const fn = cond([
-      [equals(0), always('water freezes at 0°C')],
-      [equals(100), always('water boils at 100°C')],
+      [(x: number) => x === 0, always('water freezes at 0°C')],
+      [(x: number) => x === 100, always('water boils at 100°C')],
       [T, temp => `nothing special happens at ${temp}°C`],
     ])
 

@@ -6,9 +6,9 @@ import {isString} from 'typed-is'
 export const template_ = (string, data) =>
   isString(string)
     ? eval_(
-        string.replace(/{\!([^}]+)}/g, (_, key) => {
+        string.replace(/{\!([^}]+)}/g, (_, key: string) => {
           const res = path_(key, data)
-          return res
+          return res as string
         }),
       )
     : string

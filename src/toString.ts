@@ -1,7 +1,7 @@
 import {type_} from './type'
 import {isFunction, isNil, isString} from 'typed-is'
 
-export const toString_ = value => {
+export const toString_ = (value: any): string => {
   if (isNil(value)) return type_(value)
   if (isString(value)) return value
 

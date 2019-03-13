@@ -12,7 +12,7 @@ describe('toString', () => {
 
   it('Fn', () => {
     const a = toString(x => x)
-    const eA = 'function (x) {return x;}'
+    const eA = 'x => x'
     expect(a).toEqual(eA)
   })
 

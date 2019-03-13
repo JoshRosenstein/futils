@@ -140,52 +140,58 @@ function _processItem({
   lazySeq,
   acc,
 }: {
-  item: any
-  lazySeq: any[]
-  acc: any[]
+  item: any;
+  lazySeq: any[];
+  acc: any[];
 }): boolean {
   if (lazySeq.length === 0) {
-    acc.push(item)
-    return false
+    acc.push(item);
+    return false;
   }
-  let lazyResult: LazyResult<any> = {done: false, hasNext: false}
+  let lazyResult: LazyResult<any> = { done: false, hasNext: false };
+  let isDone = false;
   for (let i = 0; i < lazySeq.length; i++) {
-    const lazyFn = lazySeq[i]
-    const indexed = lazyFn.indexed
-    const index = lazyFn.index
-    const items = lazyFn.items
-    items.push(item)
-    lazyResult = indexed ? lazyFn(item, index, items) : lazyFn(item)
-    lazyFn.index++
+    const lazyFn = lazySeq[i];
+    const indexed = lazyFn.indexed;
+    const index = lazyFn.index;
+    const items = lazyFn.items;
+    items.push(item);
+    lazyResult = indexed ? lazyFn(item, index, items) : lazyFn(item);
+    lazyFn.index++;
     if (lazyResult.hasNext) {
       if (lazyResult.hasMany) {
-        const nextValues: any[] = lazyResult.next
+        const nextValues: any[] = lazyResult.next;
         for (const subItem of nextValues) {
           const subResult = _processItem({
             item: subItem,
             acc,
             lazySeq: lazySeq.slice(i + 1),
-          })
+          });
           if (subResult) {
-            return true
+            return true;
           }
         }
-        return false
+        return false;
       } else {
-        item = lazyResult.next
+        item = lazyResult.next;
       }
     }
-    if (!lazyResult.hasNext || lazyResult.done) {
-      break
+    if (!lazyResult.hasNext) {
+      break;
+    }
+    // process remaining functions in the pipe
+    // but don't process remaining elements in the input array
+    if (lazyResult.done) {
+      isDone = true;
     }
   }
   if (lazyResult.hasNext) {
-    acc.push(item)
+    acc.push(item);
   }
-  if (lazyResult.done) {
-    return true
+  if (isDone) {
+    return true;
   }
-  return false
+  return false;
 }
 
 export default flow

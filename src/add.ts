@@ -1,9 +1,47 @@
-import {curry2_} from './_internal/curry2_'
-export type Add_ = (a: number, b: number) => number
+import {purry} from './purry'
 
-export const add_: Add_ = (a, b) => Number(a) + Number(b)
+/**
+ * Adds two values.
+ *
+ * @param a
+ * @param b
+ * @signature
+ *    F.add(a,b)
+ * @example
+ *    F.add(2, 3);//=>  5
+ *
+ * @pipeable
+ * @data_first
+ * @category Math
+ *
+ */
 
-export type Add = Add_ & ((a: number) => (b: number) => number)
+export function add(a: number, b: number): number
 
-export const add: Add = curry2_(add_)
+/**
+ * Adds two values.
+ *
+ * @param a
+ * @param b
+ * @signature
+ *    F.add(a,b)
+ * @example
+ *    F.add(7)(10); //=> 17
+ *
+ * @pipeable
+ * @data_last
+ * @category Math
+ *
+ */
+
+export function add(a: number): (b: number) => number
+
+export function add() {
+  return purry(add_, arguments)
+}
+
+export function add_(a, b) {
+  return Number(a) + Number(b)
+}
+
 export default add

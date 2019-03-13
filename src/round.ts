@@ -22,5 +22,10 @@ export const round_ = (precision = 1, number: number) => {
   return Number(number.toFixed(decimalPlaces(precision)))
 }
 
-export const round = curry2_(round_)
+export const round: Round = curry2_(round_)
 export default round
+
+export type Round = {
+  (a: number, b: number): number
+  (a: number): (b: number) => number
+}

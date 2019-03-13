@@ -6,7 +6,7 @@ import {splitWhenNoSpace_} from './_internal/splitWhenNoSpace_'
 
 export const paths_ = (keys, keyedEnumerable) =>
   reduceValues_(
-    (acc, key) => append_(path_(key, keyedEnumerable), acc),
+    (acc, key) => append_(path_(key, keyedEnumerable) as any, acc),
     [],
     splitWhenNoSpace_(keys, ','),
   )
