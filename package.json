@@ -1,6 +1,6 @@
 {
   "name": "@roseys/futils",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "modulename": "futils",
   "description": "My JavaScript utils library",
   "main": "dist/commonjs/index.js",
@@ -18,7 +18,7 @@
     "commit": "git-cz",
     "copy:types": "node ./scripts/transferTypes.js",
     "copy:dist": "node ./scripts/copy-dist-typedefs.js",
-    "prepack": "yarn run build",
+    "prepacks": "yarn run build",
     "flow:gen": "rimraf genFlowDefs/* && flow gen-flow-files src --out-dir genFlowDefs",
     "travis": "yarn run test:coverage && yarn run build",
     "build:modules": "node scripts/create-export.js && yarn run clean && yarn run build:es && yarn run build:cjs",

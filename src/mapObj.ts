@@ -27,7 +27,7 @@ export function mapObj<T, S extends {[x: string]: any} = {[x: string]: any}>(
  * @category Object
  */
 export function mapObj<T, S extends {[x: string]: any} = {[x: string]: any}>(
-  fn: (key: keyof T, value: T[keyof T]) => any,
+  fn: (value: T[keyof T], key: keyof T) => any,
 ): (object: T) => S
 
 export function mapObj(arg1: any, arg2?: any): any {
@@ -39,10 +39,10 @@ export function mapObj(arg1: any, arg2?: any): any {
 
 function _mapObj(obj: any, fn: (value: any, key: string) => any) {
   return Object.keys(obj).reduce(
-    (acc, key) => {
-      acc[key] = fn(obj[key], key)
-      return acc
-    },
+    (acc, key) => ({
+      ...acc,
+      ...fn(obj[key], key),
+    }),
     {} as any,
   )
 }
