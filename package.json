@@ -150,6 +150,9 @@
     "trailingComma": "all",
     "semi": false
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "@pika/pack": {
     "pipeline": [
       [
