@@ -33,7 +33,7 @@
     "scripts": "node scripts/create-export.js",
     "clean": "rimraf es/* lib/* dist/**/*.js coverage/* ",
     "clean:modules": "rimraf node_modules/*",
-    "test": "cross-env BABEL_ENV=test jest --coverage --no-cache --ci --runInBand",
+    "test": "jest -o",
     "test:wcache": "jest --coverage --ci --runInBand",
     "test:quick": "jest --onlyChanged --runInBand --bail",
     "test:clear": "jest --clearCache",
