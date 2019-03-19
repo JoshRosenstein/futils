@@ -12,5 +12,17 @@ export const prop_ = (name, keyedFunctor) => {
 
   return keyedFunctor[name]
 }
-export const prop = curry2_(prop_)
+type Prop = {
+  prop<P extends keyof T, T>(p: P, obj: T): T[P]
+  prop<P extends string>(p: P): <T>(obj: Record<P, T>) => T
+  prop<P extends string, T>(p: P): (obj: Record<P, T>) => T
+}
+
+// export function prop(name: any, keyedFunctor: any): any
+// export function prop(name: any): (keyedFunctor: any) => any
+// export function prop() {
+//   return curry2_(prop_)(arguments)
+// }
+
+export const prop: Prop = curry2_(prop_)
 export default prop
