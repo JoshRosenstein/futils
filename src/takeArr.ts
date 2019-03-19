@@ -47,30 +47,29 @@ function _takeArr<T>(array: T[], n: number) {
   return _reduceLazy(array, takeArr.lazy(n))
 }
 
-export namespace takeArr {
-  export function lazy<T>(n: number) {
-    return (value: T): LazyResult<T> => {
-      if (n === 0) {
-        return {
-          done: true,
-          hasNext: false,
-        }
-      }
-      n--
-      if (n === 0) {
-        return {
-          done: true,
-          hasNext: true,
-          next: value,
-        }
-      }
+function lazy<T>(n: number) {
+  return (value: T): LazyResult<T> => {
+    if (n === 0) {
       return {
-        done: false,
+        done: true,
+        hasNext: false,
+      }
+    }
+    n--
+    if (n === 0) {
+      return {
+        done: true,
         hasNext: true,
         next: value,
       }
     }
+    return {
+      done: false,
+      hasNext: true,
+      next: value,
+    }
   }
 }
+takeArr.lazy = lazy
 
-const e = takeArr(3)([1, 2, 3, 4, 3, 2, 1])
+export default takeArr

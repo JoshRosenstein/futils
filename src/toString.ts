@@ -1,5 +1,7 @@
 import {type_} from './type'
-import {isFunction, isNil, isString} from 'typed-is'
+import {isFunction} from 'typed-is/lib/isFunction'
+import {isNil} from 'typed-is/lib/isNil'
+import {isString} from 'typed-is/lib/isString'
 
 export const toString_ = (value: any): string => {
   if (isNil(value)) return type_(value)

@@ -21,7 +21,7 @@ import {Pred, PredIndexedOptional, PredIndexed} from './_types/remeda'
  * @pipeable
  * @category Array
  */
-export function mapArr<T, K>(array: T[], fn: Pred<T, K>): K[]
+function mapArr<T, K>(array: T[], fn: Pred<T, K>): K[]
 
 /**
  * mapArr each value of an object using a defined callback function.
@@ -37,9 +37,9 @@ export function mapArr<T, K>(array: T[], fn: Pred<T, K>): K[]
  * @pipeable
  * @category Array
  */
-export function mapArr<T, K>(fn: Pred<T, K>): (array: T[]) => K[]
+function mapArr<T, K>(fn: Pred<T, K>): (array: T[]) => K[]
 
-export function mapArr() {
+function mapArr() {
   return purry(_mapArr(false), arguments, mapArr.lazy)
 }
 
@@ -64,15 +64,17 @@ const _lazy = (indexed: boolean) => <T, K>(fn: PredIndexedOptional<T, K>) => {
   }
 }
 
-export namespace mapArr {
-  export const lazy = _lazy(false)
-  export const lazyIndexed = _toLazyIndexed(_lazy(true))
+const lazy = _lazy(false)
+const lazyIndexed = _toLazyIndexed(_lazy(true))
 
-  export function indexed<T, K>(array: T[], fn: PredIndexed<T, K>): K[]
-  export function indexed<T, K>(fn: PredIndexed<T, K>): (array: T[]) => K[]
-  export function indexed() {
-    return purry(_mapArr(true), arguments, lazyIndexed)
-  }
+function indexed<T, K>(array: T[], fn: PredIndexed<T, K>): K[]
+function indexed<T, K>(fn: PredIndexed<T, K>): (array: T[]) => K[]
+function indexed() {
+  return purry(_mapArr(true), arguments, lazyIndexed)
 }
 
-export default mapArr
+mapArr.lazy = lazy
+mapArr.lazyIndexed = lazyIndexed
+mapArr.indexed = indexed
+
+export {mapArr}

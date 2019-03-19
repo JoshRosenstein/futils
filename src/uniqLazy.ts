@@ -30,22 +30,24 @@ function _uniqLazy<T>(array: T[]) {
   return _reduceLazy(array, uniqLazy.lazy())
 }
 
-export namespace uniqLazy {
-  export function lazy() {
-    const set = new Set<any>()
-    return (value: any): LazyResult<any> => {
-      if (set.has(value)) {
-        return {
-          done: false,
-          hasNext: false,
-        }
-      }
-      set.add(value)
+function lazy() {
+  const set = new Set<any>()
+  return (value: any): LazyResult<any> => {
+    if (set.has(value)) {
       return {
         done: false,
-        hasNext: true,
-        next: value,
+        hasNext: false,
       }
+    }
+    set.add(value)
+    return {
+      done: false,
+      hasNext: true,
+      next: value,
     }
   }
 }
+
+uniqLazy.lazy = lazy
+
+export default uniqLazy

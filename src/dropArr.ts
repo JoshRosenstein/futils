@@ -38,22 +38,23 @@ function _dropArr<T>(array: T[], n: number) {
   return _reduceLazy(array, dropArr.lazy(n))
 }
 
-export namespace dropArr {
-  export function lazy<T>(n: number) {
-    let left = n
-    return (value: T): LazyResult<T> => {
-      if (left > 0) {
-        left--
-        return {
-          done: false,
-          hasNext: false,
-        }
-      }
+function lazy<T>(n: number) {
+  let left = n
+  return (value: T): LazyResult<T> => {
+    if (left > 0) {
+      left--
       return {
         done: false,
-        hasNext: true,
-        next: value,
+        hasNext: false,
       }
+    }
+    return {
+      done: false,
+      hasNext: true,
+      next: value,
     }
   }
 }
+dropArr.lazy = lazy
+
+export default dropArr

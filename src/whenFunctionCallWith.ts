@@ -1,4 +1,4 @@
-import isFunction from './isFunction'
+import {isFunction} from './isFunction'
 
 export const whenFunctionCallWith_ = (...args) => test =>
   isFunction(test) ? test(...args) : test

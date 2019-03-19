@@ -38,30 +38,30 @@ function _takeLazy<T>(array: T[], n: number) {
   return _reduceLazy(array, takeLazy.lazy(n))
 }
 
-export namespace takeLazy {
-  export function lazy<T>(n: number) {
-    return (value: T): LazyResult<T> => {
-      if (n === 0) {
-        return {
-          done: true,
-          hasNext: false,
-        }
-      }
-      n--
-      if (n === 0) {
-        return {
-          done: true,
-          hasNext: true,
-          next: value,
-        }
-      }
+function lazy<T>(n: number) {
+  return (value: T): LazyResult<T> => {
+    if (n === 0) {
       return {
-        done: false,
+        done: true,
+        hasNext: false,
+      }
+    }
+    n--
+    if (n === 0) {
+      return {
+        done: true,
         hasNext: true,
         next: value,
       }
     }
+    return {
+      done: false,
+      hasNext: true,
+      next: value,
+    }
   }
 }
+
+takeLazy.lazy = lazy
 
 export default takeLazy

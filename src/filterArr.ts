@@ -70,17 +70,17 @@ const _lazy = (indexed: boolean) => <T>(
   }
 }
 
-export namespace filterArr {
-  export const lazy = _lazy(false)
-  export const lazyIndexed = _toLazyIndexed(_lazy(true))
+const lazy = _lazy(false)
+const lazyIndexed = _toLazyIndexed(_lazy(true))
 
-  export function indexed<T, K>(array: T[], fn: PredIndexed<T, boolean>): K[]
-  export function indexed<T, K>(
-    fn: PredIndexed<T, boolean>,
-  ): (array: T[]) => K[]
-  export function indexed() {
-    return purry(_filterArr(true), arguments, lazyIndexed)
-  }
+function indexed<T, K>(array: T[], fn: PredIndexed<T, boolean>): K[]
+function indexed<T, K>(fn: PredIndexed<T, boolean>): (array: T[]) => K[]
+function indexed() {
+  return purry(_filterArr(true), arguments, lazyIndexed)
 }
+
+filterArr.lazy = lazy
+filterArr.indexed = indexed
+filterArr.lazyIndexed = lazyIndexed
 
 export default filterArr
