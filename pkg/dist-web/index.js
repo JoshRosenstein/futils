@@ -1129,7 +1129,13 @@ const dispatchWith_ = function dispatchWith_(pred, fns) {
     args[_key - 2] = arguments[_key];
   }
 
-  return reduceWhile_((val, nextFn, idx) => idx === 0 || pred(val) === false, (acc, fn, idx) => idx > 0 && fn(...args), undefined, toArray(fns));
+  return reduceWhile_((val, nextFn, idx) => {
+    if (idx > 0 && !pred(val)) {
+      return true;
+    }
+
+    return pred(nextFn(...args));
+  }, (acc, fn, idx) => fn(...args), undefined, toArray(fns));
 };
 const dispatchWith = curryN_(2, (pred, fns) => curryN_(maxArgs_(fns), function () {
   for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {

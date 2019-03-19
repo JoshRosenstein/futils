@@ -1,6 +1,6 @@
 {
   "name": "@roseys/futils",
-  "version": "2.0.3",
+  "version": "2.0.1",
   "modulename": "futils",
   "description": "My JavaScript utils library",
   "main": "dist/commonjs/index.js",
@@ -13,7 +13,10 @@
   "sideEffects": false,
   "scripts": {
     "pika:build": "pika-pack build",
-    "pika:publish": "pika-pack publish",
+    "publish": "pika-pack publish --no-cleanup",
+    "publish:next": "pika-pack publish --any-branch --no-cleanup --tag next",
+    "publish:dry": "pika-pack publish --any-branch --no-cleanup",
+    "pika:publishNext": "pika-pack publish --any-branch --no-cleanup --tag next",
     "lint:lib": "prettier lib/** --write ",
     "template:types": "node ./scripts/createTypes.js",
     "rollup": "cross-env BABEL_ENV=es rollup -c config/rollup.simple.js",

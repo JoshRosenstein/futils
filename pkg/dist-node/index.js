@@ -1016,7 +1016,13 @@ const dec = dec_;
 const defaultTo_ = (d, v) => v == null || v !== v ? d : v;
 const defaultTo = curry2_(defaultTo_);
 
-const dispatchWith_ = (pred, fns, ...args) => reduceWhile_((val, nextFn, idx) => idx === 0 || pred(val) === false, (acc, fn, idx) => idx > 0 && fn(...args), undefined, toArray(fns));
+const dispatchWith_ = (pred, fns, ...args) => reduceWhile_((val, nextFn, idx) => {
+  if (idx > 0 && !pred(val)) {
+    return true;
+  }
+
+  return pred(nextFn(...args));
+}, (acc, fn, idx) => fn(...args), undefined, toArray(fns));
 const dispatchWith = curryN_(2, (pred, fns) => curryN_(maxArgs_(fns), (...args) => dispatchWith_(pred, fns, ...args)));
 
 const omitKey_ = (key, keyedList) => reduce_((accumulated, value, k) => key === k ? accumulated : attach_(k, value, accumulated), empty_(keyedList), keyedList);
