@@ -13,10 +13,9 @@
   "sideEffects": false,
   "scripts": {
     "pika:build": "pika-pack build",
-    "publish": "pika-pack publish --no-cleanup",
-    "publish:next": "pika-pack publish --any-branch --no-cleanup --tag next",
-    "publish:dry": "pika-pack publish --any-branch --no-cleanup",
-    "pika:publishNext": "pika-pack publish --any-branch --no-cleanup --tag next",
+    "pika:publish": "pika-pack publish --no-cleanup",
+    "pika:next": "pika-pack publish --any-branch --no-cleanup",
+    "pika:dry": "pika-pack publish --any-branch --no-cleanup --no-publish",
     "lint:lib": "prettier lib/** --write ",
     "template:types": "node ./scripts/createTypes.js",
     "rollup": "cross-env BABEL_ENV=es rollup -c config/rollup.simple.js",
