@@ -1,6 +1,6 @@
 {
   "name": "@roseys/futils",
-  "version": "2.0.01",
+  "version": "2.0.1",
   "modulename": "futils",
   "description": "My JavaScript utils library",
   "main": "dist/commonjs/index.js",
@@ -12,19 +12,23 @@
   ],
   "sideEffects": false,
   "scripts": {
+    "pika:build": "pika-pack build",
+    "pika:publish": "pika-pack publish",
     "lint:lib": "prettier lib/** --write ",
     "template:types": "node ./scripts/createTypes.js",
     "rollup": "cross-env BABEL_ENV=es rollup -c config/rollup.simple.js",
     "commit": "git-cz",
     "copy:types": "node ./scripts/transferTypes.js",
     "copy:dist": "node ./scripts/copy-dist-typedefs.js",
-    "prepack": "yarn run build",
     "flow:gen": "rimraf genFlowDefs/* && flow gen-flow-files src --out-dir genFlowDefs",
     "travis": "yarn run test:coverage && yarn run build",
-    "build:modules": "node scripts/create-export.js && yarn run clean && yarn run build:es && yarn run build:cjs",
-    "build": "yarn run build:modules",
-    "build:es": "tsc --declaration true --declarationMap true --module esnext --outDir ./dist/es",
-    "build:cjs": "tsc --declaration true --declarationMap true --module commonjs --outDir ./dist/commonjs",
+    "build:modules": "node scripts/create-export.js && yarn run clean && yarn build:es && yarn bili",
+    "build": "yarn clean && yarn build:modules",
+    "build:types": "tsc --emitDeclarationOnly --outDir dist/commonjs",
+    "bili": "bili --config bili.config.ts && yarn build:types",
+    "build:es2": "cross-env BABEL_ENV=es babel src --out-dir es --ignore **/*.spec.ts,**/*.test.ts",
+    "build:es": "tsc --declaration true --module esnext --outDir ./dist/es",
+    "build:cjs": "tsc --declaration true --declarationMap true --module commonjs --outDir ./dist/lib",
     "build:bundles": "cross-env NODE_ENV=development rollup -c config/rollup.simple.js",
     "scripts": "node scripts/create-export.js",
     "clean": "rimraf es/* lib/* dist/**/*.js coverage/* ",
@@ -74,12 +78,19 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.3.3",
     "@metahub/cz-conventional-commit": "^3.0.2",
+    "@pika/pack": "^0.3.5",
+    "@pika/plugin-build-node": "^0.3.14",
+    "@pika/plugin-build-types": "^0.3.14",
+    "@pika/plugin-build-web": "^0.3.14",
+    "@pika/plugin-standard-pkg": "^0.3.14",
+    "@pika/plugin-ts-standard-pkg": "^0.3.14",
     "@roseys/art": "^1.0.1",
     "@types/jest": "^24.0.11",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^24.4.0",
     "babel-plugin-module-resolver": "^3.1.1",
     "babel-plugin-transform-module-imports": "^1.0.0",
+    "bili": "^4.5.2",
     "bundlesize": "^0.17.0",
     "codecov": "^3.0.0",
     "commander": "^2.19.0",
@@ -121,6 +132,7 @@
     "rollup-plugin-filesize": "^2.0.0",
     "rollup-plugin-node-resolve": "^3.3.0",
     "rollup-plugin-terser": "^1.0.1",
+    "rollup-plugin-typescript2": "^0.20.1",
     "ts-jest": "^24.0.0",
     "typedoc": "^0.14.2",
     "typescript": "^3.3.3333",
@@ -149,5 +161,23 @@
     "singleQuote": true,
     "trailingComma": "all",
     "semi": false
+  },
+  "@pika/pack": {
+    "pipeline": [
+      [
+        "@pika/plugin-ts-standard-pkg",
+        {
+          "exclude": [
+            "/**/*.spec.ts"
+          ]
+        }
+      ],
+      [
+        "@pika/plugin-build-node"
+      ],
+      [
+        "@pika/plugin-build-web"
+      ]
+    ]
   }
 }
