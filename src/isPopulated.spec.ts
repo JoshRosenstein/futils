@@ -1,18 +1,19 @@
-import isPopulated from './isPopulated'
+import {isPopulated} from './isPopulated'
 
-describe('isPopulated', () => {
-  test('returns "true" if value is empty, otherwise "false"', () => {
-    expect(isPopulated([1, 2, 3])).toBeTruthy()
-    expect(isPopulated([undefined])).toBeTruthy()
-    expect(isPopulated([])).toBeFalsy()
-    expect(isPopulated('')).toBeFalsy()
-    expect(isPopulated(null)).toBeFalsy()
-    expect(isPopulated({})).toBeFalsy()
-    expect(isPopulated(undefined)).toBeFalsy()
-    expect(isPopulated(false)).toBeTruthy()
-    expect(isPopulated(true)).toBeTruthy()
-    expect(isPopulated(0)).toBeTruthy()
-    expect(isPopulated(() => {})).toBeTruthy()
-    expect(isPopulated(NaN)).toBeTruthy()
-  })
+const data = [
+  [[1, 2, 3], true],
+  [[undefined], true],
+  [[], false],
+  ['', false],
+  [null, false],
+  [{}, false],
+  [undefined, false],
+  [false, true],
+  [true, true],
+  [0, true],
+  [NaN, true],
+]
+
+test.each(data)('%# %p', (input, expected) => {
+  expect(isPopulated(input)).toEqual(expected)
 })

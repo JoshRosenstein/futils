@@ -3,10 +3,20 @@ import maxArgs_ from './_internal/maxArgs_'
 import {reduceWhile_} from './reduceWhile'
 import toArray from './toArray'
 //// TODO: Fix
+const CONTINUE = true
+const BRK = false
+
 export const dispatchWith_ = (pred, fns, ...args) =>
   reduceWhile_(
-    (val, nextFn, idx) => idx === 0 || pred(val) === false,
-    (acc, fn, idx) => idx > 0 && fn(...args),
+    (val, nextFn, idx) => {
+      if (idx > 0 && !pred(val)) {
+        return true
+      }
+      return pred(nextFn(...args))
+    },
+
+    (acc, fn, idx) => fn(...args),
+
     undefined,
     toArray(fns),
   )
