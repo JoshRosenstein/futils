@@ -24,3 +24,4 @@ rollup.configOG.js
 /flow-typed/**
 out.json
 scripts/def.json
+/pkg/
