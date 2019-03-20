@@ -18,11 +18,11 @@ import { LazyResult } from './_internal/_reduceLazy';
  */
 export declare function uniqLazy<T>(array: T[]): T[];
 export declare namespace uniqLazy {
-    var lazy: typeof lazy;
+    var lazy: typeof _lazy;
 }
 export declare function uniqLazy<T>(): (array: T[]) => T[];
 export declare namespace uniqLazy {
-    var lazy: typeof lazy;
+    var lazy: typeof _lazy;
 }
-declare function lazy(): (value: any) => LazyResult<any>;
+declare function _lazy(): (value: any) => LazyResult<any>;
 export default uniqLazy;

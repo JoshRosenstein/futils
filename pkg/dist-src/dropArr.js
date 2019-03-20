@@ -2,12 +2,12 @@
 import { purry } from './purry';
 import { _reduceLazy } from './_internal/_reduceLazy';
 export function dropArr() {
-    return purry(_dropArr, arguments, dropArr.lazy);
+    return purry(_dropArr, arguments, dropArrlazy);
 }
 function _dropArr(array, n) {
-    return _reduceLazy(array, dropArr.lazy(n));
+    return _reduceLazy(array, dropArrlazy(n));
 }
-function lazy(n) {
+function dropArrlazy(n) {
     let left = n;
     return (value) => {
         if (left > 0) {
@@ -24,6 +24,6 @@ function lazy(n) {
         };
     };
 }
-dropArr.lazy = lazy;
+dropArr.lazy = dropArrlazy;
 export default dropArr;
 //# sourceMappingURL=dropArr.js.map

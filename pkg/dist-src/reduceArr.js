@@ -3,12 +3,10 @@ import { purry } from './purry';
 export function reduceArr() {
     return purry(reduceArr_(false), arguments);
 }
-export const reduceArr_ = (indexed) => (items, fn, initialValue) => {
-    return items.reduce((acc, item, index) => indexed ? fn(acc, item, index, items) : fn(acc, item), initialValue);
-};
-function indexed() {
+export const reduceArr_ = (indexed) => (items, fn, initialValue) => items.reduce((acc, item, index) => indexed ? fn(acc, item, index, items) : fn(acc, item), initialValue);
+function _indexed() {
     return purry(reduceArr_(true), arguments);
 }
-reduceArr.indexed = indexed;
+reduceArr.indexed = _indexed;
 export default reduceArr;
 //# sourceMappingURL=reduceArr.js.map

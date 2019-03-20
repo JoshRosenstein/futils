@@ -31,14 +31,14 @@ export function dropArr<T>(array: T[], n: number): T[]
 export function dropArr<T>(n: number): (array: T[]) => T[]
 
 export function dropArr() {
-  return purry(_dropArr, arguments, dropArr.lazy)
+  return purry(_dropArr, arguments, dropArrlazy)
 }
 
 function _dropArr<T>(array: T[], n: number) {
-  return _reduceLazy(array, dropArr.lazy(n))
+  return _reduceLazy(array, dropArrlazy(n))
 }
 
-function lazy<T>(n: number) {
+function dropArrlazy<T>(n: number) {
   let left = n
   return (value: T): LazyResult<T> => {
     if (left > 0) {
@@ -55,6 +55,6 @@ function lazy<T>(n: number) {
     }
   }
 }
-dropArr.lazy = lazy
+dropArr.lazy = dropArrlazy
 
 export default dropArr

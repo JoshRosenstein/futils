@@ -40,20 +40,11 @@ export function filterArr() {
   return purry(_filterArr(false), arguments, filterArr.lazy)
 }
 
-const _filterArr = (indexed: boolean) => <T>(
-  array: T[],
-  fn: PredIndexedOptional<T, boolean>,
-) => {
-  return _reduceLazy(
-    array,
-    indexed ? filterArr.lazyIndexed(fn) : filterArr.lazy(fn),
-    indexed,
-  )
+const _filterArr = (indexed: boolean) => <T>(array: T[], fn: PredIndexedOptional<T, boolean>) => {
+  return _reduceLazy(array, indexed ? filterArrlazyIndexed(fn) : filterArrLazy(fn), indexed)
 }
 
-const _lazy = (indexed: boolean) => <T>(
-  fn: PredIndexedOptional<T, boolean>,
-) => {
+const _lazy = (indexed: boolean) => <T>(fn: PredIndexedOptional<T, boolean>) => {
   return (value: T, index?: number, array?: T[]): LazyResult<T> => {
     const valid = indexed ? fn(value, index, array) : fn(value)
     if (!!valid) {
@@ -70,17 +61,17 @@ const _lazy = (indexed: boolean) => <T>(
   }
 }
 
-const lazy = _lazy(false)
-const lazyIndexed = _toLazyIndexed(_lazy(true))
+const filterArrLazy = _lazy(false)
+const filterArrlazyIndexed = _toLazyIndexed(_lazy(true))
 
-function indexed<T, K>(array: T[], fn: PredIndexed<T, boolean>): K[]
-function indexed<T, K>(fn: PredIndexed<T, boolean>): (array: T[]) => K[]
-function indexed() {
-  return purry(_filterArr(true), arguments, lazyIndexed)
+function filterArrindexed<T, K>(array: T[], fn: PredIndexed<T, boolean>): K[]
+function filterArrindexed<T, K>(fn: PredIndexed<T, boolean>): (array: T[]) => K[]
+function filterArrindexed() {
+  return purry(_filterArr(true), arguments, filterArrlazyIndexed)
 }
 
-filterArr.lazy = lazy
-filterArr.indexed = indexed
-filterArr.lazyIndexed = lazyIndexed
+filterArr.lazy = filterArrLazy
+filterArr.indexed = filterArrindexed
+filterArr.lazyIndexed = filterArrlazyIndexed
 
 export default filterArr

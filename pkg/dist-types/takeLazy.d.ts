@@ -13,7 +13,7 @@ import { LazyResult } from './_internal/_reduceLazy';
  */
 export declare function takeLazy<T>(array: T[], n: number): T[];
 export declare namespace takeLazy {
-    var lazy: typeof lazy;
+    var lazy: typeof _lazy;
 }
 /**
  * Returns the first `n` elements of `array`.
@@ -28,7 +28,7 @@ export declare namespace takeLazy {
  */
 export declare function takeLazy<T>(n: number): (array: T[]) => T[];
 export declare namespace takeLazy {
-    var lazy: typeof lazy;
+    var lazy: typeof _lazy;
 }
-declare function lazy<T>(n: number): (value: T) => LazyResult<T>;
+declare function _lazy<T>(n: number): (value: T) => LazyResult<T>;
 export default takeLazy;

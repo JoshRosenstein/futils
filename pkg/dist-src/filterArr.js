@@ -5,7 +5,7 @@ export function filterArr() {
     return purry(_filterArr(false), arguments, filterArr.lazy);
 }
 const _filterArr = (indexed) => (array, fn) => {
-    return _reduceLazy(array, indexed ? filterArr.lazyIndexed(fn) : filterArr.lazy(fn), indexed);
+    return _reduceLazy(array, indexed ? filterArrlazyIndexed(fn) : filterArrLazy(fn), indexed);
 };
 const _lazy = (indexed) => (fn) => {
     return (value, index, array) => {
@@ -23,13 +23,13 @@ const _lazy = (indexed) => (fn) => {
         };
     };
 };
-const lazy = _lazy(false);
-const lazyIndexed = _toLazyIndexed(_lazy(true));
-function indexed() {
-    return purry(_filterArr(true), arguments, lazyIndexed);
+const filterArrLazy = _lazy(false);
+const filterArrlazyIndexed = _toLazyIndexed(_lazy(true));
+function filterArrindexed() {
+    return purry(_filterArr(true), arguments, filterArrlazyIndexed);
 }
-filterArr.lazy = lazy;
-filterArr.indexed = indexed;
-filterArr.lazyIndexed = lazyIndexed;
+filterArr.lazy = filterArrLazy;
+filterArr.indexed = filterArrindexed;
+filterArr.lazyIndexed = filterArrlazyIndexed;
 export default filterArr;
 //# sourceMappingURL=filterArr.js.map

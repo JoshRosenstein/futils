@@ -18,7 +18,7 @@ import { Pred, PredIndexedOptional, PredIndexed } from './_types/remeda';
 export declare function filterArr<T>(array: T[], fn: Pred<T, boolean>): T[];
 export declare namespace filterArr {
     var lazy: <T>(fn: PredIndexedOptional<T, boolean>) => (value: T, index?: number | undefined, array?: T[] | undefined) => LazyResult<T>;
-    var indexed: typeof indexed;
+    var indexed: typeof filterArrindexed;
     var lazyIndexed: (<T>(fn: PredIndexedOptional<T, boolean>) => (value: T, index?: number | undefined, array?: T[] | undefined) => LazyResult<T>) & {
         indexed: true;
     };
@@ -40,11 +40,11 @@ export declare namespace filterArr {
 export declare function filterArr<T>(fn: Pred<T, boolean>): (array: T[]) => T[];
 export declare namespace filterArr {
     var lazy: <T>(fn: PredIndexedOptional<T, boolean>) => (value: T, index?: number | undefined, array?: T[] | undefined) => LazyResult<T>;
-    var indexed: typeof indexed;
+    var indexed: typeof filterArrindexed;
     var lazyIndexed: (<T>(fn: PredIndexedOptional<T, boolean>) => (value: T, index?: number | undefined, array?: T[] | undefined) => LazyResult<T>) & {
         indexed: true;
     };
 }
-declare function indexed<T, K>(array: T[], fn: PredIndexed<T, boolean>): K[];
-declare function indexed<T, K>(fn: PredIndexed<T, boolean>): (array: T[]) => K[];
+declare function filterArrindexed<T, K>(array: T[], fn: PredIndexed<T, boolean>): K[];
+declare function filterArrindexed<T, K>(fn: PredIndexed<T, boolean>): (array: T[]) => K[];
 export default filterArr;

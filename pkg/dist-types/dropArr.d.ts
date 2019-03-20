@@ -13,7 +13,7 @@ import { LazyResult } from './_internal/_reduceLazy';
  */
 export declare function dropArr<T>(array: T[], n: number): T[];
 export declare namespace dropArr {
-    var lazy: typeof lazy;
+    var lazy: typeof dropArrlazy;
 }
 /**
  * Removes last `n` elements from the `array`.
@@ -29,7 +29,7 @@ export declare namespace dropArr {
  */
 export declare function dropArr<T>(n: number): (array: T[]) => T[];
 export declare namespace dropArr {
-    var lazy: typeof lazy;
+    var lazy: typeof dropArrlazy;
 }
-declare function lazy<T>(n: number): (value: T) => LazyResult<T>;
+declare function dropArrlazy<T>(n: number): (value: T) => LazyResult<T>;
 export default dropArr;

@@ -4,12 +4,12 @@ import { _reduceLazy } from './_internal/_reduceLazy';
 //   n: number,
 // ): <T extends [T0] extends [never] ? any : T0>(array: T[]) => T[]
 export function takeArr() {
-    return purry(_takeArr, arguments, takeArr.lazy);
+    return purry(_takeArr, arguments, takeArrlazy);
 }
 function _takeArr(array, n) {
-    return _reduceLazy(array, takeArr.lazy(n));
+    return _reduceLazy(array, takeArrlazy(n));
 }
-function lazy(n) {
+function takeArrlazy(n) {
     return (value) => {
         if (n === 0) {
             return {
@@ -32,6 +32,6 @@ function lazy(n) {
         };
     };
 }
-takeArr.lazy = lazy;
+takeArr.lazy = takeArr;
 export default takeArr;
 //# sourceMappingURL=takeArr.js.map

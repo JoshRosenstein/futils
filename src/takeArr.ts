@@ -37,14 +37,14 @@ export function takeArr(n: number): <T>(array: T[]) => T[]
 // ): <T extends [T0] extends [never] ? any : T0>(array: T[]) => T[]
 
 export function takeArr() {
-  return purry(_takeArr, arguments, takeArr.lazy)
+  return purry(_takeArr, arguments, takeArrlazy)
 }
 
 function _takeArr<T>(array: T[], n: number) {
-  return _reduceLazy(array, takeArr.lazy(n))
+  return _reduceLazy(array, takeArrlazy(n))
 }
 
-function lazy<T>(n: number) {
+function takeArrlazy<T>(n: number) {
   return (value: T): LazyResult<T> => {
     if (n === 0) {
       return {
@@ -67,6 +67,6 @@ function lazy<T>(n: number) {
     }
   }
 }
-takeArr.lazy = lazy
+takeArr.lazy = takeArr
 
 export default takeArr

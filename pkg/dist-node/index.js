@@ -1066,14 +1066,14 @@ function _reduceLazy(array, lazy, indexed) {
 
 // from https://raw.githubusercontent.com/remeda/remeda/master/src/dropArr.ts
 function dropArr() {
-  return purry(_dropArr, arguments, dropArr.lazy);
+  return purry(_dropArr, arguments, dropArrlazy);
 }
 
 function _dropArr(array, n) {
-  return _reduceLazy(array, dropArr.lazy(n));
+  return _reduceLazy(array, dropArrlazy(n));
 }
 
-function lazy(n) {
+function dropArrlazy(n) {
   let left = n;
   return value => {
     if (left > 0) {
@@ -1092,7 +1092,7 @@ function lazy(n) {
   };
 }
 
-dropArr.lazy = lazy;
+dropArr.lazy = dropArrlazy;
 
 const values_ = functor => reduceValues_((l, r) => append_(r, l), [], functor);
 const values = values_;
@@ -1147,7 +1147,7 @@ function filterArr() {
 }
 
 const _filterArr = indexed => (array, fn) => {
-  return _reduceLazy(array, indexed ? filterArr.lazyIndexed(fn) : filterArr.lazy(fn), indexed);
+  return _reduceLazy(array, indexed ? filterArrlazyIndexed(fn) : filterArrLazy(fn), indexed);
 };
 
 const _lazy = indexed => fn => {
@@ -1169,17 +1169,17 @@ const _lazy = indexed => fn => {
   };
 };
 
-const lazy$1 = _lazy(false);
+const filterArrLazy = _lazy(false);
 
-const lazyIndexed = _toLazyIndexed(_lazy(true));
+const filterArrlazyIndexed = _toLazyIndexed(_lazy(true));
 
-function indexed() {
-  return purry(_filterArr(true), arguments, lazyIndexed);
+function filterArrindexed() {
+  return purry(_filterArr(true), arguments, filterArrlazyIndexed);
 }
 
-filterArr.lazy = lazy$1;
-filterArr.indexed = indexed;
-filterArr.lazyIndexed = lazyIndexed;
+filterArr.lazy = filterArrLazy;
+filterArr.indexed = filterArrindexed;
+filterArr.lazyIndexed = filterArrlazyIndexed;
 
 const is_ = (sig, value) => {
   if (typeof sig === 'string') {
@@ -1408,31 +1408,25 @@ function mapArr() {
   return purry(_mapArr(false), arguments, mapArr.lazy);
 }
 
-const _mapArr = indexed => (array, fn) => {
-  return _reduceLazy(array, indexed ? mapArr.lazyIndexed(fn) : mapArr.lazy(fn), indexed);
-};
+const _mapArr = indexed => (array, fn) => _reduceLazy(array, indexed ? MaplazyIndexed(fn) : Maplazy(fn), indexed);
 
-const _lazy$1 = indexed => fn => {
-  return (value, index, array) => {
-    return {
-      done: false,
-      hasNext: true,
-      next: indexed ? fn(value, index, array) : fn(value)
-    };
-  };
-};
+const _lazy$1 = indexed => fn => (value, index, array) => ({
+  done: false,
+  hasNext: true,
+  next: indexed ? fn(value, index, array) : fn(value)
+});
 
-const lazy$2 = _lazy$1(false);
+const Maplazy = _lazy$1(false);
 
-const lazyIndexed$1 = _toLazyIndexed(_lazy$1(true));
+const MaplazyIndexed = _toLazyIndexed(_lazy$1(true));
 
-function indexed$1() {
-  return purry(_mapArr(true), arguments, lazyIndexed$1);
+function mapArrindexed() {
+  return purry(_mapArr(true), arguments, MaplazyIndexed);
 }
 
-mapArr.lazy = lazy$2;
-mapArr.lazyIndexed = lazyIndexed$1;
-mapArr.indexed = indexed$1;
+mapArr.lazy = Maplazy;
+mapArr.lazyIndexed = MaplazyIndexed;
+mapArr.indexed = mapArrindexed;
 
 const mapKeysWithValueKey_ = (fn, functor) => reduce_((accumulated, value, key) => merge_(accumulated, of_(fn(value, key), value, accumulated)), empty_(functor), functor);
 const mapKeysWithValueKey = curry2_(mapKeysWithValueKey_);
@@ -1757,15 +1751,13 @@ function range_(start, end) {
 function reduceArr() {
   return purry(reduceArr_(false), arguments);
 }
-const reduceArr_ = indexed => (items, fn, initialValue) => {
-  return items.reduce((acc, item, index) => indexed ? fn(acc, item, index, items) : fn(acc, item), initialValue);
-};
+const reduceArr_ = indexed => (items, fn, initialValue) => items.reduce((acc, item, index) => indexed ? fn(acc, item, index, items) : fn(acc, item), initialValue);
 
-function indexed$2() {
+function _indexed() {
   return purry(reduceArr_(true), arguments);
 }
 
-reduceArr.indexed = indexed$2;
+reduceArr.indexed = _indexed;
 
 const reduceRight_ = (reducer, initial, functor) => reduce_(reducer, initial, functor, true);
 const reduceRight$1 = curry3_(reduceRight_);
@@ -1805,14 +1797,14 @@ const tail = tail_;
 // ): <T extends [T0] extends [never] ? any : T0>(array: T[]) => T[]
 
 function takeArr() {
-  return purry(_takeArr, arguments, takeArr.lazy);
+  return purry(_takeArr, arguments, takeArrlazy);
 }
 
 function _takeArr(array, n) {
-  return _reduceLazy(array, takeArr.lazy(n));
+  return _reduceLazy(array, takeArrlazy(n));
 }
 
-function lazy$3(n) {
+function takeArrlazy(n) {
   return value => {
     if (n === 0) {
       return {
@@ -1839,7 +1831,7 @@ function lazy$3(n) {
   };
 }
 
-takeArr.lazy = lazy$3;
+takeArr.lazy = takeArr;
 
 const takeLast_ = (count, orderedList) => {
   if (count < 0) return orderedList;
@@ -1850,14 +1842,14 @@ const takeLast = curry2_(takeLast_);
 
 // from https://github.com/remeda/remeda/blob/master/src/take.test.ts
 function takeLazy() {
-  return purry(_takeLazy, arguments, takeLazy.lazy);
+  return purry(_takeLazy, arguments, _lazy$2);
 }
 
 function _takeLazy(array, n) {
-  return _reduceLazy(array, takeLazy.lazy(n));
+  return _reduceLazy(array, _lazy$2(n));
 }
 
-function lazy$4(n) {
+function _lazy$2(n) {
   return value => {
     if (n === 0) {
       return {
@@ -1884,7 +1876,7 @@ function lazy$4(n) {
   };
 }
 
-takeLazy.lazy = lazy$4;
+takeLazy.lazy = _lazy$2;
 
 const tap_ = (fn, value) => {
   fn(value);
@@ -2071,14 +2063,14 @@ const uniq_ = array => [...new Set(array)];
 const uniq = uniq_;
 
 function uniqLazy() {
-  return purry(_uniqLazy, arguments, uniqLazy.lazy);
+  return purry(_uniqLazy, arguments, _lazy$3);
 }
 
 function _uniqLazy(array) {
-  return _reduceLazy(array, uniqLazy.lazy());
+  return _reduceLazy(array, _lazy$3());
 }
 
-function lazy$5() {
+function _lazy$3() {
   const set = new Set();
   return value => {
     if (set.has(value)) {
@@ -2097,7 +2089,7 @@ function lazy$5() {
   };
 }
 
-uniqLazy.lazy = lazy$5;
+uniqLazy.lazy = _lazy$3;
 
 const unless_ = (cond, fn, val) => cond(val) ? val : fn(val);
 const unless = curry3_(unless_);

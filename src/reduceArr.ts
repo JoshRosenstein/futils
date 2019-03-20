@@ -48,26 +48,25 @@ export const reduceArr_ = (indexed: boolean) => <T, K>(
   items: T[],
   fn: (acc: K, item: T, index?: number, items?: T[]) => K,
   initialValue: K,
-): K => {
-  return items.reduce(
+): K =>
+  items.reduce(
     (acc, item, index) =>
       indexed ? fn(acc, item, index, items) : fn(acc, item),
     initialValue,
   )
-}
 
-function indexed<T, K>(
+function _indexed<T, K>(
   array: T[],
   fn: (acc: K, item: T, index: number, items: T[]) => K,
   initialValue: K,
 ): Record<string, T>
-function indexed<T, K>(
+function _indexed<T, K>(
   fn: (acc: K, item: T, index: number, items: T[]) => K,
   initialValue: K,
 ): (array: T[]) => Record<string, T>
-function indexed() {
+function _indexed() {
   return purry(reduceArr_(true), arguments)
 }
-reduceArr.indexed = indexed
+reduceArr.indexed = _indexed
 
 export default reduceArr

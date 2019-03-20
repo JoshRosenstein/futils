@@ -22,7 +22,7 @@ declare namespace mapArr {
     var lazyIndexed: (<T, K>(fn: PredIndexedOptional<T, K>) => (value: T, index?: number | undefined, array?: T[] | undefined) => LazyResult<K>) & {
         indexed: true;
     };
-    var indexed: typeof indexed;
+    var indexed: typeof mapArrindexed;
 }
 /**
  * mapArr each value of an object using a defined callback function.
@@ -44,8 +44,8 @@ declare namespace mapArr {
     var lazyIndexed: (<T, K>(fn: PredIndexedOptional<T, K>) => (value: T, index?: number | undefined, array?: T[] | undefined) => LazyResult<K>) & {
         indexed: true;
     };
-    var indexed: typeof indexed;
+    var indexed: typeof mapArrindexed;
 }
-declare function indexed<T, K>(array: T[], fn: PredIndexed<T, K>): K[];
-declare function indexed<T, K>(fn: PredIndexed<T, K>): (array: T[]) => K[];
+declare function mapArrindexed<T, K>(array: T[], fn: PredIndexed<T, K>): K[];
+declare function mapArrindexed<T, K>(fn: PredIndexed<T, K>): (array: T[]) => K[];
 export { mapArr };

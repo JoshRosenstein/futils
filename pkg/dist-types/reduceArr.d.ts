@@ -15,7 +15,7 @@
  */
 export declare function reduceArr<T, K>(items: T[], fn: (acc: K, item: T) => K, initialValue: K): K;
 export declare namespace reduceArr {
-    var indexed: typeof indexed;
+    var indexed: typeof _indexed;
 }
 /**
  * Calls the specified callback function for all the elements in an array. The return value of the callback function is the accumulated result, and is provided as an argument in the next call to the callback function.
@@ -32,9 +32,9 @@ export declare namespace reduceArr {
  */
 export declare function reduceArr<T, K>(fn: (acc: K, item: T) => K, initialValue: K): (items: T[]) => K;
 export declare namespace reduceArr {
-    var indexed: typeof indexed;
+    var indexed: typeof _indexed;
 }
 export declare const reduceArr_: (indexed: boolean) => <T, K>(items: T[], fn: (acc: K, item: T, index?: number | undefined, items?: T[] | undefined) => K, initialValue: K) => K;
-declare function indexed<T, K>(array: T[], fn: (acc: K, item: T, index: number, items: T[]) => K, initialValue: K): Record<string, T>;
-declare function indexed<T, K>(fn: (acc: K, item: T, index: number, items: T[]) => K, initialValue: K): (array: T[]) => Record<string, T>;
+declare function _indexed<T, K>(array: T[], fn: (acc: K, item: T, index: number, items: T[]) => K, initialValue: K): Record<string, T>;
+declare function _indexed<T, K>(fn: (acc: K, item: T, index: number, items: T[]) => K, initialValue: K): (array: T[]) => Record<string, T>;
 export default reduceArr;

@@ -46,35 +46,29 @@ function mapArr() {
 const _mapArr = (indexed: boolean) => <T, K>(
   array: T[],
   fn: PredIndexedOptional<T, K>,
-) => {
-  return _reduceLazy(
-    array,
-    indexed ? mapArr.lazyIndexed(fn) : mapArr.lazy(fn),
-    indexed,
-  )
+) => _reduceLazy(array, indexed ? MaplazyIndexed(fn) : Maplazy(fn), indexed)
+
+const _lazy = (indexed: boolean) => <T, K>(fn: PredIndexedOptional<T, K>) => (
+  value: T,
+  index?: number,
+  array?: T[],
+): LazyResult<K> => ({
+  done: false,
+  hasNext: true,
+  next: indexed ? fn(value, index, array) : fn(value),
+})
+
+const Maplazy = _lazy(false)
+const MaplazyIndexed = _toLazyIndexed(_lazy(true))
+
+function mapArrindexed<T, K>(array: T[], fn: PredIndexed<T, K>): K[]
+function mapArrindexed<T, K>(fn: PredIndexed<T, K>): (array: T[]) => K[]
+function mapArrindexed() {
+  return purry(_mapArr(true), arguments, MaplazyIndexed)
 }
 
-const _lazy = (indexed: boolean) => <T, K>(fn: PredIndexedOptional<T, K>) => {
-  return (value: T, index?: number, array?: T[]): LazyResult<K> => {
-    return {
-      done: false,
-      hasNext: true,
-      next: indexed ? fn(value, index, array) : fn(value),
-    }
-  }
-}
-
-const lazy = _lazy(false)
-const lazyIndexed = _toLazyIndexed(_lazy(true))
-
-function indexed<T, K>(array: T[], fn: PredIndexed<T, K>): K[]
-function indexed<T, K>(fn: PredIndexed<T, K>): (array: T[]) => K[]
-function indexed() {
-  return purry(_mapArr(true), arguments, lazyIndexed)
-}
-
-mapArr.lazy = lazy
-mapArr.lazyIndexed = lazyIndexed
-mapArr.indexed = indexed
+mapArr.lazy = Maplazy
+mapArr.lazyIndexed = MaplazyIndexed
+mapArr.indexed = mapArrindexed
 
 export {mapArr}

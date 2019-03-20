@@ -23,14 +23,14 @@ export function uniqLazy<T>(array: T[]): T[]
 export function uniqLazy<T>(): (array: T[]) => T[]
 
 export function uniqLazy() {
-  return purry(_uniqLazy, arguments, uniqLazy.lazy)
+  return purry(_uniqLazy, arguments, _lazy)
 }
 
 function _uniqLazy<T>(array: T[]) {
-  return _reduceLazy(array, uniqLazy.lazy())
+  return _reduceLazy(array, _lazy())
 }
 
-function lazy() {
+function _lazy() {
   const set = new Set<any>()
   return (value: any): LazyResult<any> => {
     if (set.has(value)) {
@@ -48,6 +48,6 @@ function lazy() {
   }
 }
 
-uniqLazy.lazy = lazy
+uniqLazy.lazy = _lazy
 
 export default uniqLazy

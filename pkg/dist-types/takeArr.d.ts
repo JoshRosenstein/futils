@@ -1,4 +1,3 @@
-import { LazyResult } from './_internal/_reduceLazy';
 export declare type InferType<V> = V extends void ? any : V;
 /**
  * Returns the first `n` elements of `array`.
@@ -14,7 +13,7 @@ export declare type InferType<V> = V extends void ? any : V;
  */
 export declare function takeArr<T>(array: T[], n: number): T[];
 export declare namespace takeArr {
-    var lazy: typeof lazy;
+    var lazy: typeof takeArr;
 }
 /**
  * Returns the first `n` elements of `array`.
@@ -29,7 +28,6 @@ export declare namespace takeArr {
  */
 export declare function takeArr(n: number): <T>(array: T[]) => T[];
 export declare namespace takeArr {
-    var lazy: typeof lazy;
+    var lazy: typeof takeArr;
 }
-declare function lazy<T>(n: number): (value: T) => LazyResult<T>;
 export default takeArr;

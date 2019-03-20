@@ -2,12 +2,12 @@
 import { purry } from './purry';
 import { _reduceLazy } from './_internal/_reduceLazy';
 export function takeLazy() {
-    return purry(_takeLazy, arguments, takeLazy.lazy);
+    return purry(_takeLazy, arguments, _lazy);
 }
 function _takeLazy(array, n) {
-    return _reduceLazy(array, takeLazy.lazy(n));
+    return _reduceLazy(array, _lazy(n));
 }
-function lazy(n) {
+function _lazy(n) {
     return (value) => {
         if (n === 0) {
             return {
@@ -30,6 +30,6 @@ function lazy(n) {
         };
     };
 }
-takeLazy.lazy = lazy;
+takeLazy.lazy = _lazy;
 export default takeLazy;
 //# sourceMappingURL=takeLazy.js.map

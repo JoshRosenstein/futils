@@ -31,14 +31,14 @@ export function takeLazy<T>(array: T[], n: number): T[]
 export function takeLazy<T>(n: number): (array: T[]) => T[]
 
 export function takeLazy() {
-  return purry(_takeLazy, arguments, takeLazy.lazy)
+  return purry(_takeLazy, arguments, _lazy)
 }
 
 function _takeLazy<T>(array: T[], n: number) {
-  return _reduceLazy(array, takeLazy.lazy(n))
+  return _reduceLazy(array, _lazy(n))
 }
 
-function lazy<T>(n: number) {
+function _lazy<T>(n: number) {
   return (value: T): LazyResult<T> => {
     if (n === 0) {
       return {
@@ -62,6 +62,6 @@ function lazy<T>(n: number) {
   }
 }
 
-takeLazy.lazy = lazy
+takeLazy.lazy = _lazy
 
 export default takeLazy

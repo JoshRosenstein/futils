@@ -13,11 +13,11 @@
   "sideEffects": false,
   "scripts": {
     "pika:fix": "node ./scripts/pathPika.js",
-    "pika:build": "yarn pika:fix && yarn pack build",
+    "pika:build": "pika-pack build",
     "pika:publish": "yarn pika:fix && pika-pack publish --no-cleanup",
     "pika:next": "pika-pack publish --any-branch --no-cleanup",
     "pika:dry": "pika-pack publish --any-branch --no-cleanup --no-publish",
-    "commit": "git-cz",
+    "commit": "git add . && git-cz",
     "travis": "yarn run test:coverage && yarn run build",
     "build": "node scripts/create-export.js && yarn pika:build",
     "clean": "rimraf es/* lib/* dist/**/*.js coverage/* ",
