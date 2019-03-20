@@ -8,9 +8,10 @@
   },
   "exclude": [
     "node_modules",
-    "bower_components",
-    "jspm_packages",
-    "tmp",
+    "**/*.flow.js",
+    "types",
+    "type-definitions",
+    "type-definitions/flow-test",
     "temp"
   ]
 }

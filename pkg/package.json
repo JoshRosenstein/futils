@@ -1,0 +1,73 @@
+{
+  "name": "@roseys/futils",
+  "description": "My JavaScript utils library",
+  "version": "2.0.2-2",
+  "license": "MIT",
+  "source": "dist-src/index.js",
+  "types": "dist-types/index.d.ts",
+  "main": "dist-node/index.js",
+  "module": "dist-web/index.js",
+  "pika": true,
+  "sideEffects": false,
+  "keywords": [
+    "ramda",
+    "functional",
+    "js"
+  ],
+  "files": [
+    "dist-*/",
+    "assets/",
+    "bin/"
+  ],
+  "homepage": "https://github.com/JoshRosenstein/futils#README",
+  "bugs": {
+    "url": "https://github.com/JoshRosenstein/futils/issues"
+  },
+  "dependencies": {
+    "typed-is": "^1.0.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.0",
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.3.3",
+    "@metahub/cz-conventional-commit": "^3.0.2",
+    "@pika/pack": "^0.3.5",
+    "@pika/plugin-build-node": "^0.3.14",
+    "@pika/plugin-build-types": "^0.3.14",
+    "@pika/plugin-build-web": "^0.3.14",
+    "@pika/plugin-standard-pkg": "^0.3.14",
+    "@pika/plugin-ts-standard-pkg": "^0.3.14",
+    "@roseys/art": "^1.0.1",
+    "@roseys/eslint-config": "^1.0.2",
+    "@roseys/jest-preset": "^1.0.1",
+    "@types/jest": "^24.0.11",
+    "@typescript-eslint/eslint-plugin": "^1.4.2",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "^24.4.0",
+    "babel-plugin-module-resolver": "^3.1.1",
+    "babel-plugin-transform-module-imports": "^1.0.0",
+    "codecov": "^3.0.0",
+    "commander": "^2.19.0",
+    "commitizen": "^3.0.4",
+    "coveralls": "3.0.1",
+    "cross-env": "^5.1.6",
+    "cz-cli": "^1.0.0",
+    "cz-conventional-kawaii": "^1.0.1",
+    "debug": "^4.1.0",
+    "deprecate": "^1.1.0",
+    "eslint": "^5.7.0",
+    "fs-extra": "^7.0.1",
+    "globby": "8.0.1",
+    "jest": "^24.4.0",
+    "jest-circus": "^24.5.0",
+    "marked": "^0.6.1",
+    "typedoc": "^0.14.2",
+    "typescript": "^3.3.3333",
+    "typescript-test-utils": "^1.2.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

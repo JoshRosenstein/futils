@@ -1,0 +1,1 @@
+{"version":3,"file":"isNilOrEmpty.js","sourceRoot":"","sources":["../../src/isNilOrEmpty.ts"],"names":[],"mappings":"AAAA,OAAO,EAAC,KAAK,EAAE,OAAO,EAAC,MAAM,UAAU,CAAA;AAEvC,MAAM,CAAC,MAAM,aAAa,GAAG,KAAK,CAAC,EAAE,CAAC,KAAK,CAAC,KAAK,CAAC,IAAI,OAAO,CAAC,KAAK,CAAC,CAAA;AACpE,MAAM,CAAC,MAAM,YAAY,GAAG,aAAa,CAAA;AAEzC,eAAe,YAAY,CAAA"}

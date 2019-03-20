@@ -1,0 +1,35 @@
+{
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "**/*.test.ts", "**/*.spec.ts"],
+  // Do not compile with TSC.
+
+  "compilerOptions": {
+    /* Basic Options */
+    "target": "es2018" /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017','ES2018' or 'ESNEXT'. */,
+    // Use esnext for pika pkg else commonjs modules.
+    "module": "esnext" /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */,
+    // Allow to use node modules.
+    "moduleResolution": "node",
+    // Do not compile with TSC.
+    // "noEmit": true,
+    // Use dom and latest ES typings.
+    "lib": ["dom", "es2018"],
+    // Use for debugging and error tracking.
+    "sourceMap": true,
+
+    "outDir": "./dist" /* Redirect output structure to the directory. */,
+    "rootDir": "./src" /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */,
+
+    // Strict type checks.
+    "strict": true /* Enable all strict type-checking options. */,
+    //  Change this after finishing converting all ts
+    "noImplicitAny": false,
+
+    // Dead code checks.
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    // Possible bug checks.
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}

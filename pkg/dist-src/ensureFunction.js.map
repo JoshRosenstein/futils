@@ -1,0 +1,1 @@
+{"version":3,"file":"ensureFunction.js","sourceRoot":"","sources":["../../src/ensureFunction.ts"],"names":[],"mappings":"AAAA,OAAO,EAAC,WAAW,EAAC,MAAM,cAAc,CAAA;AAExC,MAAM,CAAC,MAAM,eAAe,GAAG,CAAC,CAAC,EAAE,CAAC,CAAC,WAAW,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,CAAA;AAClE,MAAM,CAAC,MAAM,cAAc,GAAG,eAAe,CAAA;AAC7C,eAAe,cAAc,CAAA"}

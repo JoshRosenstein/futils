@@ -1,111 +1,57 @@
-const presets = [
-  '@babel/preset-env',
-  '@babel/preset-react',
-  '@babel/preset-flow',
-]
-const resolver = [
-  'module-resolver',
-  {
-    alias: {
-      '^types$': './types',
-    },
-    cwd: 'packagejson',
-  },
-]
-const assign = Object.assign
+'use strict'
 
-const esPresents = assign(presets, [
-  [
-    '@babel/preset-env',
-    {
-      modules: false,
-    },
-  ],
-])
+module.exports = api => {
+  const isTest = api.env('test')
 
-module.exports = function babelConfig(api) {
-  api.cache(true)
-  return {
-    presets: esPresents,
-    plugins: [resolver],
-    retainLines: true,
-    env: {
-      test: {
-        presets: [
-          '@babel/preset-env',
-          '@babel/preset-react',
-          '@babel/preset-flow',
-        ],
-        retainLines: true,
-      },
-      cjs: {
-        presets: [
-          '@babel/preset-env',
-          '@babel/preset-react',
-          '@babel/preset-flow',
-        ],
-        retainLines: false,
-        comments: false,
-        plugins: [
-          [
-            '@babel/transform-modules-commonjs',
-            {noInterop: true, strict: true},
-          ],
-        ],
-      },
-      es: {
-        presets: esPresents,
-        retainLines: false,
-        comments: false,
-      },
-      docz: {
-        presets: presets,
-      },
-    },
+  api.cache(() => JSON.stringify({isTest}))
+
+  const presets = ['@babel/react', '@babel/typescript']
+  const plugins = []
+
+  if (isTest) {
+    presets.push(['@babel/env', {targets: {node: true}}])
+  } else {
+    // plugins.push([
+    //   ('transform-module-imports',
+    //   {
+    //     'typed-is': {
+    //       // eslint-disable-next-line no-template-curly-in-string
+    //       transform: 'typed-is/lib/${member}',
+    //       preventFullImport: true,
+    //     },
+    //   }),
+    // ])
   }
+
+  return {presets, plugins}
 }
 
-// module.exports = function babelConfig(api) {
-//   api.cache(true)
+// module.exports = api => {
+//   const isTest = api.env('test')
+
+//   api.cache(() => JSON.stringify({isTest}))
+
+//   if (!isTest) {
+//     return {}
+//   }
+
 //   return {
-//     presets: [
-//       [
-//         '@babel/preset-env',
-//         {
-//           modules: false,
-//         },
-//       ],
-//       '@babel/preset-react',
-//       '@babel/preset-flow',
-//     ],
+//     compact: false,
 //     plugins: [
+//       '@babel/plugin-proposal-class-properties',
 //       [
-//         'module-resolver',
+//         'transform-module-imports',
 //         {
-//           alias: {
-//             '^types$': './types',
+//           'typed-is': {
+//             transform: 'typed-is/lib/${member}',
+//             preventFullImport: true,
 //           },
-//           cwd: 'packagejson',
 //         },
 //       ],
 //     ],
-//     retainLines: true,
-//     env: {
-//       test: {
-//         presets: [
-//           '@babel/preset-env',
-//           '@babel/preset-react',
-//           '@babel/preset-flow',
-//         ],
-//         retainLines: true,
-//       },
-//       docz: {
-//         presets: [
-//           '@babel/preset-env',
-//           '@babel/preset-react',
-//           '@babel/preset-flow',
-//         ],
-//       },
-//     },
+//     presets: [
+//       '@babel/preset-typescript',
+//       ['@babel/preset-env', {targets: {node: true}}],
+//     ],
 //   }
 // }

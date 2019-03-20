@@ -1,0 +1,1 @@
+{"version":3,"file":"cleanWhitespace.js","sourceRoot":"","sources":["../../src/cleanWhitespace.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,MAAM,gBAAgB,GAAG,GAAG,CAAC,EAAE,CAAC,GAAG,CAAC,OAAO,CAAC,OAAO,EAAE,EAAE,CAAC,CAAC,IAAI,EAAE,CAAA;AACtE,MAAM,CAAC,MAAM,eAAe,GAAG,gBAAgB,CAAA;AAE/C,eAAe,eAAe,CAAA"}
