@@ -1,6 +1,6 @@
 {
   "name": "@roseys/futils",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "modulename": "futils",
   "description": "My JavaScript utils library",
   "main": "dist/commonjs/index.js",
