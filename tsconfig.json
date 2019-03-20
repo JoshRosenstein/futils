@@ -11,7 +11,7 @@
     // Allow to use node modules.
     "moduleResolution": "node",
     // Do not compile with TSC.
-    "noEmit": true,
+    // "noEmit": true,
     // Use dom and latest ES typings.
     "lib": ["dom", "es2018"],
     // Use for debugging and error tracking.

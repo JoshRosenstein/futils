@@ -18,7 +18,7 @@
     "pika:dry": "pika-pack publish --any-branch --no-cleanup --no-publish",
     "commit": "git-cz",
     "travis": "yarn run test:coverage && yarn run build",
-    "build": "yarn pika:build",
+    "build": "node scripts/create-export.js && yarn pika:build",
     "clean": "rimraf es/* lib/* dist/**/*.js coverage/* ",
     "clean:modules": "rimraf node_modules/*",
     "test": "jest -o",
@@ -64,6 +64,7 @@
     "@roseys/eslint-config": "^1.0.2",
     "@roseys/jest-preset": "^1.0.1",
     "@types/jest": "^24.0.11",
+    "@typescript-eslint/eslint-plugin": "^1.4.2",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^24.4.0",
     "babel-plugin-module-resolver": "^3.1.1",
@@ -117,6 +118,12 @@
     "pipeline": [
       [
         "@pika/plugin-ts-standard-pkg"
+      ],
+      [
+        "@pika/plugin-build-node"
+      ],
+      [
+        "@pika/plugin-build-web"
       ]
     ]
   }
