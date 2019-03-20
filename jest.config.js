@@ -1,10 +1,14 @@
+'use strict'
+
 module.exports = {
-  transform: {
-    //  '\\.css$': '<rootDir>/test/styleTransform.js',
-    '^.+\\.js?$': 'babel-jest',
-    '\\.ts$': 'ts-jest',
-  },
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
+  preset: '@roseys/jest-preset',
+
+  // transform: {
+  //   //  '\\.css$': '<rootDir>/test/styleTransform.js',
+  //   '^.+\\.js?$': 'babel-jest',
+  //   '\\.ts$': 'ts-jest',
+  // },
+  // moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   testMatch: [
     '**/__tests__/**/*.js?(x)',
     '**/?(*.)+(spec).js?(x)',
@@ -12,11 +16,12 @@ module.exports = {
     '**/?(*.)+(spec).ts?(x)',
   ],
   testPathIgnorePatterns: [
+    '/pkg/',
     '/node_modules/',
     '/__fixtures__/',
     '/__utils__/',
     '/es/',
     '/lib/',
   ],
-  coveragePathIgnorePatterns: ['/node_modules/'],
+  // coveragePathIgnorePatterns: ['/node_modules/'],
 }

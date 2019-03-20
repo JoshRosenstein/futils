@@ -1,16 +1,14 @@
 import {curry2_} from './_internal/curry2_'
 
 export type And_ = <
-  T extends {and?: ((...a: any[]) => any)} | number | boolean | string | null
+  T extends {and?: (...a: any[]) => any} | number | boolean | string | null
 >(
   fn1: T,
   val2: any,
 ) => boolean
 
 export type And = And_ &
-  (<
-    T extends {and?: ((...a: any[]) => any)} | number | boolean | string | null
-  >(
+  (<T extends {and?: (...a: any[]) => any} | number | boolean | string | null>(
     fn1: T,
   ) => (val2: any) => boolean)
 

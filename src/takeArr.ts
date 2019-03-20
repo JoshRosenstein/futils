@@ -1,9 +1,6 @@
 import {purry} from './purry'
 import {_reduceLazy, LazyResult} from './_internal/_reduceLazy'
 
-type Extract<T, U> = T extends U ? T : never
-//export type InferType=NonNullable
-
 export type InferType<V> = V extends void ? any : V
 //export type InferType<T> = T extends (infer U) ? (U extends [never] ? T : T) : T
 // https://github.com/remeda/remeda/blob/master/src/take.ts

@@ -1,4 +1,3 @@
-import {curry2_} from './_internal/curry2_'
 import {purry} from './purry'
 
 /**

@@ -27,7 +27,7 @@ describe('all', () => {
     expect(allGt5([6, 7, 8, 9])).toBeTruthy()
   })
   it('testObj', () => {
-    const isBiggerThanZero = (x) => x > 0
+    const isBiggerThanZero = x => x > 0
 
     expect(all(isBiggerThanZero, {a: 1, b: 1, c: 1})).toBe(true)
     expect(all(isBiggerThanZero, {a: 0, b: 1, c: 1})).toBe(false)

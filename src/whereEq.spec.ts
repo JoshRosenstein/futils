@@ -1,4 +1,4 @@
-import whereEq from './whereEq'
+import {whereEq} from './whereEq'
 
 describe('whereEq', () => {
   it('returns true if the test object satisfies the spec', () => {
@@ -40,26 +40,5 @@ describe('whereEq', () => {
 
   it('reports true when the object equals the spec', () => {
     expect(whereEq({a: 1}, {a: 1})).toEqual(true)
-  })
-
-  class Parent {
-    y = 6
-    a: any
-    x: any
-  }
-  Parent.prototype.a = undefined
-  Parent.prototype.x = 5
-  const parent = new Parent()
-
-  it('matches inherited props', () => {
-    expect(whereEq({y: 6}, parent)).toEqual(true)
-    expect(whereEq({x: 5}, parent)).toEqual(true)
-    expect(whereEq({x: 5, y: 6}, parent)).toEqual(true)
-    expect(whereEq({x: 4, y: 6}, parent)).toEqual(false)
-  })
-
-  it('does not match inherited spec', () => {
-    expect(whereEq(parent, {y: 6})).toEqual(true)
-    expect(whereEq(parent, {x: 5})).toEqual(false)
   })
 })

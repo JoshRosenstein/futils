@@ -38,10 +38,14 @@ type Pathable<
   : {[K in AllKeys<T>]: TypesForKey<T, K>}
 
 type AllKeys<T> = T extends infer I
-  ? I extends string | number ? never : keyof I
+  ? I extends string | number
+    ? never
+    : keyof I
   : never
 type TypesForKey<T, K extends string | number> = T extends infer I
-  ? K extends keyof I ? I[K] : never
+  ? K extends keyof I
+    ? I[K]
+    : never
   : never
 
 /**
@@ -159,34 +163,3 @@ function _pathObj(object: any, path: any[]): any {
   }
   return current
 }
-
-interface SampleType {
-  a: {
-    b: {
-      c: number[]
-      d?: number
-    }
-    z?: number
-  }
-  d?: {
-    c: number[]
-    d?: number
-  }
-  x?: number
-  y?: number
-}
-
-const obj: SampleType = {
-  a: {
-    b: {
-      c: [1],
-    },
-  },
-  y: 10,
-}
-const e = pathObj(obj, ['x'])
-type MaybeSampleType = SampleType | undefined
-export const ttt = pathObj(undefined as MaybeSampleType, ['a', 'b', 'c'])
-
-export const t = pathObj(obj, ['d'])
-//export const t2 = pathObj(['a', 'b'])(obj)

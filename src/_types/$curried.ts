@@ -3,9 +3,8 @@ export interface Curried1<A1, R> {
   (a1: A1, ...args: any[]): R;
 }
 
-export interface Curried2<A1, A2, R> {
-  (): Curried2<A1, A2, R>;
-  (a1: A1): Curried1<A2, R>;
+export interface Curried2<A1, A2, R>
+{(): Curried2<A1, A2, R>;(a1: A1): Curried1<A2, R>;
   (a1: A1, a2: A2, ...args: any[]): R;
 }
 

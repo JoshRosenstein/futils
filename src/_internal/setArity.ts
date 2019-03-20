@@ -7,39 +7,39 @@ export default function _setArity(arity, fn) {
         return fn(...arguments)
       }
     case 1:
-      return function arity1(a) {
+      return function arity1(_a) {
         return fn(...arguments)
       }
     case 2:
-      return function arity2(a, b) {
+      return function arity2(_a, _b) {
         return fn(...arguments)
       }
     case 3:
-      return function arity3(a, b, c) {
+      return function arity3(_a, _b, _c) {
         return fn(...arguments)
       }
     case 4:
-      return function arity4(a, b, c, d) {
+      return function arity4(_a, _b, _c, _d) {
         return fn(...arguments)
       }
     case 5:
-      return function arity5(a, b, c, d, e) {
+      return function arity5(_a, _b, _c, _d, _e) {
         return fn(...arguments)
       }
     case 6:
-      return function arity6(a, b, c, d, e, f) {
+      return function arity6(_a, _b, _c, _d, _e, _f) {
         return fn(...arguments)
       }
     case 7:
-      return function arity7(a, b, c, d, e, f, g) {
+      return function arity7(_a, _b, _c, _d, _e, _f, _g) {
         return fn(...arguments)
       }
     case 8:
-      return function arity8(a, b, c, d, e, f, g, h) {
+      return function arity8(_a, _b, _c, _d, _e, _f, _g, _h) {
         return fn(...arguments)
       }
     case 9:
-      return function arity9(a, b, c, d, e, f, g, h, i) {
+      return function arity9(_a, _b, _c, _d, _e, _f, _g, _h, _i) {
         return fn(...arguments)
       }
     default:

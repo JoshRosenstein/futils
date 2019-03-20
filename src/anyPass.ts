@@ -14,7 +14,7 @@ type AnyPass = (<T>(
 export const anyPass_: AnyPass_ = (fns, ...args) =>
   reduceWhile_(
     acc => acc === false,
-    (acc, fn) => fn(...args),
+    (_, fn) => fn(...args),
     false,
     toArray(fns),
   )

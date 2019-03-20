@@ -15,7 +15,7 @@ export type Any = Any_ &
 export const any_: Any_ = (handlerFn, functor) =>
   reduceWhile_(
     acc => acc === false,
-    (acc, value, key) => handlerFn(value, key),
+    (_, value, key) => handlerFn(value, key),
     false,
     functor,
   )

@@ -14,7 +14,7 @@ const fromMapping = {
   String: (key, value, functor) =>
     `${functor.slice(0, key)}${value}${functor.slice(key)}`,
   Map: (key, value, functor) => new Map([...functor, [key, value]]),
-  Set: (key, value, functor) => new Set([...functor, value]),
+  Set: (_, value, functor) => new Set([...functor, value]),
 }
 
 export const attach_ = (key, value, functor) => {

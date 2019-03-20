@@ -6,15 +6,19 @@ export default function(exp) {
   }
 
   let parts = exp.match(/(.*)\s*[=-]>\s*(.*)/)
-  parts.shift()
-
+  if (parts) {
+    parts.shift()
+  }
+  //@ts-ignore
   const params = parts
     .shift()
     .replace(/^\s*|\s(?=\s)|\s*$|,/g, '')
     .split(' ')
+  //@ts-ignore
   const body = parts.shift()
-
+  //@ts-ignore
   parts = (!/\s*return\s+/.test(body) ? 'return ' : '') + body
+  //@ts-ignore
   params.push(parts)
 
   return Function.apply({}, params)

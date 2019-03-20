@@ -1,8 +1,8 @@
 // from https://github.com/remeda/remeda/blob/master/src/_reduceLazy.ts
 
-export type LazyResult<T> = LazyEmpty<T> | LazyNext<T> | LazyMany<T>
+export type LazyResult<T> = LazyEmpty | LazyNext<T> | LazyMany<T>
 
-interface LazyEmpty<T> {
+interface LazyEmpty {
   done: boolean
   hasNext: false
   hasMany?: false | undefined

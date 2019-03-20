@@ -4,7 +4,7 @@ import {curry2_} from './_internal/curry2_'
 export const all_ = (fn, functor) =>
   reduceWhile_(
     acc => acc === true,
-    (acc, value, key) => fn(value, key),
+    (_, value, key) => fn(value, key),
     true,
     functor,
   )

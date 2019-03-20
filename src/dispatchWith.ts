@@ -2,9 +2,6 @@ import {curryN_} from './curryN'
 import maxArgs_ from './_internal/maxArgs_'
 import {reduceWhile_} from './reduceWhile'
 import toArray from './toArray'
-//// TODO: Fix
-const CONTINUE = true
-const BRK = false
 
 export const dispatchWith_ = (pred, fns, ...args) =>
   reduceWhile_(
@@ -15,7 +12,7 @@ export const dispatchWith_ = (pred, fns, ...args) =>
       return pred(nextFn(...args))
     },
 
-    (acc, fn, idx) => fn(...args),
+    (_acc, fn, _idx) => fn(...args),
 
     undefined,
     toArray(fns),
