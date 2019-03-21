@@ -3,9 +3,10 @@
   "version": "2.1.1",
   "modulename": "futils",
   "description": "My JavaScript utils library",
-  "main": "dist/commonjs/index.js",
-  "module": "dist/es/index.js",
-  "jsnext:main": "dist/es/index.js",
+  "source": "pkg/dist-src/index.js",
+  "types": "pkg/dist-types/index.d.ts",
+  "main": "pkg/dist-node/index.js",
+  "module": "dist-web/index.js",
   "files": [
     "dist",
     "README.md"
@@ -28,8 +29,6 @@
     "test:clear": "jest --clearCache",
     "test:watch": "jest --watchAll --runInBand",
     "test:coverage": "jest --coverage",
-    "reinstall": "yarn run clean:modules && yarn",
-    "lint": "eslint src/*.ts",
     "typedoc": "typedoc --options typedoc.ts",
     "gendoc": "cd scripts && ts-node generate",
     "update-docs": "yarn run typedoc && yarn run gendoc"
