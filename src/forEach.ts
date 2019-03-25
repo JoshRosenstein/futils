@@ -9,7 +9,7 @@ export const forEach_ = (fn, functor) => {
 
     return functor
   }
-  return toPairs_(functor).forEach(([key, value]) => {
+  return (toPairs_(functor) as any[]).forEach(([key, value]) => {
     fn(value, key)
   })
 }
