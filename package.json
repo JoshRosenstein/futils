@@ -20,6 +20,7 @@
     "pika:dry": "pika-pack publish --any-branch --no-cleanup --no-publish",
     "commit": "git add . && git-cz",
     "travis": "yarn run test:coverage && yarn run build",
+    "generate:index": "node scripts/create-export.js",
     "build": "node scripts/create-export.js && yarn pika:build",
     "clean": "rimraf es/* lib/* dist/**/*.js coverage/* ",
     "clean:modules": "rimraf node_modules/*",

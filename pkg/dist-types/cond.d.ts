@@ -34,4 +34,3 @@ export declare function cond<T1, T2, T3, T4, T5, R>(fns: Array<[(v1: T1, v2: T2,
 export declare function cond<T1, T2, T3, T4, T5, T6, R>(fns: Array<[(v1: T1, v2: T2, v3: T3, v4: T4, v5: T5, v6: T6) => boolean, (v1: T1, v2: T2, v3: T3, v4: T4, v5: T5, v6: T6) => R]>): (v1: T1, v2: T2, v3: T3, v4: T4, v5: T5, v6: T6) => R;
 export declare function cond(fns: any): (...args: any[]) => any;
 export declare function cond_<T1, R>(data: T1, conds: Array<[(v1: T1) => boolean, (v1: T1) => R]>): any;
-export default cond;

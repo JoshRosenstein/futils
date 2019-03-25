@@ -9,5 +9,4 @@ export function cond_(data, conds) {
             : cond_(data, conds.slice(1))
         : undefined;
 }
-export default cond;
 //# sourceMappingURL=cond.js.map
