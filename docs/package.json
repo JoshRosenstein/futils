@@ -14,7 +14,7 @@
     "history": "4.7.2",
     "json-stringify-pretty-compact": "^1.2.0",
     "lodash.debounce": "4.0.8",
-    "prop-types": "15.6.2",
+    "prop-types": "15.7.2",
     "ramda": "0.25.0",
     "react": "16.7",
     "react-codemirror": "1.0.0",
