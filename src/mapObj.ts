@@ -11,10 +11,10 @@
  * @data_first
  * @category Object
  */
-export function mapObj<T, S extends {[x: string]: any} = {[x: string]: any}>(
-  object: T,
-  fn: (value: T[keyof T], key: keyof T) => any,
-): S
+export function mapObj<
+  T extends {[x: string]: any},
+  S extends {[x: string]: any} = {[x: string]: any}
+>(object: T, fn: (value: T[keyof T], key: keyof T) => any): S
 
 /**
  * Maps keys of `object` and keeps the same values.
@@ -26,9 +26,10 @@ export function mapObj<T, S extends {[x: string]: any} = {[x: string]: any}>(
  * @data_last
  * @category Object
  */
-export function mapObj<T, S extends {[x: string]: any} = {[x: string]: any}>(
-  fn: (value: T[keyof T], key: keyof T) => any,
-): (object: T) => S
+export function mapObj<
+  T extends {[x: string]: any},
+  S extends {[x: string]: any} = {[x: string]: any}
+>(fn: (value: T[keyof T], key: keyof T) => any): (object: T) => S
 
 export function mapObj(arg1: any, arg2?: any): any {
   if (arguments.length === 1) {

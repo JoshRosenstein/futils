@@ -2,7 +2,7 @@ import pluck from './pluck'
 
 describe('pluck', () => {
   test('Object', () => {
-     const e= pluck<number>('val', {a: {val: 3}, b: {val: 5}})
+     const e= pluck('val', {a: {val: 3}, b: {val: 5}})
     expect(e).toEqual({
       a: 3,
       b: 5,
