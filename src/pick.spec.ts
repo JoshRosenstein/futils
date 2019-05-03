@@ -2,13 +2,14 @@ import pick from './pick'
 
 describe('Pick', () => {
   test('pick with present keys', () => {
+    const e= pick(['alpha', 'beta', 'delta'],{
+      alpha: '1',
+      beta: '2',
+      delta: '3',
+      feta: '0',
+    })
     expect(
-      pick(['alpha', 'beta', 'delta'])({
-        alpha: '1',
-        beta: '2',
-        delta: '3',
-        feta: '0',
-      }),
+     e
     ).toEqual({
       alpha: '1',
       beta: '2',

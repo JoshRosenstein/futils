@@ -6,6 +6,12 @@ import {empty_} from './empty'
 import {isNil_} from './isNil'
 import {splitWhenNoSpace_} from './_internal/splitWhenNoSpace_'
 
+
+export type PickT={
+  <T, K extends string>(names: Array<K>, obj: T): {[P in K]:P extends keyof T? T[P]:never }
+  <K extends string>(names: Array<K>): <T>(obj: T) => Pick<T, Exclude<keyof T, Exclude<keyof T, K>>>;
+}
+
 export const pick_ = (keys, obj) =>
   reduceValues_(
     (acc, key) => {
@@ -15,5 +21,10 @@ export const pick_ = (keys, obj) =>
     empty_(obj),
     splitWhenNoSpace_(keys, ','),
   )
-export const pick = curry2_(pick_)
+
+/**
+* Returns a partial copy of an object containing only the keys specified.  If the key does not exist, the
+* property is ignored.
+*/
+export const pick:PickT = curry2_(pick_)
 export default pick
