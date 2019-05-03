@@ -22,7 +22,7 @@
     "react-emotion": "9.2.6",
     "react-powerplug": "1.0.0-rc.1",
     "react-redux": "5.0.7",
-    "react-scripts": "1.1.4",
+    "react-scripts": "1.1.5",
     "redux": "4.0.0",
     "redux-logger": "3.0.6",
     "scriptjs": "2.5.8"
