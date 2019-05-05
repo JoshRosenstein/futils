@@ -13,7 +13,6 @@ docs/build/
 notes/
 
 package-lock.json
-yarn.lock
 lerna-debug.log
 npm-debug.log*
 yarn-debug.log*
