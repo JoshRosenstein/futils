@@ -1,6 +1,6 @@
-import {isNil} from 'typed-is/lib/isNil'
-const isNil_ = isNil
+import { isNil } from 'typed-is';
+const isNil_ = isNil;
 
-export {isNil, isNil_}
+export { isNil, isNil_ };
 
-export default isNil
+export default isNil;

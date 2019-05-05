@@ -12,9 +12,9 @@
  * @category Object
  */
 export function mapObj<
-  T extends {[x: string]: any},
-  S extends {[x: string]: any} = {[x: string]: any}
->(object: T, fn: (value: T[keyof T], key: keyof T) => any): S
+  T extends { [x: string]: any },
+  S extends { [x: string]: any } = { [x: string]: any }
+>(object: T, fn: (value: T[keyof T], key: keyof T) => any): S;
 
 /**
  * Maps keys of `object` and keeps the same values.
@@ -27,15 +27,15 @@ export function mapObj<
  * @category Object
  */
 export function mapObj<
-  T extends {[x: string]: any},
-  S extends {[x: string]: any} = {[x: string]: any}
->(fn: (value: T[keyof T], key: keyof T) => any): (object: T) => S
+  T extends { [x: string]: any },
+  S extends { [x: string]: any } = { [x: string]: any }
+>(fn: (value: T[keyof T], key: keyof T) => any): (object: T) => S;
 
 export function mapObj(arg1: any, arg2?: any): any {
   if (arguments.length === 1) {
-    return (data: any) => _mapObj(data, arg1)
+    return (data: any) => _mapObj(data, arg1);
   }
-  return _mapObj(arg1, arg2)
+  return _mapObj(arg1, arg2);
 }
 
 function _mapObj(obj: any, fn: (value: any, key: string) => any) {
@@ -45,7 +45,7 @@ function _mapObj(obj: any, fn: (value: any, key: string) => any) {
       ...fn(obj[key], key),
     }),
     {} as any,
-  )
+  );
 }
 
-export default mapObj
+export default mapObj;

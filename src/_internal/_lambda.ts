@@ -1,25 +1,25 @@
-import {isString} from 'typed-is'
+import { isString } from 'typed-is';
 
 export default function(exp) {
   if (!isString(exp)) {
-    return
+    return;
   }
 
-  let parts = exp.match(/(.*)\s*[=-]>\s*(.*)/)
+  let parts = exp.match(/(.*)\s*[=-]>\s*(.*)/);
   if (parts) {
-    parts.shift()
+    parts.shift();
   }
   //@ts-ignore
   const params = parts
     .shift()
     .replace(/^\s*|\s(?=\s)|\s*$|,/g, '')
-    .split(' ')
+    .split(' ');
   //@ts-ignore
-  const body = parts.shift()
+  const body = parts.shift();
   //@ts-ignore
-  parts = (!/\s*return\s+/.test(body) ? 'return ' : '') + body
+  parts = (!/\s*return\s+/.test(body) ? 'return ' : '') + body;
   //@ts-ignore
-  params.push(parts)
+  params.push(parts);
 
-  return Function.apply({}, params)
+  return Function.apply({}, params);
 }

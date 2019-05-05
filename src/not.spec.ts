@@ -1,14 +1,14 @@
-import not from './not'
+import not from './not';
 
 describe('not', () => {
   test('should return inverted boolean', () => {
-    expect(not(true)).toBe(false)
-    expect(not(false)).toBe(true)
-  })
+    expect(not(true)).toBe(false);
+    expect(not(false)).toBe(true);
+  });
 
   test('should return bool for another data', () => {
-    expect(not(0)).toBe(true)
-    expect(not([])).toBe(false)
-    expect(not({})).toBe(false)
-  })
-})
+    expect(not(0)).toBe(true);
+    expect(not([])).toBe(false);
+    expect(not({})).toBe(false);
+  });
+});

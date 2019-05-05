@@ -1,4 +1,4 @@
-import {isPopulated} from './isPopulated'
+import { isPopulated } from './isPopulated';
 
 const data = [
   [[1, 2, 3], true],
@@ -12,8 +12,8 @@ const data = [
   [true, true],
   [0, true],
   [NaN, true],
-]
+];
 
 test.each(data)('%# %p', (input, expected) => {
-  expect(isPopulated(input)).toEqual(expected)
-})
+  expect(isPopulated(input)).toEqual(expected);
+});

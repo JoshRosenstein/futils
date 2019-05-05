@@ -1,4 +1,10 @@
-import {purry} from './purry'
+import { purry } from './purry';
+
+export function concat_<T, K>(a: T[], b: K[]): (T | K)[];
+export function concat_(a: string, b: string): string;
+export function concat_(a: any, b: any) {
+  return a.concat(b);
+}
 
 /**
  * Combines two arrays or two strings.
@@ -11,8 +17,8 @@ import {purry} from './purry'
  * @data_first
  * @category Array
  */
-export function concat<T, K>(a: T[], b: K[]): Array<T | K>
-export function concat(a: string, b: string): string
+export function concat<T, K>(a: T[], b: K[]): (T | K)[];
+export function concat(a: string, b: string): string;
 /**
  * Combines two arrays.
  * @param b the second array
@@ -24,13 +30,7 @@ export function concat(a: string, b: string): string
  * @category Array
  */
 export function concat() {
-  return purry(concat_, arguments)
+  return purry(concat_, arguments);
 }
 
-export default concat
-
-export function concat_<T, K>(a: T[], b: K[]): Array<T | K>
-export function concat_(a: string, b: string): string
-export function concat_(a: any, b: any) {
-  return a.concat(b)
-}
+export default concat;

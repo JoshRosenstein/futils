@@ -1,23 +1,23 @@
-import {curry2_} from './_internal/curry2_'
-import {mergeDeepRight_} from './mergeDeepRight'
-import {reduceValues_} from './reduceValues'
-import {empty_} from './empty'
-import {of_} from './of'
-import {objOf_} from './objOf'
+import { curry2_ } from './_internal/curry2_';
+import { empty_ } from './empty';
+import { mergeDeepRight_ } from './mergeDeepRight';
+import { objOf_ } from './objOf';
+import { of_ } from './of';
+import { reduceValues_ } from './reduceValues';
 
 export const groupBy_ = (fn, list) =>
   reduceValues_(
     (accumulated, value) => {
-      const key = fn(value)
+      const key = fn(value);
       return key
         ? mergeDeepRight_(
             accumulated,
             objOf_(key, of_(null, value, empty_(list))),
           )
-        : accumulated
+        : accumulated;
     },
     {},
     list,
-  )
-export const groupBy = curry2_(groupBy_)
-export default groupBy
+  );
+export const groupBy = curry2_(groupBy_);
+export default groupBy;

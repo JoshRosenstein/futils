@@ -1,5 +1,5 @@
-import {isFalse} from 'typed-is/lib/isFalse'
-const isFalse_ = isFalse
+import { isFalse } from 'typed-is/lib/isFalse';
+const isFalse_ = isFalse;
 
-export {isFalse, isFalse_}
-export default isFalse
+export { isFalse, isFalse_ };
+export default isFalse;

@@ -1,4 +1,4 @@
-import isEmpty from './isEmpty'
+import { isEmpty } from './isEmpty';
 
 const data = [
   [[1, 2, 3], false],
@@ -12,8 +12,8 @@ const data = [
   [null, true],
   [{}, true],
   [undefined, true],
-]
+];
 
 test.each(data)('%# %p', (input, expected) => {
-  expect(isEmpty(input)).toEqual(expected)
-})
+  expect(isEmpty(input)).toEqual(expected);
+});

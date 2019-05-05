@@ -1,12 +1,12 @@
-import {curryN_} from './curryN'
+import { curryN_ } from './curryN';
 export const tryCatch_ = (tryer, catcher) =>
   curryN_(tryer.length, (...args) => {
     try {
-      return tryer(...args)
+      return tryer(...args);
     } catch (e) {
-      return catcher(e, ...args)
+      return catcher(e, ...args);
     }
-  })
+  });
 
-export const tryCatch = curryN_(2, tryCatch_)
-export default tryCatch
+export const tryCatch = curryN_(2, tryCatch_);
+export default tryCatch;

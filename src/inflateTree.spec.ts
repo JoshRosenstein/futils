@@ -1,4 +1,4 @@
-import inflateTree from './inflateTree'
+import { inflateTree } from './inflateTree';
 
 describe('inflateTree', () => {
   it('Works', () => {
@@ -7,7 +7,7 @@ describe('inflateTree', () => {
       'data-profile-age': 93,
       'data-metadata-interval': '10s',
       'data-location': 'http://api.example.com/profiles/24',
-    })
+    });
 
     expect(a).toEqual({
       data: {
@@ -15,9 +15,9 @@ describe('inflateTree', () => {
           name: 'Black Jack',
           age: 93,
         },
-        metadata: {interval: '10s'},
+        metadata: { interval: '10s' },
         location: 'http://api.example.com/profiles/24',
       },
-    })
-  })
-})
+    });
+  });
+});

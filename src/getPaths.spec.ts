@@ -1,4 +1,4 @@
-import getPaths from './getPaths'
+import { getPaths } from './getPaths';
 
 describe('getPaths ', () => {
   test('Works', () => {
@@ -17,7 +17,7 @@ describe('getPaths ', () => {
           },
         },
       ],
-    })
+    });
 
     const result = [
       ['id'],
@@ -25,7 +25,7 @@ describe('getPaths ', () => {
       ['attributes', 'age'],
       ['meta', 'version'],
       ['included'],
-    ]
-    expect(a).toEqual(result)
-  })
-})
+    ];
+    expect(a).toEqual(result);
+  });
+});

@@ -1,4 +1,4 @@
-import {curryN_} from '../curryN'
-export const curry3_ = fn => curryN_(3, fn)
+import { curryN_ } from '../curryN';
+export const curry3_ = (fn) => curryN_(3, fn);
 
-export default curry3_
+export default curry3_;

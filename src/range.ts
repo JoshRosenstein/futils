@@ -1,5 +1,5 @@
 // from https://github.com/remeda/remeda/blob/master/src/range.ts
-import {purry} from './purry'
+import { purry } from './purry';
 
 /**
  * Returns a list of numbers from `start` (inclusive) to `end` (exclusive).
@@ -11,7 +11,7 @@ import {purry} from './purry'
  * @data_first
  * @category Array
  */
-export function range(start: number, end: number): number[]
+export function range(start: number, end: number): number[];
 
 /**
  * Returns a list of numbers from `start` (inclusive) to `end` (exclusive).
@@ -22,18 +22,18 @@ export function range(start: number, end: number): number[]
  * @data_first
  * @category Array
  */
-export function range(end: number): (start: number) => number[]
+export function range(end: number): (start: number) => number[];
 
 export function range() {
-  return purry(range_, arguments)
+  return purry(range_, arguments);
 }
 
 export function range_(start: number, end: number) {
-  const ret: number[] = []
+  const ret: number[] = [];
   for (let i = start; i < end; i++) {
-    ret.push(i)
+    ret.push(i);
   }
-  return ret
+  return ret;
 }
 
-export default range
+export default range;

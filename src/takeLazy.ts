@@ -1,7 +1,7 @@
 // from https://github.com/remeda/remeda/blob/master/src/take.test.ts
 
-import {purry} from './purry'
-import {_reduceLazy, LazyResult} from './_internal/_reduceLazy'
+import { purry } from './purry';
+import { _reduceLazy, LazyResult } from './_internal/_reduceLazy';
 
 /**
  * Returns the first `n` elements of `array`.
@@ -15,7 +15,7 @@ import {_reduceLazy, LazyResult} from './_internal/_reduceLazy'
  * @pipeable
  * @category Array
  */
-export function takeLazy<T>(array: T[], n: number): T[]
+export function takeLazy<T>(array: T[], n: number): T[];
 
 /**
  * Returns the first `n` elements of `array`.
@@ -28,14 +28,14 @@ export function takeLazy<T>(array: T[], n: number): T[]
  * @pipeable
  * @category Array
  */
-export function takeLazy<T>(n: number): (array: T[]) => T[]
+export function takeLazy<T>(n: number): (array: T[]) => T[];
 
 export function takeLazy() {
-  return purry(_takeLazy, arguments, _lazy)
+  return purry(_takeLazy, arguments, _lazy);
 }
 
 function _takeLazy<T>(array: T[], n: number) {
-  return _reduceLazy(array, _lazy(n))
+  return _reduceLazy(array, _lazy(n));
 }
 
 function _lazy<T>(n: number) {
@@ -44,24 +44,24 @@ function _lazy<T>(n: number) {
       return {
         done: true,
         hasNext: false,
-      }
+      };
     }
-    n--
+    n--;
     if (n === 0) {
       return {
         done: true,
         hasNext: true,
         next: value,
-      }
+      };
     }
     return {
       done: false,
       hasNext: true,
       next: value,
-    }
-  }
+    };
+  };
 }
 
-takeLazy.lazy = _lazy
+takeLazy.lazy = _lazy;
 
-export default takeLazy
+export default takeLazy;

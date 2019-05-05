@@ -1,4 +1,4 @@
-import hammer from './hammer'
+import { hammer } from './hammer';
 
 describe('hammer', () => {
   it('works', () => {
@@ -8,11 +8,11 @@ describe('hammer', () => {
         name: 'Kurtis Rainbolt-Greene',
         age: 26,
       },
-    }
+    };
     expect(hammer('attributes', payload)).toEqual({
       id: 1,
       name: 'Kurtis Rainbolt-Greene',
       age: 26,
-    })
-  })
-})
+    });
+  });
+});

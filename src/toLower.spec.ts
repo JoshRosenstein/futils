@@ -1,7 +1,7 @@
-import toLower from './toLower'
+import toLower from './toLower';
 
 describe('toLower', () => {
   it('works', () => {
-    expect(toLower('ABC')).toEqual('abc')
-  })
-})
+    expect(toLower('ABC')).toEqual('abc');
+  });
+});

@@ -1,5 +1,5 @@
 //@ flow
-import toPairs from './toPairs'
+import toPairs from './toPairs';
 const data = [
   [null, []],
   [undefined, []],
@@ -14,10 +14,10 @@ const data = [
   [new Uint8Array([10, 20]), [[0, 10], [1, 20]]],
 
   [{}, []],
-  [{x: 1}, [['x', 1]]],
-  [{x: 1, y: 2, z: 3}, [['x', 1], ['y', 2], ['z', 3]]],
+  [{ x: 1 }, [['x', 1]]],
+  [{ x: 1, y: 2, z: 3 }, [['x', 1], ['y', 2], ['z', 3]]],
   [
-    {y: 'bar', 1: 'x', 2: 'y', 0: 'z', x: 'foo'},
+    { y: 'bar', 1: 'x', 2: 'y', 0: 'z', x: 'foo' },
     [['0', 'z'], ['1', 'x'], ['2', 'y'], ['y', 'bar'], ['x', 'foo']],
   ],
 
@@ -33,7 +33,7 @@ const data = [
 
   [new WeakSet(), []],
   [new WeakMap(), []],
-]
+];
 
 describe('toPairs', () => {
   it('Object', () => {
@@ -41,37 +41,37 @@ describe('toPairs', () => {
       aaa: 'a',
       bbb: 'b',
       ccc: 'c',
-    })
-    const eA = [['aaa', 'a'], ['bbb', 'b'], ['ccc', 'c']]
+    });
+    const eA = [['aaa', 'a'], ['bbb', 'b'], ['ccc', 'c']];
 
-    expect(a).toEqual(eA)
-  })
+    expect(a).toEqual(eA);
+  });
   it('Array', () => {
-    const a = toPairs(['a', 'b', 'c'])
-    const eA = [[0, 'a'], [1, 'b'], [2, 'c']]
+    const a = toPairs(['a', 'b', 'c']);
+    const eA = [[0, 'a'], [1, 'b'], [2, 'c']];
 
-    expect(a).toEqual(eA)
-  })
+    expect(a).toEqual(eA);
+  });
 
   it('Set', () => {
-    const a = toPairs(new Set(['a', 'b', 'c']))
-    const eA = [['a', 'a'], ['b', 'b'], ['c', 'c']]
+    const a = toPairs(new Set(['a', 'b', 'c']));
+    const eA = [['a', 'a'], ['b', 'b'], ['c', 'c']];
 
-    expect(a).toEqual(eA)
-  })
+    expect(a).toEqual(eA);
+  });
 
   it('Map', () => {
-    const a = toPairs(new Map([['aaa', 'a'], ['bbb', 'b'], ['ccc', 'c']]))
-    const eA = [['aaa', 'a'], ['bbb', 'b'], ['ccc', 'c']]
+    const a = toPairs(new Map([['aaa', 'a'], ['bbb', 'b'], ['ccc', 'c']]));
+    const eA = [['aaa', 'a'], ['bbb', 'b'], ['ccc', 'c']];
 
-    expect(a).toEqual(eA)
-  })
+    expect(a).toEqual(eA);
+  });
   it('String', () => {
-    const a = toPairs('abc')
-    const eA = [[0, 'a'], [1, 'b'], [2, 'c']]
+    const a = toPairs('abc');
+    const eA = [[0, 'a'], [1, 'b'], [2, 'c']];
 
-    expect(a).toEqual(eA)
-  })
+    expect(a).toEqual(eA);
+  });
   //   it('Error', () => {
 
   //     function testError() {
@@ -83,6 +83,6 @@ describe('toPairs', () => {
   //   })
 
   test.each(data)('KV.entries(%O) === %o', (value, expected) => {
-    expect(toPairs(value)).toEqual(expected)
-  })
-})
+    expect(toPairs(value)).toEqual(expected);
+  });
+});

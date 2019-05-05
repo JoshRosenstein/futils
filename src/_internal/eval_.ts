@@ -1,11 +1,11 @@
-export const eval_ = v => {
-  let val
+export const eval_ = (v) => {
+  let val;
   try {
-    val = new Function(`return ${v}`)()
+    val = new Function(`return ${v}`)();
   } catch (error) {
-    return v
+    return v;
   }
-  return val
-}
+  return val;
+};
 
-export default eval_
+export default eval_;

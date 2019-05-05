@@ -1,7 +1,6 @@
-import {isArray} from 'typed-is/lib/isArray'
-import {isEmpty} from 'typed-is/lib/isEmpty'
+import { isArray, isEmpty } from 'typed-is';
 
-export const isEmptyArray_ = v => isArray(v) && isEmpty(v)
-export const isEmptyArray = isEmptyArray_
+export const isEmptyArray_ = (v) => isArray(v) && isEmpty(v);
+export const isEmptyArray = isEmptyArray_;
 
-export default isEmptyArray
+export default isEmptyArray;

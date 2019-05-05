@@ -1,5 +1,5 @@
-import {purry} from './purry'
-import {_reduceLazy, LazyResult} from './_internal/_reduceLazy'
+import { purry } from './purry';
+import { _reduceLazy, LazyResult } from './_internal/_reduceLazy';
 
 /**
  * Returns a new array containing only one copy of each element in the original list.
@@ -19,35 +19,35 @@ import {_reduceLazy, LazyResult} from './_internal/_reduceLazy'
  * @category Array
  */
 
-export function uniqLazy<T>(array: T[]): T[]
-export function uniqLazy<T>(): (array: T[]) => T[]
+export function uniqLazy<T>(array: T[]): T[];
+export function uniqLazy<T>(): (array: T[]) => T[];
 
 export function uniqLazy() {
-  return purry(_uniqLazy, arguments, _lazy)
+  return purry(_uniqLazy, arguments, _lazy);
 }
 
 function _uniqLazy<T>(array: T[]) {
-  return _reduceLazy(array, _lazy())
+  return _reduceLazy(array, _lazy());
 }
 
 function _lazy() {
-  const set = new Set<any>()
+  const set = new Set<any>();
   return (value: any): LazyResult<any> => {
     if (set.has(value)) {
       return {
         done: false,
         hasNext: false,
-      }
+      };
     }
-    set.add(value)
+    set.add(value);
     return {
       done: false,
       hasNext: true,
       next: value,
-    }
-  }
+    };
+  };
 }
 
-uniqLazy.lazy = _lazy
+uniqLazy.lazy = _lazy;
 
-export default uniqLazy
+export default uniqLazy;

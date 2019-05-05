@@ -1,6 +1,6 @@
 // from https://raw.githubusercontent.com/remeda/remeda/master/src/dropArr.ts
-import {purry} from './purry'
-import {_reduceLazy, LazyResult} from './_internal/_reduceLazy'
+import { purry } from './purry';
+import { _reduceLazy, LazyResult } from './_internal/_reduceLazy';
 
 /**
  * Removes first `n` elements from the `array`.
@@ -14,7 +14,7 @@ import {_reduceLazy, LazyResult} from './_internal/_reduceLazy'
  * @pipeable
  * @category Array
  */
-export function dropArr<T>(array: T[], n: number): T[]
+export function dropArr<T>(array: T[], n: number): T[];
 
 /**
  * Removes last `n` elements from the `array`.
@@ -28,33 +28,33 @@ export function dropArr<T>(array: T[], n: number): T[]
  * @pipeable
  * @category Array
  */
-export function dropArr<T>(n: number): (array: T[]) => T[]
+export function dropArr<T>(n: number): (array: T[]) => T[];
 
 export function dropArr() {
-  return purry(_dropArr, arguments, dropArrlazy)
+  return purry(_dropArr, arguments, dropArrlazy);
 }
 
 function _dropArr<T>(array: T[], n: number) {
-  return _reduceLazy(array, dropArrlazy(n))
+  return _reduceLazy(array, dropArrlazy(n));
 }
 
 function dropArrlazy<T>(n: number) {
-  let left = n
+  let left = n;
   return (value: T): LazyResult<T> => {
     if (left > 0) {
-      left--
+      left--;
       return {
         done: false,
         hasNext: false,
-      }
+      };
     }
     return {
       done: false,
       hasNext: true,
       next: value,
-    }
-  }
+    };
+  };
 }
-dropArr.lazy = dropArrlazy
+dropArr.lazy = dropArrlazy;
 
-export default dropArr
+export default dropArr;

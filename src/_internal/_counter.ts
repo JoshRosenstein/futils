@@ -1,13 +1,13 @@
-import {mapArr} from '../mapArr'
+import { mapArr } from '../mapArr';
 
 export const createCounter = () => {
-  const count = jest.fn()
+  const count = jest.fn();
   return {
     count,
     fn: <T>() =>
-      mapArr<T, T>(x => {
-        count()
-        return x
+      mapArr<T, T>((x) => {
+        count();
+        return x;
       }),
-  }
-}
+  };
+};

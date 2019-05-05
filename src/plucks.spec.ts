@@ -1,4 +1,4 @@
-import plucks from './plucks'
+import plucks from './plucks';
 
 describe('plucks', () => {
   test('works', () => {
@@ -30,8 +30,8 @@ describe('plucks', () => {
     ).toEqual([
       ['Bond', 50, undefined, '1'],
       ['James', 50, ['Miss Money'], '2'],
-    ])
-  })
+    ]);
+  });
 
   test('DotNotation', () => {
     expect(
@@ -59,8 +59,8 @@ describe('plucks', () => {
     ).toEqual([
       ['Bond', 50, undefined, '1'],
       ['James', 50, ['Miss Money'], '2'],
-    ])
-  })
+    ]);
+  });
   test('Dot&CommaNotation', () => {
     expect(
       plucks('attributes.name,attributes.age,attributes.friends,id')([
@@ -85,6 +85,6 @@ describe('plucks', () => {
     ).toEqual([
       ['Bond', 50, undefined, '1'],
       ['James', 50, ['Miss Money'], '2'],
-    ])
-  })
-})
+    ]);
+  });
+});

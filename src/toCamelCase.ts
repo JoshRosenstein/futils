@@ -1,4 +1,4 @@
-export const toCamelCase_ = str =>
+export const toCamelCase_ = (str) =>
   str
     .trim()
     .split(/[\s\u2000-\u206F\u2E00-\u2E7F\\'!"#$%&()*+,\-./:;<=>?@[\]^_`{|}~]+/)
@@ -11,7 +11,7 @@ export const toCamelCase_ = str =>
               word.slice(1),
             ),
       '',
-    )
-export const toCamelCase = toCamelCase_
+    );
+export const toCamelCase = toCamelCase_;
 
-export default toCamelCase
+export default toCamelCase;

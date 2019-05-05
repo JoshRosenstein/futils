@@ -1,4 +1,4 @@
-import {purry} from './purry'
+import { purry } from './purry';
 
 /**
  * Creates an object composed of the pickObjed `object` properties.
@@ -13,7 +13,7 @@ import {purry} from './purry'
 export function pickObj<T extends {}, K extends keyof T>(
   object: T,
   names: K[],
-): Pick<T, K>
+): Pick<T, K>;
 
 /**
  * Creates an object composed of the pickObjed `object` properties.
@@ -26,23 +26,23 @@ export function pickObj<T extends {}, K extends keyof T>(
  */
 export function pickObj<T extends {}, K extends keyof T>(
   names: K[],
-): (object: T) => Pick<T, K>
+): (object: T) => Pick<T, K>;
 
 export function pickObj() {
-  return purry(pickObj_, arguments)
+  return purry(pickObj_, arguments);
 }
 
 export function pickObj_(object: any, names: string[]) {
   if (object == null) {
-    return {}
+    return {};
   }
   return names.reduce(
     (acc, name) => {
-      acc[name] = object[name]
-      return acc
+      acc[name] = object[name];
+      return acc;
     },
     {} as any,
-  )
+  );
 }
 
-export default pickObj
+export default pickObj;

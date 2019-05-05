@@ -1,5 +1,5 @@
-import {purry} from './purry'
-import {Omit} from './_types/Omit'
+import { purry } from './purry';
+import { Omit } from './_types/Omit';
 
 /**
  * Returns a partial copy of an object omitting the keys specified.
@@ -15,7 +15,7 @@ import {Omit} from './_types/Omit'
 export function omitProps<T extends {}, K extends keyof T>(
   object: T,
   names: K[],
-): Omit<T, K>
+): Omit<T, K>;
 
 /**
  * Returns a partial copy of an object omitting the keys specified.
@@ -30,26 +30,26 @@ export function omitProps<T extends {}, K extends keyof T>(
  */
 export function omitProps<T extends {}, K extends keyof T>(
   names: K[],
-): (object: T) => Omit<T, K>
+): (object: T) => Omit<T, K>;
 
 export function omitProps() {
-  return purry(_omitProps, arguments)
+  return purry(_omitProps, arguments);
 }
 
 function _omitProps<T extends {}, K extends keyof T>(
   object: T,
   names: K[],
 ): Omit<T, K> {
-  const set = new Set(names as string[])
+  const set = new Set(names as string[]);
   return Object.entries(object).reduce(
     (acc, [name, value]) => {
       if (!set.has(name)) {
-        acc[name] = value
+        acc[name] = value;
       }
-      return acc
+      return acc;
     },
     {} as any,
-  ) as Omit<T, K>
+  ) as Omit<T, K>;
 }
 
-export default omitProps
+export default omitProps;

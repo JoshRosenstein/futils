@@ -1,5 +1,5 @@
-import always from './always'
+import always from './always';
 
 test('returns value given in 1st argument', () => {
-  expect(always(1)()).toBe(1)
-})
+  expect(always(1)()).toBe(1);
+});

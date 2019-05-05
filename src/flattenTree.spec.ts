@@ -1,4 +1,4 @@
-import flattenTree from './flattenTree'
+import { flattenTree } from './flattenTree';
 
 describe('flattenTree', () => {
   it('Works', () => {
@@ -13,14 +13,14 @@ describe('flattenTree', () => {
         },
         location: 'http://api.example.com/profiles/24',
       },
-    })
+    });
     const res = {
       'data-profile-name': 'Kurtis Rainbolt-Greene',
       'data-profile-age': 24,
       'data-metadata-interval': '10s',
       'data-location': 'http://api.example.com/profiles/24',
-    }
+    };
 
-    expect(a).toEqual(res)
-  })
-})
+    expect(a).toEqual(res);
+  });
+});

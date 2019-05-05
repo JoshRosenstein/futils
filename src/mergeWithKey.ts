@@ -1,6 +1,6 @@
-import {curry3_} from './_internal/curry3_'
-import {attach_} from './attach'
-import {reduce_} from './reduce'
+import { curry3_ } from './_internal/curry3_';
+import { attach_ } from './attach';
+import { reduce_ } from './reduce';
 
 export const mergeWithKey_ = (fn, initial, functor) =>
   reduce_(
@@ -9,14 +9,14 @@ export const mergeWithKey_ = (fn, initial, functor) =>
         return {
           ...acc,
           [key]: fn(acc[key], value, key),
-        }
+        };
       }
 
-      return attach_(key, value, acc)
+      return attach_(key, value, acc);
     },
     initial,
     functor,
-  )
+  );
 
-export const mergeWithKey = curry3_(mergeWithKey_)
-export default mergeWithKey
+export const mergeWithKey = curry3_(mergeWithKey_);
+export default mergeWithKey;

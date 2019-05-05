@@ -1,4 +1,4 @@
-import comparator from './comparator'
+import { comparator } from './comparator';
 
 describe('comparator', () => {
   it('builds a comparator function for sorting out of a simple predicate that reports whether the first param is smaller', () => {
@@ -9,6 +9,6 @@ describe('comparator', () => {
       3,
       5,
       8,
-    ])
-  })
-})
+    ]);
+  });
+});

@@ -1,4 +1,4 @@
-import {LazyResult} from './_internal/_reduceLazy'
+import { LazyResult } from './_internal/_reduceLazy';
 
 // from https://github.com/remeda/remeda/blob/master/src/pipe.ts
 
@@ -19,19 +19,19 @@ import {LazyResult} from './_internal/_reduceLazy'
  * @category Function
  */
 
-export function flow<A, B>(value: A, op1: (input: A) => B): B
+export function flow<A, B>(value: A, op1: (input: A) => B): B;
 export function flow<A, B, C>(
   value: A,
   op1: (input: A) => B,
   op2: (input: B) => C,
-): C
+): C;
 
 export function flow<A, B, C, D>(
   value: A,
   op1: (input: A) => B,
   op2: (input: B) => C,
   op3: (input: C) => D,
-): D
+): D;
 
 export function flow<A, B, C, D, E>(
   value: A,
@@ -39,7 +39,7 @@ export function flow<A, B, C, D, E>(
   op2: (input: B) => C,
   op3: (input: C) => D,
   op4: (input: D) => E,
-): E
+): E;
 
 export function flow<A, B, C, D, E, F>(
   value: A,
@@ -48,7 +48,7 @@ export function flow<A, B, C, D, E, F>(
   op3: (input: C) => D,
   op4: (input: D) => E,
   op5: (input: E) => F,
-): F
+): F;
 
 export function flow<A, B, C, D, E, F, G>(
   value: A,
@@ -58,7 +58,7 @@ export function flow<A, B, C, D, E, F, G>(
   op4: (input: D) => E,
   op5: (input: E) => F,
   op6: (input: F) => G,
-): G
+): G;
 
 export function flow<A, B, C, D, E, F, G, H>(
   value: A,
@@ -69,71 +69,71 @@ export function flow<A, B, C, D, E, F, G, H>(
   op5: (input: E) => F,
   op6: (input: F) => G,
   op7: (input: G) => H,
-): H
+): H;
 
 export function flow(
   value: any,
   ...operations: Array<(value: any) => any>
 ): any {
-  let ret = value
-  const lazyOps = operations.map(op => {
-    const {lazy, lazyArgs} = op as LazyOp
+  let ret = value;
+  const lazyOps = operations.map((op) => {
+    const { lazy, lazyArgs } = op as LazyOp;
     if (lazy) {
-      const fn: any = lazy(...lazyArgs)
-      fn.indexed = lazy.indexed
-      fn.single = lazy.single
-      fn.index = 0
-      fn.items = []
-      return fn
+      const fn: any = lazy(...lazyArgs);
+      fn.indexed = lazy.indexed;
+      fn.single = lazy.single;
+      fn.index = 0;
+      fn.items = [];
+      return fn;
     }
-    return null
-  })
-  let opIdx = 0
+    return null;
+  });
+  let opIdx = 0;
   while (opIdx < operations.length) {
-    const op = operations[opIdx]
-    const lazyOp = lazyOps[opIdx]
+    const op = operations[opIdx];
+    const lazyOp = lazyOps[opIdx];
     if (!lazyOp) {
-      ret = op(ret)
-      opIdx++
-      continue
+      ret = op(ret);
+      opIdx++;
+      continue;
     }
-    const lazySeq: LazyFn[] = []
+    const lazySeq: LazyFn[] = [];
     for (let j = opIdx; j < operations.length; j++) {
       if (lazyOps[j]) {
-        lazySeq.push(lazyOps[j])
+        lazySeq.push(lazyOps[j]);
         if (lazyOps[j].single) {
-          break
+          break;
         }
       } else {
-        break
+        break;
       }
     }
 
-    let acc: any[] = []
+    let acc: any[] = [];
 
     for (let item of ret) {
-      if (_processItem({item, acc, lazySeq})) {
-        break
+      if (_processItem({ item, acc, lazySeq })) {
+        break;
       }
     }
-    const lastLazySeq = lazySeq[lazySeq.length - 1]
+    const lastLazySeq = lazySeq[lazySeq.length - 1];
 
-    ret = (lastLazySeq as any).single ? acc[0] : acc
+    ret = (lastLazySeq as any).single ? acc[0] : acc;
 
-    opIdx += lazySeq.length
+    opIdx += lazySeq.length;
   }
-  return ret
+  return ret;
 }
 
-type LazyFn = ((value: any, index?: number, items?: any) => LazyResult<any>)
+type LazyFn = (value: any, index?: number, items?: any) => LazyResult<any>;
 
 type LazyOp = ((input: any) => any) & {
   lazy: ((...args: any[]) => LazyFn) & {
-    indexed: boolean
-    single: boolean
-  }
-  lazyArgs: any[]
-}
+    indexed: boolean;
+    single: boolean;
+  };
+  lazyArgs: any[];
+};
 
 function _processItem({
   item,
@@ -194,4 +194,4 @@ function _processItem({
   return false;
 }
 
-export default flow
+export default flow;

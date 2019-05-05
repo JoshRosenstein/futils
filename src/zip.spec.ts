@@ -1,4 +1,4 @@
-import zip from './zip'
+import zip from './zip';
 
 describe('Zip', () => {
   test('Works Arrays', () => {
@@ -6,8 +6,8 @@ describe('Zip', () => {
       [1, 'a'],
       [2, 'b'],
       [3, 'c'],
-    ])
-  })
+    ]);
+  });
 
   test('Works Obkects', () => {
     expect(
@@ -24,6 +24,6 @@ describe('Zip', () => {
       aaa: ['1', '0'],
       bbb: ['2', '0'],
       ccc: ['0', '0'],
-    })
-  })
-})
+    });
+  });
+});

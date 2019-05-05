@@ -1,7 +1,7 @@
-import {isArray} from 'typed-is/lib/isArray'
+import { isArray } from 'typed-is';
 
-const isArray_ = isArray
+const isArray_ = isArray;
 
-export {isArray_, isArray}
+export { isArray_, isArray };
 
-export default isArray
+export default isArray;

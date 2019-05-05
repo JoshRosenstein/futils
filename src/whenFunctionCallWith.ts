@@ -1,6 +1,7 @@
-import {isFunction} from './isFunction'
+import { isFunction } from './isFunction';
 
-export const whenFunctionCallWith_ = (...args) => test =>
-  isFunction(test) ? test(...args) : test
-export const whenFunctionCallWith = whenFunctionCallWith_
-export default whenFunctionCallWith
+export const whenFunctionCallWith_ = (...args) => (fnOrVal) =>
+  isFunction(fnOrVal) ? fnOrVal(...args) : fnOrVal;
+
+export const whenFunctionCallWith = whenFunctionCallWith_;
+export default whenFunctionCallWith;

@@ -1,28 +1,28 @@
-import {type_} from './type'
+import { type_ } from './type';
 
-export const empty_ = value => {
-  const t = type_(value)
+export const empty_ = (value) => {
+  const t = type_(value);
   switch (t) {
     case 'null': {
-      return null
+      return null;
     }
     case 'undefined': {
-      return undefined
+      return undefined;
     }
     case 'String': {
-      return ''
+      return '';
     }
     case 'Array': {
-      return []
+      return [];
     }
     case 'Object': {
-      return {}
+      return {};
     }
     case 'Map': {
-      return new Map()
+      return new Map();
     }
     case 'Set': {
-      return new Set()
+      return new Set();
     }
 
     default: {
@@ -30,13 +30,13 @@ export const empty_ = value => {
         ? value.empty()
         : value.constructor != null &&
           typeof value.constructor.empty === 'function'
-          ? value.constructor.empty()
-          : null
+        ? value.constructor.empty()
+        : null;
 
       // throw new Error(`empty doesn't know how to handle ${t}`)
     }
   }
-}
+};
 
-export const empty = empty_
-export default empty
+export const empty = empty_;
+export default empty;

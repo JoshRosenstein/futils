@@ -1,7 +1,7 @@
-import {isFunction} from 'typed-is/lib/isFunction'
+import { isFunction } from 'typed-is';
 
-const isFunction_ = isFunction
+const isFunction_ = isFunction;
 
-export {isFunction_, isFunction}
+export { isFunction_, isFunction };
 
-export default isFunction
+export default isFunction;

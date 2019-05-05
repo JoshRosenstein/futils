@@ -1,4 +1,4 @@
-import {purry} from './purry'
+import { purry } from './purry';
 
 /**
  * Adds two values.
@@ -16,7 +16,7 @@ import {purry} from './purry'
  *
  */
 
-export function add(a: number, b: number): number
+export function add(a: number, b: number): number;
 
 /**
  * Adds two values.
@@ -34,14 +34,14 @@ export function add(a: number, b: number): number
  *
  */
 
-export function add(a: number): (b: number) => number
+export function add(a: number): (b: number) => number;
 
 export function add() {
-  return purry(add_, arguments)
+  return purry(add_, arguments);
 }
 
 export function add_(a, b) {
-  return Number(a) + Number(b)
+  return Number(a) + Number(b);
 }
 
-export default add
+export default add;

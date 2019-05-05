@@ -1,8 +1,8 @@
-import {isNil, isArray} from 'typed-is'
+import { isNil, isArray } from 'typed-is';
 
 export const toArray_ = <T>(v: T[] | T | undefined | null): T[] =>
-  isNil(v) ? [] : isArray(v) ? v : [v]
+  isNil(v) ? [] : isArray(v) ? v : [v];
 
-export const toArray = toArray_
+export const toArray = toArray_;
 
-export default toArray
+export default toArray;

@@ -1,5 +1,16 @@
 // from https://github.com/remeda/remeda/blob/master/src/mapObjKeys.ts
 
+function _mapObjKeys(obj: any, fn: (key: string, value: any) => any) {
+  return Object.keys(obj).reduce(
+    (acc, key) => {
+      const v = obj[key];
+      acc[fn(key, v)] = v;
+      return acc;
+    },
+    {} as any,
+  );
+}
+
 /**
  * Maps keys of `object` and keeps the same values.
  * @param object the object to map
@@ -13,8 +24,8 @@
  */
 export function mapObjKeys<
   T,
-  S extends {[x: string]: any} = {[x: string]: any}
->(object: T, fn: (key: keyof T, value: T[keyof T]) => any): S
+  S extends { [x: string]: any } = { [x: string]: any }
+>(object: T, fn: (key: keyof T, value: T[keyof T]) => any): S;
 
 /**
  * Maps keys of `object` and keeps the same values.
@@ -28,25 +39,14 @@ export function mapObjKeys<
  */
 export function mapObjKeys<
   T,
-  S extends {[x: string]: any} = {[x: string]: any}
->(fn: (key: keyof T, value: T[keyof T]) => any): (object: T) => S
+  S extends { [x: string]: any } = { [x: string]: any }
+>(fn: (key: keyof T, value: T[keyof T]) => any): (object: T) => S;
 
 export function mapObjKeys(arg1: any, arg2?: any): any {
   if (arguments.length === 1) {
-    return (data: any) => _mapObjKeys(data, arg1)
+    return (data: any) => _mapObjKeys(data, arg1);
   }
-  return _mapObjKeys(arg1, arg2)
+  return _mapObjKeys(arg1, arg2);
 }
 
-function _mapObjKeys(obj: any, fn: (key: string, value: any) => any) {
-  return Object.keys(obj).reduce(
-    (acc, key) => {
-      const v = obj[key]
-      acc[fn(key, v)] = v
-      return acc
-    },
-    {} as any,
-  )
-}
-
-export default mapObjKeys
+export default mapObjKeys;

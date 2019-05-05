@@ -1,5 +1,5 @@
 // from https://raw.githubusercontent.com/remeda/remeda/master/src/reduce.ts
-import {purry} from './purry'
+import { purry } from './purry';
 
 /**
  * Calls the specified callback function for all the elements in an array. The return value of the callback function is the accumulated result, and is provided as an argument in the next call to the callback function.
@@ -20,7 +20,7 @@ export function reduceArr<T, K>(
   items: T[],
   fn: (acc: K, item: T) => K,
   initialValue: K,
-): K
+): K;
 
 /**
  * Calls the specified callback function for all the elements in an array. The return value of the callback function is the accumulated result, and is provided as an argument in the next call to the callback function.
@@ -38,10 +38,10 @@ export function reduceArr<T, K>(
 export function reduceArr<T, K>(
   fn: (acc: K, item: T) => K,
   initialValue: K,
-): (items: T[]) => K
+): (items: T[]) => K;
 
 export function reduceArr() {
-  return purry(reduceArr_(false), arguments)
+  return purry(reduceArr_(false), arguments);
 }
 
 export const reduceArr_ = (indexed: boolean) => <T, K>(
@@ -53,20 +53,20 @@ export const reduceArr_ = (indexed: boolean) => <T, K>(
     (acc, item, index) =>
       indexed ? fn(acc, item, index, items) : fn(acc, item),
     initialValue,
-  )
+  );
 
 function _indexed<T, K>(
   array: T[],
   fn: (acc: K, item: T, index: number, items: T[]) => K,
   initialValue: K,
-): Record<string, T>
+): Record<string, T>;
 function _indexed<T, K>(
   fn: (acc: K, item: T, index: number, items: T[]) => K,
   initialValue: K,
-): (array: T[]) => Record<string, T>
+): (array: T[]) => Record<string, T>;
 function _indexed() {
-  return purry(reduceArr_(true), arguments)
+  return purry(reduceArr_(true), arguments);
 }
-reduceArr.indexed = _indexed
+reduceArr.indexed = _indexed;
 
-export default reduceArr
+export default reduceArr;

@@ -1,4 +1,4 @@
-import mapValuesWithValueKey from './mapValuesWithValueKey'
+import mapValuesWithValueKey from './mapValuesWithValueKey';
 
 describe('mapValuesWithValueKey', () => {
   it('Array', () => {
@@ -8,8 +8,8 @@ describe('mapValuesWithValueKey', () => {
         'b',
         'c',
       ]),
-    ).toEqual(['a:0', 'b:1', 'c:2'])
-  })
+    ).toEqual(['a:0', 'b:1', 'c:2']);
+  });
 
   it('Object', () => {
     expect(
@@ -22,12 +22,12 @@ describe('mapValuesWithValueKey', () => {
       aaa: 'a:aaa',
       bbb: 'b:bbb',
       ccc: 'c:ccc',
-    })
-  })
+    });
+  });
 
   it('String', () => {
     expect(
       mapValuesWithValueKey((value, index) => `${value}:${index}`)('abc'),
-    ).toEqual('a:0b:1c:2')
-  })
-})
+    ).toEqual('a:0b:1c:2');
+  });
+});

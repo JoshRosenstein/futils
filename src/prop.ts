@@ -1,17 +1,17 @@
-import {curry2_} from './_internal/curry2_'
-import {isNil} from './isNil'
+import { curry2_ } from './_internal/curry2_';
+import { isNil } from './isNil';
 
 export const prop_ = (name, keyedFunctor) => {
   if (isNil(keyedFunctor)) {
-    return keyedFunctor
+    return keyedFunctor;
   }
 
   if (keyedFunctor.get) {
-    return keyedFunctor.get(name)
+    return keyedFunctor.get(name);
   }
 
-  return keyedFunctor[name]
-}
+  return keyedFunctor[name];
+};
 // export interface Prop {
 //   prop<P extends keyof T, T>(p: P, obj: T): T[P]
 //   prop<P extends string>(p: P): <T>(obj: Record<P, T>) => T
@@ -24,5 +24,5 @@ export const prop_ = (name, keyedFunctor) => {
 //   return curry2_(prop_)(arguments)
 // }
 
-export const prop = curry2_(prop_)
-export default prop
+export const prop = curry2_(prop_);
+export default prop;

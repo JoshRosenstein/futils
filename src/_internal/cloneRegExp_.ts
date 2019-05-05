@@ -1,4 +1,4 @@
-export default pattern =>
+export default (pattern) =>
   new RegExp(
     pattern.source,
     (pattern.global ? 'g' : '') +
@@ -6,4 +6,4 @@ export default pattern =>
       (pattern.multiline ? 'm' : '') +
       (pattern.sticky ? 'y' : '') +
       (pattern.unicode ? 'u' : ''),
-  )
+  );

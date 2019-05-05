@@ -1,24 +1,24 @@
-import {curry2_} from './_internal/curry2_'
-import {reduceWhile_} from './reduceWhile'
-import {toArray} from './toArray'
+import { curry2_ } from './_internal/curry2_';
+import { reduceWhile_ } from './reduceWhile';
+import { toArray } from './toArray';
 
 type AnyPass_ = <T>(
-  fns: Array<(...args: T[]) => boolean>,
+  fns: ((...args: T[]) => boolean)[],
   ...args: T[]
-) => boolean
+) => boolean;
 type AnyPass = (<T>(
-  fns: Array<(...args: T[]) => boolean>,
+  fns: ((...args: T[]) => boolean)[],
 ) => (...args: T[]) => boolean) &
-  AnyPass_
+  AnyPass_;
 
 export const anyPass_: AnyPass_ = (fns, ...args) =>
   reduceWhile_(
-    acc => acc === false,
+    (acc) => acc === false,
     (_, fn) => fn(...args),
     false,
     toArray(fns),
-  )
+  );
 
-export const anyPass: AnyPass = curry2_(anyPass_)
+export const anyPass: AnyPass = curry2_(anyPass_);
 
-export default anyPass
+export default anyPass;

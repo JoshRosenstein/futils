@@ -1,7 +1,7 @@
-import isBoolean from 'typed-is/lib/isBoolean'
+import { isBoolean } from 'typed-is';
 
-const isBoolean_ = isBoolean
+const isBoolean_ = isBoolean;
 
-export {isBoolean_, isBoolean}
+export { isBoolean_, isBoolean };
 
-export default isBoolean
+export default isBoolean;

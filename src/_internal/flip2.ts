@@ -1,3 +1,3 @@
-export const flip2 = fn => (a, b) => fn(b, a)
+export const flip2 = (fn) => (a, b) => fn(b, a);
 
-export default flip2
+export default flip2;

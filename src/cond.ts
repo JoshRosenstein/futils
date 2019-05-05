@@ -1,4 +1,4 @@
-import {purry} from './purry'
+import { purry } from './purry';
 
 /**
  * Returns a function, `fn`, which encapsulates `if/else, if/else, ...` logic.
@@ -28,20 +28,20 @@ import {purry} from './purry'
  *
  */
 
-export function cond<R>(fns: Array<[() => boolean, () => R]>): () => R
+export function cond<R>(fns: Array<[() => boolean, () => R]>): () => R;
 export function cond<T1, R>(
   fns: Array<[(v1: T1) => boolean, (v1: T1) => R]>,
-): (v1: T1) => R
+): (v1: T1) => R;
 
 export function cond<T1, T2, R>(
   fns: Array<[(v1: T1, v2: T2) => boolean, (v1: T1, v2: T2) => R]>,
-): (v1: T1, v2: T2) => R
+): (v1: T1, v2: T2) => R;
 
 export function cond<T1, T2, T3, R>(
   fns: Array<
     [(v1: T1, v2: T2, v3: T3) => boolean, (v1: T1, v2: T2, v3: T3) => R]
   >,
-): (v1: T1, v2: T2, v3: T3) => R
+): (v1: T1, v2: T2, v3: T3) => R;
 
 export function cond<T1, T2, T3, T4, R>(
   fns: Array<
@@ -50,7 +50,7 @@ export function cond<T1, T2, T3, T4, R>(
       (v1: T1, v2: T2, v3: T3, v4: T4) => R
     ]
   >,
-): (v1: T1, v2: T2, v3: T3, v4: T4) => R
+): (v1: T1, v2: T2, v3: T3, v4: T4) => R;
 
 export function cond<T1, T2, T3, T4, T5, R>(
   fns: Array<
@@ -59,7 +59,7 @@ export function cond<T1, T2, T3, T4, T5, R>(
       (v1: T1, v2: T2, v3: T3, v4: T4, v5: T5) => R
     ]
   >,
-): (v1: T1, v2: T2, v3: T3, v4: T4, v5: T5) => R
+): (v1: T1, v2: T2, v3: T3, v4: T4, v5: T5) => R;
 
 export function cond<T1, T2, T3, T4, T5, T6, R>(
   fns: Array<
@@ -68,12 +68,12 @@ export function cond<T1, T2, T3, T4, T5, T6, R>(
       (v1: T1, v2: T2, v3: T3, v4: T4, v5: T5, v6: T6) => R
     ]
   >,
-): (v1: T1, v2: T2, v3: T3, v4: T4, v5: T5, v6: T6) => R
+): (v1: T1, v2: T2, v3: T3, v4: T4, v5: T5, v6: T6) => R;
 
-export function cond(fns: any): (...args: any[]) => any
+export function cond(fns: any): (...args: any[]) => any;
 
 export function cond() {
-  return purry(cond_, arguments)
+  return purry(cond_, arguments);
 }
 
 export function cond_<T1, R>(
@@ -84,7 +84,7 @@ export function cond_<T1, R>(
     ? conds[0][0](data)
       ? conds[0][1](data)
       : cond_(data, conds.slice(1))
-    : undefined
+    : undefined;
 }
 
-export default cond
+export default cond;

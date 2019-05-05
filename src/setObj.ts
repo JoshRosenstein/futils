@@ -1,5 +1,5 @@
 // https://raw.githubusercontent.com/remeda/remeda/master/src/setObj.ts
-import {purry} from './purry'
+import { purry } from './purry';
 
 /**
  * setObjs the `value` at `prop` of `object`.
@@ -13,7 +13,7 @@ import {purry} from './purry'
  * @data_first
  * @category Object
  */
-export function setObj<T, K extends keyof T>(obj: T, prop: K, value: T[K]): T
+export function setObj<T, K extends keyof T>(obj: T, prop: K, value: T[K]): T;
 
 /**
  * setObjs the `value` at `prop` of `object`.
@@ -29,19 +29,19 @@ export function setObj<T, K extends keyof T>(obj: T, prop: K, value: T[K]): T
 export function setObj<T, K extends keyof T>(
   prop: K,
   value: T[K],
-): (obj: T) => T
+): (obj: T) => T;
 
 export function setObj() {
-  return purry(setObj_, arguments)
+  return purry(setObj_, arguments);
 }
 
-export function setObj_<T, K extends keyof T>(obj: T, prop: K, value: T[K]): T
+export function setObj_<T, K extends keyof T>(obj: T, prop: K, value: T[K]): T;
 
 export function setObj_(obj: any, prop: string, value: any) {
   return {
     ...obj,
     [prop]: value,
-  }
+  };
 }
 
-export default setObj
+export default setObj;

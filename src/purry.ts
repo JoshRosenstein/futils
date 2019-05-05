@@ -32,20 +32,20 @@
  */
 
 export function purry(fn: any, args: IArguments | any[], lazy?: any) {
-  const diff = fn.length - args.length
-  const arrayArgs = Array.from(args)
+  const diff = fn.length - args.length;
+  const arrayArgs = Array.from(args);
   if (diff === 0) {
-    return fn(...arrayArgs)
+    return fn(...arrayArgs);
   }
   if (diff === 1) {
-    const ret: any = (data: any) => fn(data, ...arrayArgs)
+    const ret: any = (data: any) => fn(data, ...arrayArgs);
     if (lazy || fn.lazy) {
-      ret.lazy = lazy || fn.lazy
-      ret.lazyArgs = args
+      ret.lazy = lazy || fn.lazy;
+      ret.lazyArgs = args;
     }
-    return ret
+    return ret;
   }
-  throw new Error('Wrong number of arguments')
+  throw new Error('Wrong number of arguments');
 }
 
-export default purry
+export default purry;

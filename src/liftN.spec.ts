@@ -1,39 +1,39 @@
-import liftN from './liftN'
+import { liftN } from './liftN';
 
-const array = [1, 2, 3, 4]
+const array = [1, 2, 3, 4];
 
 const check = (n, product) => {
-  let i = n
-  let g = liftN(n, (...args) => args)
+  let i = n;
+  let g = liftN(n, (...args) => args);
   while (i > 0) {
-    expect(typeof g).toEqual('function')
-    g = g(array)
-    i -= 1
+    expect(typeof g).toEqual('function');
+    g = g(array);
+    i -= 1;
   }
-  expect(Array.isArray(g)).toBeTruthy()
-  expect(g).toEqual(product)
-}
+  expect(Array.isArray(g)).toBeTruthy();
+  expect(g).toEqual(product);
+};
 
 describe('liftN', () => {
-  const addN = (...args) => args.reduce((a, b) => a + b, 0)
-  const addN3 = liftN(3, addN)
-  const addN4 = liftN(4, addN)
+  const addN = (...args) => args.reduce((a, b) => a + b, 0);
+  const addN3 = liftN(3, addN);
+  const addN4 = liftN(4, addN);
 
   it('Works', () => {
-    expect(addN(1, 10)).toEqual(11)
+    expect(addN(1, 10)).toEqual(11);
 
-    expect(addN3([1, 10], [2], [3])).toEqual([6, 15])
-  })
+    expect(addN3([1, 10], [2], [3])).toEqual([6, 15]);
+  });
 
   it('can lift functions of any arity', () => {
-    expect(addN3([1, 10], [2], [3])).toEqual([6, 15])
+    expect(addN3([1, 10], [2], [3])).toEqual([6, 15]);
 
-    expect(addN4([1, 10], [2], [3], [40])).toEqual([46, 55])
-  })
+    expect(addN4([1, 10], [2], [3], [40])).toEqual([46, 55]);
+  });
   test('returns the cartesian product for arity = 1', () => {
-    const product = [[1], [2], [3], [4]]
-    check(1, product)
-  })
+    const product = [[1], [2], [3], [4]];
+    check(1, product);
+  });
 
   test('returns the cartesian product for arity = 2', () => {
     const product = [
@@ -53,10 +53,10 @@ describe('liftN', () => {
       [4, 2],
       [4, 3],
       [4, 4],
-    ]
+    ];
 
-    check(2, product)
-  })
+    check(2, product);
+  });
 
   test('returns the cartesian product for arity = 3', () => {
     const product = [
@@ -124,8 +124,8 @@ describe('liftN', () => {
       [4, 4, 2],
       [4, 4, 3],
       [4, 4, 4],
-    ]
+    ];
 
-    check(3, product)
-  })
-})
+    check(3, product);
+  });
+});

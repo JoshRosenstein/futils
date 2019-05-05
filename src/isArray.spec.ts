@@ -1,9 +1,9 @@
-import isArray from './isArray'
+import { isArray } from './isArray';
 
 describe('isArray', () => {
   it('Works', () => {
-    expect(isArray([])).toBeTruthy()
-    expect(isArray([1, 2])).toBeTruthy()
-    expect(isArray({})).toBeFalsy()
-  })
-})
+    expect(isArray([])).toBeTruthy();
+    expect(isArray([1, 2])).toBeTruthy();
+    expect(isArray({})).toBeFalsy();
+  });
+});

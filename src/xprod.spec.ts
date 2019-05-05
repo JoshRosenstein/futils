@@ -1,4 +1,4 @@
-import xprod from './xprod'
+import xprod from './xprod';
 
 describe('xprod', () => {
   test('no tests yet', () => {
@@ -7,6 +7,6 @@ describe('xprod', () => {
       [1, 'b'],
       [2, 'a'],
       [2, 'b'],
-    ])
-  })
-})
+    ]);
+  });
+});

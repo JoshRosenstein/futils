@@ -1,6 +1,6 @@
-import {isPlainObject} from 'typed-is/lib/isPlainObject'
+import { isPlainObject } from 'typed-is/lib/isPlainObject';
 
-export const isObject_ = isPlainObject
-export const isObject = isPlainObject
+export const isObject_ = isPlainObject;
+export const isObject = isPlainObject;
 
-export default isObject
+export default isObject;
