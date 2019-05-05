@@ -22,6 +22,7 @@
     "travis": "yarn run test:coverage && yarn run build",
     "generate:index": "node scripts/create-export.js",
     "build": "node scripts/create-export.js && yarn pika:build",
+    "build:docs": "cd docs && yarn && yarn build",
     "clean": "rimraf es/* lib/* dist/**/*.js coverage/* ",
     "clean:modules": "rimraf node_modules/*",
     "test": "jest -o",

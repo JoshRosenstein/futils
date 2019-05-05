@@ -1,15 +1,15 @@
 {
   "jest.autoEnable": false,
-  "editor.rulers": [80],
+  "editor.rulers": [
+    80
+  ],
   "files.exclude": {
     "**/.git": true,
     "**/node_modules": true,
     "**/build": true
   },
   "editor.formatOnSave": true,
-
   "jest.pathToJest": "yarn jest",
   "prettier.eslintIntegration": true,
-
   "typescript.tsdk": "node_modules/typescript/lib"
 }

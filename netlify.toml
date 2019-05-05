@@ -1,0 +1,5 @@
+[build]
+  command = "yarn build && yarn build:docs"
+  publish = "./docs/build/"
+[build.environment]
+  BUILD_ENV = "production"
