@@ -21,8 +21,6 @@ const Navbar=props => {
 }
 
 Navbar.displayName='Navbar'
-Navbar.propTypes={
-  title: PropTypes.string.isRequired,
-}
+
 
 export default Navbar

@@ -1,10 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React,{useEffect,useRef} from 'react';
 
-/**
- * Helper to build out the iframe's src
- * scotchLog is our way of sending data up to the parent through postMessage
- */
-const buildIframeSrc = (js) => `
+
+const buildIframeSrc=(js) => `
   <html>
   <head>
 
@@ -36,55 +33,43 @@ const buildIframeSrc = (js) => `
   </html>
 `;
 
-/**
- * The browser component has a nested iframe
- * Every time the html, css, js props change, destroy the iframe and create a new iframe
- */
-export default function Browser({ js, addHistory }) {
-  const iframeContainer = useRef(null);
 
-  /**
-   * Watch for postMessage coming from our iframe
-   */
+export default function Browser({js,addHistory}) {
+  const iframeContainer=useRef(null);
+
+
   useEffect(() => {
-    window.addEventListener('message', (e) => {
-      if (!e.data) return false; // only handle if theres data
-      if (typeof e.data !== 'string') return false; // data must be a string
-      if (e.data.includes('_')) return false; // dont watch for events emitted by the react library
+    window.addEventListener('message',(e) => {
+      if(!e.data) return false; // only handle if theres data
+      if(typeof e.data!=='string') return false; // data must be a string
+      if(e.data.includes('_')) return false; // dont watch for events emitted by the react library
       addHistory(e.data);
     });
-  }, [addHistory]);
+  },[addHistory]);
 
   /**
    * Run the code
    */
   useEffect(() => {
-    // remove all children
-    while (iframeContainer.current.hasChildNodes()) {
+    while(iframeContainer.current.hasChildNodes()) {
       iframeContainer.current.removeChild(iframeContainer.current.lastChild);
     }
+    let iframe=document.createElement('iframe');
+    iframe.height='100%';
+    iframe.width='100%';
+    iframe.sandbox='allow-scripts allow-same-origin';
+    iframe.style.border='none';
+    iframe.background='#fff';
 
-    // create new iframe
-    let iframe = document.createElement('iframe');
-    iframe.height = '100%';
-    iframe.width = '100%';
-    iframe.sandbox = 'allow-scripts allow-same-origin';
-    iframe.style.border = 'none';
-    iframe.background = '#fff';
-
-    // convert all console.log to use scotchLog
-    // scotchLog swill send events back up to this parent
-    // we can use that to add to history
-    // scotchLog will also run console.log()
-    const newJs = js
-      .replace(new RegExp('console.log', 'g'), 'getLog')
-      .replace(new RegExp('F.', 'g'), 'parent.F.')
-      .replace(new RegExp('R.', 'g'), 'parent.R.');
-    iframe.srcdoc = buildIframeSrc(newJs);
+    const code=js
+      .replace(new RegExp('console.log','g'),'getLog')
+      .replace(new RegExp('F.','g'),'parent.F.')
+      .replace(new RegExp('R.','g'),'parent.R.');
+    iframe.srcdoc=buildIframeSrc(code);
     iframeContainer.current.appendChild(iframe);
-  }, [js]);
+  },[js]);
 
-  const display = 'none';
+  const display='none';
 
   return (
     <div
