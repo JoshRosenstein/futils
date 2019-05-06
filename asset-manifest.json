@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/futils/static/css/main.3684abf1.chunk.css",
+    "main.js": "/futils/static/js/main.6a96fa1e.chunk.js",
+    "main.js.map": "/futils/static/js/main.6a96fa1e.chunk.js.map",
+    "runtime~main.js": "/futils/static/js/runtime~main.2100b1af.js",
+    "runtime~main.js.map": "/futils/static/js/runtime~main.2100b1af.js.map",
+    "static/css/2.e7575e9f.chunk.css": "/futils/static/css/2.e7575e9f.chunk.css",
+    "static/js/2.5045ff07.chunk.js": "/futils/static/js/2.5045ff07.chunk.js",
+    "static/js/2.5045ff07.chunk.js.map": "/futils/static/js/2.5045ff07.chunk.js.map",
+    "index.html": "/futils/index.html",
+    "precache-manifest.2d0ec6f2a2c7f7b54610ff2e6f02a995.js": "/futils/precache-manifest.2d0ec6f2a2c7f7b54610ff2e6f02a995.js",
+    "service-worker.js": "/futils/service-worker.js",
+    "static/css/2.e7575e9f.chunk.css.map": "/futils/static/css/2.e7575e9f.chunk.css.map",
+    "static/css/main.3684abf1.chunk.css.map": "/futils/static/css/main.3684abf1.chunk.css.map"
+  }
+}
