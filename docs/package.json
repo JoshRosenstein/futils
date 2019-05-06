@@ -6,32 +6,47 @@
   "main": "src/index.js",
   "homepage": "https://joshrosenstein.github.io/futils",
   "dependencies": {
+    "@emotion/core": "10.0.10",
+    "@emotion/styled": "10.0.10",
     "@roseys/futils": "file:../pkg",
     "babel-standalone": "6.26.0",
     "base-64": "0.1.0",
     "codemirror": "5.39.2",
-    "emotion": "9.2.12",
-    "history": "4.7.2",
+    "history": "4.9.0",
     "json-stringify-pretty-compact": "^1.2.0",
     "lodash.debounce": "4.0.8",
     "prop-types": "15.6.2",
     "ramda": "0.25.0",
-    "react": "16.7",
-    "react-codemirror": "1.0.0",
-    "react-dom": "16.7",
-    "react-emotion": "9.2.6",
+    "react": "16.8.6",
+    "react-codemirror2": "6.0.0",
+    "react-dom": "16.8.6",
     "react-powerplug": "1.0.0-rc.1",
     "react-redux": "5.0.7",
-    "react-scripts": "1.1.4",
     "redux": "4.0.0",
     "redux-logger": "3.0.6",
     "scriptjs": "2.5.8"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "5.16.0",
+    "eslint-config-rosey": "^1.0.1",
+    "react-scripts": "^3.0.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

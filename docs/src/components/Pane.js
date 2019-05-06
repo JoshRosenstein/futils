@@ -1,6 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import styled from 'react-emotion'
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from '@emotion/styled';
 
 const Root = styled('div')({
   label: 'Editor',
@@ -18,7 +18,7 @@ const Root = styled('div')({
   '@media (min-width: 1200px)': {
     flexBasis: '25%',
   },
-})
+});
 
 // const Title = styled('div')({
 //   display: 'flex',
@@ -37,18 +37,18 @@ const Root = styled('div')({
 // })
 // < Title > { props.title }</Title>
 //   <Content>{props.children}</Content>
-const Pane = props => {
+const Pane = (props) => {
   return (
     <React.Fragment>
-      <Root className="editor input">{props.children}</Root>
+      <Root className='editor input'>{props.children}</Root>
     </React.Fragment>
-  )
-}
+  );
+};
 
-Pane.displayName = 'Pane'
+Pane.displayName = 'Pane';
 Pane.propTypes = {
   title: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
-}
+};
 
-export default Pane
+export default Pane;

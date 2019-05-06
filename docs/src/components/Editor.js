@@ -1,58 +1,43 @@
-import React, { Component } from 'react'
-import styled from 'react-emotion'
+import React, { Component } from 'react';
+import { Controlled as CodeMirror } from 'react-codemirror2';
+import debounce from 'lodash.debounce';
 
-import debounce from 'lodash.debounce'
-import PropTypes from 'prop-types'
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/theme/neat.css';
+import './Editor.css';
+require('codemirror/mode/css/css');
+require('codemirror/mode/javascript/javascript');
 
-import 'codemirror/mode/javascript/javascript'
+export default class Editor extends Component {
+  state = { value: this.props.code };
 
-import CM from 'react-codemirror'
-const E = styled('div')({
-  // display: 'flex',
-  // flex: '1 1 auto',
-})
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.code !== this.props.code)
+      this.setState({ value: this.props.code });
+  }
 
-const CodeMirror = styled(CM)({
-  // fontSize: '16px',
-  // border: 'none',
-})
+  handleChange = (editor, data, value) => {
+    this.setState({ value });
+    this.debouncedUpdate(value);
+  };
 
-const editorConfiguration = {
-  lineNumbers: true,
+  debouncedUpdate = debounce((value) => {
+    this.props.updateCode(value);
+  }, 500);
 
-  extraKeys: {
-    Tab: 'autocomplete',
-  },
-  autofocus: true,
-  autoCloseBrackets: true,
-  mode: {
-    name: 'javascript',
-    statementIndent: 2,
-  },
-  indentUnit: 2,
-  tabSize: 2,
-}
-
-class Editor extends Component {
   render() {
-    const { onChange, value } = this.props
+    const { value } = this.state;
+    const { language } = this.props;
+    const options = { lineNumbers: true, mode: language, theme: 'neat' };
 
     return (
-      <E>
+      <div className='playground-editor'>
         <CodeMirror
           value={value}
-          onChange={debounce(onChange, 800).bind(this)}
-          options={editorConfiguration}
+          onBeforeChange={this.handleChange}
+          options={options}
         />
-      </E>
-    )
+      </div>
+    );
   }
 }
-
-Editor.displayName = 'Editor'
-Editor.propTypes = {
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-}
-
-export default Editor
