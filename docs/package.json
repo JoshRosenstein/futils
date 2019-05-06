@@ -19,8 +19,8 @@
   },
   "devDependencies": {
     "eslint": "5.16.0",
-    "eslint-config-rosey": "^1.0.1",
-    "react-scripts": "^3.0.0"
+    "eslint-config-rosey": "1.0.2",
+    "react-scripts": "3.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
