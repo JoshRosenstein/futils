@@ -10,7 +10,7 @@
     "babel-standalone": "6.26.0",
     "base-64": "0.1.0",
     "codemirror": "5.39.2",
-    "emotion": "9.2.12",
+    "emotion": "10.0.9",
     "history": "4.7.2",
     "json-stringify-pretty-compact": "^1.2.0",
     "lodash.debounce": "4.0.8",
