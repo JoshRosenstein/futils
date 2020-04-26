@@ -14,7 +14,7 @@
     "lodash.debounce": "4.0.8",
     "ramda": "0.25.0",
     "react": "16.8.6",
-    "react-codemirror2": "6.0.0",
+    "react-codemirror2": "6.0.1",
     "react-dom": "16.8.6"
   },
   "devDependencies": {
