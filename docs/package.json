@@ -13,9 +13,9 @@
     "history": "4.9.0",
     "lodash.debounce": "4.0.8",
     "ramda": "0.25.0",
-    "react": "16.8.6",
+    "react": "16.14.0",
     "react-codemirror2": "6.0.0",
-    "react-dom": "16.8.6"
+    "react-dom": "16.14.0"
   },
   "devDependencies": {
     "eslint": "5.16.0",
