@@ -12,7 +12,7 @@
     "codemirror": "5.39.2",
     "history": "4.9.0",
     "lodash.debounce": "4.0.8",
-    "ramda": "0.25.0",
+    "ramda": "0.28.0",
     "react": "16.8.6",
     "react-codemirror2": "6.0.0",
     "react-dom": "16.8.6"
