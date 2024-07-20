@@ -6,8 +6,8 @@
   "main": "src/index.js",
   "homepage": "https://joshrosenstein.github.io/futils",
   "dependencies": {
-    "@emotion/core": "10.0.10",
-    "@emotion/styled": "10.0.10",
+    "@emotion/core": "11.0.0",
+    "@emotion/styled": "11.13.0",
     "@roseys/futils": "file:../pkg",
     "codemirror": "5.39.2",
     "history": "4.9.0",
